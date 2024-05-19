@@ -1,4 +1,3 @@
-import profile from "../../public/profile.svg"
 import SidebarComponenet from "./SidebarComponent";
 const NavbarComponent = () => {
     return (

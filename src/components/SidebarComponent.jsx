@@ -31,6 +31,14 @@ const SidebarComponenet = () => {
                                 </svg>
                                <b> Project</b>
                             </a>
+                            <a href="#" className="flex items-center px-4 py-2 mt-2 text-gray-100 gap-2 pt-[500px] font-light-[16px]">
+                                <img src="./setting.svg" alt="setting" />
+                               <b>Setting</b>
+                            </a>
+                            <a href="#" className="flex items-center px-4 py-2 mt-2 text-gray-100 gap-2 pt-10 font-light-[16px]">
+                                <img src="./logout.svg" alt="logout" />
+                               <b> Logout</b>
+                            </a>
                         </nav>
                     </div>
                 </div>
