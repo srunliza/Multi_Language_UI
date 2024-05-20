@@ -1,6 +1,6 @@
 const LanguageSelector = () => {
   return (
-    <div className="flex justify-center min-h-screen flex-col bg-white items-center">
+    <div className="flex justify-center min-h-screen flex-col bg-black items-center">
       <div className="w-full max-w-sm p-8 bg-white rounded-lg shadow-xl">
         <label htmlFor="language" className="block mb-2 text-lg font-medium">
           Choose Language
