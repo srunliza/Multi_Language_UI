@@ -1,6 +1,8 @@
-import CreateProject from "./components/CreateProject";
-import FileList from "./components/FileList";
-import Notification from "./components/Notification";
+import CreateProject from "./components/CreateProject.jsx";
+import FileList from "./components/FileList.jsx";
+import NotificationAll from "./components/NotificationAll.jsx";
+import NotificationUnread from "./components/NotificationUnread.jsx";
+import UsernameForm from "./components/UsernameForm.jsx";
 
 export default function Home() {
   return (
@@ -10,8 +12,12 @@ export default function Home() {
         <FileList />
       </div>
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Notification />
+        <NotificationUnread />
       </div>
+      <div className="min-h-screen bg-black flex items-center justify-center py-32">
+        <NotificationAll />
+      </div>
+      <UsernameForm />
     </main>
   );
 }
