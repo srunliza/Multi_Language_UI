@@ -14,7 +14,7 @@ export const ForgetPasswordComponent = () => {
               Enter your registered email below{" "}
             </p>
             <img
-              src="./question.png"
+              src="../assets/images/forget-password.png"
               alt=""
               className="w-['391.3px'] h-['100px']"
             />
