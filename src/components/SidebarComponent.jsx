@@ -1,6 +1,8 @@
+import ProjectListComponent from "./ProjectListComponent";
+
 const SidebarComponenet = () => {
     return (
-        <main>
+        <main className="flex ">  
             <div className="flex h-screen  bg-blue-800 ">
                 <div className="hidden md:flex flex-col w-64 ">
                     <div className="flex items-center justify-center h-30 ">
@@ -48,6 +50,7 @@ const SidebarComponenet = () => {
                     </div>
                 </div>
             </div>
+        
         </main>
     )
 }

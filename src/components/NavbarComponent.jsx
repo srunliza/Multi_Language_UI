@@ -1,3 +1,4 @@
+import ProjectListComponent from "./ProjectListComponent";
 import SidebarComponenet from "./SidebarComponent";
 const NavbarComponent = () => {
     return (
@@ -22,7 +23,8 @@ const NavbarComponent = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                    <ProjectListComponent/>
+                </div>           
             </div>
         </main>
     )
