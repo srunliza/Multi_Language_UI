@@ -1,60 +1,91 @@
-import React from "react";
-
-const notifications = [
-  {
-    id: 1,
-    projectName: "Project Name 001",
-    userName: "MENG SOKLAY",
-    description: "was translated 3 files on and downloaded “JSON...”",
-    date: "5-May-2024",
-    isUnread: true,
-    userImage: "/images/user.jpg",
-  },
-];
+"use client";
+import Image from "next/image";
+import IMAGES from "../../../public/assets/images/index";
+import Link from "next/link";
 
 const Notification = () => {
+  const notifications = [0, 1, 2, 3];
+  const notification = [0, 1, 2, 3, 4, 5];
+
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center p-4">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl">
-        <div className="border-b px-6 py-4 flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Notifications</h2>
-          <div className="flex space-x-4">
-            <button className="text-black font-medium border-b-2 border-black">
-              Unread
-            </button>
-            <button className="text-gray-600 font-medium">All</button>
+    <div className="flex gap-20">
+      <div className="bg-white min-h-screen flex justify-center p-4 rounded-2xl">
+        <div className="rounded-lg w-full max-w-3xl">
+          <div className="px-6 py-4 flex justify-between flex-col">
+            <h2 className="text-xl font-semibold mb-5">Notifications</h2>
+            <div className="flex space-x-4 gap-10">
+              <button className="text-black font-bold border-black">
+                Unread
+              </button>
+              <Link href="#" className="text-gray-600 font-medium">
+                All
+              </Link>
+            </div>
+          </div>
+          <div className="container flex flex-col gap-6 gap-x-10">
+            {notifications.map(() => (
+              <div key={1} className="px-6 py-4 flex items-center">
+                <Image
+                  width={24}
+                  height={24}
+                  src={IMAGES.profile}
+                  alt="User"
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <div className="grid grid-cols-2">
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-semibold">Project Name 001</h3>
+                    <p className="text-gray-600">
+                      <span className="font-bold">MENG SOKLAY</span>, was
+                      translated 3 files on and downloaded “JSON...”
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-gray-500 text-sm">5-May-2024</span>
+                    <span className="bg-blue-500 w-3 h-3 rounded-full mt-3 mr-8"></span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-        <div>
-          {notifications.map((notification) => (
-            <div
-              key={notification.id}
-              className="border-b px-6 py-4 flex items-center"
-            >
-              <img
-                src={notification.userImage}
-                alt={notification.userName}
-                className="w-12 h-12 rounded-full mr-4"
-              />
-              <div className="flex-grow">
-                <h3 className="text-lg font-medium">
-                  {notification.projectName}
-                </h3>
-                <p className="text-gray-600">
-                  <span className="font-bold">{notification.userName}</span>,{" "}
-                  {notification.description}
-                </p>
-              </div>
-              <div className="flex flex-col items-end">
-                <span className="text-gray-500 text-sm">
-                  {notification.date}
-                </span>
-                {notification.isUnread && (
-                  <span className="bg-blue-500 w-3 h-3 rounded-full mt-2"></span>
-                )}
-              </div>
+      </div>
+      <div className="bg-white min-h-screen flex justify-center p-4 rounded-2xl">
+        <div className="rounded-lg w-full max-w-3xl">
+          <div className="px-6 py-4 flex justify-between flex-col">
+            <h2 className="text-xl font-semibold mb-5">Notifications</h2>
+            <div className="flex space-x-4 gap-10">
+              <button className="border-black text-gray-600">Unread</button>
+              <Link href="#" className="font-bold">
+                All
+              </Link>
             </div>
-          ))}
+          </div>
+          <div className="container flex flex-col gap-6 gap-x-10">
+            {notification.map(() => (
+              <div key={1} className="px-6 py-4 flex items-center">
+                <Image
+                  width={24}
+                  height={24}
+                  src={IMAGES.profile}
+                  alt="User"
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <div className="grid grid-cols-2">
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-semibold">Project Name 001</h3>
+                    <p className="text-gray-600">
+                      <span className="font-bold">MENG SOKLAY</span>, was
+                      translated 3 files on and downloaded “JSON...”
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-gray-500 text-sm">5-May-2024</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
