@@ -1,13 +1,14 @@
 const SidebarComponenet = () => {
     return (
         <main>
-            <div className="flex h-screen ">
+            <div className="flex h-screen  bg-blue-800 ">
                 <div className="hidden md:flex flex-col w-64 ">
                     <div className="flex items-center justify-center h-30 ">
                         <img className="w-[300px] bg-blue-800" src="./logo.png" alt="multi logo" />
                     </div>
                     <div className="flex flex-col flex-1 overflow-y-auto">
-                        <nav className="flex-1 px-2 py-4 bg-blue-800">
+                        <nav className="flex-1 px-2 block m-auto">
+                            <div>
                             <a href="#">
                             <img src="./sidebar component.svg" alt="sidebar" />
                             </a>
@@ -31,7 +32,11 @@ const SidebarComponenet = () => {
                                 </svg>
                                <b> Project</b>
                             </a>
-                            <a href="#" className="flex items-center px-4 py-2 mt-2 text-gray-100 gap-2 pt-[500px] font-light-[16px]">
+                            </div>
+                           
+                        </nav>
+                        <div className="mb-[50px] ml-5">
+                            <a href="#" className="flex items-center px-4 py-2 mt-2 text-gray-100 gap-2 pt-10 font-light-[16px]">
                                 <img src="./setting.svg" alt="setting" />
                                <b>Setting</b>
                             </a>
@@ -39,7 +44,7 @@ const SidebarComponenet = () => {
                                 <img src="./logout.svg" alt="logout" />
                                <b> Logout</b>
                             </a>
-                        </nav>
+                            </div>
                     </div>
                 </div>
             </div>
