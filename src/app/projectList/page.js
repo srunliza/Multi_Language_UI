@@ -1,6 +1,9 @@
-import SidebarComponenet from "./SidebarComponent";
-const NavbarComponent = () => {
-    return (
+import NavbarComponent from "@/components/NavbarComponent";
+import ProjectListComponent from "@/components/ProjectListComponent";
+import SidebarComponenet from "@/components/SidebarComponent";
+
+function ProjectPage() {
+    return(
         <main>
             <div class="flex h-screen bg-gray-100">
                 <SidebarComponenet />
@@ -21,10 +24,11 @@ const NavbarComponent = () => {
                                 <img class="w-8 h-8 rounded-full" src="./profile.svg" alt="user photo" />
                             </button>
                         </div>
-                    </div>                  
+                    </div>   
+                    <ProjectListComponent/>               
                 </div>           
             </div>
         </main>
     )
 }
-export default NavbarComponent;
+export default ProjectPage;

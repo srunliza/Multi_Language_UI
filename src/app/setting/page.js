@@ -1,9 +1,12 @@
-import SidebarComponenet from "./SidebarComponent";
-const NavbarComponent = () => {
+
+import SettingComponent from "@/components/SettingComponent";
+import SidebarComponenet from "@/components/SidebarComponent";
+
+const SettingPage = () => {
     return (
         <main>
             <div class="flex h-screen bg-gray-100">
-                <SidebarComponenet />
+                <SidebarComponenet/>
                 <div class="flex flex-col flex-1 overflow-y-auto">
                     <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
                         <div class="flex items-center px-4 ">
@@ -21,10 +24,13 @@ const NavbarComponent = () => {
                                 <img class="w-8 h-8 rounded-full" src="./profile.svg" alt="user photo" />
                             </button>
                         </div>
-                    </div>                  
-                </div>           
+                    </div>
+                    <SettingComponent />
+                </div>
+              
             </div>
         </main>
+
     )
 }
-export default NavbarComponent;
+export default SettingPage;
