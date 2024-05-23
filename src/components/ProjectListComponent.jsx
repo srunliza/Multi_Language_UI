@@ -74,7 +74,7 @@ const ProjectListComponent = () => {
   ];
 
   return (
-    <div className="p-6 flex-1">
+    <div className="p-6 flex-1 bg-white mt-5">
       <h2 className="text-2xl font-bold mb-4 text-gray-700">My Project</h2>
       <div className="flex flex-wrap items-center mb-4">
         <input

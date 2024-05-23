@@ -6,8 +6,8 @@ const NavbarComponent = () => {
                 <SidebarComponenet />
                 <div class="flex flex-col flex-1 overflow-y-auto">
                     <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
-                        <div class="flex items-center px-4 ">
-                            <input class="ml-[40px] mx-4 w-[481px] border rounded-md px-4 py-2" type="text" placeholder="Search" />
+                        <div class="flex items-center px-4 border-blue-200 border-2">
+                            <input class="ml-[40px] mx-4 w-[481px]border-blue-200 border-2 rounded-md px-4 py-2" type="text" placeholder="Search" />
                         </div>
                         <div class="flex items-center pr-4 gap-4">
                             <button class="btn btn-ghost btn-circle">

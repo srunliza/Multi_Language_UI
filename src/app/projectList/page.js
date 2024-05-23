@@ -1,4 +1,4 @@
-import NavbarComponent from "@/components/NavbarComponent";
+
 import ProjectListComponent from "@/components/ProjectListComponent";
 import SidebarComponenet from "@/components/SidebarComponent";
 
@@ -24,8 +24,10 @@ function ProjectPage() {
                                 <img class="w-8 h-8 rounded-full" src="./profile.svg" alt="user photo" />
                             </button>
                         </div>
-                    </div>   
-                    <ProjectListComponent/>               
+                    </div> 
+                   <div className="pt-30">
+                   <ProjectListComponent/>   
+                    </div>            
                 </div>           
             </div>
         </main>
