@@ -1,7 +1,7 @@
 const SettingComponent = () => {
     return (
         <main>
-            <form action="" className="grid grid-cols-span-6" >
+            <form action="" className="grid grid-cols-span-6 " >
                 <div className="bg-gray-100 dark:bg-gray-900">
                     <div className="w-[90%] mx-auto p-8 block m-auto ">
                         <div className=" bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700 ">
@@ -21,7 +21,7 @@ const SettingComponent = () => {
                                             </div>
                                         </div>
                                         <div className="mt-4">
-                                            <label for="countries" className="block mb-2 text-sm font-medium text-gray-400 dark:text-white">Gender</label>
+                                            <label for="countries" className="block text-gray-700 dark:text-white mb-1">Gender</label>
                                             <select id="countries" className=" border-blue-200 border-2 bg-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  text-black dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 <option selected>Female</option>
                                                 <option value="US"  >Male</option>
@@ -41,7 +41,7 @@ const SettingComponent = () => {
                                         <label for="state" className="block text-gray-700 dark:text-white mb-1  ">Email</label>
                                         <div className="relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                <img src="./mail.svg" alt="mail" />
+                                                <img className="w-[15px]" src="./mail.svg" alt="mail" />
                                             </div>
                                             <input type="text" id="email-address-icon" className="border-blue-200 border-2  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" />
                                         </div>
@@ -50,7 +50,7 @@ const SettingComponent = () => {
                                         <label for="zip" className="block text-gray-700 dark:text-white mb-1">Password</label>
                                         <div className="relative ">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                <img src="./iconpassword.svg" alt="password" />
+                                                <img className="w-[15px]" src="./iconpassword.svg" alt="password" />
                                             </div>
                                             <input type="password" id="email-address-icon" className="  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border-blue-200 border-2" placeholder="*******" />
                                         </div>
@@ -63,7 +63,7 @@ const SettingComponent = () => {
                                         <label for="zip" className="block text-gray-700 dark:text-white mb-1">Contact</label>
                                         <div className="relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                <img src="./contact.svg" alt="contact" />
+                                                <img className="w-[15px]" src="./contact.svg" alt="contact" />
                                             </div>
                                             <input type="text" id="email-address-icon" className="  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 border-blue-200 border-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="012 345 687" />
                                         </div>
@@ -72,7 +72,7 @@ const SettingComponent = () => {
                                         <label for="cvv" className="block text-gray-700 dark:text-white mb-1">Socail Contact</label>
                                         <div className="relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                <img src="./socaicontact.svg" alt="contact" />
+                                                <img className="w-[15px]" src="./socaicontact.svg" alt="contact" />
                                             </div>
                                             <input type="text" id="email-address-icon" className="  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 border-blue-200 border-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Telegram" />
                                         </div>

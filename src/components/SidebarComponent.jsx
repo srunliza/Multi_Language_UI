@@ -1,15 +1,14 @@
 import Link from "next/link";
 
-
-const SidebarComponenet = () => {
+const SidebarComponent = () => {
     return (
-        <main className="flex ">  
-            <div className="flex  bg-blue-800 ">
-                <div className="hidden md:flex flex-col w-64 ">
-                    <div className="flex items-center justify-center ">
-                        <img className="w-[300px] bg-blue-800" src="./logo.png" alt="multi logo" />
-                    </div>
-                    <div className="flex flex-col flex-1 ">
+        <div class="flex h-screen bg-gray-100">
+            {/* <!-- sidebar --> */}
+            <div class="hidden md:flex flex-col w-64 bg-blue-800 ">
+                <div class="flex items-center justify-center h-30 bg-blue-800 ">
+                <img className="w-[300px] bg-blue-800" src="./logo.png" alt="multi logo" />
+                </div>
+                <div className="flex flex-col flex-1 ">
                         <nav className="flex-1 px-2 block m-auto">
                             <div>
                             <a href="#">
@@ -49,10 +48,42 @@ const SidebarComponenet = () => {
                             </a>
                             </div>
                     </div>
+            </div>
+
+            {/* <!-- Main content --> */}
+            <div class="flex flex-col flex-1 overflow-y-auto">
+                <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
+                    <div class="flex items-center px-4">
+                        <button class="text-gray-500 focus:outline-none focus:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                        <input class="mx-4 w-full  border-blue-200 border-2 rounded-md px-4 py-2" type="text" placeholder="Search" />
+                    </div>
+                    <div class="flex items-center pr-4">
+
+                       
+                    <div className="flex items-center pr-4 gap-5">
+                            <button className="btn btn-ghost btn-circle">
+                                <img src="./notification.svg" alt="notification" />
+                            </button>
+                            <button type="button" className=" w-[45px] h-[45px] flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                                <span className="sr-only">Open user menu</span>
+                                <img className="w-[45px] h-[45px] rounded-full" src="./profile.svg" alt="user photo" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    
                 </div>
             </div>
-        
-        </main>
+
+        </div>
+
     )
 }
-export default SidebarComponenet;
+export default SidebarComponent;
