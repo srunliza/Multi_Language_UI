@@ -5,7 +5,7 @@ import Link from "next/link";
 function ProjectPage() {
     return(
         <main>
-           <div class="flex h-screen bg-gray-100">
+           <div class="flex h-screen bg-white">
             {/* <!-- sidebar --> */}
             <div class="hidden md:flex flex-col w-64 bg-blue-800 ">
                 <div class="flex items-center justify-center h-30 bg-blue-800 ">

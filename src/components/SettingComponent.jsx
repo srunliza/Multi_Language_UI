@@ -2,7 +2,7 @@ const SettingComponent = () => {
     return (
         <main>
             <form action="" className="grid grid-cols-span-6 " >
-                <div className="bg-gray-100 dark:bg-gray-900">
+                <div className="bg-white dark:bg-gray-900">
                     <div className="w-[90%] mx-auto p-8 block m-auto ">
                         <div className=" bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700 ">
                             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Seeting</h1>
