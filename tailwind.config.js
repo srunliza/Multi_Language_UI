@@ -15,7 +15,8 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-          'custom-pattern': 'repeating-linear-gradient(45deg, #444cf6 0, #443cf6 0.1px, #e5e5f7 0, #e5e4f7 49%)',
+        "custom-pattern": 'repeating-linear-gradient(45deg, #444cf6 0, #443cf6 0.1px, #e5e5f7 0, #e5e4f7 49%)',
+
       },
 
       colors: {
