@@ -1,4 +1,4 @@
-import CalendarComponent from "@/components/CalendarComponent";
+import EmployeeDashboard from "@/components/EmployeeDashboard";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
@@ -18,7 +18,7 @@ export default function Home() {
               <NavbarComponent/>
             </div>
             <div>
-              <CalendarComponent/>
+              <EmployeeDashboard/>
             </div>
           </div>
         </div>
