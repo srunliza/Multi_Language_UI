@@ -1,8 +1,9 @@
-import CalendarComponent from "@/components/CalendarComponent";
+import DeveloperDashboardComponent from "@/components/DeveloperDashboard";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
-const CalendarPage = () => {
+
+const DeveloperDashboardPage = () => {
     return ( 
         <main>
             <div className="grid grid-cols-12 bg-slate-400">
@@ -17,13 +18,14 @@ const CalendarPage = () => {
                     <NavbarComponent/>
                     </div>  
                     
+                    {/* developer component */}
                     <div>
-                        <CalendarComponent/>
+                         <DeveloperDashboardComponent/>
                     </div>
                 </div>
             </div>
         </main>
-    );
+     );
 }
  
-export default CalendarPage;
+export default DeveloperDashboardPage;
