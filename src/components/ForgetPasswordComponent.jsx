@@ -4,7 +4,15 @@ import { CiMail } from "react-icons/ci";
 export const ForgetPasswordComponent = () => {
   return (
     <div>
-      <section class="flex flex-col items-center pt-6">
+      <div style={{
+          backgroundImage: `url("../assets/images/background.png")`,
+          backgroundSize: 'cover',  // Ensures image covers the entire area
+          backgroundRepeat: 'no-repeat', // Prevents tiling if image is smaller
+          height: '100%',
+          width: '100%',
+          position: 'relative'  // Allows other elements to be positioned relative to it
+      }}>
+        <section class="flex flex-col items-center pt-16">
         <div class="w-['647px'] h-['829px']  bg-white rounded-2xl shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bgtext-color-text-black-800 dark:bordertext-color-text-black-700">
           <div class="p-10 py-6">
             <p class="text-5xl font-bold leading-tight tracking-tight  md:text-2xl text-primary-color">
@@ -58,6 +66,7 @@ export const ForgetPasswordComponent = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
