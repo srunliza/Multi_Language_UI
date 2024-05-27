@@ -5,7 +5,7 @@ export default function NavbarComponent() {
 
     <main>
         <div class=" bg-gray-100">
-        {/* <SidebarComponenet /> */}
+        {/* <SidebarComponent /> */}
             <div class="flex flex-col flex-1 overflow-y-auto">
                 <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
                     <div class="flex items-center px-4 ">
