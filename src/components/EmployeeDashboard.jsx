@@ -3,6 +3,7 @@ import employee_welcome from "../../public/images/employee-welcome.png"
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import EmployeeCalendarComponent from "./EmployeeCalendarComponent";
 
+
 const EmployeeDashboard = () => {
     return ( 
         <main>

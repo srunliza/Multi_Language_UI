@@ -1,7 +1,7 @@
 const SidebarComponent = () => {
     return ( 
         <main>
-            <div className="flex h-screen ">
+            <div className="flex h-screen fixed">
                 <div className="hidden md:flex flex-col w-64 ">
                     <div className="flex items-center justify-center h-30 ">
                         <img className="w-[300px] bg-blue-800" src="./logo.png" alt="multi logo" />
