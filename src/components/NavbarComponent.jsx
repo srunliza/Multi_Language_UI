@@ -1,6 +1,6 @@
 const NavbarComponent = () => {
     return(
-        <div className="sticky top-0 z-10 flex flex-col flex-1 overflow-y-auto">
+        <div className="sticky top-0 z-10 flex flex-col overflow-y-auto">
         <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200">
             <div className="flex items-center px-4">
                 <button className="text-gray-500 focus:outline-none focus:text-gray-700">
@@ -31,9 +31,7 @@ const NavbarComponent = () => {
                 </div>
             </div>
         </div>
-        <div className="p-4">
-
-        </div>
+        
     </div>
 
     )
