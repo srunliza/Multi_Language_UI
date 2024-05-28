@@ -115,25 +115,25 @@ const DashboardAttactComponent = () => {
             </div>
             {/* table */}
             <div className="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10 bg-white">
-                <table className="w-full table-fixed">
+                <table className="min-w-full ">
                     <thead className="text-xs text-gray-700  white bg-blue-200 dark:text-gray-400">
                         <tr className="">
-                            <th className="w-1/4 py-6 px-3  text-gray-600 font-bold uppercase text-center">
+                            <th className="py-6 px-3  text-gray-600 font-bold uppercase text-center">
                                 File Name
                             </th>
-                            <th className="w-1/4 py-6 px-3 text-center text-gray-600 font-bold uppercase">
+                            <th className="py-6 px-3 text-center text-gray-600 font-bold uppercase">
                                 Language
                             </th>
-                            <th className="w-1/4 py-6 px-3  text-center text-gray-600 font-bold uppercase">
+                            <th className="py-6 px-3  text-center text-gray-600 font-bold uppercase">
                                 Status
                             </th>
-                            <th className="w-1/4 py-6 px-3  text-center text-gray-600 font-bold uppercase">
+                            <th className="py-6 px-3  text-center text-gray-600 font-bold uppercase">
                                 From
                             </th>
-                            <th className="w-1/4 py-6 px-3  text-center text-gray-600 font-bold uppercase">
+                            <th className="py-6 px-3  text-center text-gray-600 font-bold uppercase">
                                 To
                             </th>
-                            <th className="w-1/4 py-6 px-3  text-center text-gray-600 font-bold uppercase">
+                            <th className="py-6 px-3  text-center text-gray-600 font-bold uppercase">
                                 Action
                             </th>
                         </tr>
