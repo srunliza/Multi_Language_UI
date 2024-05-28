@@ -1,5 +1,5 @@
 import Image from "next/image";
-import employee_welcome from "../../public/images/employee-welcome.png"
+import employee_welcome from "../../public/assets/images/employee-welcome.png"
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import EmployeeCalendarComponent from "./EmployeeCalendarComponent";
 

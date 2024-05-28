@@ -8,7 +8,7 @@ import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 const RegisterComponent = () => {
     return ( 
 
-        <main className="bg-[url('/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
+        <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
             <div className='flex justify-center items-center'>
                 <div className="bg-white rounded-2xl mt-16 shadow-lg p-8 sm:p-10 md:px-14 md:py-8 max-w-md w-full">
 

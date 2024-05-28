@@ -1,12 +1,12 @@
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
-import changePasswordImage from '../../public/images/reset-password.png'
+import changePasswordImage from '../../public/assets/images/reset-password.png'
 import Image from 'next/image';
 
 
 const ResetPasswordComponent = () => {
     return ( 
-        <main className="bg-[url('/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
+        <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
             <div className='flex justify-center items-center'>
                 <div className="bg-white rounded-2xl mt-16 shadow-lg p-8 md:px-14 pb-10 max-w-md w-full sm:ml-px">
 

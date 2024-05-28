@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { EmailOutlined, HttpsOutlined, VisibilityOffOutlined } from '@mui/icons-material';
-import login from '../../public/images/login.png'
-import google from '../../public/images/google.svg'
-import github from '../../public/images/github.svg'
+import login from '../../public/assets/images/login.png'
+import google from '../../public/assets/icons/google.svg'
+import github from '../../public/assets/icons/github.svg'
 import Link from 'next/link';
 
 
 const LoginComponent = () => {
     return ( 
-        <main className="bg-[url('/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
+        <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
             <div className='flex justify-center items-center'>
                 <div className="bg-white rounded-2xl mt-16 shadow-lg p-8 sm:p-5 md:px-14 max-w-md w-full">
                 
@@ -28,7 +28,7 @@ const LoginComponent = () => {
                         {/* input email */}
                         <div className="mb-2">
                             <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base">Email</label>
-                            <div className="relative">
+                            <div className="relative text-gray-800">
                                 <input type="email" id="email" className="w-full px-10 py-2 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm" placeholder="example@gmail.com" />
                                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                     <EmailOutlined fontSize="small" />
@@ -40,7 +40,7 @@ const LoginComponent = () => {
                         {/* input password */}
                         <div className="mb-4">
                             <label htmlFor="password" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base">Password</label>
-                            <div className="relative">
+                            <div className="relative text-gray-800">
                                 <input type="password" id="password" className="w-full px-10 py-2 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm" placeholder="Enter Your Password" />
                                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                     <HttpsOutlined fontSize="small" />

@@ -1,11 +1,11 @@
-import optImage from "../../public/images/verify-otp.png";
+import optImage from "../../public/assets/images/verify-otp.png";
 import Image from "next/image";
 
 
 const VerifyOtpComponent = () => {
 
   return (
-    <main className="bg-[url('/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
+    <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white  pt-7 mt-8 rounded-3xl shadow-lg p-8 max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[28%]">
 
