@@ -14,18 +14,12 @@ function DashboardAttact() {
                     <nav className="flex-1 px-2 block m-auto">
                         <div>
                             <Link href="#">
-                                <svg width="208" height="54" viewBox="0 0 208 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.5 10C0.5 4.47715 4.97715 0 10.5 0H197.5C203.023 0 207.5 4.47715 207.5 10V44C207.5 49.5228 203.023 54 197.5 54H0.5V10Z" fill="white" />
-                                    <g clip-path="url(#clip0_3051_1318)">
-                                        <path d="M57.5 19V21H47.5V34.385L49.263 33H63.5V26H65.5V34C65.5 34.2652 65.3946 34.5196 65.2071 34.7071C65.0196 34.8946 64.7652 35 64.5 35H49.955L45.5 38.5V20C45.5 19.7348 45.6054 19.4804 45.7929 19.2929C45.9804 19.1054 46.2348 19 46.5 19H57.5ZM62.5 19V16H64.5V19H67.5V21H64.5V24H62.5V21H59.5V19H62.5Z" fill="#1A42BC" />
-                                    </g>
-
-                                    <defs>
-                                        <clipPath id="clip0_3051_1318">
-                                            <path d="M43.5 26C43.5 20.4772 47.9772 16 53.5 16H67.5V40H43.5V26Z" fill="white" />
-                                        </clipPath>
-                                    </defs>
+                            <button type="button" className="gap-2 px-6 py-3.5 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg  text-center  ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 3V5H4V18.385L5.763 17H20V10H22V18C22 18.2652 21.8946 18.5196 21.7071 18.7071C21.5196 18.8946 21.2652 19 21 19H6.455L2 22.5V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H14ZM19 3V0H21V3H24V5H21V8H19V5H16V3H19Z" fill="#1A42BC" />
                                 </svg>
+                                New Project
+                            </button>
                             </Link>
                             <Link href="#" className="flex items-center px-4 py-2 mt-2 text-gray-100  gap-2 pt-10 font-light-[16px]">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,12 +84,10 @@ function DashboardAttact() {
             </div>
 
             {/* <!-- Main content --> */}
-            <div className="sticky top-0 z-10 flex flex-col flex-1 overflow-y-auto">
+            <div className="flex flex-col flex-1 overflow-y-auto">        
                 <NavbarComponent />
-                <div className="p-4">
-                    <DashboardAttactComponent/>
 
-                </div>
+                <DashboardAttactComponent/>              
             </div>
 
         </div>
