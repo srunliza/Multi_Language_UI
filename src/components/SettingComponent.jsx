@@ -7,7 +7,7 @@ const SettingComponent = () => {
                         <div className=" bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700 ">
                             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Seeting</h1>
                             <hr />
-                            <div className="grid grid-cols-2 gap-10">
+                            <div className="grid grid-cols-2 gap-10 pt-5">
                                 <div className=" max-w-3xl ">
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
@@ -53,9 +53,9 @@ const SettingComponent = () => {
                                     </div>
                                 </div>
                                 {/* profile */}
-                                <div className="max-w-3xl">
+                                <div className="max-w-3xl flex-wrap">
                                     <div className="mt-[50px] mx-auto flex justify-center w-[141px] h-[141px] bg-[url('/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat"></div>
-                                   <div className="mt-20 ">
+                                   <div className="mt-[74px] ">
                                    <div className="mt-4">
                                         <label for="zip" className="block text-gray-700 dark:text-white mb-1">Password</label>
                                         <div className="relative ">
