@@ -1,11 +1,11 @@
 import NavbarComponent from "@/components/NavbarComponent";
-import PreviewJsonFileComponent from "@/components/PreviewJsonFile";
+import PreviewJsonFileComponent from "@/components/PreviewJsonFileComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
 const PreviewJsonFilePage = () => {
     return ( 
         <main>
-             <div className="grid grid-cols-12 bg-slate-400">
+            <div className="grid grid-cols-12 bg-slate-400">
                 {/* sidebar */}
                 <div className="col-span-2 bg-black-200">
                     <SidebarComponent/>
@@ -17,7 +17,7 @@ const PreviewJsonFilePage = () => {
                     <NavbarComponent/>
                     </div>  
                     
-                    {/* developer component */}
+                    {/* preview json file component */}
                     <div>
                          <PreviewJsonFileComponent/>
                     </div>
