@@ -53,7 +53,7 @@ const FeedbackComponent = () => {
     
                     
                     {/* feedback */}
-                    {feedbackData.map((json, index) => (
+                    {feedbackData.map((feedback, index) => (
                      <div key={index} className="bg-white shadow px-2 rounded-xl mb-2.5">
                          <div className="flex py-2 pb-2">
                              <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
@@ -61,10 +61,10 @@ const FeedbackComponent = () => {
                              </div>
                              <div className="ml-3 text-p">
                              <span className='text-gray-800 flex justify-end ml-[237px]'><MoreVertIcon/></span>
-                                 <div className="font-medium text-gray-800 mt-[-20px]">{json.name}</div>
-                                 <div className="text-gray-600 text-xs mt-1">{json.position}</div>
-                                 <div className="mt-3 text-gray-700 text-[13px] ml-[-63px]">{json.comment}</div>
-                                 <div className='text-gray-500 text-sm mt-2 ml-[-63px]'>{json.date}</div>
+                                 <div className="font-medium text-gray-800 mt-[-20px]">{feedback.name}</div>
+                                 <div className="text-gray-600 text-xs mt-1">{feedback.position}</div>
+                                 <div className="mt-3 text-gray-700 text-[13px] ml-[-63px]">{feedback.comment}</div>
+                                 <div className='text-gray-500 text-sm mt-2 ml-[-63px]'>{feedback.date}</div>
                              </div>
                          </div>
                      </div>
