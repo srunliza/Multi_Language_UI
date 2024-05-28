@@ -1,6 +1,6 @@
 import CardFeedbackComponent from "./CardFeedbackComponent";
 
-const PreviewJsonComponent = () => {
+const PreviewStringComponent = () => {
     return (
         <div className="grid grid-cols-2  flex-wrap">
             {/* preview page */}
@@ -34,4 +34,4 @@ const PreviewJsonComponent = () => {
 
     )
 }
-export default PreviewJsonComponent;
+export default PreviewStringComponent;
