@@ -1,0 +1,140 @@
+const PreviewXmlFileComponent = () => {
+
+    const previewXmlData = [
+       
+        {
+            'id': 1,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 2,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 3,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 4,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 5,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 6,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 7,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 8,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 9,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 10,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 11,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 12,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 13,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 14,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 15,
+            'key' : "Hello",
+            'value' : "Hello"
+        },
+        {
+            'id': 16,
+            'key' : "Hello",
+            'value' : "Hello"
+        }
+    ]
+
+
+
+    return ( 
+        <main className="bg-white p-8">
+            <div className="grid grid-cols-12 gap-8">
+                <div className="col-span-8">
+                    <div className="bg-white shadow-md p-6 rounded-md min-h-[560px]">
+                        <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
+                        <hr />
+                        <div className='overflow-auto  max-h-[405px] mb-4 no-scrollbar'>
+                           
+                            <div className="text-black p-14">
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                                <p>"Hello": "Hello",</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-4 mt-4 justify-end">
+                        <a href="" className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">Go Back</a>
+                        <a href="" className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">Download</a>
+                    </div>
+                </div>
+
+
+                {/* feedback  */}
+                <div className="col-span-4">
+                    <FeedbackComponent/>
+                </div>
+
+            </div>          
+      
+        </main>
+     );
+}
+ 
+export default PreviewXmlFileComponent;
