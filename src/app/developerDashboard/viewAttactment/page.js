@@ -1,14 +1,10 @@
 import React from 'react'
-import Link from 'next/link';
-import DashboardDeveloperComponent from '@/components/DashboardDeveloperComponent';
-import SidebarComponent from '@/components/SidebarComponent';
-import Test from '@/components/Test';
-import NavbarDashbaord from '@/components/NavbarDashbaord';
-import SelectComponent from '@/components/Selectomponent';
-const Developer = () => {
+import Link from 'next/link'
+import ProjectLeaderAttactment from '@/components/ProjectLeaderAttactment'
+const Attactment = () => {
   return (
     <div>
-        <div class="flex h-screen bg-gray-100">
+       <div class="flex h-screen bg-gray-100">
             {/* <!-- sidebar --> */}
             <div class="hidden md:flex flex-col w-64 bg-blue-800 ">
                 <div class="flex items-center justify-center h-30 bg-blue-800 ">
@@ -84,13 +80,14 @@ const Developer = () => {
                     </div>
                 </div>
                 <div class="p-4">
-                     <DashboardDeveloperComponent/>
-                     {/* <SelectComponent/> */}
+                  <ProjectLeaderAttactment/>
                 </div>   
                 
             </div>
         </div>
     </div>
+ 
   )
 }
-export default Developer;
+
+export default Attactment

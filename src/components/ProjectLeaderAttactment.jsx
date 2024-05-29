@@ -2,7 +2,7 @@ import React from 'react'
 import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
-const CalendarComponent = () => {
+const ProjectLeaderAttactment = () => {
   return (
     <div>
           <div className="ml-5 mt-5">
@@ -33,12 +33,12 @@ const CalendarComponent = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link class="md:p-4 py-3 px-0 block " href="/developerDashboard/viewAttactment">
+                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard/viewAttactment">
                       View Attactment
                     </Link>
                   </li>
                   <li>
-                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard/calendar">
+                    <Link class="md:p-4 py-3 px-0 block" href="/developerDashboard/calendar">
                       Calendar
                     </Link>
                   </li>
@@ -61,14 +61,13 @@ const CalendarComponent = () => {
           <div className="flex">
            
           </div>
-          </div> 
+          </div>
           <MemberComponent/>
         </div>
-       
+        
       </div>
     </div>
   )
-  
 }
 
-export default CalendarComponent
+export default ProjectLeaderAttactment
