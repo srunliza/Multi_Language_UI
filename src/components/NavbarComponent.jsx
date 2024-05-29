@@ -1,6 +1,6 @@
 const NavbarComponent = () => {
     return (
-        <div className="sticky top-0 z-10 flex flex-col overflow-y-auto">
+        <div className="shadow-md flex flex-col overflow-y-auto">
             <div className="flex items-center justify-between h-16 bg-white border-b border-gray-200">
                 <div className="flex items-center px-4">
                     <div class="lg:hidden">

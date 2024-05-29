@@ -1,6 +1,5 @@
 import Link from "next/link";
 import NavbarComponent from "./NavbarComponent";
-
 const SidebarComponent = () => {
     return (
         <div class="flex h-screen bg-gray-100">
@@ -79,16 +78,13 @@ const SidebarComponent = () => {
                     </div>
                 </div>
             </div>
-
             {/* <!-- Main content --> */}
             <div className="sticky top-0 z-10 flex flex-col flex-1 overflow-y-auto">
-                <NavbarComponent/>
+                <NavbarComponent />
                 <div className="p-4">
 
                 </div>
             </div>
-
-
         </div>
 
     )

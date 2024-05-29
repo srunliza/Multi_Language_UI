@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const SettingPage = () => {
     return (
-        <main>
+        <>
             <div class="flex h-screen bg-white">
                 {/* <!-- sidebar --> */}
                 <div class="hidden md:flex flex-col w-64 bg-blue-800 ">
@@ -91,7 +91,7 @@ const SettingPage = () => {
 
             </div>
 
-        </main>
+        </>
 
     )
 }
