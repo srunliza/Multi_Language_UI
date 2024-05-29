@@ -11,7 +11,18 @@ const NavbarComponent = () => {
                             </svg>
                         </button>
                     </div>
-                    <input className="mx-4 w-full  border-blue-200 border-2 rounded-md px-4 py-2" type="text" placeholder="Search" />
+
+                    <div className="relative hidden md:block">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg className="w-4 h-4 ml-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span className="sr-only">Search Project</span>
+                        </div>
+                        <input type="text" id="search-navbar" className="mx-4 w-[500px] p-2 pl-10 border-blue-200 border-2 rounded-md px-4 py-2" placeholder="Search Project" />
+                    </div>
                 </div>
                 <div class="flex items-center pr-4">
                     <div className="flex items-center pr-4 gap-5">
@@ -32,9 +43,9 @@ const NavbarComponent = () => {
                     </div>
                 </div>
             </div>
-    
+
         </div>
-        
+
 
     )
 }
