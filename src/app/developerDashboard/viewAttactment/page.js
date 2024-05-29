@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ProjectLeaderAttactment from '@/components/ProjectLeaderAttactment'
+import AttactmentComponent from '@/components/AttactmentComponent'
 const Attactment = () => {
   return (
     <div>
@@ -80,7 +81,7 @@ const Attactment = () => {
                     </div>
                 </div>
                 <div class="p-4">
-                  <ProjectLeaderAttactment/>
+                   <ProjectLeaderAttactment/>
                 </div>   
                 
             </div>

@@ -3,10 +3,12 @@ import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
 import AttactmentComponent from './AttactmentComponent';
-const ProjectLeaderAttactment = () => {
+import EmployeeCalendarComponent from './EmployeeCalendarComponent';
+import CalendarComponent from './CalendarComponent';
+const ProjectLeaderCalendar = () => {
   return (
     <div>
-          <div className="ml-5 mt-5">
+          <div className="ml-5 ">
       {/* Upload file */}
       <div className="flex justify-between">
           <h2 className="text-xl text-color-text-black font-bold">
@@ -34,12 +36,12 @@ const ProjectLeaderAttactment = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard/viewAttactment">
+                    <Link class="md:p-4 py-3 px-0 block " href="/developerDashboard/viewAttactment">
                       View Attactment
                     </Link>
                   </li>
                   <li>
-                    <Link class="md:p-4 py-3 px-0 block" href="/developerDashboard/calendar">
+                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard/calendar">
                       Calendar
                     </Link>
                   </li>
@@ -48,7 +50,7 @@ const ProjectLeaderAttactment = () => {
             </div>
           </div>
           {/* text */}
-          <AttactmentComponent/>
+         <CalendarComponent/>
           </div>
           <MemberComponent/>
         </div>
@@ -58,4 +60,4 @@ const ProjectLeaderAttactment = () => {
   )
 }
 
-export default ProjectLeaderAttactment
+export default ProjectLeaderCalendar

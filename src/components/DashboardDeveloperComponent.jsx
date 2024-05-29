@@ -60,16 +60,16 @@ const DashboardDeveloperComponent = () => {
           </div>
           {/* file upload */}
           <div className="flex">
-            <div class="py-16  px-20">
-              <div class="max-w-md rounded-lg overflow-hidden md:max-w-xl">
-                <div class="md:flex">
+            <div class="py-16  px-20 ">
+              <div class="max-w-md rounded-lg overflow-hidden md:max-w-xl ">
+                <div class="md:flex ">
                   <div class="w-['393px']  ">
-                  <Link href={'/developerDashboard/upload'}>
-                    <div class="relative  h-60  rounded-2xl  border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                  <Link href={'/developerDashboard/uploadFile'} >
+                    <div class="relative  h-60  rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
                       <div class="absolute">
                         <h1 className="ml-10 -mt-8 text-md font-medium leading-loose mb-2 ">File Upload</h1>
                         <hr class="w-[393px] mb-3" />
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center ">
                           <svg
                             width="64"
                             height="64"
@@ -101,8 +101,9 @@ const DashboardDeveloperComponent = () => {
 
                       <input
                         type="file"
-                        class="h-full w-full opacity-0"
+                        class="h-full w-full opacity-0 cursor-pointer"
                         name=""
+
                       />
                     </div>
                     </Link>
@@ -111,13 +112,13 @@ const DashboardDeveloperComponent = () => {
                 </div>
               </div>
             </div>
-            {/* file upload */}
+            {/* file upload add manaulkey */}
 
             <div class="py-16  ">
               <div class="max-w-md rounded-lg overflow-hidden md:max-w-xl">
                 <div class="md:flex">
                   <div class="w-['393px'] ">
-                    <Link href={'/developerDashboard/viewAttactment'}>
+                    <Link href={'/developerDashboard/addManualKey'}>
                     <div class="relative  h-60 rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
                       <div class="absolute">
                       <h1 className="ml-10 -mt-8 text-md font-medium leading-loose mb-2">Add keys manually</h1>
@@ -154,7 +155,7 @@ const DashboardDeveloperComponent = () => {
 
                       <input
                         type="file"
-                        class="h-full w-full opacity-0"
+                        class="h-full w-full opacity-0 cursor-pointer"
                         name=""
                       />
                       

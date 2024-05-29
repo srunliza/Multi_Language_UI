@@ -3,13 +3,7 @@ import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
 import SelectComponent from "./Selectomponent";
-const ProjectLeaderUploadFile = () => {
-  const tableData = [ // Replace with your actual data
-    { key: 'Home', hint: 'relating to the place where one lives' },
-    { key: 'About', hint: 'information about something or someone' },
-    { key: 'Contact', hint: 'a way of getting in touch with someone' },
-    // ... more rows
-  ];
+const ProjectLeaderAddManualKey = () => {
   return (
     <div className="ml-5 mt-5">
       {/* Upload file */}
@@ -22,7 +16,7 @@ const ProjectLeaderUploadFile = () => {
         <AddMemberModal />
       </div>
       <div className="flex">
-        <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
+        <div className="w-[900px]  overflow-hidden  border border-blue-300  rounded-t-lg  ">
           {/* Header */}
           <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg  flex">
             <div
@@ -160,27 +154,46 @@ const ProjectLeaderUploadFile = () => {
                   value={"Add key"}
                 /></div>
               </div>
+              {/* choose key word */}
+              <div className="w-[321px] py-2 mb-2">
+                <label htmlFor="select" className="text-sm">
+                    Or choose keyword as a page
+                </label>
+                <select class="block w-[321px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                  <option value="language">Choose type of keyword</option>
+                  <option value="khmer">Dashbord</option>
+                  <option value="english">English</option>
+                  <option value="korea">Korea</option>
+                  <option value="spain">Spain</option>
+                </select>
+              </div>
               {/* table */}
-              <div className="border w-[590px] p-2 rounded-lg border-gray-300">
-      <div className="rounded-lg w-[570px] overflow-y-auto h-20"> {/* Fixed height for 2 rows, enable vertical scroll */}
-        <table class="table-fixed text-md left-0 border border-gray-200">
-          <thead className="text-center text-md bg-gray-300 rounded-full sticky top-0">
-            <tr className="text-center text-md">
-              <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-bold">
-                Key name
-              </th>
-              <th className="w-1/2 py-2 px-1 text-gray-600 font-bold">
-                Hint
-              </th>
-            </tr>
-          </thead>
+              <div className="border w-[590px] p-2  rounded-lg border-gray-300">
+                <div class="rounded-lg w-[570px] overflow-hidden  ">
+                  <table class=" table-fixed h-5 text-md left-0 border border-gray-200">
+                    <thead >
+                      <tr class=" text-center text-md bg-gray-300 rounded-full " >
+                        <th class="w-1/2 py-2 px-1 text-left text-gray-600 font-bold " >
+                          Key name
+                        </th>
+                        <th class="w-1/2 py-2  px-1  text-gray-600 font-bold ">
+                          Hint
+                        </th>
+                      </tr>
+                    </thead>
                     <tbody class="bg-none ">
-                    {tableData.map((row) => (
-              <tr key={row.key} className="py-2 px-6 border-b border-gray-200 truncate">
-                <td>{row.key}</td>
-                <td>{row.hint}</td>
-              </tr>
-            ))}
+                      <tr>
+                        <td class="py-2 px-6 border-b border-gray-200">Home</td>
+                        <td class="py-2 px-6 border-b border-gray-200 truncate">
+                          relating to the place where one lives{" "}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="py-2 px-6 border-b border-gray-200">Home</td>
+                        <td class="py-2 px-6 border-b border-gray-200 truncate">
+                          relating to the place where one lives{" "}
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -213,4 +226,4 @@ const ProjectLeaderUploadFile = () => {
   );
 };
 
-export default ProjectLeaderUploadFile;
+export default ProjectLeaderAddManualKey;

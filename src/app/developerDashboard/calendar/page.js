@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import CalendarComponent from '@/components/CalendarComponent'
+import ProjectLeaderCalendar from '@/components/ProjectLeaderCalendar'
 const CalendarPage = () => {
   return (
           <div>
@@ -80,7 +81,7 @@ const CalendarPage = () => {
                        </div>
                    </div>
                    <div class="p-4">
-                      <CalendarComponent/>
+                       <ProjectLeaderCalendar/>
                    </div>   
                    
                </div>

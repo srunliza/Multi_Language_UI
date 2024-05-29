@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react"; // Removed unused Component import
+import React, { useState, Component } from "react";
 import Select from "react-select";
 
 const language = [
@@ -7,7 +7,7 @@ const language = [
   { value: 2, label: "English" },
   { value: 3, label: "Korea" },
   { value: 4, label: "Thai" },
-  { value: 5, label: "French" }, // Corrected typo
+  { value: 5, label: "Franch" },
 ];
 
 function SelectComponent() {
@@ -19,18 +19,28 @@ function SelectComponent() {
 
   return (
     <div className="w-[321px] py-2">
-      <div className="mx-auto container py-8">
-        <label htmlFor="select">Translating to (target language)</label>
+     
+      <div className="mx-auto container text-sm ">
+      <label htmlFor="select" className=" mb-2">Translating to (target language)</label>
         <div className="flex flex-wrap items-center lg:justify-between justify-center">
-          <div className="w-[321px] text-sm font-medium transition duration-75 rounded-lg border border-gray-300 h-9 focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-2 bg-none">
-            <Select
-              className="" // Removed inline style
-              options={language}
-              onChange={setHandle}
-              isMulti
-            />
+          <div className=" w-[321px] text-sm py-1 text-gray-400">
+
+          <Select
+            styles={{
+                    control: (provided, state) => ({
+                      ...provided,
+                      border: state.isFocused ? '1px solid #ccc' : '1px solid #ddd',
+                      borderRadius: '8px',
+                      padding: '2px', // Adjust padding as needed
+                    }),
+                  }}
+          options={language}
+          onChange={setHandle}
+          isMulti
+          placeholder="Select languages" // Set placeholder text
+          />
           </div>
-          <div>{selectedOptions}</div>
+         
         </div>
       </div>
     </div>
