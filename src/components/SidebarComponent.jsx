@@ -79,7 +79,7 @@ const SidebarComponent = () => {
                 </div>
             </div>
             {/* <!-- Main content --> */}
-            <div className="sticky top-0 z-10 flex flex-col flex-1 overflow-y-auto">
+            <div className=" flex flex-col flex-1 ">
                 <NavbarComponent />
                 <div className="p-4">
 

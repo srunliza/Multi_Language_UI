@@ -1,4 +1,3 @@
-
 import NavbarComponent from "@/components/NavbarComponent";
 import SettingComponent from "@/components/SettingComponent";
 import Link from "next/link";
@@ -10,7 +9,7 @@ const SettingPage = () => {
                 {/* <!-- sidebar --> */}
                 <div class="hidden md:flex flex-col w-[200px] bg-blue-800 ">
                 <div class="flex items-center justify-center h-30 bg-blue-800 ">
-                    <img className="w-[300px] bg-blue-800" src="./logo.png" alt="multi logo" />
+                    <img className=" bg-blue-800" src="./logo.png" alt="multi logo" />
                 </div>
                 <div className="flex flex-col flex-1 ">
                     <nav className="flex-1 px-2 block m-auto">
@@ -84,7 +83,7 @@ const SettingPage = () => {
             </div>
 
                 {/* <!-- Main content --> */}
-                <div className="  sticky top-0 flex flex-col flex-1 overflow-y-auto">
+                <div className="flex flex-col flex-1 ">
                     <NavbarComponent />
                     <div class="p-4">
                         <SettingComponent />
