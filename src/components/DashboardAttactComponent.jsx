@@ -115,7 +115,7 @@ const DashboardAttactComponent = () => {
             {/* table */}
             <div className="shadow-lg rounded-lg overflow-hidden  md:mx-10 mx-10 bg-white">
                 <table className="min-w-full ">
-                    <thead className="text-xs text-gray-700  white bg-blue-200 dark:text-gray-400">
+                    <thead className="text-lg text-gray-700  white bg-blue-200 dark:text-gray-400">
                         <tr className="">
                             <th className="py-6 px-3  text-black font-bold  text-center">
                                 File Name
@@ -140,12 +140,11 @@ const DashboardAttactComponent = () => {
                     <tbody>
                         {
                             data.map((data) => (
-
                                 <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" className=" text-center  px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {data.title}
                                     </th>
-                                    <td className=" text-center py-4 px-6  border-b border-gray-200 ">
+                                    <td className=" text-center py-4 px-6   border-b border-gray-200 ">
                                         {data.language}
                                     </td>
                                     <td className=" text-center py-4 px-6   border-b border-gray-200 text-green-500 truncate">
