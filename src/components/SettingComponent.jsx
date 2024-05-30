@@ -90,7 +90,7 @@ const SettingComponent = () => {
                             </div>
                         </div>
                         <div className="mt-8 flex justify-end gap-3 mr-[50px]">
-                            <button className="bg-white text-blue-800 px-4 py-2 rounded-lg hover:bg--700 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]  border-blue-200 border-2">Cancel</button>
+                            <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px] border-2">Cancel</button>
                             <button className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white  w-[100px] ">Save</button>
                         </div>
                     </div>

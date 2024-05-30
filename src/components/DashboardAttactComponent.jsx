@@ -82,7 +82,7 @@ const DashboardAttactComponent = () => {
             <div className="p-6 flex-1 container block m-auto">
                 <div className="flex gap-5 flex-wrap items-center mb-4">
                     <div className="flex">
-                    <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>Start</p>
                         </span>
                         <input
@@ -91,7 +91,7 @@ const DashboardAttactComponent = () => {
                         />
                     </div>
                     <div className="flex">
-                    <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>End</p>
                         </span>
                         <input
@@ -105,10 +105,9 @@ const DashboardAttactComponent = () => {
                         </span>
                         <select id="countries" className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>All</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
+                            <option>Finished</option>
+                            <option>Progress</option>
+                            <option>Pending</option>
                         </select>
                     </div>
                 </div>
@@ -141,24 +140,24 @@ const DashboardAttactComponent = () => {
                     <tbody>
                         {
                             data.map((data) => (
-                                
+
                                 <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" className=" text-center  px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {data.title}
                                     </th>
-                                    <td className=" text-center py-4 px-6  border-b border-gray-200 ">
+                                    <td className=" text-center py-6 px-4  border-b border-gray-200 ">
                                         {data.language}
                                     </td>
-                                    <td className=" text-center py-4 px-6  border-b border-gray-200 text-green-500 truncate">
+                                    <td className=" text-center py-6 px-4  border-b border-gray-200 text-green-500 truncate">
                                         {data.status}
                                     </td>
-                                    <td className=" text-center py-4 px-6  border-b border-gray-200">
+                                    <td className=" text-center py-6 px-4  border-b border-gray-200">
                                         {data.from}
                                     </td>
-                                    <td className=" text-center py-4 px-6  border-b border-gray-200">
+                                    <td className=" text-center py-6 px-4  border-b border-gray-200">
                                         {data.to}
                                     </td>
-                         
+
                                     <td className="flex gap-2 justify-center">
                                         <div>
                                             <svg width="34" height="51" viewBox="0 0 34 51" fill="none" xmlns="http://www.w3.org/2000/svg">
