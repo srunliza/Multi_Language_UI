@@ -1,12 +1,12 @@
 const SettingComponent = () => {
     return (
         <main>
-            <form >
+            <form  className="h-10 ">
                 <div className="bg-white dark:bg-gray-900">
                     <div className=" col-span-6 sm:p-16 md:p-20 lg:p-24 xl:p-20 flex-col md:flex-row px-4 sm:px-8 md:px-24 lg:px-24 xl:px-24 relative w-[90%] mx-auto p-8 m-auto grid grid-cols-span-6 ">
                         <div className=" bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700 ">
-                            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Seeting</h1>
-                            <hr />
+                            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
+                            <hr className="border-1 border-blue-500"/>
                             <div className="grid grid-cols-2 gap-10 pt-5">
                                 <div className=" max-w-3xl ">
                                     <div className="grid grid-cols-2 gap-4">
