@@ -5,7 +5,7 @@ import MemberComponent from './MemberComponent'
 const NavbarDashbaord = () => {
   return (
     <div>
-           <div className="ml-5 mt-5">
+           <div className="ml-5 mt-5 ">
       {/* Upload file */}
       <div className="flex justify-between">
           <h2 className="text-xl text-color-text-black font-bold">

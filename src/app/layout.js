@@ -1,9 +1,13 @@
-import { Inter } from "next/font/google";
+import SidebarComponent from "@/components/SidebarComponent";
 import "./globals.css";
-import NavbarDashbaord from "@/components/NavbarDashbaord";
-import DashboardDeveloperComponent from "@/components/ProjectLeaderDashboard";
-import { ForgetPasswordComponent } from "@/components/ForgetPasswordComponent";
-const inter = Inter({ subsets: ["latin"] });
+import { Poppins } from "next/font/google";
+import NavbarComponent from "@/components/NavbarComponent";
+import Sidebar from "@/components/Sidebar";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -13,13 +17,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-           {/* <DashboardDeveloperComponent/> */}
-          
-        {children}
-
+      <body className={poppins.className}>
+        <div className="grid grid-cols-12">
+          <div className="col-span-2">
+            <Sidebar />
+          </div>
+          <div className="col-span-10">
+            <NavbarComponent />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
 }
-

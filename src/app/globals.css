@@ -14,4 +14,11 @@
               scrollbar-width: none;  /* Firefox */
         }
       }
-    
+/* globals.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    /* Add any other global styles here */
+  }
+  

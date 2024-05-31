@@ -1,66 +1,58 @@
-import React from 'react'
+import React from "react";
 import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
-import AttactmentComponent from './AttactmentComponent';
-import EmployeeCalendarComponent from './EmployeeCalendarComponent';
-import CalendarComponent from './CalendarComponent';
-import ViewMember from './ViewMember';
+import AttactmentComponent from "./AttactmentComponent";
+import EmployeeCalendarComponent from "./EmployeeCalendarComponent";
+import CalendarComponent from "./CalendarComponent";
+import ViewMember from "./ViewMember";
+import NavbarProjectLeaderComponent from "@/app/project-leader/_components/NavbarProjectLeaderComponent";
 const ProjectLeaderCalendar = () => {
   return (
     <div>
-          <div className="ml-5 mt-5">
-      {/* Upload file */}
-      <div className="flex justify-between">
+      <div className="ml-5 ">
+        <div className="flex justify-between items-center ">
           <h2 className="text-xl text-color-text-black font-bold">
             Project Name
           </h2>
-          
-            {/*Modal */}
-            <AddMemberModal />
-          
+          <AddMemberModal />
         </div>
-      <div className="flex py-2">
-       
-        <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
-          {/* Header */}
-          <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg  flex">
-            <div
-              class="hidden md:flex md:items-center md:w-auto w-full "
-              id="menu"
-            >
-              <nav>
-                <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                  <li>
-                    <Link class="md:p-4 py-3 px-0 block" href="/developerDashboard">
-                      Upload
-                    </Link>
-                  </li>
-                  <li>
-                    <Link class="md:p-4 py-3 px-0 block " href="/developerDashboard/viewAttactment">
-                      View Attactment
-                    </Link>
-                  </li>
-                  <li>
-                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard/calendar">
-                      Calendar
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-          {/* text */}
-         <CalendarComponent/>
+        <div className="flex py-2">
+          <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
+            {/* Header */}
+            {/* <div className="w-full  bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
+            <nav>
+              <ul className="flex px-6 py-3 gap-5 items-center justify-center text-base text-gray-700">
+                <li className="mx-2">
+                  <Link className="block text-blue-700" href="/developerDashboard">
+                    Upload
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className="block" href="/developerDashboard/viewAttactment">
+                    View Attachment
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className=" block" href="/developerDashboard/calendar">
+                    Calendar
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div> */}
+            <NavbarProjectLeaderComponent />
+
+            {/* text */}
+            <CalendarComponent />
           </div>
           <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
-          <ViewMember />
+            <ViewMember />
+          </div>
         </div>
-        </div>
-        
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProjectLeaderCalendar
+export default ProjectLeaderCalendar;

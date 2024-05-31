@@ -4,6 +4,7 @@ import MemberComponent from "./MemberComponent";
 import Link from "next/link";
 import SelectComponent from "./Selectomponent";
 import ViewMember from "./ViewMember";
+import NavbarProjectLeaderComponent from "@/app/project-leader/_components/NavbarProjectLeaderComponent";
 const ProjectLeaderUploadFile = () => {
   const tableData = [
     // Replace with your actual data
@@ -20,40 +21,39 @@ const ProjectLeaderUploadFile = () => {
     // ... more rows
   ];
   return (
-    <div className="ml-5">
-      <div className="flex justify-between items-center">
+    <div className="ml-5 ">
+      <div className="flex justify-between items-center ">
         <h2 className="text-xl text-color-text-black font-bold">
           Project Name
         </h2>
-        
-        {/* Modal */}
         <AddMemberModal />
       </div>
-      <div className="flex flex-col md:flex-row py-2">
+      <div className="flex flex-col md:flex-row py-2 text-ms">
         <div className="w-full md:w-3/4 overflow-hidden border border-blue-300 rounded-t-lg">
-
           {/* Header */}
-          <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
+          {/* <div className="w-full  bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
             <nav>
-              <ul className="flex items-center justify-center text-base text-gray-700">
+              <ul className="flex px-6 py-3 gap-5 items-center justify-center text-base text-gray-700">
                 <li className="mx-2">
-                  <Link className="p-4 block text-blue-700" href="/developerDashboard">
+                  <Link className="block text-blue-700" href="/developerDashboard">
                     Upload
                   </Link>
                 </li>
                 <li className="mx-2">
-                  <Link className="p-4 block" href="/developerDashboard/viewAttachment">
+                  <Link className="block" href="/developerDashboard/viewAttactment">
                     View Attachment
                   </Link>
                 </li>
                 <li className="mx-2">
-                  <Link className="p-4 block" href="/developerDashboard/calendar">
+                  <Link className=" block" href="/developerDashboard/calendar">
                     Calendar
                   </Link>
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
+          <NavbarProjectLeaderComponent />
+
           {/* text */}
 
           {/* contain  */}
@@ -99,7 +99,7 @@ const ProjectLeaderUploadFile = () => {
                   <option value="spain">Spain</option>
                 </select>
               </div>
-              <SelectComponent/>
+              <SelectComponent />
               <div className="flex items-center space-x-4  text-sm ">
                 <div className="flex flex-col">
                   <label htmlFor="start" className="text-sm  mb-1">
@@ -160,9 +160,9 @@ const ProjectLeaderUploadFile = () => {
               <div className="border w-[590px] p-2  rounded-lg border-gray-300">
                 <div className="rounded-lg w-[570px] overflow-hidden overflow-y-auto h-32  no-scrollbar ">
                   <table class="w-full table-fixed h-5 text-md left-0  border-gray-200 rounded-lg  ">
-                    <thead >
-                      <tr class=" text-center text-md bg-gray-300 rounded-full sticky -top-0" >
-                        <th class="w-1/2 py-2 px-1 text-left text-gray-600 font-bold " >
+                    <thead>
+                      <tr class=" text-center text-md bg-gray-300 rounded-full sticky -top-0">
+                        <th class="w-1/2 py-2 px-1 text-left text-gray-600 font-bold ">
                           Key name
                         </th>
                         <th class="w-1/2 py-2  px-1  text-gray-600 font-bold ">
@@ -202,7 +202,7 @@ const ProjectLeaderUploadFile = () => {
           </form>
         </div>
         {/* <MemberComponent /> */}
-       <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+        <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
           <ViewMember />
         </div>
       </div>
