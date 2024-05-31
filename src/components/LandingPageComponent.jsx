@@ -76,7 +76,7 @@ const LandingPageComponent = () => {
       <div className="relative w-full h-[850px] bg-[#2357F9]" id="home">
         <div className="absolute inset-9 flex flex-col md:flex-row justify-center md:ml-20">
           <div className="md:w-1/2 mt-24 text-center md:text-left">
-            <h1 className="text-gray-700 font-bold md:text-5xl leading-tight mb-2 mt-20 text-white">
+            <h1 className=" font-bold md:text-5xl leading-tight mb-2 mt-20 text-white">
               We bring the solution to make <br />
               your work faster
             </h1>
@@ -100,110 +100,87 @@ const LandingPageComponent = () => {
         </div>
 
         {/* fly card */}
-        <div className="relative">
-          <div className="pt-48 md:pt-[45rem] flex flex-col md:flex-row gap-10 w-11/12 md:w-9/12 mx-auto">
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:rounded-lg sm:px-6">
-              <div className="relative z-10 mx-auto">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300">
-                  <img src="../Images/Group.png" alt="feedback" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300 group-hover:text-white/90">
-                  <h1 className="font-semibold text-xl">Feedback System</h1>
-                  <p className="text-sm">
-                    Project leaders and developers can provide, edit, and remove
-                    feedback on translations, facilitating continuous
-                    improvement and high-quality outcomes.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 group-hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:rounded-lg sm:px-6">
-              <div className="relative z-10 mx-auto">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300">
-                  <img src="../Images/ChatAi.png" alt="AI chat generator" className="w-50 h-50" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300 group-hover:text-white/90">
-                  <h1 className="font-semibold text-xl">AI Chat Generator</h1>
-                  <p className="text-sm">
-                    Our AI-powered keyword meaning generation tool assists
-                    translators by providing context and enhancing translation
-                    accuracy.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 group-hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:rounded-lg sm:px-6">
-              <div className="relative z-10 mx-auto">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300">
-                  <img src="../Images/File.png" alt="File system" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300 group-hover:text-white/90">
-                  <h1 className="font-semibold text-xl">Project Creation</h1>
-                  <p className="text-sm">
-                    Project leaders can create projects, assign roles, set
-                    deadlines, and choose translation options. This feature
-                    streamlines project setup and management.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 group-hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:rounded-lg sm:px-6">
-              <div className="relative z-10 mx-auto">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300">
-                  <img src="../Images/Precess.png" alt="Tracking process" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300 group-hover:text-white/90">
-                  <h1 className="font-semibold text-xl">Tracking Process</h1>
-                  <p className="text-sm">
-                    Users can monitor their progress, the size and length of the
-                    project, helping ensure access to the most relevant and
-                    up-to-date information.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 group-hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="relative position-sticky">
+  <div className="pt-24 md:pt-[45rem] flex flex-col justify-evenly md:flex-row flex-wrap gap-10 w-11/12 md:w-9/12 mx-auto">
+    <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
+      <div className="relative z-10 mx-auto text-center md:text-left">
+        <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
+          <img src="../Images/Group.png" alt="feedback" />
+        </span>
+        <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
+          <h1 className="font-semibold text-xl">Feedback System</h1>
+          <p className="text-sm">
+            Project leaders and developers can provide, edit, and remove
+            feedback on translations, facilitating continuous
+            improvement and high-quality outcomes.
+          </p>
         </div>
+        <div className="pt-5 text-base font-semibold leading-7">
+          <p>
+            <a
+              href="#"
+              className="text-sky-500 transition-all duration-300 hover:text-white"
+            >
+              Read more &rarr;
+            </a>
+          </p>
+        </div>
+    </div>
+    </div>
+    <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
+      <div className="relative z-10 mx-auto text-center md:text-left">
+        <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
+          <img src="../Images/ChatAi.png" alt="AI chat generator" className="w-full h-full" />
+        </span>
+        <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
+          <h1 className="font-semibold text-xl">AI Chat Generator</h1>
+          <p className="text-sm">
+            Our AI-powered keyword meaning generation tool assists
+            translators by providing context and enhancing translation
+            accuracy.
+          </p>
+        </div>
+        <div className="pt-5 text-base font-semibold leading-7">
+          <p>
+            <a
+              href="#"
+              className="text-sky-500 transition-all duration-300 hover:text-white"
+            >
+              Read more &rarr;
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
+      <div className="relative z-10 mx-auto text-center md:text-left">
+        <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
+          <img src="../Images/File.png" alt="File system" />
+        </span>
+        <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
+          <h1 className="font-semibold text-xl">Project Creation</h1>
+          <p className="text-sm">
+            Project leaders can create projects, assign roles, set
+            deadlines, and choose translation options. This feature
+            streamlines project setup and management.
+          </p>
+        </div>
+        <div className="pt-5 text-base font-semibold leading-7">
+          <p>
+            <a
+              href="#"
+              className="text-sky-500 transition-all duration-300 hover:text-white"
+            >
+              Read more &rarr;
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+        </div>
+
       </div>
 
       {/* Reason */}
@@ -269,28 +246,28 @@ const LandingPageComponent = () => {
 
       {/* about us */}
       <section className="mt-20 mb-10" id="aboutus">
-        <div className="flex flex-col md:flex-row justify-center items-center sm:px-[18px] md:flex-row md:px-10">
-          <div className="sm:px-[18px] md:flex-row md:px-5">
-            <h2 className="text-3xl font-bold text-[#454545]">About Our Team</h2>
-            <p className="text-[#454545] text-md mb-6 ">
-              As we look to the future, we are excited to continue our <br /> journey of
-              innovation, growth, and impact. We remain steadfast <br /> in our commitment
-              to pushing boundaries, challenging the status quo, and driving
-              positive change in the world.
-            </p>
-            <a
-              href="#learnmore"
-              className="px-4 py-2 bg-blue-800 text-white font-sm rounded-full hover:bg-[#c09858] transition duration-200"
-            >
-              Learn More
-            </a>
-          </div>
-          <div className="mt-12 md:mt-0">
-            <div className="flex justify-end md:mb-0">
-              <img src="../Images/team.png" alt="teamus" className="w-1/2 md:w-9/12" />
-            </div>
+      <div className="flex flex-col md:flex-row items-center justify-around px-4 sm:px-[50px] md:px-20">
+        <div className="relative px-auto max-w-xl text-center md:text-left">
+          <h2 className="text-3xl font-bold text-[#454545]">About Our Team</h2>
+          <p className="text-[#454545] text-md mb-6">
+            As we look to the future, we are excited to continue our <br className="hidden md:block" /> journey of
+            innovation, growth, and impact. We remain steadfast <br className="hidden md:block" /> in our commitment
+            to pushing boundaries, challenging the status quo, <br className="hidden md:block" /> and driving
+            positive change in the world.
+          </p>
+          <a
+            href="#learnmore"
+            className="px-4 py-2 bg-blue-800 text-white font-sm rounded-full hover:bg-[#c09858] transition duration-200"
+          >
+            Learn More
+          </a>
+        </div>
+        <div className="mt-12 md:mt-0">
+          <div className="flex justify-end md:mb-0">
+            <img src="../Images/team.png" alt="teamus" className="w-11/12 md:w-9/12 mx-auto md:mx-0" />
           </div>
         </div>
+      </div>
       </section>
 
       {/* Card */}
@@ -494,8 +471,13 @@ const LandingPageComponent = () => {
         </div>
       </section>
 
+      {/*Group */}
+      <div>
+        <img src="../Images/Point.png" alt="" className="mx-auto py-8 " />
+      </div>
+
       {/* Contact Us */}
-      <section className="mt-20" id="contactus">
+      <section className="mt-" id="contactus">
         <div className="flex flex-col md:flex-row justify-evenly items-center">
           <div className="overflow-hidden py-16 px-6 sm:px-8 lg:px-10 lg:py-24">
             <div className="relative mx-auto max-w-xl">
@@ -558,7 +540,7 @@ const LandingPageComponent = () => {
             </div>
           </div>
           <div className="mt-12 md:mt-0">
-            <div className="flex justify-end md:mb-0">
+            <div className=" md:mb-0">
               <img src="../Images/contact.png" alt="contact" className="w-11/12 md:w-9/12" />
             </div>
           </div>
