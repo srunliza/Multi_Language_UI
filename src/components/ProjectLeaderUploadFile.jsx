@@ -3,61 +3,56 @@ import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
 import SelectComponent from "./Selectomponent";
+import ViewMember from "./ViewMember";
 const ProjectLeaderUploadFile = () => {
-  const tableData = [ // Replace with your actual data
-    { key: 'Home', hint: 'relating to the place where one lives' },
-    { key: 'About', hint: 'information about something or someone' },
-    { key: 'Contact', hint: 'a way of getting in touch with someone' },
+  const tableData = [
+    // Replace with your actual data
+    { key: "Home", hint: "relating to the place where one lives" },
+    { key: "About", hint: "information about something or someone" },
+    { key: "Contact", hint: "a way of getting in touch with someone" },
+    { key: "More", hint: "a way of getting in touch with someone" },
+    { key: "About", hint: "information about something or someone" },
+    { key: "Contact", hint: "a way of getting in touch with someone" },
+    { key: "More", hint: "a way of getting in touch with someone" },
+    { key: "About", hint: "information about something or someone" },
+    { key: "Contact", hint: "a way of getting in touch with someone" },
+    { key: "More", hint: "a way of getting in touch with someone" },
     // ... more rows
   ];
   return (
-    <div className="ml-5 mt-5">
-      {/* Upload file */}
-      <div className="flex justify-between">
+    <div className="ml-5">
+      <div className="flex justify-between items-center">
         <h2 className="text-xl text-color-text-black font-bold">
           Project Name
         </h2>
-
-        {/*Modal */}
+        
+        {/* Modal */}
         <AddMemberModal />
       </div>
-      <div className="flex">
-        <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
+      <div className="flex flex-col md:flex-row py-2">
+        <div className="w-full md:w-3/4 overflow-hidden border border-blue-300 rounded-t-lg">
+
           {/* Header */}
-          <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg  flex">
-            <div
-              class="hidden md:flex md:items-center md:w-auto w-full "
-              id="menu"
-            >
-              <nav>
-                <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                  <li>
-                    <Link
-                      class="md:p-4 py-3 px-0 block text-blue-700"
-                      href="/developerDashboard"
-                    >
-                      Upload
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      class="md:p-4 py-3 px-0 block"
-                      href="/developerDashboard/viewAttactment"
-                    >
-                      View Attactment
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      class="md:p-4 py-3 px-0 block"
-                      href="/developerDashboard/calendar"
-                    >
-                      Calendar
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+          <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
+            <nav>
+              <ul className="flex items-center justify-center text-base text-gray-700">
+                <li className="mx-2">
+                  <Link className="p-4 block text-blue-700" href="/developerDashboard">
+                    Upload
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className="p-4 block" href="/developerDashboard/viewAttachment">
+                    View Attachment
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className="p-4 block" href="/developerDashboard/calendar">
+                    Calendar
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </div>
           {/* text */}
 
@@ -93,7 +88,7 @@ const ProjectLeaderUploadFile = () => {
               </div>
               <div className="w-[815px]   border-b-2 border-gray-400"></div>
               <div className="w-[321px] py-2">
-                <label htmlFor="select" className="text-sm">
+                <label htmlFor="select" className="text-sm ">
                   Translating from (base, source language)
                 </label>
                 <select class="block w-[321px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
@@ -104,10 +99,10 @@ const ProjectLeaderUploadFile = () => {
                   <option value="spain">Spain</option>
                 </select>
               </div>
-              <SelectComponent />
-              <div className="flex items-center space-x-4 text-gray-500 text-sm ">
+              <SelectComponent/>
+              <div className="flex items-center space-x-4  text-sm ">
                 <div className="flex flex-col">
-                  <label htmlFor="start" className="text-sm text-gray-600 mb-1">
+                  <label htmlFor="start" className="text-sm  mb-1">
                     Start Date
                   </label>
                   <input
@@ -118,7 +113,7 @@ const ProjectLeaderUploadFile = () => {
                   />
                 </div>
                 <div className="flex flex-col ">
-                  <label htmlFor="end" className="text-sm text-gray-600 mb-1">
+                  <label htmlFor="end" className="text-sm  mb-1">
                     End Date
                   </label>
                   <input
@@ -130,9 +125,9 @@ const ProjectLeaderUploadFile = () => {
                 </div>
               </div>
               {/* input key */}
-              <div className="flex items-center space-x-4 text-gray-500 text-sm py-2">
+              <div className="flex items-center space-x-4  text-sm py-2">
                 <div className="flex flex-col">
-                  <label htmlFor="key" className="text-sm text-gray-600 mb-1">
+                  <label htmlFor="key" className="text-sm  mb-1">
                     Key name
                   </label>
                   <input
@@ -143,7 +138,7 @@ const ProjectLeaderUploadFile = () => {
                   />
                 </div>
                 <div className="flex flex-col  ">
-                  <label htmlFor="end" className="text-sm text-gray-600 mb-1">
+                  <label htmlFor="end" className="text-sm mb-1">
                     Add Hint
                   </label>
                   <input
@@ -154,60 +149,62 @@ const ProjectLeaderUploadFile = () => {
                   />
                 </div>
                 <div class="flex mt-6 w-[41px] ">
-                <input
-                  class="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
-                  type="submit"
-                  value={"Add key"}
-                /></div>
+                  <input
+                    class="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    type="submit"
+                    value={"Add key"}
+                  />
+                </div>
               </div>
               {/* table */}
-              <div className="border w-[590px] p-2 rounded-lg border-gray-300">
-      <div className="rounded-lg w-[570px] overflow-y-auto h-20"> {/* Fixed height for 2 rows, enable vertical scroll */}
-        <table class="table-fixed text-md left-0 border border-gray-200">
-          <thead className="text-center text-md bg-gray-300 rounded-full sticky top-0">
-            <tr className="text-center text-md">
-              <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-bold">
-                Key name
-              </th>
-              <th className="w-1/2 py-2 px-1 text-gray-600 font-bold">
-                Hint
-              </th>
-            </tr>
-          </thead>
+              <div className="border w-[590px] p-2  rounded-lg border-gray-300">
+                <div className="rounded-lg w-[570px] overflow-hidden overflow-y-auto h-32  no-scrollbar ">
+                  <table class="w-full table-fixed h-5 text-md left-0  border-gray-200 rounded-lg  ">
+                    <thead >
+                      <tr class=" text-center text-md bg-gray-300 rounded-full sticky -top-0" >
+                        <th class="w-1/2 py-2 px-1 text-left text-gray-600 font-bold " >
+                          Key name
+                        </th>
+                        <th class="w-1/2 py-2  px-1  text-gray-600 font-bold ">
+                          Hint
+                        </th>
+                      </tr>
+                    </thead>
                     <tbody class="bg-none ">
-                    {tableData.map((row) => (
-              <tr key={row.key} className="py-2 px-6 border-b border-gray-200 truncate">
-                <td>{row.key}</td>
-                <td>{row.hint}</td>
-              </tr>
-            ))}
+                      {tableData.map((row) => (
+                        <tr
+                          key={row.key}
+                          className="py-5  px-6 border-b text-sm border-gray-200 truncate"
+                        >
+                          <td className="py-1">{row.key}</td>
+                          <td>{row.hint}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
               </div>
               {/* button */}
               <div class="flex gap-4 py-5 min-w-[95px] ">
-              <input
+                <input
                   class="px-6 py-2  text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                   type="reset"
                   value={"Reset"}
-               />
-                  
-                
+                />
+
                 <input
                   class="px-6 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                   type="submit"
                   value={"Submit"}
                 />
-                  
-                
-
-               
               </div>
             </div>
           </form>
         </div>
-        <MemberComponent />
+        {/* <MemberComponent /> */}
+       <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+          <ViewMember />
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
-import DashboardDeveloperComponent from '@/components/DashboardDeveloperComponent';
-import SidebarComponent from '@/components/SidebarComponent';
-import Test from '@/components/Test';
-import NavbarDashbaord from '@/components/NavbarDashbaord';
-import SelectComponent from '@/components/Selectomponent';
+import ProjectLeaderDashboard from '@/components/ProjectLeaderDashboard';
+
 const Developer = () => {
   return (
     <div>
@@ -84,7 +81,7 @@ const Developer = () => {
                     </div>
                 </div>
                 <div class="p-4">
-                     <DashboardDeveloperComponent/>
+                    <ProjectLeaderDashboard/>
                      {/* <SelectComponent/> */}
                 </div>   
                 

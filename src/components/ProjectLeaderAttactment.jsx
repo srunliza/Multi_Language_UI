@@ -3,6 +3,7 @@ import AddMemberModal from "./AddMemberModal";
 import MemberComponent from "./MemberComponent";
 import Link from "next/link";
 import AttactmentComponent from './AttactmentComponent';
+import ViewMember from './ViewMember';
 const ProjectLeaderAttactment = () => {
   return (
     <div>
@@ -17,7 +18,7 @@ const ProjectLeaderAttactment = () => {
             <AddMemberModal />
           
         </div>
-      <div className="flex">
+      <div className="flex py-2">
        
         <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
           {/* Header */}
@@ -50,7 +51,9 @@ const ProjectLeaderAttactment = () => {
           {/* text */}
           <AttactmentComponent/>
           </div>
-          <MemberComponent/>
+          <div className="mt-5 lg:mt-0 w-full lg:w-auto lg:flex-1">
+          <ViewMember />
+        </div>
         </div>
         
       </div>

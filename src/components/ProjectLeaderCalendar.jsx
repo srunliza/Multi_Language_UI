@@ -5,10 +5,11 @@ import Link from "next/link";
 import AttactmentComponent from './AttactmentComponent';
 import EmployeeCalendarComponent from './EmployeeCalendarComponent';
 import CalendarComponent from './CalendarComponent';
+import ViewMember from './ViewMember';
 const ProjectLeaderCalendar = () => {
   return (
     <div>
-          <div className="ml-5 ">
+          <div className="ml-5 mt-5">
       {/* Upload file */}
       <div className="flex justify-between">
           <h2 className="text-xl text-color-text-black font-bold">
@@ -19,7 +20,7 @@ const ProjectLeaderCalendar = () => {
             <AddMemberModal />
           
         </div>
-      <div className="flex">
+      <div className="flex py-2">
        
         <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
           {/* Header */}
@@ -52,7 +53,9 @@ const ProjectLeaderCalendar = () => {
           {/* text */}
          <CalendarComponent/>
           </div>
-          <MemberComponent/>
+          <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+          <ViewMember />
+        </div>
         </div>
         
       </div>

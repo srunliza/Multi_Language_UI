@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavbarDashbaord from "@/components/NavbarDashbaord";
-import DashboardDeveloperComponent from "@/components/DashboardDeveloperComponent";
+import DashboardDeveloperComponent from "@/components/ProjectLeaderDashboard";
+import { ForgetPasswordComponent } from "@/components/ForgetPasswordComponent";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
            {/* <DashboardDeveloperComponent/> */}
-           <NavbarDashbaord/>
+          
         {children}
 
       </body>

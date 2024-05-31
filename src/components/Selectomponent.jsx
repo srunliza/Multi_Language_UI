@@ -14,7 +14,7 @@ function SelectComponent() {
   const [selectedOptions, setSelectedOptions] = useState(null);
 
   const setHandle = (e) => {
-    setSelectedOptions(Array.isArray(e) ? e.map((hotel) => hotel.label) : []);
+    setSelectedOptions(Array.isArray(e) ? e.map((lan) => lan.label) : []);
   };
 
   return (
@@ -23,7 +23,7 @@ function SelectComponent() {
       <div className="mx-auto container text-sm ">
       <label htmlFor="select" className=" mb-2">Translating to (target language)</label>
         <div className="flex flex-wrap items-center lg:justify-between justify-center">
-          <div className=" w-[321px] text-sm py-1 text-gray-400">
+          <div className=" w-[321px] text-sm py-1 text-gray-400 ">
 
           <Select
             styles={{
@@ -32,6 +32,7 @@ function SelectComponent() {
                       border: state.isFocused ? '1px solid #ccc' : '1px solid #ddd',
                       borderRadius: '8px',
                       padding: '2px', // Adjust padding as needed
+                      backgroundColor:''
                     }),
                   }}
           options={language}
