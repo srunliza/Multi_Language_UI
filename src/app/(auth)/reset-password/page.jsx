@@ -16,6 +16,8 @@ const ResetPasswordPage = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
 
+
+
     // Initialize the router
     const router = useRouter();
 
@@ -32,11 +34,13 @@ const ResetPasswordPage = () => {
             errors.confirmPassword = 'Confirm password is required.'
         } else if (confirmPassword.length < 6) {
             errors.confirmPassword = 'Confirm password must be at least 6 characters.'
+        } else {
+            errors.confirmPassword = 'Passwords do not match.'
         }
 
-        if (newPassword !== confirmPassword) {
-            errors.confirmPassword = 'Passwords do not match.';
-        }
+        // if (newPassword !== confirmPassword) {
+        //     errors.confirmPassword = 'Passwords do not match.';
+        // }
 
         setPasswordError(errors.newPassword || '');
         setConfirmPasswordError(errors.confirmPassword || '');
@@ -60,9 +64,9 @@ const ResetPasswordPage = () => {
         e.preventDefault();
         validateForm();
 
-        if (isFormValid) {
-            router.push('/login'); 
-        }
+        // if (isFormValid) {
+        //     router.push('/login'); 
+        // }
     };
 
     // Function to toggle password visibility
@@ -96,7 +100,7 @@ const ResetPasswordPage = () => {
 
 
                     {/* form */}
-                    <form onSubmit={handleResetPasswordClick}>
+                    <form onSubmit={handleResetPassword}>
 
                         {/* input new password */}
                         <div className="mb-3">
