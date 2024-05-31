@@ -1,10 +1,11 @@
 import Image from "next/image";
-import employee_welcome from "../../public/assets/images/employee-welcome.png"
+import employee_welcome from "../../../../public/assets/images/employee-welcome.png"
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
-import EmployeeCalendarComponent from "./EmployeeCalendarComponent";
+import EmployeeCalendarComponent from "@/components/EmployeeCalendarComponent";
 
 
-const EmployeeDashboard = () => {
+
+const EmployeeDashboardPage = () => {
     return ( 
         <main>
             <div className="bg-gray-100 p-6 w-full mx-auto">
@@ -193,10 +194,75 @@ const EmployeeDashboard = () => {
                         </tbody>
                     </table>
                 </div>
-
             </div>
+
+
+
+        <div className="bg-red-300 mx-auto w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
+                <div className="col-span-1">
+                    <div className="flex flex-col md:flex-row justify-evenly py-10 gap-5">
+                        <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
+                            <div className="md:flex">
+                                <div className="flex-shrink-0 m-4 w-16 h-16 rounded-full text-[#454545] self-center">
+                                    <img src="../Images/teamwork.png" alt="teamwork" />
+                                </div>
+                                <div className="p-8">
+                                    <p className="mt-2 text-[#454545] text-lg">
+                                        <strong>Team Management</strong> <br />
+                                        Our system supports three distinct user roles: Project Leader,
+                                        Translator, and Developer. This structure ensures clarity in
+                                        responsibilities and efficient management of translation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-span-1">
+                    <div className="flex flex-col md:flex-row justify-evenly py-10 gap-5">
+                        <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
+                            <div className="md:flex">
+                                <div className="flex-shrink-0 m-4 w-16 h-16 rounded-full text-[#454545] self-center">
+                                    <img src="../Images/teamwork.png" alt="teamwork" />
+                                </div>
+                                <div className="p-8">
+                                    <p className="mt-2 text-[#454545] text-lg">
+                                        <strong>Team Management</strong> <br />
+                                        Our system supports three distinct user roles: Project Leader,
+                                        Translator, and Developer. This structure ensures clarity in
+                                        responsibilities and efficient management of translation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-span-1">
+                    <div className="flex flex-col md:flex-row justify-evenly py-10 gap-5">
+                        <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
+                            <div className="md:flex">
+                                <div className="flex-shrink-0 m-4 w-16 h-16 rounded-full text-[#454545] self-center">
+                                    <img src="../Images/teamwork.png" alt="teamwork" />
+                                </div>
+                                <div className="p-8">
+                                    <p className="mt-2 text-[#454545] text-lg">
+                                        <strong>Team Management</strong> <br />
+                                        Our system supports three distinct user roles: Project Leader,
+                                        Translator, and Developer. This structure ensures clarity in
+                                        responsibilities and efficient management of translation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+            
         </main>
      );
 }
  
-export default EmployeeDashboard;
+export default EmployeeDashboardPage;

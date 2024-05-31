@@ -1,4 +1,5 @@
 import EmployeeDashboard from "@/components/EmployeeDashboard";
+import { ForgetPasswordComponent } from "@/components/ForgetPasswordComponent";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
@@ -6,7 +7,7 @@ import SidebarComponent from "@/components/SidebarComponent";
 export default function Home() {
   return (
     <main>
-      <div className="grid grid-cols-12 bg-slate-400">
+      {/* <div className="grid grid-cols-12 bg-slate-400">
           {/* sidebar */}
           <div className="col-span-2 bg-black-200">
             <SidebarComponent/>
@@ -21,7 +22,8 @@ export default function Home() {
               <EmployeeDashboard/>
             </div>
           </div>
-        </div>
+        {/* </div> */} 
+   
     </main>
   );
 }

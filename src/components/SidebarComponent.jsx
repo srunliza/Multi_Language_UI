@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 const SidebarComponent = () => {
@@ -89,7 +90,6 @@ const SidebarComponent = () => {
             </div>
 
         </div>
-
     )
 }
 export default SidebarComponent;
