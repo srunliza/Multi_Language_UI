@@ -28,7 +28,7 @@ const SidebarComponent = () => {
                             <img src="./icon/schedule_icon.svg" alt="" />
                                 <p>Calender</p>
                             </Link>
-                            <Link href="#" className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]">
+                            <Link href="#" className="hover:bg-gray-400 hover:bg-opacity-25  rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]">
                             <img src="./icon/project.svg" alt="" />
                                 <p> Project</p>
                             </Link>
@@ -36,7 +36,7 @@ const SidebarComponent = () => {
 
                     </nav>
                     <div className="mb-[50px] px-2">
-                        <Link href="/setting" className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]">
+                        <Link href="/setting" className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]">
                         <img src="./icon/setting.svg" alt="" />
                             <p>Setting</p>
                         </Link>
