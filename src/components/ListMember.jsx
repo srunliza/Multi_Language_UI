@@ -26,7 +26,17 @@ export const ListMember = () => {
                                name: "Robert Downey Jr.",
                                image: "https://i.imgur.com/Q6739lH.jpg",
                                lastSeen: "a long time ago",
-                      }
+                      },
+                      {
+                        name: "Robert Downey Jr.",
+                        image: "https://i.imgur.com/Q6739lH.jpg",
+                        lastSeen: "a long time ago",
+              },
+              {
+                        name: "Robert Downey Jr.",
+                        image: "https://i.imgur.com/Q6739lH.jpg",
+                        lastSeen: "a long time ago",
+               }
                     
                   ];
   return (

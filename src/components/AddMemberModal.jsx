@@ -35,7 +35,7 @@ const AddMemberModal = () => {
           <div className="flex items-center justify-center min-h-screen">
             <div className="bg-white w-[367px] p-6 rounded-lg shadow-md">
               <div className="flex justify-between mb-5">
-                <h2 className="text-lg font-bold ">Add Member</h2>
+                <h2 className="text-base font-bold ">Add Member</h2>
                 <button
                   id="closeContactForm"
                   className="text-gray-700 hover:text-red-500"
@@ -103,7 +103,8 @@ const AddMemberModal = () => {
                 {/* list member */}
                 <ListMember/>
                 {/* select */}
-                <label htmlFor="select" className="text-md font-medium py-3">
+               <div className="py-3">
+               <label htmlFor="select" className="text-md font-medium ">
                   Assign role
                 </label>
                 <select class="block w-[319px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
@@ -111,6 +112,7 @@ const AddMemberModal = () => {
                   <option value="language">Developer</option>
                   <option value="khmer">Translator</option>
                 </select>
+               </div>
                 {/* button */}
                 <div class="flex gap-4 py-5 min-w-[50px] h-[75px] text-sm">
                   <input

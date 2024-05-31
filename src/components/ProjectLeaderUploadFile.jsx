@@ -18,7 +18,7 @@ const ProjectLeaderUploadFile = () => {
     { key: "About", hint: "information about something or someone" },
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
-    // ... more rows
+
   ];
   return (
     <div className="ml-5 ">
@@ -86,12 +86,12 @@ const ProjectLeaderUploadFile = () => {
                 </label>
                 <input id="upload" type="file" class="hidden" />
               </div>
-              <div className="w-[815px]   border-b-2 border-gray-400"></div>
-              <div className="w-[321px] py-2">
-                <label htmlFor="select" className="text-sm ">
+              <div className="w-[815px]   border-b-[1px] border-gray-400"></div>
+              <div className="w-full lg:w-[321px] py-2 text-xs">
+                <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
-                <select class="block w-[321px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose Language</option>
                   <option value="khmer">Khmer</option>
                   <option value="english">English</option>
@@ -100,81 +100,82 @@ const ProjectLeaderUploadFile = () => {
                 </select>
               </div>
               <SelectComponent />
-              <div className="flex items-center space-x-4  text-sm ">
-                <div className="flex flex-col">
-                  <label htmlFor="start" className="text-sm  mb-1">
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs">
+                <div className="flex flex-col w-full lg:w-auto ">
+                  <label htmlFor="start" className="text-xs text-gray-600 mb-1">
                     Start Date
                   </label>
                   <input
                     type="date"
                     id="start"
                     name="start"
-                    className="w-[220px] px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
                   />
                 </div>
-                <div className="flex flex-col ">
-                  <label htmlFor="end" className="text-sm  mb-1">
+                <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
+                  <label htmlFor="end" className="text-xs text-gray-600 mb-1">
                     End Date
                   </label>
                   <input
                     type="date"
                     id="end"
                     name="end"
-                    className="w-[220px] px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border border-gray-300 text-xs rounded-lg"
                   />
                 </div>
               </div>
               {/* input key */}
-              <div className="flex items-center space-x-4  text-sm py-2">
-                <div className="flex flex-col">
-                  <label htmlFor="key" className="text-sm  mb-1">
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-3">
+                
+                <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
+                  <label htmlFor="key" className="text-xs text-gray-600 mb-1">
                     Key name
                   </label>
                   <input
-                    type="text"
-                    placeholder="Input your key name "
+                   type="text"
+                    placeholder="Input your key name"
                     name="keyName"
-                    className="w-[220px] px-3 py-2 h-[41px] border text-sm border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
-                <div className="flex flex-col  ">
-                  <label htmlFor="end" className="text-sm mb-1">
+                <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
+                  <label htmlFor="hint" className="text-xs text-gray-600 mb-1">
                     Add Hint
                   </label>
                   <input
                     type="text"
-                    placeholder="hints for some keywords "
+                    placeholder="Hints for some keywords"
                     name="hint"
-                    className="w-[220px] px-3  text-sm py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
-                <div class="flex mt-6 w-[41px] ">
+                <div className="flex  lg:mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    class="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    className="px-3 py-2  text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                     type="submit"
                     value={"Add key"}
                   />
                 </div>
               </div>
               {/* table */}
-              <div className="border w-[590px] p-2  rounded-lg border-gray-300">
-                <div className="rounded-lg w-[570px] overflow-hidden overflow-y-auto h-32  no-scrollbar ">
-                  <table class="w-full table-fixed h-5 text-md left-0  border-gray-200 rounded-lg  ">
+              <div className="border w-full lg:w-[590px] p-2 rounded-lg border-gray-300">
+                <div className="rounded-lg w-full lg:w-[570px] overflow-hidden overflow-y-auto h-32 no-scrollbar">
+                  <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
                     <thead>
-                      <tr class=" text-center text-md bg-gray-300 rounded-full sticky -top-0">
-                        <th class="w-1/2 py-2 px-1 text-left text-gray-600 font-bold ">
+                      <tr className="text-center text-md bg-gray-300 rounded-r-lg sticky top-0">
+                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-bold">
                           Key name
                         </th>
-                        <th class="w-1/2 py-2  px-1  text-gray-600 font-bold ">
+                        <th className="w-1/2 py-2 px-1 text-gray-600 font-bold">
                           Hint
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-none ">
+                    <tbody className="bg-none text-xs">
                       {tableData.map((row) => (
                         <tr
                           key={row.key}
-                          className="py-5  px-6 border-b text-sm border-gray-200 truncate"
+                          className="py-5 px-6 border-b border-gray-200 text-gray-700 truncate"
                         >
                           <td className="py-1">{row.key}</td>
                           <td>{row.hint}</td>
