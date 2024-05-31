@@ -48,12 +48,12 @@ const SidebarComponent = () => {
                 </div>
             </div>
             {/* <!-- Main content --> */}
-            <div className=" flex flex-col flex-1 ">
+            {/* <div className=" flex flex-col flex-1 ">
                 <NavbarComponent />
                 <div className="p-4">
 
                 </div>
-            </div>
+            </div> */}
         </div>
 
     )

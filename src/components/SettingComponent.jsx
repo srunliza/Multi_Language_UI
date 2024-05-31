@@ -1,15 +1,15 @@
 const SettingComponent = () => {
     return (
         <main>
-            <form  className="h-10 ">
+            <form className="h-10 ">
                 <div className="bg-white dark:bg-gray-900">
                     <div className=" col-span-6 sm:p-16 md:p-20 lg:p-24 xl:p-20 flex-col md:flex-row px-4 sm:px-8 md:px-24 lg:px-24 xl:px-24 relative w-[90%] mx-auto p-8 m-auto grid grid-cols-span-6 ">
                         <div className=" bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700 ">
                             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
-                            <hr className="border-1 border-blue-500"/>
+                            <hr className="border-1 border-blue-500" />
                             <div className="grid grid-cols-2 gap-10 pt-5">
                                 <div className=" max-w-3xl ">
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-2  gap-4">
                                         <div>
                                             <label for="first_name" className="block text-gray-700 dark:text-white mb-1">First Name</label>
                                             <input type="text" id="first_name" placeholder="Vibolpheakneth" className="border-blue-200 border-2 w-full rounded-lg  py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" />
@@ -19,14 +19,24 @@ const SettingComponent = () => {
                                             <input type="text" id="last_name" placeholder="Tan" className="border-blue-200 border-2 w-full rounded-lg  py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" />
                                         </div>
                                     </div>
-                                    <div className="mt-4">
-                                        <label for="countries" className="block text-gray-700 dark:text-white mb-1">Gender</label>
-                                        <select id="countries" className=" border-blue-200 border-2 bg-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  text-black dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected>Female</option>
-                                            <option value="US"  >Male</option>
-
-                                        </select>
+                                    {/* Gender */}
+                                    <div className="grid grid-cols-2 pt-3">
+                                        <div>
+                                            <label for="first_name" className="block text-gray-700 dark:text-white mb-1">Gender</label>
+                                            <div className="relative">
+                                                <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                                    <img  src="./icon/gender1.svg" alt="sociacontact" />
+                                                </div>
+                                                <input type="text" id="email-address-icon" className="  text-gray-900 text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 border-blue-200 border-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Male" />
+                                            </div>
+                                           
+                                        </div>
+                                        <div>
+                                            <label for="first_name" className="block text-gray-700 dark:text-white mb-1">Gender</label>
+                                            <input type="text" id="last_name" placeholder="Female" className="border-blue-200 border-2 w-full rounded-e-lg  py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" />
+                                        </div>
                                     </div>
+                                    {/* date of birth */}
                                     <div className="mt-4">
                                         <label for="city" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                         <input type="date" id="city" className="text-gray-400 border-blue-200 border-2 w-full rounded-lg py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none" />
@@ -36,11 +46,11 @@ const SettingComponent = () => {
                                             <label for="state" className="block text-gray-700 dark:text-white mb-1  ">Email</label>
                                             <div className="relative">
                                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                    <svg width="20" height="20"viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="20" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M23 2.5C23 1.125 21.965 0 20.7 0H2.3C1.035 0 0 1.125 0 2.5V17.5C0 18.875 1.035 20 2.3 20H20.7C21.965 20 23 18.875 23 17.5V2.5ZM20.7 2.5L11.5 8.75L2.3 2.5H20.7ZM20.7 17.5H2.3V5L11.5 11.25L20.7 5V17.5Z" fill="#949494" />
                                                     </svg>
                                                 </div>
-                                                <input type="text" id="email-address-icon" className="border-blue-200 border-2  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" />
+                                                <input type="text" id="email-address-icon" className="border-blue-200 border-2 bg- text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" />
                                             </div>
                                         </div>
                                     </div>
@@ -57,7 +67,7 @@ const SettingComponent = () => {
                                     </div>
                                 </div>
                                 {/* profile */}
-                                <div className="max-w-3xl flex-wrap">
+                                <div className="max-w-3xl flex-wrap grid  ">
                                     <div className="mt-[50px] mx-auto flex justify-center w-[141px] h-[141px] bg-[url('/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat"></div>
                                     <div className="mt-[74px] ">
                                         <div className="mt-4">
@@ -73,7 +83,7 @@ const SettingComponent = () => {
                                             <label for="cvv" className="block text-gray-700 dark:text-white mb-1">Socail Contact</label>
                                             <div className="relative">
                                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                <img className="w-[20px]" src="./icon/socaicontact.svg" alt="sociacontact" />
+                                                    <img className="w-[20px]" src="./icon/socaicontact.svg" alt="sociacontact" />
                                                 </div>
                                                 <input type="text" id="email-address-icon" className="  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 border-blue-200 border-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Telegram" />
                                             </div>
