@@ -9,9 +9,9 @@ const SidebarComponent = () => {
                     <img className=" bg-blue-800" src="./image/logo.png" alt="multi logo" />
                 </div>
                 <div className="flex flex-col flex-1 ">
-                    <nav className="flex-1 px-2 block m-auto">
+                    <nav className="flex-1 ">
                         <div>
-                            <button type="button" className=" gap-2 px-6 py-3.5 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg  text-center  ">
+                            <button type="button" className="ml-1 gap-2 px-6 py-3.5 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg  text-center  ">
                               <img src="./icon/newproject.svg" alt="" />
                                 New Project
                             </button>
@@ -47,13 +47,6 @@ const SidebarComponent = () => {
                     </div>
                 </div>
             </div>
-            {/* <!-- Main content --> */}
-            {/* <div className=" flex flex-col flex-1 ">
-                <NavbarComponent />
-                <div className="p-4">
-
-                </div>
-            </div> */}
         </div>
 
     )
