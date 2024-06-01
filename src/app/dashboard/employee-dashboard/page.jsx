@@ -2,13 +2,17 @@ import Image from "next/image";
 import employee_welcome from "../../../../public/assets/images/employee-welcome.png"
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import EmployeeCalendarComponent from "@/components/EmployeeCalendarComponent";
+import pendingProjectIcon from "../../../../public/assets/icons/pending-project.svg"
+import finishProjectIcon from "../../../../public/assets/icons/finish-project.svg"
+import progressProjectIcon from "../../../../public/assets/icons/progress-project.svg"
+import totalProjectIcon from "../../../../public/assets/icons/total-project.svg"
 
 
 
 const EmployeeDashboardPage = () => {
     return ( 
         <main>
-            <div className="bg-gray-100 p-6 w-full mx-auto">
+            <div className="bg-gray-50 p-6 w-full mx-auto">
                 <div className="grid grid-cols-12 gap-6">
                     <div className="col-span-8">
 
@@ -41,57 +45,51 @@ const EmployeeDashboardPage = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
                         {/* item card 1 */}
-                        <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-md">
+                        <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
                             <div>
-                                <h1 className="font-bold text-xl text-gray-600">Pending Project</h1>
-                                {/* <div className="bg-gray-300 px-3 py-3 ml-[202px] rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </div> */}
-                                <span className="px-3 py-3 rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </span>
-                                <h3 className="font-bold text-xl text-gray-800">40,689</h3>
+                                <h1 className="font-semibold text-xl text-gray-600">Pending Project</h1>
+                                <div className="bg-[#f8f8f8] px-3 py-3 ml-[210px] rounded flex justify-end items-center">
+                                    
+                                    <Image src={pendingProjectIcon} width={25} height={25} alt="pending project icon"/>
+                                </div>
+                                <h3 className="font-semibold text-xl text-gray-800">40,689</h3>
                             </div>
                         </div>
 
                         {/* item card 2 */}
-                        <div className="bg-white p-4 rounded-xl  border-2 border-green-300 shadow-md">
+                        <div className="bg-white p-4 rounded-xl  border-2 border-green-300 shadow-lg">
                             <div>
-                                <h1 className="font-bold text-xl text-gray-600">Finished Project</h1>
-                                {/* <div className="bg-gray-300 px-3 py-3 ml-[202px] rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </div> */}
-                                  <span className="px-3 py-3 rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="primary"/>
-                                </span>
+                                <h1 className="font-semibold text-xl text-gray-600">Finished Project</h1>
+                                <div className="bg-[#f8f8f8] px-3 py-3 ml-[210px] rounded flex justify-end items-center">
+
+                                <Image src={progressProjectIcon} width={25} height={25} alt="pending project icon"/>
+                                </div>
+                                 
                                 <h3 className="font-bold text-xl text-gray-800">40,689</h3>
                             </div>
                         </div>
 
                         {/* item card 3 */}
-                        <div className="bg-white p-4 rounded-xl  border-2 border-yellow-300 shadow-md">
+                        <div className="bg-white p-4 rounded-xl  border-2 border-yellow-300 shadow-lg">
                             <div>
-                                <h1 className="font-bold text-xl text-gray-600">Progress Project</h1>
-                                {/* <div className="bg-gray-300 px-3 py-3 ml-[202px] rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </div> */}
-                                  <span className="px-3 py-3 rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </span>
+                                <h1 className="font-semibold text-xl text-gray-600">Progress Project</h1>
+                                <div className="bg-[#f8f8f8] px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 ml-[60px] sm:ml-[100px] md:ml-[150px] lg:ml-[210px] rounded flex justify-end items-center">
+                                <Image src={finishProjectIcon} width={25} height={25} alt="pending project icon"/>
+                                </div>
+
+                                 
                                 <h3 className="font-bold text-xl text-gray-800">40,689</h3>
                             </div>
                         </div>
 
                         {/* item card 4 */}
-                        <div className="bg-white p-4 rounded-xl  border-2 border-blue-300 shadow-md">
+                        <div className="bg-white p-4 rounded-xl  border-2 border-blue-300 shadow-lg">
                             <div>
-                                <h1 className="font-bold text-xl text-gray-600">Total Project</h1>
-                                {/* <div className="bg-gray-300 px-3 py-3 ml-[202px] rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="warning"/>
-                                </div> */}
-                                  <span className="px-3 py-3 rounded flex justify-end items-center">
-                                    <PendingActionsOutlinedIcon color="success"/>
-                                </span>
+                                <h1 className="font-semibold text-xl text-gray-600">Total Project</h1>
+                                <div className="bg-[#f8f8f8] px-3 py-3 ml-[210px] rounded flex justify-end items-center">
+                                <Image src={totalProjectIcon} width={19} height={19} alt="pending project icon"/>
+                                </div>
+                                 
                                 <h3 className="font-bold text-xl text-gray-800">40,689</h3>
                             </div>
                         </div>
@@ -103,7 +101,7 @@ const EmployeeDashboardPage = () => {
                 {/* table item */}
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-sm text-gray-700 bg-[#dbfcfc]">
+                        <thead class="text-sm text-gray-700 bg-[#F1F4F9]">
                             <tr>
                                 <th scope="col" class="px-6 py-4">
                                     Product Name
@@ -198,7 +196,7 @@ const EmployeeDashboardPage = () => {
 
 
 
-        <div className="bg-red-300 mx-auto w-full">
+        {/* <div className="bg-red-300 mx-auto w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
                 <div className="col-span-1">
                     <div className="flex flex-col md:flex-row justify-evenly py-10 gap-5">
@@ -259,7 +257,7 @@ const EmployeeDashboardPage = () => {
                 </div>
             </div>
         </div>
-            
+             */}
             
         </main>
      );

@@ -1,7 +1,7 @@
 const EmployeeCalendarComponent = () => {
           return ( 
               <main>
-                  <div className="bg-white w-[350px] shadow-xl overflow-hidden rounded-2xl mx-auto text-gray-900 font-semibold text-center">
+                  <div className="bg-white w-[330px] shadow-xl overflow-hidden rounded-2xl mx-auto text-gray-900 font-semibold text-center">
                       <div className="flex items-center justify-between px-4 py-6">
                           <h3 className="text-base">May, 2024</h3>
       
@@ -16,6 +16,7 @@ const EmployeeCalendarComponent = () => {
                           </div>
                       </div>
       
+                    {/* week of day */}
                       <div className="grid grid-cols-7 grid-col-dense grid-rows-6 p-4 gap-1">
                           <div className="text-gray-700 text-sm">Mon</div>
                           <div className="text-gray-700 text-sm">Tue</div>
@@ -24,6 +25,8 @@ const EmployeeCalendarComponent = () => {
                           <div className="text-gray-700 text-sm">Fri</div>
                           <div className="text-gray-700 text-sm">Sat</div>
                           <div className="text-gray-700 text-sm">Sun</div>
+
+                          {/* days */}
                           <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500">27</a>
                           <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500">28</a>
                           <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500">29</a>
