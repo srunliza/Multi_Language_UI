@@ -79,7 +79,7 @@ const DashboardAttactComponent = () => {
     return (
         <div>
             {/* date */}
-            <div className="md:p-10 p-10 flex-1  ">
+            <div className="md:p-10 p-10 flex-1 container ml-7 ">
                 <div className="flex gap-5 flex-wrap items-center mb-4">
                     <div className="flex">
                         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -113,47 +113,48 @@ const DashboardAttactComponent = () => {
                 </div>
             </div>
             {/* table */}
-            <div className="shadow-lg rounded-lg overflow-hidden  md:mx-10 mx-10 bg-white">
-                <table className="min-w-full ">
-                    <thead className="text-lg text-gray-700  white bg-blue-200 dark:text-gray-400">
-                        <tr className="">
-                            <th className="py-6 px-3  text-black  font-semibold text-center">
-                                File Name
-                            </th>
-                            <th className="py-6 px-3 text-center text-black font-semibold">
-                                Language
-                            </th>
-                            <th className="py-6 px-3  text-center text-black  font-semibold">
-                                Status
-                            </th>
-                            <th className="py-6 px-3  text-center text-black  font-semibold">
-                                From
-                            </th>
-                            <th className="py-6 px-3  text-center text-black  font-semibold ">
-                                To
-                            </th>
-                            <th className="py-6 px-3  text-center text-black  font-semibold ">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
+            <div class="relative top-0 left-0 z-50 shadow-md sm:rounded-lg mt-5 container m-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-sm text-gray-700 bg-[#daeaff] sticky-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">
+                                    Product Name
+                                </th>
+                                <th scope="col" class="px-10 py-4">
+                                    Language
+                                </th>
+                                <th scope="col" class="px-10 py-4"> 
+                                    Status
+                                </th>
+                                <th scope="col" class="px-10 py-4">
+                                    Form
+                                </th>
+                                <th scope="col" class="px-10 py-4">
+                                    To
+                                </th>
+                                <th scope="col" class="px-1 py-4 text-right flex justify-center items-center pr-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                    
                     <tbody>
                         {
                             data.map((data) => (
-                                <tr className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" className=" text-center  px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr  key={data}  className="bg-white border-b text-gray-900 dark:border-gray-500">
+                                    <th scope="row" className=" px-6 py-4 font-medium whitespace-nowrap ">
                                         {data.title}
                                     </th>
-                                    <td className=" text-center py-5 px-3   border-b border-gray-200 ">
+                                    <td className=" px-6 py-4 pl-10 ">
                                         {data.language}
                                     </td>
-                                    <td className=" text-center py-5 px-3   border-b border-gray-200 text-green-500 truncate">
+                                    <td className=" px-6 py-4 pl-9 text-green-500 truncate">
                                         {data.status}
                                     </td>
-                                    <td className=" text-center py-5 px-3   border-b border-gray-200">
+                                    <td className=" px-6 py-4 border-gray-200">
                                         {data.from}
                                     </td>
-                                    <td className=" text-center py-5 px-3  border-b border-gray-200">
+                                    <td className=" px-6 py-4 border-gray-200">
                                         {data.to}
                                     </td>
 
