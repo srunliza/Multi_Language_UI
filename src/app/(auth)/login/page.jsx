@@ -118,7 +118,7 @@ const LoginPage = () => {
                 <input
                   type="email"
                   id="email"
-                  className={`w-full px-10 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${emailError ? 'border-red-500' : ''}`}
+                  className={`w-full px-10 py-3 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${emailError ? 'border-red-500' : ''}`}
                   placeholder="example@gmail.com"
                   value={email}
                   onChange={handleEmailChange}
@@ -142,7 +142,7 @@ const LoginPage = () => {
                 <input
                   type={passwordVisible ? "text" : "password"}
                   id="password"
-                  className={`w-full px-10 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${passwordError ? 'border-red-500' : ''}`}
+                  className={`w-full px-10 py-3 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${passwordError ? 'border-red-500' : ''}`}
                   placeholder="Enter Your Password"
                   value={password}
                   onChange={handlePasswordChange}

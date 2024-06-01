@@ -112,22 +112,22 @@ const VerifyOtpPage = () => {
           <div className="flex justify-center mb-4 gap-2">
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
             <input type="text"
                 maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg text-black border-[#1A42BC]" />
+                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
           </div>
           {otpError && <p className='text-red-500 text-sm text-center'>{otpError}</p>}
 

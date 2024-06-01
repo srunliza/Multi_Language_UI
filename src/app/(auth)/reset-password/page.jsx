@@ -111,7 +111,7 @@ const ResetPasswordPage = () => {
                                     id="new-password"
                                     value={newPassword}
                                     onChange={handlePasswordChange}
-                                    className="w-full px-10 py-2 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm" 
+                                    className="w-full px-10 py-2 border rounded-lg focus:outline-none bg-gray-50 focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm" 
                                     placeholder="Enter Your Password"
                                 />
                                 <span className='absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500'>
@@ -134,7 +134,7 @@ const ResetPasswordPage = () => {
                                     id="confirm-password"
                                     value={confirmPassword}
                                     onChange={handleConfirmPasswordChange}
-                                    className="w-full px-10 py-2 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
+                                    className="w-full px-10 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                                     placeholder="Confirm Your Password"
                                 />
                                 <span className='absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500'>

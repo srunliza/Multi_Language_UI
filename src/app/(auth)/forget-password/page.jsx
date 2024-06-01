@@ -89,7 +89,7 @@ const ForgetPasswordPage = () => {
                       <div className="mb-3 text-gray-700">
                           <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base">Email</label>
                           <div className="relative w-80">
-                            <input type="email" id="email" className={`w-full px-10 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${error ?'border-red-500' : ''}`}
+                            <input type="email" id="email" className={`w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${error ?'border-red-500' : ''}`}
                             onChange={handleEmailChange}
                             value={email}
                             placeholder="Enter Your Email"/>

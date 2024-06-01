@@ -135,7 +135,7 @@ const RegisterPage = () => {
                 type="text" 
                 id="first-name" 
                 name='first-name' 
-                className="w-full px-10 py-2.5 text-sm border rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
+                className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                 value={firstName}
                 onChange={handleFirstNameChange}
                 placeholder="Enter Your First Name" />
@@ -155,7 +155,7 @@ const RegisterPage = () => {
                 <input 
                 type="text" 
                 id="last-name" 
-                className="w-full px-10 text-gray-800 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
+                className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                 value={lastName}
                 onChange={handleLastNameChange}
                 placeholder="Enter Your Last Name" />
@@ -201,7 +201,7 @@ const RegisterPage = () => {
                   <input
                     type="date"
                     id="dob"
-                    className="block w-full bg-white border border-blue-600 text-gray-700 py-2.5 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm"
+                    className="block w-full border bg-gray-50 border-blue-600 text-gray-700 py-2.5 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm"
                     value={date}
                     onChange={handleDateChange}
                     placeholder="dd/mm/yyyy"
@@ -220,7 +220,7 @@ const RegisterPage = () => {
             <div className="mb-3">
               <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]">Email</label>
               <div className="relative">
-                <input type="email" id="email" className={`w-full px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm `}
+                <input type="email" id="email" className={`w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm `}
                   value={email}
                   onChange={handleEmailChange}
                   placeholder="Enter Your Email" />
@@ -237,7 +237,7 @@ const RegisterPage = () => {
             <div className="mb-4">
               <label htmlFor="password" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]">Password</label>
               <div className="relative">
-                <input type="password" id="password" className="w-full px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
+                <input type="password" id="password" className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   value={password}
                   onChange={handlePasswordChange}
                   placeholder="Enter Your Password" />
