@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListMember } from './ListMember';
+import { ListMemberForSearch } from './ListMemberForSearch';
 
 const ModalForSearch = ({ isVisible, onClose, children }) => {
   if (!isVisible) return null;
@@ -10,7 +11,7 @@ const ModalForSearch = ({ isVisible, onClose, children }) => {
           <div className="flex items-center justify-center min-h-screen">
             <div className="bg-white w-[367px] p-6 rounded-lg shadow-lg">
               <div className="flex justify-between mb-5">
-                <h2 className="text-base font-bold ">Members</h2>
+                <h2 className="text-base  ">Members</h2>
                 <button
                   id="closeContactForm"
                   className="text-gray-700 hover:text-red-500"
@@ -77,7 +78,7 @@ const ModalForSearch = ({ isVisible, onClose, children }) => {
                 </div>
                 {/* list member */}
                 <div className='h-[280px]'>
-                <ListMember/>
+                <ListMemberForSearch/>
                 </div>
               
               </form>

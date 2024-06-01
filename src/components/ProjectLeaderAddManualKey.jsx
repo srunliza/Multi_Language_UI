@@ -1,7 +1,5 @@
 import React from "react";
 import AddMemberModal from "./AddMemberModal";
-import MemberComponent from "./MemberComponent";
-import Link from "next/link";
 import SelectComponent from "./Selectomponent";
 import ViewMember from "./ViewMember";
 import NavbarProjectLeaderComponent from "@/app/project-leader/_components/NavbarProjectLeaderComponent";
@@ -23,7 +21,7 @@ const ProjectLeaderAddManualKey = () => {
   return (
     <div className="ml-5">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl text-color-text-black font-bold">
+        <h2 className="text-lg text-color-text-black ">
           Project Name
         </h2>
         <AddMemberModal />

@@ -25,6 +25,7 @@ module.exports = {
         'color-finish':'#00D33B',
         'color-pending':'#D20303',
         'color-process':'#F8C408',
+        'color-blue-btn':'#1E63F2',
       }
     },
   },

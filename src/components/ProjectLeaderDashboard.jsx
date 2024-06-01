@@ -8,7 +8,7 @@ const ProjectLeaderDashboard = () => {
   return (
     <div className="ml-5 ">
       <div className="flex justify-between items-center mb-2">
-        <h2 className="text-xl text-color-text-black font-bold">
+        <h2 className="text-lg text-color-text-black ">
           Project Name
         </h2>
         <AddMemberModal />
@@ -16,56 +16,34 @@ const ProjectLeaderDashboard = () => {
       <div className="flex flex-col lg:flex-row lg:space-x-4">
         <div className="w-full lg:w-[900px] h-auto lg:h-screen border border-blue-300 rounded-t-lg">
           {/* Header */}
-
-          {/* <div className="w-full  bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
-            <nav>
-              <ul className="flex px-6 py-3 gap-5 items-center justify-center text-base text-gray-700">
-                <li className="mx-2">
-                  <Link className="block text-blue-700" href="/developerDashboard">
-                    Upload
-                  </Link>
-                </li>
-                <li className="mx-2">
-                  <Link className="block" href="/developerDashboard/viewAttactment">
-                    View Attachment
-                  </Link>
-                </li>
-                <li className="mx-2">
-                  <Link className=" block" href="/developerDashboard/calendar">
-                    Calendar
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div> */}
           <NavbarProjectLeaderComponent />
 
           {/* Text */}
           <div className="mt-10">
-            <p className="text-xl font-bold text-center">
+            <p className="text-xl text-color-text-black text-center">
               Ready to add content?
             </p>
-            <p className="text-sm text-center py-10">
+            <p className="text-sm text-center text-color-text-black py-10">
               There are two ways to add content to your project - choose the
               most suitable option for you.
             </p>
           </div>
           {/* File upload */}
-          <div className="flex flex-wrap justify-center">
-            <div className="pt-16 px-10 w-full lg:w-1/2 max-w-md">
+          <div className="flex flex-wrap justify-center ml-10">
+            <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
               <div className="rounded-lg overflow-hidden">
                 <div className="flex justify-center">
                   <Link href={"/project-leader/upload-file"}>
-                    <div className="relative w-full h-60 rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                    <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
                       <div className="absolute w-full px-5">
-                        <h1 className="text-md font-medium leading-loose mb-2 text-center">
+                        <h1 className="text-md  leading-loose mb-2 text-center">
                           File Upload
                         </h1>
                         <hr className="w-full mb-3" />
                         <div className="flex flex-col items-center">
                           <svg
-                            width="64"
-                            height="64"
+                            width="50"
+                            height="50"
                             viewBox="0 0 64 64"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -83,10 +61,10 @@ const ProjectLeaderDashboard = () => {
                               fill="#1E63F2"
                             />
                           </svg>
-                          <p className="text-xl py-2 text-blue-700">
+                          <p className="text-base py-2 text-blue-700">
                             Select a File Upload
                           </p>
-                          <span className="block text-sm text-gray-400 font-normal">
+                          <span className="block text-xs text-gray-400 font-normal">
                             Or Drag and Drop It here
                           </span>
                         </div>
@@ -101,20 +79,20 @@ const ProjectLeaderDashboard = () => {
               </div>
             </div>
             {/* File upload add manually */}
-            <div className="pt-16 px-10 w-full lg:w-1/2 max-w-md">
+            <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
               <div className="rounded-lg overflow-hidden">
                 <div className="flex justify-center">
                   <Link href={"/project-leader/add-key-value"}>
-                    <div className="relative w-full h-60 rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                    <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
                       <div className="absolute w-full px-5">
-                        <h1 className="text-md font-medium leading-loose mb-2 text-center">
+                        <h1 className="text-md  leading-loose mb-2 text-center">
                           Add keys manually
                         </h1>
                         <hr className="w-full mb-3" />
                         <div className="flex flex-col items-center">
                           <svg
-                            width="64"
-                            height="64"
+                            width="50"
+                            height="50"
                             viewBox="0 0 64 64"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +110,10 @@ const ProjectLeaderDashboard = () => {
                               fill="#1E63F2"
                             />
                           </svg>
-                          <p className="text-xl py-2 text-blue-700">
+                          <p className="text-base py-2 text-blue-700">
                             Add keys and Value
                           </p>
-                          <span className="block text-sm text-gray-400 font-normal">
+                          <span className="block text-xs text-gray-400 font-normal">
                             Or Drag and Drop It here
                           </span>
                         </div>

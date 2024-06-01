@@ -17,17 +17,17 @@ const NavbarProjectLeaderComponent = () => {
     <nav className="w-full bg-white border-b border-blue-300 rounded-t-lg flex justify-start flex-wrap">
       <ul className="flex px-6 py-3 gap-5 items-center justify-center text-base text-gray-700">
         <li className="mx-2">
-          <Link href="/project-leader" className={`block ${isActive('/project-leader') ? 'text-blue-700 font-bold' : 'text-gray-700'}`}>
+          <Link href="/project-leader" className={`block ${isActive('/project-leader') ? 'text-blue-700 font-medium' : 'text-gray-700'}`}>
             Upload
           </Link>
         </li>
         <li className="mx-2">
-          <Link href="/project-leader/view-attachment" className={`block ${isActive('/project-leader/view-attachment') ? 'text-blue-700 font-bold' : 'text-gray-700'}`}>
+          <Link href="/project-leader/view-attachment" className={`block ${isActive('/project-leader/view-attachment') ? 'text-blue-700 font-medium' : 'text-gray-700'}`}>
             View Attachment
           </Link>
         </li>
         <li className="mx-2">
-          <Link href="/project-leader/calendar" className={`block ${isActive('/project-leader/calendar') ? 'text-blue-700 font-bold' : 'text-gray-700'}`}>
+          <Link href="/project-leader/calendar" className={`block ${isActive('/project-leader/calendar') ? 'text-blue-700 font-medium' : 'text-gray-700'}`}>
             Calendar
           </Link>
         </li>

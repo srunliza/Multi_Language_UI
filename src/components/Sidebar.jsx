@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NavbarComponent from "./NavbarComponent";
 const Sidebar = () => {
     return (
         <div className="flex h-screen sticky top-0  bg-gray-100">

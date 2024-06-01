@@ -23,7 +23,7 @@ function SelectComponent() {
       <div className="mx-auto container text-xs ">
       <label htmlFor="select" className=" mb-2">Translating to (target language)</label>
         <div className="flex flex-wrap items-center lg:justify-between justify-center">
-          <div className=" w-[321px] text-xs py-1 text-gray-400 ">
+          <div className=" w-[321px] text-xs py-2 text-gray-400 ">
 
           <Select
             styles={{
