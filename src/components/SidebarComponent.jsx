@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NavbarComponent from "./NavbarComponent";
 const SidebarComponent = () => {
     return (
         <div className="flex h-screen bg-gray-100">
@@ -11,7 +10,7 @@ const SidebarComponent = () => {
                 <div className="flex flex-col flex-1 ">
                     <nav className="flex-1 ">
                         <div>
-                            <button type="button" className="ml-1 gap-2 px-6 py-3.5 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg  text-center  ">
+                            <button type="button" className="ml-1 gap-1 px-6 py-3.5 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg  text-center  ">
                               <img src="./icon/newproject.svg" alt="" />
                                 New Project
                             </button>
