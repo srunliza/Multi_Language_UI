@@ -1,9 +1,8 @@
-import FeedbackComponent from './FeedbackComponent';
+import FeedbackComponent from "../../../components/FeedbackComponent";
 
+const PreviewStringFilePage = () => {
 
-const PreviewJsonFilePage = () => {
-
-    const previewJsonData = [
+    const previewStringData = [
        
         {
             'id': 1,
@@ -97,17 +96,17 @@ const PreviewJsonFilePage = () => {
                         {/* title */}
                         <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
                         <hr />
-                       
-                        <div className='overflow-auto  max-h-[440px] mt-4 mb-4 no-scrollbar'>
 
-                        {/* data map as json data */}
-                            {previewJsonData.map((jsonData, index) =>  (
-                            <div key={index} className="text-black pl-8 mt-4">
-                                <p>"{jsonData.key}" : "{jsonData.value}",</p>
-                            </div>
-                            ))}
+                       
+                        <div className='overflow-auto  max-h-[455px] mb-4 no-scrollbar'>
+                        {/* data map as string data */}
+                           {previewStringData.map((stringData, index) => (
+                             <div key={index} className="text-black pl-8 mt-3">
+                                <p>"{stringData.key}" : "{stringData.value}";</p>
+                             </div>
+                           ))}
+                           
                         </div>
-                     
                     </div>
 
                     {/* button go back and download */}
@@ -126,7 +125,7 @@ const PreviewJsonFilePage = () => {
             </div>          
       
         </main>
-    );
+     );
 }
  
-export default PreviewJsonFilePage;
+export default PreviewStringFilePage;
