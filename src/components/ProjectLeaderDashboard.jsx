@@ -1,26 +1,22 @@
 import React from "react";
 import AddMemberModal from "./AddMemberModal";
-import MemberComponent from "./MemberComponent";
-import ProjectLeaderUploadFile from "./ProjectLeaderUploadFile";
 import Link from "next/link";
+import ViewMember from "./ViewMember";
+import NavbarProjectLeaderComponent from "@/app/project-leader/_components/NavbarProjectLeaderComponent";
 
-const DashboardDeveloperComponent = () => {
+const ProjectLeaderDashboard = () => {
   return (
-    <div className="ml-5 mt-5">
-      {/* Upload file */}
-      <div className="flex justify-between">
-          <h2 className="text-xl text-color-text-black font-bold">
-            Project Name
-          </h2>
-          
-            {/*Modal */}
-            <AddMemberModal />
-          
-        </div>
-      <div className="flex">
-       
-        <div className="w-[900px] h-screen bg-red-100 border border-blue-300  rounded-t-lg  ">
+    <div className="ml-5 ">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-lg text-color-text-black ">
+          Project Name
+        </h2>
+        <AddMemberModal />
+      </div>
+      <div className="flex flex-col lg:flex-row lg:space-x-4">
+        <div className="w-full lg:w-[900px] h-auto lg:h-screen border border-blue-300 rounded-t-lg">
           {/* Header */}
+<<<<<<< HEAD:src/components/DashboardDeveloperComponent.jsx
           <div className="w-full h-14 bg-white border-b border-blue-300 rounded-t-lg  flex">
             <div
               class="hidden md:flex md:items-center md:w-auto w-full "
@@ -48,31 +44,36 @@ const DashboardDeveloperComponent = () => {
             </div>
           </div>
           {/* text */}
+=======
+          <NavbarProjectLeaderComponent />
+
+          {/* Text */}
+>>>>>>> origin/Sreyka:src/components/ProjectLeaderDashboard.jsx
           <div className="mt-10">
-            <p className="text-xl font-bold text-center">
-              {" "}
+            <p className="text-xl text-color-text-black text-center">
               Ready to add content?
             </p>
-            <p className="text-sm text-center py-10">
+            <p className="text-sm text-center text-color-text-black py-10">
               There are two ways to add content to your project - choose the
-              most suitable opton for you.{" "}
+              most suitable option for you.
             </p>
           </div>
-          {/* file upload */}
-          <div className="flex">
-            <div class="py-16  px-20 ">
-              <div class="max-w-md rounded-lg overflow-hidden md:max-w-xl ">
-                <div class="md:flex ">
-                  <div class="w-['393px']  ">
-                  <Link href={'/developerDashboard/uploadFile'} >
-                    <div class="relative  h-60  rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                      <div class="absolute">
-                        <h1 className="ml-10 -mt-8 text-md font-medium leading-loose mb-2 ">File Upload</h1>
-                        <hr class="w-[393px] mb-3" />
-                        <div class="flex flex-col items-center ">
+          {/* File upload */}
+          <div className="flex flex-wrap justify-center ml-10">
+            <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
+              <div className="rounded-lg overflow-hidden">
+                <div className="flex justify-center">
+                  <Link href={"/project-leader/upload-file"}>
+                    <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                      <div className="absolute w-full px-5">
+                        <h1 className="text-md  leading-loose mb-2 text-center">
+                          File Upload
+                        </h1>
+                        <hr className="w-full mb-3" />
+                        <div className="flex flex-col items-center">
                           <svg
-                            width="64"
-                            height="64"
+                            width="50"
+                            height="50"
                             viewBox="0 0 64 64"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -90,43 +91,38 @@ const DashboardDeveloperComponent = () => {
                               fill="#1E63F2"
                             />
                           </svg>
-                          <p className=" text-xl py-2 text-blue-700">
+                          <p className="text-base py-2 text-blue-700">
                             Select a File Upload
                           </p>
-                          <span class="block text-sm text-gray-400 font-normal">
+                          <span className="block text-xs text-gray-400 font-normal">
                             Or Drag and Drop It here
                           </span>
                         </div>
                       </div>
-
                       <input
                         type="file"
-                        class="h-full w-full opacity-0 cursor-pointer"
-                        name=""
-
+                        className="h-full w-full opacity-0 cursor-pointer"
                       />
                     </div>
-                    </Link>
-                  </div>
-                  
+                  </Link>
                 </div>
               </div>
             </div>
-            {/* file upload add manaulkey */}
-
-            <div class="py-16  ">
-              <div class="max-w-md rounded-lg overflow-hidden md:max-w-xl">
-                <div class="md:flex">
-                  <div class="w-['393px'] ">
-                    <Link href={'/developerDashboard/addManualKey'}>
-                    <div class="relative  h-60 rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                      <div class="absolute">
-                      <h1 className="ml-10 -mt-8 text-md font-medium leading-loose mb-2">Add keys manually</h1>
-                        <hr class="w-[393px] mb-3" />
-                        <div class="flex flex-col items-center">
+            {/* File upload add manually */}
+            <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
+              <div className="rounded-lg overflow-hidden">
+                <div className="flex justify-center">
+                  <Link href={"/project-leader/add-key-value"}>
+                    <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                      <div className="absolute w-full px-5">
+                        <h1 className="text-md  leading-loose mb-2 text-center">
+                          Add keys manually
+                        </h1>
+                        <hr className="w-full mb-3" />
+                        <div className="flex flex-col items-center">
                           <svg
-                            width="64"
-                            height="64"
+                            width="50"
+                            height="50"
                             viewBox="0 0 64 64"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -144,33 +140,31 @@ const DashboardDeveloperComponent = () => {
                               fill="#1E63F2"
                             />
                           </svg>
-                          <p className=" text-xl py-2 text-blue-700">
+                          <p className="text-base py-2 text-blue-700">
                             Add keys and Value
                           </p>
-                          <span class="block text-sm text-gray-400 font-normal">
+                          <span className="block text-xs text-gray-400 font-normal">
                             Or Drag and Drop It here
                           </span>
                         </div>
                       </div>
-
                       <input
                         type="file"
-                        class="h-full w-full opacity-0 cursor-pointer"
-                        name=""
+                        className="h-full w-full opacity-0 cursor-pointer"
                       />
-                      
                     </div>
-                    </Link>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <MemberComponent/>
+        <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+          <ViewMember />
+        </div>
       </div>
     </div>
   );
 };
 
-export default DashboardDeveloperComponent;
+export default ProjectLeaderDashboard;
