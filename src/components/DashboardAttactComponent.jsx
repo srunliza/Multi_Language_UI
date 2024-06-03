@@ -73,13 +73,22 @@ const DashboardAttactComponent = () => {
             from: "14/5/2024",
             to: "17/5/2024",
 
+        },
+        {
+            id: 8,
+            title: "WebDesign",
+            language: "Khmer",
+            status: "Finished",
+            from: "14/5/2024",
+            to: "17/5/2024",
         }
+
     ];
 
     return (
-        <div>
+        <div className="w-full p-6">
             {/* date */}
-            <div className="md:p-10 p-10 flex-1 container ml-7 ">
+            <div className=" flex-1 ">
                 <div className="flex gap-5 flex-wrap items-center mb-4">
                     <div className="flex">
                         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -112,36 +121,35 @@ const DashboardAttactComponent = () => {
                     </div>
                 </div>
             </div>
-            {/* table */}
-            <div class="relative top-0 left-0 z-50 shadow-md sm:rounded-lg mt-5 container m-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-sm text-gray-700 bg-[#daeaff] sticky-header">
-                            <tr>
-                                <th scope="col" class="px-6 py-4">
-                                    Product Name
-                                </th>
-                                <th scope="col" class="px-10 py-4">
-                                    Language
-                                </th>
-                                <th scope="col" class="px-10 py-4"> 
-                                    Status
-                                </th>
-                                <th scope="col" class="px-10 py-4">
-                                    Form
-                                </th>
-                                <th scope="col" class="px-10 py-4">
-                                    To
-                                </th>
-                                <th scope="col" class="px-1 py-4 text-right flex justify-center items-center pr-3">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                    
+            {/* table item */}
+            <div class="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 no-scrollbar">
+                <table class="w-full  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-sm text-gray-700 font-semibold sticky top-0 bg-[#daeaff]">
+                        <tr>
+                            <th scope="col" class="px-6 py-4">
+                                Product Name
+                            </th>
+                            <th scope="col" class="px-10 py-4">
+                                Language
+                            </th>
+                            <th scope="col" class="px-10 py-4">
+                                Status
+                            </th>
+                            <th scope="col" class="px-10 py-4">
+                                Form
+                            </th>
+                            <th scope="col" class="px-10 py-4">
+                                To
+                            </th>
+                            <th scope="col" class="px-1 py-4 text-right flex justify-center items-center pr-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {
                             data.map((data) => (
-                                <tr  key={data}  className="bg-white border-b text-gray-900 dark:border-gray-500">
+                                <tr key={data} className="bg-white border-b text-gray-900 dark:border-gray-300">
                                     <th scope="row" className=" px-6 py-4 font-medium whitespace-nowrap ">
                                         {data.title}
                                     </th>
@@ -185,8 +193,10 @@ const DashboardAttactComponent = () => {
 
                             ))
                         }
+
                     </tbody>
                 </table>
+
             </div>
         </div>
 
