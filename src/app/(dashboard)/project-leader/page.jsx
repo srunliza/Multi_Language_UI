@@ -1,10 +1,13 @@
 
+import DashboardDeveloperComponent from '@/components/DashboardDeveloperComponent'
 import React from 'react'
 
-const DeveloperDashboardHome = () => {
+const ProjectLeaderDashboardHome = () => {
   return (
-    <div>DeveloperDashboardHome</div>
+    <div>
+        <DashboardDeveloperComponent/>
+    </div>
   )
 }
 
-export default DeveloperDashboardHome
+export default ProjectLeaderDashboardHome
