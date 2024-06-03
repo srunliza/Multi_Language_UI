@@ -11,15 +11,6 @@ export default function Home() {
           <NavbarComponent />
         </div>
       </div>
-{/* 
-      <div className="grid grid-cols-12">
-        <div className="col-span-2">
-          <div><SidebarComponent /></div>
-        </div>
-        <div className="col-span-10">
-          <div><NavbarComponent /></div>
-        </div>
-      </div> */}
     </main>
 
 

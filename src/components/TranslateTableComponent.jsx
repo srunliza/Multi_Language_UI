@@ -132,18 +132,29 @@ const TranslateTableComponent = () => {
                         <button className="btntext-white bg-blue-700 text-center rounded-lg text-sm py-2 px-3 w-[100px] text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Save</button>
                         <dialog id="my_modal_1" className="modal">
                             <div className="modal-box">
-                                <h3 className="font-bold text-lg">Hello!</h3>
-                                <p className="py-4">Do you want to save this translation?</p>
-                                <div className="modal-action">
-                                    <form method="dialog">
+                                <p className="py-4 text-xl text-center">Do you want to save this translation?</p>
+                                <div className="modal-action ">
+                                    <form method="dialog " className="flex m-auto gap-5">
                                         {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn">No</button>
-                                        <button className="btn">Yes</button>
+                                        <button className="btn btn-outline btn-primary w-[100px]">No</button>
+                                        <button className="btn btn-active btn-primary w-[100px]">Yes</button>
                                     </form>
                                 </div>
                             </div>
                         </dialog>
-                        <a href="" className="text-white bg-green-600  text-center rounded-lg text-sm py-2 px-3  w-[100px]">Submit</a>
+                        <button className="btntext-white bg-green-600 text-center rounded-lg text-sm py-2 px-3 w-[100px] text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Submit</button>
+                        <dialog id="my_modal_1" className="modal">
+                            <div className="modal-box">
+                                <p className="py-4 text-xl text-center">Do you want to submit this translation?</p>
+                                <div className="modal-action ">
+                                    <form method="dialog " className="flex m-auto gap-5">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button className="btn btn-outline btn-primary w-[100px]">No</button>
+                                        <button className="btn btn-active btn-primary w-[100px]">Yes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
                     </div>
                 </div>
 
