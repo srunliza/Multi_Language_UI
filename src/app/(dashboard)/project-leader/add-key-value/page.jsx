@@ -18,11 +18,7 @@ const AddKeyValuePage = () => {
     { key: "More", hint: "a way of getting in touch with someone" },
   ];
   return (
-    <div className="ml-5">
-    <div className="flex justify-between items-center">
-      <h2 className="text-lg text-color-text-black ">Project Name</h2>
-      <AddMemberModal />
-    </div>
+    <div className="mx-5">
     <div className="flex flex-col lg:flex-row py-2">
       <div className="w-full lg:w-[900px] h-auto lg:overflow-hidden border border-blue-300 rounded-t-lg">
         {/* Header */}
@@ -160,7 +156,7 @@ const AddKeyValuePage = () => {
           </div>
         </form>
       </div>
-      <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+      <div className="mt-10 ml-5 lg:mt-0 w-full lg:w-auto lg:flex-1">
         <ViewMember />
       </div>
     </div>

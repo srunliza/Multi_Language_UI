@@ -12,12 +12,12 @@ const AddMemberModal = () => {
     <div className="flex justify-center ">
       <button
         id="openContactForm"
-        className="flex  bg-blue-500 text-base hover:bg-blue-700 text-white  py-2 px-4 rounded-md"
+        className="flex  bg-blue-500 text-sm hover:bg-blue-700 text-white   py-2 px-2 rounded-md"
         onClick={handleOpenModal}
       >
         <svg
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

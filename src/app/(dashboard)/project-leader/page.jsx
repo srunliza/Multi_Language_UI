@@ -7,14 +7,8 @@ import ViewMember from "@/components/ViewMember";
 const ProjectLeaderDashboardHome = () => {
   return (
     <div>
-    <div className="ml-5 ">
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="text-lg text-color-text-black ">
-          Project Name
-        </h2>
-        <AddMemberModal />
-      </div>
-      <div className="flex flex-col lg:flex-row lg:space-x-4">
+    <div className="mx-5 ">
+      <div className="flex flex-col lg:flex-row py-2">
         <div className="w-full lg:w-[900px] h-auto lg:h-screen border border-blue-300 rounded-t-lg">
           {/* Header */}
           <NavbarProjectLeaderComponent />
@@ -130,7 +124,7 @@ const ProjectLeaderDashboardHome = () => {
             </div>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+        <div className="mt-10 ml-5 lg:mt-0 w-full lg:w-auto lg:flex-1 ">
           <ViewMember />
         </div>
       </div>

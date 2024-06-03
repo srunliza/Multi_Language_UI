@@ -21,11 +21,7 @@ const UploadFilePage = () => {
   
   return (
     <div>
-       <div className="ml-5 ">
-      <div className="flex justify-between items-center ">
-        <h2 className="text-lg text-color-text-black ">Project Name</h2>
-        <AddMemberModal />
-      </div>
+       <div className="mx-5 ">
       <div className="flex flex-col md:flex-row py-2 text-ms">
         <div className="w-full md:w-3/4 overflow-hidden border border-blue-300 rounded-t-lg">
           {/* Header */}
@@ -178,7 +174,7 @@ const UploadFilePage = () => {
           </form>
         </div>
         {/* <MemberComponent /> */}
-        <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+        <div className="mt-10 ml-5 lg:mt-0 w-full lg:w-auto lg:flex-1">
           <ViewMember />
         </div>
       </div>
