@@ -1,6 +1,4 @@
 import Link from "next/link";
-import IMAGES from "../../public/assets/images";
-import logo from "../../public/assets/images/logo.png"
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';

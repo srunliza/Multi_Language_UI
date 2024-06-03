@@ -3,7 +3,10 @@ import React from 'react'
 
 const CalendarPage = () => {
   return (
-    <CalendarComponent />
+    // <CalendarComponent />
+    <div>
+      gg
+    </div>
   )
 }
 

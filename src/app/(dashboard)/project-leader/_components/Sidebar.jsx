@@ -10,7 +10,7 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 const Sidebar = () => {
   return (
     <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
-      <div className="flex items-center justify-center h-30 bg-blue-800 ">
+      <div className="flex items-center justify-center h-30">
         <img
           className="w-[150px] mb-6"
           src="./assets/images/logo1.png"
