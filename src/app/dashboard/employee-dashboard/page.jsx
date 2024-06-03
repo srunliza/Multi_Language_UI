@@ -110,7 +110,7 @@ const EmployeeDashboardPage = () => {
                 </div>
 
 
-    
+      
                 {/* table item */}
                 <div class="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 no-scrollbar">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -312,14 +312,14 @@ const EmployeeDashboardPage = () => {
 
 
                 {/* footer */}
-                <hr class="mt-[30px] text-gray-800" />
+                {/* <hr class="mt-[30px] text-gray-800" />
                     <div class="flex items-center justify-center pb-8 pt-[9px] md:py-6">
                         <p class="text-[10px] font-normal text-gray-800 md:text-[13px]">
                             © Copyright
                                     2024
                                         , All Rights Reserved by KOSIGN (Cambodia) Investment Co.,Ltd.
                         </p>
-                    </div>
+                    </div> */}
             </div>
 
 

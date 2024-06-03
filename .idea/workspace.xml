@@ -5,39 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9749d39c-4375-423e-b53d-2ff393ab23d6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/contact.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/dashboard.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/drop.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/editprofile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hide.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iconpassword.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logout.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mail.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/neth.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/notification.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/profile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/profile_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/profileneth.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/schedule_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/setting.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sidebar component.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/socaicontact.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sokheng.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/soklay.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sreyly.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/projectList/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/setting/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ProjectListComponent.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SidebarComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SidebarComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/login/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/login/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/register/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/register/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/employee-dashboard/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/employee-dashboard/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/preview-json-file/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/preview-json-file/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/preview-string-file/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/preview-string-file/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/dashboard/preview-xml-file/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/preview-xml-file/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FeedbackComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FeedbackComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -52,9 +27,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2h1yftMQb3RcWiAdQVCHq8DVFcN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -64,7 +39,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging Vandy",
+    "git-widget-placeholder": "Vandy",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/KSHRD/Basic course/Final project/NextJS Frontend/multi-language-ui",
     "node.js.detected.package.eslint": "true",
@@ -84,6 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1716775984772</updated>
       <workItem from="1716775985951" duration="2534000" />
+      <workItem from="1717404091162" duration="26000" />
     </task>
     <servers />
   </component>

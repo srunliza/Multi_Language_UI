@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { EmailOutlined, HttpsOutlined, VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
-import login from '../../../../public/assets/images/login.png';
+import login from '../../../../public/assets/icons/login.svg';
 import google from '../../../../public/assets/icons/google.svg';
 import github from '../../../../public/assets/icons/github.svg';
 import Link from 'next/link';
@@ -16,11 +16,13 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  //handle validate email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  //handle email change
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -34,6 +36,7 @@ const LoginPage = () => {
     }
   };
 
+  //handle password change
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -48,6 +51,7 @@ const LoginPage = () => {
   };
 
 
+  //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -74,17 +78,18 @@ const LoginPage = () => {
     }
 
     if (valid) {
-      // Proceed with form submission
       console.log('Form submitted successfully!');
     }
   };
 
+  //handle hide and show password
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   const router = useRouter();
 
+  //use to redirect to another path
   const handleLoginClick = () => {
     router.push('/dashboard/employee-dashboard')
   }
@@ -118,7 +123,7 @@ const LoginPage = () => {
                 <input
                   type="email"
                   id="email"
-                  className={`w-full px-10 py-3 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${emailError ? 'border-red-500' : ''}`}
+                  className={`w-full px-10 py-2.5 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${emailError ? 'border-red-500' : ''}`}
                   placeholder="example@gmail.com"
                   value={email}
                   onChange={handleEmailChange}
@@ -142,7 +147,7 @@ const LoginPage = () => {
                 <input
                   type={passwordVisible ? "text" : "password"}
                   id="password"
-                  className={`w-full px-10 py-3 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${passwordError ? 'border-red-500' : ''}`}
+                  className={`w-full px-10 py-2.5 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${passwordError ? 'border-red-500' : ''}`}
                   placeholder="Enter Your Password"
                   value={password}
                   onChange={handlePasswordChange}
@@ -181,12 +186,12 @@ const LoginPage = () => {
 
             {/* login with google or github */}
             <div className="flex justify-center items-center mt-3 gap-5">
-              <button className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
+              <a className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
                 <Image src={google} width={20} height={20} alt='google icon' />
-              </button>
-              <button className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
+              </a>
+              <a className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
                 <Image src={github} width={20} height={20} alt='github' />
-              </button>
+              </a>
             </div>
 
 

@@ -89,7 +89,7 @@ const PreviewStringFilePage = () => {
 
     return ( 
         <main className="bg-white p-8">
-            <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-8">
                     <div className="bg-white shadow-md p-6 rounded-md min-h-[560px]">
 
@@ -102,7 +102,7 @@ const PreviewStringFilePage = () => {
                         {/* data map as string data */}
                            {previewStringData.map((stringData, index) => (
                              <div key={index} className="text-black pl-8 mt-3">
-                                <p>"{stringData.key}" : "{stringData.value}";</p>
+                                <p className="font-consolas text-gray-800">"{stringData.key}" : "{stringData.value}";</p>
                              </div>
                            ))}
                            
