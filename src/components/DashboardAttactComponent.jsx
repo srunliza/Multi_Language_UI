@@ -8,8 +8,6 @@ const DashboardAttactComponent = () => {
             status: "Finished",
             from: "14/5/2024",
             to: " 17/5/2024",
-
-
         },
         {
             id: 2,
