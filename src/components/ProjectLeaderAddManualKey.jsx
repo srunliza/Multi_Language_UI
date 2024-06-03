@@ -21,9 +21,7 @@ const ProjectLeaderAddManualKey = () => {
   return (
     <div className="ml-5">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg text-color-text-black ">
-          Project Name
-        </h2>
+        <h2 className="text-lg text-color-text-black ">Project Name</h2>
         <AddMemberModal />
       </div>
       <div className="flex flex-col lg:flex-row py-2">
@@ -54,9 +52,8 @@ const ProjectLeaderAddManualKey = () => {
 
           {/* Form */}
           <form action="">
-            <div className="ml-10 mt-3">
-
-              <div className="w-full lg:w-[321px] py-2 text-xs">
+            <div className="ml-10 mt-3 ">
+              <div className="w-full lg:w-[321px] py-2 text-xs ">
                 <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
@@ -69,69 +66,68 @@ const ProjectLeaderAddManualKey = () => {
                 </select>
               </div>
               <SelectComponent />
-              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs">
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4  text-xs">
                 <div className="flex flex-col w-full lg:w-auto ">
-                  <label htmlFor="start" className="text-xs text-gray-600 mb-1">
+                  <label htmlFor="start" className="text-xs  mb-1">
                     Start Date
                   </label>
                   <input
                     type="date"
                     id="start"
                     name="start"
-                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-gray-600 text-xs border-gray-300 rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="end" className="text-xs text-gray-600 mb-1">
+                  <label htmlFor="end" className="text-xs mb-1">
                     End Date
                   </label>
                   <input
                     type="date"
                     id="end"
                     name="end"
-                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border border-gray-300 text-xs rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-gray-600 border-gray-300 text-xs rounded-lg"
                   />
                 </div>
               </div>
               {/* input key */}
-              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-3">
-                
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs text-gray-600 mb-1">
+                  <label htmlFor="key" className="text-xs  mb-1">
                     Key name
                   </label>
                   <input
-                   type="text"
+                    type="text"
                     placeholder="Input your key name"
                     name="keyName"
-                    className="w-full lg:w-[220px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px]   px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="hint" className="text-xs text-gray-600 mb-1">
+                  <label htmlFor="hint" className="text-xs mb-1">
                     Add Hint
                   </label>
                   <input
                     type="text"
                     placeholder="Hints for some keywords"
                     name="hint"
-                    className="w-full lg:w-[220px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
-                <div className="flex  lg:mt-4 h-[35px] w-full lg:w-auto">
+                <div className="flex lg:mt-5 mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    className="px-3 py-2  text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    className="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                     type="submit"
                     value={"Add key"}
                   />
                 </div>
               </div>
               {/* choose key word */}
-              <div className="w-full lg:w-[321px] py-2 mb-2">
+              <div className="w-full lg:w-[321px] pb-2 mb-2 mt-0">
                 <label htmlFor="select" className="text-xs">
                   Or choose keyword as a page
                 </label>
-                <select className="block w-full lg:w-[321px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose type of keyword</option>
                   <option value="dashboard">Dashboard</option>
                   <option value="english">English</option>
@@ -168,14 +164,16 @@ const ProjectLeaderAddManualKey = () => {
                 </div>
               </div>
               {/* button */}
-              <div className="flex flex-col lg:flex-row gap-4 py-5 min-w-[95px]">
+
+              <div class="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
                 <input
-                  className="px-6 py-2 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer w-full lg:w-auto"
+                  class="px-3 py-1  text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                   type="reset"
                   value={"Reset"}
                 />
+
                 <input
-                  className="px-6 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer w-full lg:w-auto"
+                  class="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                   type="submit"
                   value={"Submit"}
                 />

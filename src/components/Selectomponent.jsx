@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 
 const language = [
@@ -7,7 +7,7 @@ const language = [
   { value: 2, label: "English" },
   { value: 3, label: "Korea" },
   { value: 4, label: "Thai" },
-  { value: 5, label: "Franch" },
+  { value: 5, label: "French" },
 ];
 
 function SelectComponent() {
@@ -18,31 +18,30 @@ function SelectComponent() {
   };
 
   return (
-    <div className="w-[321px] py-2">
-     
-      <div className="mx-auto container text-xs ">
-      <label htmlFor="select" className=" mb-2">Translating to (target language)</label>
-        <div className="flex flex-wrap items-center lg:justify-between justify-center">
-          <div className=" w-[321px] text-xs py-2 text-gray-400 ">
-
-          <Select
-            styles={{
-                    control: (provided, state) => ({
-                      ...provided,
-                      border: state.isFocused ? '1px solid #ccc' : '1px solid #ddd',
-                      borderRadius: '8px',
-                      padding: '2px', // Adjust padding as needed
-                      backgroundColor:'',
-                      height:'37.6px'
-                    }),
-                  }}
-          options={language}
-          onChange={setHandle}
-          isMulti
-          placeholder="Select languages" // Set placeholder text
-          />
+    <div className="w-full lg:w-[321px] py-2">
+      <div className="container mx-auto text-xs">
+        <label htmlFor="select" className=" block">
+          Translating to (target language)
+        </label>
+        <div className="flex flex-wrap items-center justify-center lg:justify-between">
+          <div className="w-full lg:w-[321px] text-xs py-2 text-gray-400">
+            <Select
+              styles={{
+                control: (provided, state) => ({
+                  ...provided,
+                  border: state.isFocused ? "1px solid #ccc" : "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "2px", // Adjust padding as needed
+                  backgroundColor: "",
+                  height: "37.6px",
+                }),
+              }}
+              options={language}
+              onChange={setHandle}
+              isMulti
+              placeholder="Select languages" // Set placeholder text
+            />
           </div>
-         
         </div>
       </div>
     </div>
