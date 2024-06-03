@@ -1,15 +1,20 @@
 import NavbarComponent from "@/components/NavbarComponent";
 import Sidebar from "./_components/Sidebar";
 
+
 export default function DeveloperDashboardLayout({ children }) {
   return (
-    <div className="flex h-full">
-      <aside className="w-[280px] fixed top-0 left-0 h-full">
+    <div className="grid grid-cols-12 w-full h-screen grid-rows-12">
+      <div className="bg-red-500 col-span-2 row-span-12">
         <Sidebar />
-      </aside>
-      <div className="flex-1 ml-[280px]">
+      </div>
+      <div className="bg-slate-500 col-span-10 row-span-1">
         <NavbarComponent />
-        <main className="p-4">{children}</main>
+      </div>
+      <div className="   col-span-10 row-span-12 rounded-md w-full h-full p-4">
+        <div className="bg-yellow-300 shadow-2xl w-full h-full rounded-md">
+          {children}
+        </div>
       </div>
     </div>
   );
