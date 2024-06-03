@@ -1,4 +1,3 @@
-import EmployeeDashboard from "@/components/EmployeeDashboard";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 

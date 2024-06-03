@@ -1,3 +1,4 @@
+import { projects } from "@/obj/projects";
 import React from "react";
 
 const getStatusColor = (status) => {
@@ -14,67 +15,8 @@ const getStatusColor = (status) => {
 };
 
 const ProjectListComponent = () => {
-  const projects = [
-    {
-      id: 1,
-      name: "Web Designing",
-      owner: "Meng Soklay",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 2,
-      name: "Web Designing",
-      owner: "Tep Thean",
-      daysLeft: 1,
-      status: "Progress",
-    },
-    {
-      id: 3,
-      name: "Web Designing",
-      owner: "Long SreyLy",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 4,
-      name: "Web Designing",
-      owner: "Tey Sokheng",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 5,
-      name: "Web Designing",
-      owner: "Mao Piseth",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 6,
-      name: "Web Designing",
-      owner: "Krem Vandy",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 7,
-      name: "Web Designing",
-      owner: "Kosal Sreyka",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 8,
-      name: "Web Designing",
-      owner: "Mi Neath",
-      daysLeft: 1,
-      status: "Progress",
-    },
-  ];
-
   return (
-    <div className="p-6 flex-1 bg-white mt-5">
+    <div className="p-6 flex-1 bg-white mt-5 overflow-hidden"> {/* Added overflow-hidden here */}
       <h2 className="text-2xl font-bold mb-4 text-gray-700">My Project</h2>
       <div className="flex flex-wrap items-center mb-4">
         <input
@@ -147,7 +89,9 @@ const ProjectListComponent = () => {
           </button>
         </div>
       </div>
-      <div className="space-y-4">
+
+      {/* scroll list */}
+      <div className="h-[26.1rem] overflow-y-auto no-scrollbar">
         {projects.map((project, index) => (
           <div
             key={index}
