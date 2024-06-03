@@ -18,15 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <div className="grid grid-cols-12">
-          <div className="col-span-2">
-            <Sidebar />
-          </div>
-          <div className="col-span-10">
-            <NavbarComponent />
-            {children}
-          </div>
-        </div>
+      { children }
       </body>
     </html>
   );
