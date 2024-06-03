@@ -87,7 +87,8 @@ const DashboardAttactComponent = () => {
                             <tr key={item.id} className="bg-white border-b text-gray-900 dark:border-gray-300">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">{item.title}</th>
                                 <td className="px-6 py-4 pl-10">{item.language}</td>
-                                <td className="px-6 py-4 pl-9 text-green-500 truncate">{item.status}</td>
+                                {/* <td className={`px-6 py-4 pl-9 truncate`}>{item.status}</td> */}    
+                                <td className={`px-6 py-4 pl-9 ${item.status === 'Pending' ? 'text-red-600' : item.status === 'Progress' ? 'text-yellow-600' : item.status === 'Completed' ? 'text-green-600' : ''} truncate`}>{item.status}</td>
                                 <td className="px-6 py-4 border-gray-200">{item.from}</td>
                                 <td className="px-6 py-4 border-gray-200">{item.to}</td>
                                 <td className="flex gap-2 justify-center">
