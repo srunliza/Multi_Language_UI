@@ -87,46 +87,78 @@ const TranslateTableComponent = () => {
     };
 
     return (
-        <div className="container mx-auto shadow-sm pt-10">
-            <div className="overflow-x-auto">
-                <h1 className="p-5 font-bold text-black">Web Design</h1>
-                <div className='flex border  p-3 rounded-t-lg justify-evenly items-center'>
-                    <h3>English</h3>
-                    <Image
-                        src={"./icon/switch.svg"}
-                        width={18}
-                        height={18}
-                      
-                    />
-                    <h3>Korean</h3>
+        <main className="bg-white p-8">
+            <div className="grid grid-cols-12 gap-8">
+                <div className="col-span-8">
+                    <div className="overflow-x-auto">
+                        <h1 className="p-5 font-bold text-black">Web Design</h1>
+                        <div className='flex border  p-3 rounded-t-lg justify-evenly items-center'>
+                            <h3>English</h3>
+                            <Image
+                                src={"./assets/icons/switch.svg"}
+                                width={18}
+                                height={18}
 
+                            />
+                            <h3>Korean</h3>
+
+                        </div>
+                        <div className='overflow-auto h-[450px] border  border-x-0 border-t-0 no-scrollbar'>
+                            <table className="min-w-full ">
+                                <tbody >
+                                    {translateData.map((e) => (
+                                        <tr key={e.id} className="grid grid-cols-2">
+                                            <td className="w-full p-2 border border-gray-300 rounded ">{e.baseLang}</td>
+                                            <td >
+                                                <input
+                                                    type="text"
+                                                    value={e.tagetLang}
+                                                    onChange={(event) => handleInputChange(e.id, event.target.value)}
+                                                    className="w-full p-2 border border-gray-300 rounded"
+                                                />
+                                            </td>
+
+                                        </tr>
+
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* button go back and download */}
+                    <div className="flex gap-4 mt-4 justify-end">
+                        {/* Open the modal using document.getElementById('ID').showModal() method */}
+                        <button className="btntext-white bg-blue-700 text-center rounded-lg text-sm py-2 px-3 w-[100px] text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Save</button>
+                        <dialog id="my_modal_1" className="modal">
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg">Hello!</h3>
+                                <p className="py-4">Do you want to save this translation?</p>
+                                <div className="modal-action">
+                                    <form method="dialog">
+                                        {/* if there is a button in form, it will close the modal */}
+                                        <button className="btn">No</button>
+                                        <button className="btn">Yes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
+                        <a href="" className="text-white bg-green-600  text-center rounded-lg text-sm py-2 px-3  w-[100px]">Submit</a>
+                    </div>
                 </div>
-                <div className='overflow-auto h-[450px] border  border-x-0 border-t-0 no-scrollbar'>
-                    <table className="min-w-full ">
-                        <tbody >
-                            {translateData.map((e) => (
-                                <tr key={e.id} className="grid grid-cols-2">
-                                    <td className="w-full p-2 border border-gray-300 rounded ">{e.baseLang}</td>
-                                    <td >
-                                        <input
-                                            type="text"
-                                            value={e.tagetLang}
-                                            onChange={(event) => handleInputChange(e.id, event.target.value)}
-                                            className="w-full p-2 border border-gray-300 rounded"
-                                        />
-                                    </td>
 
-                                </tr>
 
-                            ))}
-                        </tbody>
-                    </table>
+                {/* feedback  */}
+                <div className="col-span-4 mt-[52px]">
+                    <FeedbackComponent />
                 </div>
+
             </div>
-            <div>
-                <FeedbackComponent/>
-            </div>
-        </div>
+
+        </main>
+
+
+
     )
 }
 

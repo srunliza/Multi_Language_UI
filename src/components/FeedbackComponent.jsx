@@ -68,6 +68,10 @@ const FeedbackComponent = () => {
                     ))}
 
                 </div>
+
+            </div>
+            <div className="float-right">
+                <img src="./assets/images/chatboot.svg" alt="chatboot" />
             </div>
         </main>
     );
