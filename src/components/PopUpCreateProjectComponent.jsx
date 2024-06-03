@@ -1,0 +1,67 @@
+import React from 'react'
+
+const PopUpCreateProjectComponent = () => {
+  return (
+    <div>
+          <div class="fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+          <div class="fixed inset-0 transition-opacity">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+          <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+          <div class="flex justify-end -mt-3 -mr-3">
+                  <button
+                    type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <form class="w-full -mt-5">
+                <h2 class="text-lg leading-6 font-medium text-color-text-black ">
+                  Create Project
+                </h2>
+               
+                    <input name="text" type="email"  required=""
+                        class="block w-full rounded-lg mt-5 border    text-color-text-black-900 sm:text-sm  focus:ring-blue-600 border-blue-500  p-2.5  dark:placeholder-color-text-grey dark:text-white dark:focus:text-primary-color"
+                        placeholder="project name" value=""></input>
+                 </form>
+          
+            <div class=" sm:mt-4 sm:flex  sm:flex-row-reverse">
+              <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                <button
+                  type="button"
+                  class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-red-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                >
+                  Logout
+                </button>
+              </span>
+              <span class="mt-3 flex   rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                <button
+                  type="button"
+                  class="inline-flex justify-center w-20 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                >
+                  No
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default PopUpCreateProjectComponent
