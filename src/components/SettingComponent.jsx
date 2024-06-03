@@ -1,12 +1,11 @@
 const SettingComponent = () => {
     return (
-        <main className="p-4 sm:p-8 md:p-16 lg:p-24 xl:p-20">
+        <main className="p-4 sm:p-8 md:p-16  lg:p-24 xl:p-20">
             <form className="h-10 w-full">
                 <div className="bg-white p-8 rounded-lg shadow-md border dark:border-gray-700 w-full max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     <hr className="border-1 border-blue-500 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
                         {/* First Name and Last Name */}
                         <div>
                             <div className="grid grid-cols-2 gap-4">
@@ -101,6 +100,7 @@ const SettingComponent = () => {
                                             <img src="./icon/iconpassword.svg" alt="password" />
                                         </div>
                                         <input type="password" id="password" className="text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 border-blue-200 border-2" placeholder="*******" />
+                                        
                                     </div>
                                 </div>
                                 {/* Social Contact */}
