@@ -1,9 +1,35 @@
-import React from 'react'
+import AddMemberModal from "@/components/AddMemberModal";
+import ProjectLeaderCalendar from "@/components/ProjectLeaderCalendar";
+import React from "react";
+import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
+import CalendarComponent from "@/components/CalendarComponent";
+import ViewMember from "@/components/ViewMember";
 
 const CalendarPage = () => {
   return (
-    <div>CalendarPage</div>
-  )
-}
+    <div>
+       <div className="ml-5 ">
+        <div className="flex justify-between items-center ">
+          <h2 className="text-lg text-color-text-black ">
+            Project Name
+          </h2>
+          <AddMemberModal />
+        </div>
+        <div className="flex py-2">
+          <div className="w-[900px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
+            {/* Header */}
+            <NavbarProjectLeaderComponent />
 
-export default CalendarPage
+            {/* text */}
+            <CalendarComponent />
+          </div>
+          <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:flex-1">
+            <ViewMember />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CalendarPage;

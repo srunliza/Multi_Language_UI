@@ -12,7 +12,7 @@ export default function DeveloperDashboardLayout({ children }) {
         <NavbarComponent />
       </div>
       <div className="   col-span-10 row-span-12 rounded-md w-full h-full p-4">
-        <div className="bg-yellow-300 shadow-2xl w-full h-full rounded-md">
+        <div className="bg-white shadow-2xl w-full h-full rounded-md">
           {children}
         </div>
       </div>

@@ -1,11 +1,14 @@
-import React from 'react';
-import AddMemberModal from './AddMemberModal';
-import ViewMember from './ViewMember';
-import AttactmentComponent from './AttactmentComponent';
+import AddMemberModal from "@/components/AddMemberModal";
+import ProjectLeaderAttactment from "@/components/ProjectLeaderAttactment";
+import React from "react";
+import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
+import AttactmentComponent from "@/components/AttactmentComponent";
+import ViewMember from "@/components/ViewMember";
 
-const ProjectLeaderAttachment = () => {
+const ViewAttachmentPage = () => {
   return (
-    <div className="ml-5">
+    <div>
+      <div className="ml-5">
       <div className="flex justify-between items-center">
         <h2 className="text-lg text-color-text-black ">Project Name</h2>
         <AddMemberModal />
@@ -22,7 +25,8 @@ const ProjectLeaderAttachment = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
-export default ProjectLeaderAttachment;
+export default ViewAttachmentPage;
