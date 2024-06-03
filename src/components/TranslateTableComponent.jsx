@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image'
 import React, { useState } from 'react'
+import FeedbackComponent from './FeedbackComponent';
 
 
 const TranslateTableComponent = () => {
@@ -121,6 +122,9 @@ const TranslateTableComponent = () => {
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div>
+                <FeedbackComponent/>
             </div>
         </div>
     )
