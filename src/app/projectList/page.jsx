@@ -4,7 +4,7 @@ import ProjectListComponent from "@/components/ProjectListComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
 
-function ProjectPage() {
+function ProjectPageComponent() {
     return (
         <>
             <div className=" flex h-screen bg-gray-100">
@@ -20,4 +20,4 @@ function ProjectPage() {
         </>
     )
 }
-export default ProjectPage;
+export default ProjectPageComponent;

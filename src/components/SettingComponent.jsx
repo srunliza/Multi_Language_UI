@@ -2,7 +2,7 @@ const SettingComponent = () => {
     return (
       
             <form className="w-full p-10">
-                <div className="bg-white p-8 max-h-screen rounded-lg shadow-md border dark:border-gray-700 w-full max-w-screen-lg mx-auto">
+                <div className="bg-white p-8 max-h-screen rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     <hr className="border-1 border-blue-500 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -24,7 +24,7 @@ const SettingComponent = () => {
                                     <label htmlFor="gender_male" className="block text-gray-700 dark:text-white mb-1">Gender</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <img src="./icon/gender1.svg" alt="gender icon" />
+                                            <img src="./assets/icons/gender1.svg" alt="gender icon" />
                                         </div>
                                         <input type="text" placeholder="Enter firest name" className="input rounded-e-none pl-10 input-bordered input-primary w-full max-w-xs" />
                                     </div>
@@ -33,7 +33,7 @@ const SettingComponent = () => {
                                     <label htmlFor="gender_male" className="block text-white dark:text-white mb-1">Gender</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <img className="w-3" src="./icon/gender2.svg" alt="gender icon" />
+                                            <img className="w-3" src="./assets/icons/gender2.svg" alt="gender icon" />
                                         </div>
                                         <input type="text" placeholder="Enter firest name" className="input rounded-s-none pl-10 input-bordered input-primary w-full max-w-xs" />
                                     </div>
@@ -50,7 +50,7 @@ const SettingComponent = () => {
                                 <label htmlFor="email" className="block text-gray-700 dark:text-white mb-1">Email</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                      <img className="w-[20px]" src="./icon/mail.svg" alt="" />
+                                      <img className="w-[20px]" src="./assets/icons/mail.svg" alt="" />
                                     </div>
                                     <input type="mail" className="text-gray-400 input  pl-10 input-primary w-full" placeholder="example@gmail.com" />
                                 </div>  
@@ -71,7 +71,7 @@ const SettingComponent = () => {
 
                         {/* Profile */}
                         <div className="flex flex-col items-center">
-                            <div className="mt-20 w-[141px] h-[141px] bg-[url('/image/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+                            <div className="mt-20 w-[141px] h-[141px] bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                                 {/* icon edite profile  */}
                                 <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-28">
                                     <input type="file" name="profile" id="upload_profile" hidden required />
@@ -95,7 +95,7 @@ const SettingComponent = () => {
                                     <label htmlFor="social_contact" className="block text-gray-700 dark:text-white mb-1">Password</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <img className="w-[20px]" src="./icon/iconpassword.svg" alt="social contact" />
+                                            <img className="w-[20px]" src="./assets/icons/iconpassword.svg" alt="social contact" />
                                         </div>
                                         <input type="mail" className="text-gray-400 input  pl-10 input-primary w-full" placeholder="xxxxxxxxx" />
                                     </div>
@@ -106,7 +106,7 @@ const SettingComponent = () => {
                                     <label htmlFor="social_contact" className="block text-gray-700 dark:text-white mb-1">Social Contact</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <img className="w-[20px]" src="./icon/socaicontact.svg" alt="social contact" />
+                                            <img className="w-[20px]" src="./assets/icons/socaicontact.svg" alt="social contact" />
                                         </div>
                                         <input type="mail" className="text-gray-400 input  pl-10 input-primary w-full" placeholder="Enter social contact" />
                                     </div>

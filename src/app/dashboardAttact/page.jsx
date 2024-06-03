@@ -4,7 +4,7 @@ import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
 
-function DashboardAttact() {
+function DashboardAttactPageComponent() {
     return (
         <div className=" flex h-screen bg-gray-100">
             <div>
@@ -18,4 +18,4 @@ function DashboardAttact() {
         </div>
     )
 }
-export default DashboardAttact;
+export default DashboardAttactPageComponent;

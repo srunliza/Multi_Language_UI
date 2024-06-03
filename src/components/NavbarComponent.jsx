@@ -27,7 +27,7 @@ const NavbarComponent = () => {
                 <div className="flex items-center pr-4">
                     <div className="flex items-center pr-4 gap-7">
                         <button className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Cart">
-                           <img src="./icon/notification.svg" alt="notification" />
+                           <img src="./assets/icons/notification.svg" alt="notification" />
                             <span className="absolute inset-0 object-right-top -mr-6">
                                 <div className="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
                                     6
@@ -36,7 +36,7 @@ const NavbarComponent = () => {
                         </button>
                         <button type="button" className=" w-[45px] h-[45px] flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-[45px] h-[45px] rounded-full" src="./image/profile.svg" alt="user photo" />
+                            <img className="w-[45px] h-[45px] rounded-full" src="./assets/images/profile.svg" alt="user photo" />
                         </button>
                     </div>
                 </div>

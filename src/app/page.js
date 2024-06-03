@@ -3,7 +3,7 @@ import SidebarComponent from "@/components/SidebarComponent";
 export default function Home() {
   return (
     <main>
-      <div className=" flex h-screen bg-gray-100">
+      <div className=" flex h-screen ">
         <div>
           <SidebarComponent />
         </div>

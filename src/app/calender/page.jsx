@@ -2,7 +2,7 @@ import CalendarComponent from "@/components/CalendarComponent";
 import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
-const CalendarPage = () => {
+const CalendarPageComponent = () => {
     return ( 
         <main>
            <div className=" flex h-screen bg-gray-100">
@@ -20,4 +20,4 @@ const CalendarPage = () => {
     );
 }
  
-export default CalendarPage;
+export default CalendarPageComponent;

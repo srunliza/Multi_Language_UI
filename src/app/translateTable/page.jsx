@@ -1,18 +1,17 @@
 import NavbarComponent from "@/components/NavbarComponent";
-import SettingComponent from "@/components/SettingComponent";
 import SidebarComponent from "@/components/SidebarComponent";
+import TranslateTableComponent from "@/components/TranslateTableComponent";
 
-
-const SettingPageComponent = () => {
+const TranslateTablePageComponent = () => {
     return (
         <>
-            <div className=" flex h-screen bg-gray-100">
+            <div className=" flex h-screen bg-white">
                 <div>
                     <SidebarComponent />
                 </div>
                 <div className="w-full">
                     <NavbarComponent />
-                    <SettingComponent/>
+                    <TranslateTableComponent/>
                 </div>
 
             </div>
@@ -20,4 +19,4 @@ const SettingPageComponent = () => {
 
     )
 }
-export default SettingPageComponent;
+export default TranslateTablePageComponent;
