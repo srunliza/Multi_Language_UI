@@ -218,7 +218,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl ml-5 mt-6 shadow-lg">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl mt-6 shadow-lg h-[35.7rem] overflow-hidden">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -312,7 +312,7 @@ const ProjectCardComponent = () => {
           </button>
 
           {/* --- link to list's flex body --- */}
-          <Link className="focus:outline-none" href="projectcard" name="list">
+          <Link className="focus:outline-none" href="project-list" name="list">
             <svg
               className="h-7 w-7 text-gray-500"
               fill="none"
@@ -331,7 +331,7 @@ const ProjectCardComponent = () => {
       </div>
 
       {/* ---card's flex body--- */}
-      <div className="h-full overflow-hidden">
+      <div className="h-[26.1rem] overflow-hidden no-scrollbar">
         <div className="overflow-auto h-full">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {filteredProjects.map((project, index) => (

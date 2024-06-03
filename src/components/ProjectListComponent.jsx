@@ -1,4 +1,5 @@
 import { projects } from "@/obj/projects";
+import Link from "next/link";
 import React from "react";
 
 const getStatusColor = (status) => {
@@ -56,7 +57,7 @@ const ProjectListComponent = () => {
               />
             </svg>
           </button>
-          <button className="focus:outline-none mr-2">
+          <Link className="focus:outline-none mr-2" href="project-card" name="card">
             <svg
               className="h-8 w-8 text-gray-500"
               viewBox="0 0 24 24"
@@ -71,7 +72,7 @@ const ProjectListComponent = () => {
               <rect x="14" y="14" width="7" height="7" />
               <rect x="3" y="14" width="7" height="7" />
             </svg>
-          </button>
+          </Link>
           <button className="focus:outline-none">
             <svg
               className="h-8 w-8 text-gray-500"

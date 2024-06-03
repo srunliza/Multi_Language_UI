@@ -11,7 +11,7 @@ export default function DeveloperDashboardLayout({ children }) {
         <NavbarComponent />
       </div>
       <div className="bg-white col-span-10 row-span-12 rounded-md w-full h-full p-4">
-        <div className="shadow-2xl w-full h-[26.1rem] rounded-md">
+        <div className="shadow-2xl w-full  rounded-md">
           {children}
         </div>
       </div>
