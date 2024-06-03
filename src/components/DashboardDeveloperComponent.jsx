@@ -29,7 +29,7 @@ const DashboardDeveloperComponent = () => {
               <nav>
                 <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
                   <li>
-                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/developerDashboard">
+                    <Link class="md:p-4 py-3 px-0 block text-blue-700" href="/project-leader">
                       Upload
                     </Link>
                   </li>
