@@ -1,7 +1,7 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const CalendarComponent = () => {
+const CalendarPage = () => {
     return (
 
         <main className="flex items-center justify-center ">
@@ -93,4 +93,4 @@ const CalendarComponent = () => {
     )
 }
 
-export default CalendarComponent;
+export default CalendarPage;

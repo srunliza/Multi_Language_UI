@@ -4,13 +4,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import send from "../../public/assets/icons/send.svg";
 import Image from 'next/image';
 import { useState } from 'react';
-// import ConfirmPopup from '../components/ConfirmToDeleteComponent'
+import ConfirmPopup from '../components/ConfirmToDeleteComponent'
+import editIcon from "../../public/assets/icons/icon_edit.svg"
+import deleteIcon from "../../public/assets/icons/icon_delete.svg"
+
 
 const FeedbackComponent = () => {
     const feedbackData = [
         {
             id: 1,
             name: "Kroem Vandy",
+            image: './assets/images/vandy.png',
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
@@ -18,6 +22,7 @@ const FeedbackComponent = () => {
         {
             id: 2,
             name: "Srun Liza",
+            image: './assets/images/lisa.png',
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
@@ -25,6 +30,7 @@ const FeedbackComponent = () => {
         {
             id: 3,
             name: "Tep Thean",
+            image: './assets/images/thean.png',
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
@@ -32,6 +38,7 @@ const FeedbackComponent = () => {
         {
             id: 4,
             name: "Ret Sokhim",
+            image: './assets/images/sokhim.png',
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
@@ -39,11 +46,13 @@ const FeedbackComponent = () => {
         {
             id: 5,
             name: "Tey Sokheng",
+            image: './assets/images/sokheng.png',
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
         },
     ];
+
 
     const [showPopup, setShowPopup] = useState(false);
     const [currentPopupIndex, setCurrentPopupIndex] = useState(null);
@@ -78,6 +87,7 @@ const FeedbackComponent = () => {
         setShowConfirmPopup(false);
     };
 
+
     return (
         <main className="max-w-4xl mx-auto">
             {/* card */}
@@ -86,15 +96,15 @@ const FeedbackComponent = () => {
                 <h1 className="text-gray-800 text-xl font-semibold mb-5">Feedback</h1>
 
                 {/* feedback map data */}
-                <div className="overflow-auto max-h-[420px] mb-4 no-scrollbar">
+                <div className="overflow-auto max-h-[426px] mb-4 no-scrollbar">
                     {feedbackData.map((feedback, index) => (
                         <div key={index} className="bg-white shadow-sm px-4 py-2 border rounded-xl mb-2.5">
                             <div className="flex flex-col sm:flex-row pb-2">
                                 <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
                                     <img
                                         className="h-12 w-12 rounded-full object-cover"
-                                        src="https://randomuser.me/api/portraits/men/43.jpg"
-                                        alt=""
+                                        src={feedback.image}
+                                        alt="profile user image"
                                     />
                                 </div>
 
@@ -104,20 +114,21 @@ const FeedbackComponent = () => {
                                         <MoreVertIcon onClick={() => handleIconClick(index)} />
                                     </div>
 
-
                                     {showPopup && currentPopupIndex === index && (
                                         <div className="absolute right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                                             <ul>
                                                 <li
-                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
+                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer flex pl-2"
                                                     onClick={handleEdit}
                                                 >
+                                                    <Image src={editIcon} width={18} height={18} alt='edit icon' />
                                                     Edit
                                                 </li>
                                                 <li
-                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
+                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer flex pl-2"
                                                     onClick={handleDelete}
                                                 >
+                                                    <Image src={deleteIcon} width={18} height={18} alt='delete icon' /> 
                                                     Delete
                                                 </li>
                                             </ul>
@@ -133,6 +144,7 @@ const FeedbackComponent = () => {
                         </div>
                     ))}
                 </div>
+
 
                 {/* form to comment feedback */}
                 <form className="sticky bottom-0 bg-white w-full">
