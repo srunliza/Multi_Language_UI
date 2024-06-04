@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const LandingPage = () => {
   return (
@@ -6,13 +7,13 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="flex flex-wrap items-center justify-between p-3 bg-[#2357F9] font-bold text-white">
         <div className="px-6 text-xl">
-          <a href="/" className="text-indigo-900 z-10 active">
+          <Link href="/" className="text-indigo-900 z-10 active">
             <img
               src="../Images/Logo.png"
               alt="langnet-logo"
               className="w-22 py-2 md:py-0 g-image ml-5 md:ml-20"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex md:hidden">
           <button id="hamburger">
@@ -33,41 +34,41 @@ const LandingPage = () => {
           </button>
         </div>
         <div className="toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none gap-8">
-          <a
+          <Link
             href="#home"
             className="block bg-[#73D4D4] text-white rounded-full md:inline-block hover:text-blue-500 px-10 md:border-none"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="#aboutus"
             className="block md:inline-block hover:text- text-white blue-500 px-3 md:border-none"
           >
             About us
-          </a>
-          <a
+          </Link>
+          <Link
             href="#contactUs"
             className="block md:inline-block  text-white  hover:text-blue-500 px-3 md:border-none"
           >
             Contact Us
-          </a>
+          </Link>
         </div>
 
         <div className="toggle w-full text-end font-bold text-white hidden md:flex md:w-auto px-4 md:rounded mr-20">
           <div className="flex justify-end">
-            <a
-              href="#Login"
+            <Link
+              href="/login"
               className="block md:inline-block hover:text-blue-500 px-6 md:border-none"
             >
               Login
-            </a>
+            </Link>
 
-            <a
-              href="#signup"
+            <Link
+              href="/register"
               className="block bg-[#73D4D4] rounded-full md:inline-block hover:text-blue-500 px-6  md:border-none"
             >
               Sign Up
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
@@ -81,18 +82,18 @@ const LandingPage = () => {
               your work faster
             </h1>
             <p className="font-regular text-lg mb-8 text-white">
-              LangNet is a web-based platform enabling software project leaders
+              LangNet is Link web-based platform enabling software project leaders
               to efficiently manage multiple languages within the software,
               ultimately saving time for developers and translators by
               streamlining the upload and download process through required
               formats like Excel, JSON, XML, and others.
             </p>
-            <a
+            <Link
               href="#contactUs"
               className="px-6 py-3 bg-white text-black rounded-md hover:bg-[#c09858] transition duration-200"
             >
               Get Started
-            </a>
+            </Link>
           </div>
           <div className="mt-12 md:mt-0">
             <img
@@ -121,12 +122,12 @@ const LandingPage = () => {
                 </div>
                 <div className="pt-5 text-base font-semibold leading-7">
                   <p>
-                    <a
+                    <Link
                       href="#"
                       className="text-sky-500 transition-all duration-300 hover:text-white"
                     >
                       Read more &rarr;
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -150,12 +151,12 @@ const LandingPage = () => {
                 </div>
                 <div className="pt-5 text-base font-semibold leading-7">
                   <p>
-                    <a
+                    <Link
                       href="#"
                       className="text-sky-500 transition-all duration-300 hover:text-white"
                     >
                       Read more &rarr;
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -175,12 +176,12 @@ const LandingPage = () => {
                 </div>
                 <div className="pt-5 text-base font-semibold leading-7">
                   <p>
-                    <a
+                    <Link
                       href="#"
                       className="text-sky-500 transition-all duration-300 hover:text-white"
                     >
                       Read more &rarr;
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -193,13 +194,13 @@ const LandingPage = () => {
       <div className="m-8 md:m-20 mt-30 md:mt-60 justify-between">
         <div className="text-center font-bold text-2xl md:text-4xl text-[#454545] mt-10 md:mt-50">
           <p>
-            Here are a few reasons why our <br />
+            Here are Link few reasons why our <br />
             customers choose LangNet
           </p>
         </div>
-        <div class="grid gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 lg:gap-10 p-6 md:p-8 ">
+        <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 lg:gap-10 p-6 md:p-8 ">
           {/*Reason1 */}
-          <div class="max-w-2xl mx-auto mt-10">
+          <div className="max-w-2xl mx-auto mt-10">
             <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
               <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
                 <div className="md:flex">
@@ -218,7 +219,7 @@ const LandingPage = () => {
             </div>
           </div>
           {/*Reason2 */}
-          <div class="max-w-2xl mx-auto mt-10">
+          <div className="max-w-2xl mx-auto mt-10">
             <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
               <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
                 <div className="md:flex">
@@ -237,7 +238,7 @@ const LandingPage = () => {
             </div>
           </div>
           {/*Reason3 */}
-          <div class="max-w-2xl mx-auto mt-10">
+          <div className="max-w-2xl mx-auto mt-10">
             <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
               <div className="bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
                 <div className="md:flex">
@@ -260,18 +261,18 @@ const LandingPage = () => {
 
       {/*Teammember */}
       <div>
-        <h2 className="text-3xl font-bold text-[#454545] mb-4 ml-10 text-left">
+        <h2 className="text-3xl font-bold text-[#454545] mb-6 ml-[43px] text-left">
           Meet Our Team
         </h2>
         <div
           id="default-carousel"
-          class="rounded-lg overflow-hidden"
+          className="rounded-lg overflow-hidden"
           data-carousel="static"
         >
-          <div class=" h-80 md:h-96" data-carousel-inner>
-            <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className=" h-80 md:h-96 mx-auto" data-carousel-inner>
+            <div className="grid justify-items-center mx-4 justify-center grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
               {/*Teammember1 */}
-              <div className="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+              <div className="bg-white w-[360px] h-[350px] p-2 pt-9 rounded-lg shadow-md text-center">
                 <img
                   src="../Images/Panha.png"
                   alt="Team Member 1"
@@ -283,7 +284,7 @@ const LandingPage = () => {
                   front-end developer
                 </p>
                 <div className="mt-4 flex justify-center gap-4">
-                  <a className="hover:scale-110" target="_blank" href="#">
+                  <Link className="hover:scale-110" target="_blank" href="#">
                     <img
                       alt="Tele icon"
                       loading="lazy"
@@ -293,8 +294,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/tele.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="Facebook icon"
                       loading="lazy"
@@ -304,8 +305,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/facebook.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="google icon"
                       loading="lazy"
@@ -315,11 +316,11 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/google.png"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               {/*Teammember2 */}
-              <div className="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+              <div className="bg-white w-[360px] h-[350px] p-2 pt-9 rounded-lg shadow-md text-center">
                 <img
                   src="../Images/Piseth.png"
                   alt="Team Member 2"
@@ -331,7 +332,7 @@ const LandingPage = () => {
                   front-end developer
                 </p>
                 <div className="mt-4 flex justify-center gap-4">
-                  <a className="hover:scale-110" target="_blank" href="#">
+                  <Link className="hover:scale-110" target="_blank" href="#">
                     <img
                       alt="Tele icon"
                       loading="lazy"
@@ -341,8 +342,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/tele.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="Facebook icon"
                       loading="lazy"
@@ -352,8 +353,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/facebook.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="google icon"
                       loading="lazy"
@@ -363,11 +364,11 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/google.png"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               {/*Teammember3 */}
-              <div className="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+              <div className="bg-white w-[360px] h-[350px] p-2 pt-9 rounded-lg shadow-md text-center">
                 <img
                   src="../Images/Thean.png"
                   alt="Team Member 3"
@@ -379,7 +380,7 @@ const LandingPage = () => {
                   front-end developer
                 </p>
                 <div className="mt-4 flex justify-center gap-4">
-                  <a className="hover:scale-110" target="_blank" href="#">
+                  <Link className="hover:scale-110" target="_blank" href="#">
                     <img
                       alt="Tele icon"
                       loading="lazy"
@@ -389,8 +390,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/tele.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="Facebook icon"
                       loading="lazy"
@@ -400,8 +401,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/facebook.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="google icon"
                       loading="lazy"
@@ -411,11 +412,11 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/google.png"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               {/*Teammember4 */}
-              <div className="bg-white rounded-lg shadow-md p-6 my-6 text-center">
+              <div className="bg-white w-[360px] h-[350px] p-2 pt-9 rounded-lg shadow-md text-center">
                 <img
                   src="../Images/Soklay.png"
                   alt="Team Member 4"
@@ -427,7 +428,7 @@ const LandingPage = () => {
                   front-end developer
                 </p>
                 <div className="mt-4 flex justify-center gap-4">
-                  <a className="hover:scale-110" target="_blank" href="#">
+                  <Link className="hover:scale-110" target="_blank" href="#">
                     <img
                       alt="Tele icon"
                       loading="lazy"
@@ -437,8 +438,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/tele.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="Facebook icon"
                       loading="lazy"
@@ -448,8 +449,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/facebook.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="google icon"
                       loading="lazy"
@@ -459,22 +460,22 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/google.png"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
 
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <div className="hidden duration-700 ease-in-out" data-carousel-item>
               <img
                 src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-                class="object-cover w-full h-full"
+                className="object-cover w-full h-full"
                 alt="Slide 2"
               />
             </div>
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <div className="hidden duration-700 ease-in-out" data-carousel-item>
               <img
                 src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-                class="object-cover w-full h-full"
+                className="object-cover w-full h-full"
                 alt="Slide 3"
               />
             </div>
@@ -568,15 +569,15 @@ const LandingPage = () => {
           <div>
             <div className="flex flex-col justify-evenly sm:px-[18px] md:flex-row md:px-10">
               <div className="md:w-[316px]">
-                <a href="/" className="text-indigo-900 z-10 active">
+                <Link href="/" className="text-indigo-900 z-10 active">
                   <img
                     src="../Images/Logo.png"
                     alt="langnet-logo"
                     className="w-22 mx-auto "
                   />
-                </a>
+                </Link>
                 <div className="mt-[18px] flex gap-6 justify-center">
-                  <a className="hover:scale-110" target="_blank" href="#">
+                  <Link className="hover:scale-110" target="_blank" href="#">
                     <img
                       alt="Tele icon"
                       loading="lazy"
@@ -586,8 +587,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/tele.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="Facebook icon"
                       loading="lazy"
@@ -597,8 +598,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/facebook.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="/">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="/">
                     <img
                       alt="google icon"
                       loading="lazy"
@@ -608,8 +609,8 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/google.png"
                     />
-                  </a>
-                  <a className="hover:scale-110" target="_blank" href="">
+                  </Link>
+                  <Link className="hover:scale-110" target="_blank" href="">
                     <img
                       alt="github icon"
                       loading="lazy"
@@ -619,7 +620,7 @@ const LandingPage = () => {
                       data-nimg="1"
                       src="../Images/github.png"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-12 md:mt-0 text-center ">
