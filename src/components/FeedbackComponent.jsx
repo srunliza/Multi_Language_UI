@@ -104,10 +104,31 @@ const FeedbackComponent = ({ feedback }) => {
                 </div>
             </div>
 
-            {/* <!-- Feedback prompt --> */}
-            <button className="float-right">
-                <img src="./assets/images/chatboot.svg" alt="chatboot" />
-            </button>
+            {/* <!-- Chat Bot --> */}
+       
+            <div className="dropdown dropdown-top dropdown-end float-right">
+                <div tabIndex={0} >
+                    <img src="./assets/images/chatboot.svg" alt="chatboot" />
+                </div>
+                <ul tabIndex={0} className="dropdown-content  menu p-2 shadow rounded-box w-[537px] h-[250px] bg-white">
+                    <form action="" className="">
+                        <div className="">
+                            <div className="flex gap-2 rounded-box bg-blue-500 h-[40px]">
+                                <img src="./assets/images/chatboot.svg" alt="chat boot" />
+                                <p className="text-white ">Support Bot</p>
+                             
+                            </div>
+
+                            <hr />
+                            <div className="h-[200px] bg-red">
+
+                            </div>
+
+                        </div>
+                    </form>
+                 
+                </ul>
+            </div>
         </main>
     );
 }

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import IMAGES from "../../public/assets/images";
-import logo from "../../public/assets/images/logo.png"
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -14,6 +12,7 @@ const SidebarComponent = () => {
       <div className="flex items-center justify-center h-30 bg-blue-800 ">
         <img className="w-[150px] mb-6" src="./assets/images/logo1.png" alt="multi logo" />
       </div>
+      <input class="hidden" type="checkbox" id="menu-toggle" />
       <div className="flex flex-col flex-1 ">
         <nav className="flex-1">
           <div>
