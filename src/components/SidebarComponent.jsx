@@ -13,11 +13,11 @@ import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 const SidebarComponent = () => {
   console.log("logo: ", logo)
   return (
-    <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
+    <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800">
       <div className="flex items-center justify-center h-30 bg-blue-800 ">
         <img className=" bg-blue-800" src={logo} alt="multi logo" />
       </div>
-      <div className="flex flex-col flex-1 ">
+      <div className="flex flex-col flex-1">
         <nav className="flex-1">
           <div>
             <button
