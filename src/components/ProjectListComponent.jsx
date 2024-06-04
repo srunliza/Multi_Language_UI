@@ -1,6 +1,9 @@
+"use client";
 import { projects } from "@/obj/projects";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import React from "react";
+import { projectsData } from "@/obj/projectsData";
+// import React from "react";
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -14,37 +17,185 @@ const getStatusColor = (status) => {
       return "bg-gray-200 text-gray-500";
   }
 };
-
+//
+const getStatusTextColor = (status) => {
+  switch (status) {
+    case "Finished":
+      return "text-green-500";
+    case "Progress":
+      return "text-yellow-500";
+    case "Pending":
+      return "text-red-500";
+    default:
+      return "text-gray-500";
+  }
+};
+const getStatusBgColor = (status) => {
+  switch (status) {
+    case "Finished":
+      return "bg-green-500";
+    case "Progress":
+      return "bg-yellow-500";
+    case "Pending":
+      return "bg-red-500";
+    default:
+      return "bg-gray-200";
+  }
+};
 const ProjectListComponent = () => {
+  const [projects, setProjects] = useState(projectsData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editProject, setEditProject] = useState({ id: null, name: "" });
+  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [sortCriteria, setSortCriteria] = useState("name");
+
+  const modalRef = useRef();
+
+  const handleSeeAll = () => {
+    setIsViewMemberOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+    setIsViewMemberOpen(false);
+    setIsEditing(false);
+  };
+
+  const handleEditClick = (project) => {
+    setEditProject(project);
+    setIsEditing(true);
+    setIsModalOpen(true); // Show modal when editing
+  };
+
+  const handleEditChange = (e) => {
+    setEditProject({ ...editProject, name: e.target.value });
+  };
+
+  const handleEditSubmit = () => {
+    setProjects((prevProjects) =>
+      prevProjects.map((proj) =>
+        proj.id === editProject.id ? { ...proj, name: editProject.name } : proj
+      )
+    );
+    setIsEditing(false);
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  const handleDeleteClick = (projectId) => {
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project.id !== projectId)
+    );
+    setSelectedProject(null);
+  };
+
+  const handleSortClick = (criteria) => {
+    setSortCriteria(criteria);
+    const sortedProjects = [...projects].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a[criteria].localeCompare(b[criteria]);
+      } else {
+        return b[criteria].localeCompare(a[criteria]);
+      }
+    });
+    setProjects(sortedProjects);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
+  const handleStatusChange = (e) => {
+    setSelectedStatus(e.target.value);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleModalClose();
+      }
+    };
+    if (isViewMemberOpen || isModalOpen || isEditing) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isViewMemberOpen, isModalOpen, isEditing]);
+
+  const filteredProjects = projects.filter((project) =>
+    selectedStatus === "All" ? true : project.status === selectedStatus
+  );
+
   return (
-    <div className="p-6 flex-1 bg-white mt-5 overflow-hidden"> {/* Added overflow-hidden here */}
-      <h2 className="text-2xl font-bold mb-4 text-gray-700">My Project</h2>
-      <div className="flex flex-wrap items-center mb-4">
-        <input
-          type="date"
-          className="border rounded p-2 mr-2 mb-2 lg:mb-0 text-gray-800"
-        />
-        <input
-          type="date"
-          className="border rounded p-2 mr-2 mb-2 lg:mb-0 text-gray-800"
-        />
-        <select className="border rounded p-2 mr-2 mb-2 lg:mb-0 text-gray-800">
-          <option>Status</option>
-          <option>All</option>
-          <option>Finished</option>
-          <option>Progress</option>
-          <option>Pending</option>
-        </select>
-        <button className="bg-gray-400 text-white rounded p-2 mr-2 mb-2 lg:mb-0">
-          Clear
-        </button>
-        <button className="bg-blue-500 text-white rounded p-2 mb-2 lg:mb-0">
-          Search
-        </button>
-        <div className="flex flex-row m-auto mr-2">
-          <button className="focus:outline-none mr-2">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden border">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
+        My Projects
+      </h2>
+
+      <div className="flex flex-wrap items-center mb-4 ">
+        <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
+          <div className="flex w-full sm:w-auto">
+            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+              <p>Start</p>
+            </span>
+            <input
+              type="date"
+              className="border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
+            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+              <p>End</p>
+            </span>
+            <input
+              type="date"
+              className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
+            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-200 border-e-0 rounded-s-md dark:text-gray-400">
+              <p>Status</p>
+            </span>
+
+            {/* ---selected option status --- */}
+            <select
+              name="status"
+              id=""
+              className=" bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value={selectedStatus}
+              onChange={handleStatusChange}
+            >
+              <option value="All">All</option>
+              <option value="Pending" className="text-red-500 font-semibold">
+                Pending
+              </option>
+              <option
+                value="Progress"
+                className="text-yellow-500 font-semibold"
+              >
+                Progress
+              </option>
+              <option value="Finished" className="text-green-500 font-semibold">
+                Completed
+              </option>
+            </select>
+          </div>
+        </div>
+
+        {/* --- left icon button at navbar of card --- */}
+        <div className="flex flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
+          <button
+            className="focus:outline-none mr-2"
+            name="sort"
+            onClick={() => handleSortClick("name")}
+          >
             <svg
-              className="h-8 w-8 text-gray-500"
+              className="h-7 w-7 text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -52,18 +203,22 @@ const ProjectListComponent = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
               />
             </svg>
           </button>
-          <Link className="focus:outline-none mr-2" href="project-card" name="card">
+          <Link
+            className="focus:outline-none mr-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
+            name="sortStartDate"
+            href="/employee/project-card"
+          >
             <svg
-              className="h-8 w-8 text-gray-500"
+              className="h-7 w-7 text-gray-500"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -73,9 +228,13 @@ const ProjectListComponent = () => {
               <rect x="3" y="14" width="7" height="7" />
             </svg>
           </Link>
-          <button className="focus:outline-none">
+          <Link
+            className="focus:outline-none hover:bg-gray-200 rounded-md transition-colors duration-200"
+            href="project-list"
+            name="list"
+          >
             <svg
-              className="h-8 w-8 text-gray-500"
+              className="h-7 w-7 text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -83,11 +242,11 @@ const ProjectListComponent = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -96,7 +255,7 @@ const ProjectListComponent = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="flex flex-wrap items-center justify-between bg-slate-250 p-4 shadow rounded-lg"
+            className="flex flex-wrap items-center justify-between bg-slate-250 p-4 shadow rounded-lg border mb-4"
           >
             <div className="flex items-center space-x-4 w-full lg:w-auto">
               <div className="text-lg font-semibold text-gray-700">
@@ -145,7 +304,7 @@ const ProjectListComponent = () => {
               >
                 <span>{project.status}</span>
               </div>
-              <div className="flex-grow bg-white rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0">
+              <div className="flex-grow rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0 border bg-slate-200">
                 <div
                   className={`h-full ${getStatusColor(
                     project.status
@@ -164,22 +323,22 @@ const ProjectListComponent = () => {
             <div className="flex space-x-6 mt-4 lg:mt-0">
               <div className="flex -space-x-3">
                 <img
-                  src="./sokheng.svg"
+                  src="../assets/images/soklay.png"
                   alt="User"
                   className="w-8 h-8 rounded-full border-2 border-white"
                 />
                 <img
-                  src="./neth.svg"
+                  src="../assets/images/neath.png"
                   alt="User"
                   className="w-8 h-8 rounded-full border-2 border-white"
                 />
                 <img
-                  src="./sreyly.svg"
+                  src="../assets/images/sreyka.png"
                   alt="User"
                   className="w-8 h-8 rounded-full border-2 border-white"
                 />
                 <img
-                  src="./soklay.svg"
+                  src="../assets/images/sreyly.png"
                   alt="User"
                   className="w-8 h-8 rounded-full border-2 border-white"
                 />

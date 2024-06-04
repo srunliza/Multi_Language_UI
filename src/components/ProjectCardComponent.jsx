@@ -120,7 +120,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden border ">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -197,13 +197,13 @@ const ProjectCardComponent = () => {
               />
             </svg>
           </button>
-          <button
-            className="focus:outline-none mr-2"
+          <Link
+            className="focus:outline-none mr-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
             name="sortStartDate"
-            onClick={() => handleSortClick("startDate")}
+            href="/employee/project-card"
           >
             <svg
-              className="h-7 w-7 text-blue-500"
+              className="h-7 w-7 text-gray-50ç0"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -216,7 +216,7 @@ const ProjectCardComponent = () => {
               <rect x="14" y="14" width="7" height="7" />
               <rect x="3" y="14" width="7" height="7" />
             </svg>
-          </button>
+          </Link>
           <Link className="focus:outline-none" href="project-list" name="list">
             <svg
               className="h-7 w-7 text-gray-500"
@@ -236,7 +236,7 @@ const ProjectCardComponent = () => {
       </div>
 
       {/* ---card's flex body--- */}
-      <div className="h-[26.1rem] pb-5">
+      <div className="h-[26.1rem] pb-1">
         <div className="overflow-auto h-full no-scrollbar">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {filteredProjects.map((project, index) => (
@@ -249,7 +249,6 @@ const ProjectCardComponent = () => {
                     {project.name}
                   </h3>
                   <div className="flex space-x-1">
-
                     {/* new dropdown */}
                     <div className="dropdown dropdown-end">
                       <div tabIndex={0}>
@@ -398,22 +397,22 @@ const ProjectCardComponent = () => {
                 {/* ---image's groups--- */}
                 <div className="flex -space-x-2 mb-4">
                   <img
-                    src="../assets/images/p4.jpg"
+                    src="../assets/images/neath.png"
                     alt="User"
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <img
-                    src="../assets/images/p1.jpg"
+                    src="../assets/images/soklay.png"
                     alt="User"
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <img
-                    src="../assets/images/p2.jpg"
+                    src="../assets/images/sreyka.png"
                     alt="User"
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <img
-                    src="../assets/images/p3.jpg"
+                    src="../assets/images/sreyly.png"
                     alt="User"
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
