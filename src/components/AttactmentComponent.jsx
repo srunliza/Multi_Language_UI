@@ -17,7 +17,7 @@ const tableData = [
 
 const AttactmentComponent = () => {
   return (
-    <div className="w-full lg:w-[840px] h-auto lg:h-full  border border-blue-300 ">
+    <div className="w-full lg:w-[891px] h-auto lg:h-full  ">
       <div className="overflow-y-auto shadow-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-sm text-gray-700 bg-[#daeaff]">

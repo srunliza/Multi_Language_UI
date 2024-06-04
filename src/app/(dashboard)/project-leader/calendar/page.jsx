@@ -6,20 +6,20 @@ import ViewMember from "@/components/ViewMember";
 
 const CalendarPage = () => {
   return (
-    <div>
-      <div className="ml-5 ">
-        <div className="flex py-2">
-          <div className="w-[840px] overflow-hidden  border border-blue-300  rounded-t-lg  ">
-            {/* Header */}
-            <NavbarProjectLeaderComponent />
 
-            {/* text */}
-            {/* <CalendarComponent /> */}
-          </div>
-          <div className="mt-10 ml-8 lg:mt-0 mr-5 w-full lg:w-auto lg:flex-1">
-            <ViewMember />
-          </div>
+<div className="w-full  ">
+      <div className="flex justify-between mb-2">
+        <h2 className="text-lg text-color-text-black">Project Name</h2>
+        <AddMemberModal />
+      </div>
+      <div className="flex justify-between ">
+        <div className="w-[893px] bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 ">
+          {/* Header */}
+          <NavbarProjectLeaderComponent />
+          {/* container */}
+          <CalendarComponent />
         </div>
+        <ViewMember />
       </div>
     </div>
   );
