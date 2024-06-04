@@ -6,8 +6,6 @@ import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import PieChartOutlinedIcon from '@mui/icons-material/PieChartOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-
-
 const SidebarComponent = () => {
   return (
     <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800">
