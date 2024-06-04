@@ -71,7 +71,7 @@ const DashboardAttactComponent = () => {
             </div>
             {/* Table */}
             <div className="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 no-scrollbar">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-sm text-gray-700 font-semibold sticky top-0 bg-[#daeaff]">
                         <tr>
                             <th scope="col" className="px-6 py-4">Product Name</th>
@@ -82,7 +82,7 @@ const DashboardAttactComponent = () => {
                             <th scope="col" className="px-1 py-4 text-right flex justify-center items-center pr-3">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="">
                         {data.map((item) => (
                             <tr key={item.id} className="bg-white border-b text-gray-900 dark:border-gray-300">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">{item.title}</th>

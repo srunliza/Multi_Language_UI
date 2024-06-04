@@ -8,11 +8,11 @@ export default function DeveloperDashboardLayout({ children }) {
       <div className="bg-red-500 col-span-2 row-span-12">
         <Sidebar />
       </div>
-      <div className="bg-slate-500 col-span-10 row-span-1">
+      <div className="col-span-10 row-span-1">
         <NavbarComponent />
       </div>
-      <div className="   col-span-10 row-span-12 rounded-md w-full h-full p-4">
-        <div className="bg-yellow-300 shadow-2xl w-full h-full rounded-md">
+      <div className=" col-span-10 row-span-12 rounded-md w-full h-full p-4">
+        <div className="">
           {children}
         </div>
       </div>
