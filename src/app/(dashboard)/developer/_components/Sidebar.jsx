@@ -60,14 +60,14 @@ const Sidebar = () => {
         <div className="mb-[10px] px-2">
           <Link
             href="/developer/setting"
-            className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+            className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2  font-light-[16px]"
           >
             <SettingsOutlinedIcon />
             <p>Setting</p>
           </Link>
           <Link
             href="#"
-            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2  font-light-[16px]"
           >
             <ExitToAppOutlinedIcon />
             <p> Logout</p>
