@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-center h-30 bg-blue-800 ">
         <img
           className="w-[150px] mb-6"
-          src="./assets/images/logo1.png"
+          src="../assets/images/logo1.png"
           alt="multi logo"
         />
       </div>
