@@ -19,18 +19,17 @@ const UploadFilePage = () => {
   ];
 
   return (
-    <div>
-      <div className="mx-5 ">
-        <div className="flex flex-col md:flex-row py-2 text-ms">
-          <div className="w-full md:w-[840px] overflow-hidden border border-blue-300 rounded-t-lg">
-            {/* Header */}
-
-            <NavbarProjectLeaderComponent />
-
-            {/* text */}
-
-            {/* contain  */}
-            <form action="">
+       <div className="w-full  ">
+      <div className="flex justify-between mb-2">
+        <h2 className="text-lg text-color-text-black">Project Name</h2>
+        <AddMemberModal />
+      </div>
+      <div className="flex justify-between ">
+        <div className="bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 ">
+          {/* Header */}
+          <NavbarProjectLeaderComponent />
+          {/* container */}
+          <form action="">
               <div className="ml-10 mt-3">
                 <p className="text-color-text-black  mb-3">Upload Your Files</p>
                 <div class="border border-dashed border-color-text-grey bg-gray-50 p-2 rounded-xl shadow-md w-[100px] h-24 mb-5">
@@ -57,7 +56,7 @@ const UploadFilePage = () => {
                   </label>
                   <input id="upload" type="file" class="hidden" />
                 </div>
-                <div className="w-[815px]   border-b-[1px] border-gray-400"></div>
+                <div className="w-[851px]   border-b-[1px] border-gray-400"></div>
                 <div className="w-full lg:w-[321px] py-4 text-xs">
                   <label htmlFor="select" className="text-xs ">
                     Translating from (base, source language)
@@ -177,14 +176,15 @@ const UploadFilePage = () => {
                 </div>
               </div>
             </form>
-          </div>
-          {/* <MemberComponent /> */}
-          <div className="mt-10 ml-8 lg:mt-0 w-full lg:w-auto lg:flex-1">
-            <ViewMember />
-          </div>
+
         </div>
+        <ViewMember />
       </div>
     </div>
+
+
+   
+    
   );
 };
 

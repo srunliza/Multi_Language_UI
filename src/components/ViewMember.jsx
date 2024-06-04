@@ -18,7 +18,7 @@ const ViewMember = () => {
   return (
     <div className="text-sm">
       <main className="flex flex-1 w-[300px]">
-        <div className="bg-white overflow-hidden border rounded-xl shadow-md sm:rounded-xl ml-4 p-4 border-blue-300 border-l-0">
+        <div className="bg-white overflow-hidden border rounded-xl shadow-md sm:rounded-xl ml-4 p-4 border-blue-300 ">
           <div className="flex items-center p-2 border-b">
             <svg
               width="26"
