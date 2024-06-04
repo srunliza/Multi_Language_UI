@@ -92,7 +92,7 @@ const ProjectListComponent = () => {
       </div>
 
       {/* scroll list */}
-      <div className="h-[26.1rem] overflow-y-auto no-scrollbar">
+      <div className="h-[26.1rem] overflow-y-auto">
         {projects.map((project, index) => (
           <div
             key={index}

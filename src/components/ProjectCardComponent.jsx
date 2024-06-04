@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import ViewMember from "./ViewMember";
+import { projectsData } from "@/obj/projectsData";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -31,105 +31,7 @@ const getStatusBgColor = (status) => {
 };
 
 const ProjectCardComponent = () => {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      name: "Analysis",
-      owner: "Meng Soklay",
-      role: "project leader",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 2,
-      name: "Android",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Progress",
-    },
-    {
-      id: 3,
-      name: "Network",
-      owner: "Tep Thean",
-      role: "developer",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 4,
-      name: "Rule",
-      owner: "Kosal Sreyka",
-      role: "developer",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 5,
-      name: "Web Designing",
-      owner: "Tan VibolPheakNeath",
-      role: "developer",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 6,
-      name: "Programming",
-      owner: "Kosal Sreyka",
-      role: "developer",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 7,
-      name: "Studio",
-      owner: "Kosal Sreyka",
-      role: "developer",
-      daysLeft: 1,
-      status: "Finished",
-    },
-    {
-      id: 8,
-      name: "Web Designing",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Progress",
-    },
-    {
-      id: 9,
-      name: "Interior Design",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Progress",
-    },
-    {
-      id: 10,
-      name: "Graphic Design",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 11,
-      name: "Web Designing",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Pending",
-    },
-    {
-      id: 12,
-      name: "Web Designing",
-      owner: "Long Sreyly",
-      role: "translator",
-      daysLeft: 1,
-      status: "Progress",
-    },
-  ]);
-
+  const [projects, setProjects] = useState(projectsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -137,10 +39,9 @@ const ProjectCardComponent = () => {
   const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedStatus, setSelectedStatus] = useState("All");
+  const [sortCriteria, setSortCriteria] = useState("name");
 
   const modalRef = useRef();
-
-  const router = useRouter();
 
   const handleSeeAll = () => {
     setIsViewMemberOpen(true);
@@ -181,12 +82,13 @@ const ProjectCardComponent = () => {
     setSelectedProject(null);
   };
 
-  const handleSortClick = () => {
+  const handleSortClick = (criteria) => {
+    setSortCriteria(criteria);
     const sortedProjects = [...projects].sort((a, b) => {
       if (sortOrder === "asc") {
-        return a.name.localeCompare(b.name);
+        return a[criteria].localeCompare(b[criteria]);
       } else {
-        return b.name.localeCompare(a.name);
+        return b[criteria].localeCompare(a[criteria]);
       }
     });
     setProjects(sortedProjects);
@@ -218,7 +120,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl mt-6 shadow-lg h-[35.7rem] overflow-hidden">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -273,12 +175,13 @@ const ProjectCardComponent = () => {
             </select>
           </div>
         </div>
+
         {/* --- left icon button at navbar of card --- */}
         <div className="flex flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto">
           <button
             className="focus:outline-none mr-2"
             name="sort"
-            onClick={handleSortClick}
+            onClick={() => handleSortClick("name")}
           >
             <svg
               className="h-7 w-7 text-gray-500"
@@ -294,9 +197,13 @@ const ProjectCardComponent = () => {
               />
             </svg>
           </button>
-          <button className="focus:outline-none mr-2" name="card">
+          <button
+            className="focus:outline-none mr-2"
+            name="sortStartDate"
+            onClick={() => handleSortClick("startDate")}
+          >
             <svg
-              className="h-7 w-7 text-green-500"
+              className="h-7 w-7 text-blue-500"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -310,8 +217,26 @@ const ProjectCardComponent = () => {
               <rect x="3" y="14" width="7" height="7" />
             </svg>
           </button>
-
-          {/* --- link to list's flex body --- */}
+          <button
+            className="focus:outline-none mr-2"
+            name="sortEndDate"
+            onClick={() => handleSortClick("endDate")}
+          >
+            <svg
+              className="h-7 w-7 text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+          </button>
           <Link className="focus:outline-none" href="project-list" name="list">
             <svg
               className="h-7 w-7 text-gray-500"
@@ -331,8 +256,8 @@ const ProjectCardComponent = () => {
       </div>
 
       {/* ---card's flex body--- */}
-      <div className="h-[26.1rem] overflow-hidden no-scrollbar">
-        <div className="overflow-auto h-full">
+      <div className="h-[26.1rem] pb-5">
+        <div className="overflow-auto h-full no-scrollbar">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {filteredProjects.map((project, index) => (
               <div
@@ -344,6 +269,7 @@ const ProjectCardComponent = () => {
                     {project.name}
                   </h3>
                   <div className="flex space-x-1">
+
                     {/* new dropdown */}
                     <div className="dropdown dropdown-end">
                       <div tabIndex={0}>
@@ -488,6 +414,7 @@ const ProjectCardComponent = () => {
                     }}
                   ></div>
                 </div>
+
                 {/* ---image's groups--- */}
                 <div className="flex -space-x-2 mb-4">
                   <img

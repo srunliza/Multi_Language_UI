@@ -22,14 +22,14 @@ const Sidebar = () => {
           <div>
             <button
               type="button"
-              className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center  "
+              className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center"
             >
               <AddToPhotosOutlinedIcon />
               New Project
             </button>
             <Link
               href="/employee"
-              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl  flex items-center px-6 py-4 mt-2 text-gray-100  gap-2  font-light-[16px]"
+              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <DashboardCustomizeOutlinedIcon />
               <p>Dashboard</p>
@@ -39,18 +39,18 @@ const Sidebar = () => {
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <AccountBoxOutlinedIcon />
-              <p> Profile</p>
+              <p>Profile</p>
             </Link>
             <Link
               href="/employee/calendar"
-              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <CalendarMonthOutlinedIcon />
-              <p>Calender</p>
+              <p>Calendar</p>
             </Link>
             <Link
-              href="/employee/project-list"
-              className="hover:bg-gray-400 hover:bg-opacity-25  rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+              href="/employee/project-card"
+              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <PieChartOutlinedIcon />
               <p>Project</p>
@@ -60,17 +60,17 @@ const Sidebar = () => {
         <div className="mb-[10px] px-2">
           <Link
             href="/employee/setting"
-            className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
           >
             <SettingsOutlinedIcon />
             <p>Setting</p>
           </Link>
           <Link
             href="#"
-            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
+            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
           >
             <ExitToAppOutlinedIcon />
-            <p> Logout</p>
+            <p>Logout</p>
           </Link>
         </div>
       </div>
