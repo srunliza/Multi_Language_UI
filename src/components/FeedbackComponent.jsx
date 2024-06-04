@@ -4,6 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import send from "../../public/assets/icons/send.svg";
 import Image from 'next/image';
 import { useState } from 'react';
+// import ConfirmPopup from '../components/ConfirmToDeleteComponent'
 
 const FeedbackComponent = () => {
     const feedbackData = [
@@ -37,7 +38,7 @@ const FeedbackComponent = () => {
         },
         {
             id: 5,
-            name: "Tan Vibolpheakneath",
+            name: "Tey Sokheng",
             position: "Developer",
             comment: "Dear translator, you have some mistake in your translation please edit it as soon as possible",
             date: "24 May 2024",
@@ -45,80 +46,92 @@ const FeedbackComponent = () => {
     ];
 
     const [showPopup, setShowPopup] = useState(false);
-  const [currentPopupIndex, setCurrentPopupIndex] = useState(null);
+    const [currentPopupIndex, setCurrentPopupIndex] = useState(null);
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
-  const handleIconClick = (index) => {
-    if (currentPopupIndex === index) {
-      setShowPopup(!showPopup);
-    } else {
-      setShowPopup(true);
-      setCurrentPopupIndex(index);
-    }
-  };
+    const handleIconClick = (index) => {
+        if (currentPopupIndex === index) {
+            setShowPopup(!showPopup);
+        } else {
+            setShowPopup(true);
+            setCurrentPopupIndex(index);
+        }
+    };
 
-  const handleEdit = () => {
-    // Add edit functionality here
-    setShowPopup(false);
-  };
+    const handleEdit = () => {
+        // Add edit functionality here
+        setShowPopup(false);
+    };
 
-  const handleDelete = () => {
-    // Add delete functionality here
-    setShowPopup(false);
-  };
+    const handleDelete = () => {
+        // Show confirm delete popup
+        setShowConfirmPopup(true);
+        setShowPopup(false);
+    };
+
+    const confirmDelete = () => {
+        // Handle delete confirmation logic here
+        setShowConfirmPopup(false);
+    };
+
+    const cancelDelete = () => {
+        setShowConfirmPopup(false);
+    };
 
     return (
         <main className="max-w-4xl mx-auto">
             {/* card */}
-            <div className="bg-white w-full py-3 px-5 shadow-md rounded-xl min-h-[100px]">
+            <div className="bg-white w-full py-3 px-5 shadow-md rounded-xl min-h-[100px] border">
                 {/* title */}
                 <h1 className="text-gray-800 text-xl font-semibold mb-5">Feedback</h1>
 
                 {/* feedback map data */}
                 <div className="overflow-auto max-h-[420px] mb-4 no-scrollbar">
-                {feedbackData.map((feedback, index) => (
-                    <div key={index} className="bg-white shadow-sm px-4 py-2 border rounded-xl mb-2.5">
-                        <div className="flex flex-col sm:flex-row pb-2">
-                            <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
-                            <img
-                                className="h-12 w-12 rounded-full object-cover"
-                                src="https://randomuser.me/api/portraits/men/43.jpg"
-                                alt=""
-                            />
-                            </div>
-
-                            {/* icon click to popup delete or edit */}
-                            <div className="ml-0 sm:ml-3 mt-3 sm:mt-0 flex-1 relative">
-                                <div className="text-gray-800 flex justify-end pr-0">
-                                    <MoreVertIcon onClick={() => handleIconClick(index)} />
+                    {feedbackData.map((feedback, index) => (
+                        <div key={index} className="bg-white shadow-sm px-4 py-2 border rounded-xl mb-2.5">
+                            <div className="flex flex-col sm:flex-row pb-2">
+                                <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
+                                    <img
+                                        className="h-12 w-12 rounded-full object-cover"
+                                        src="https://randomuser.me/api/portraits/men/43.jpg"
+                                        alt=""
+                                    />
                                 </div>
 
-                                {showPopup && currentPopupIndex === index && (
-                                    <div className="absolute right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                                        <ul>
-                                            <li
-                                            className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
-                                            onClick={handleEdit}
-                                            >
-                                            Edit
-                                            </li>
-                                            <li
-                                            className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
-                                            onClick={handleDelete}
-                                            >
-                                            Delete
-                                            </li>
-                                        </ul>
+                                {/* icon click to popup delete or edit */}
+                                <div className="ml-0 sm:ml-3 mt-3 sm:mt-0 flex-1 relative">
+                                    <div className="text-gray-800 flex justify-end pr-0 md:mr-[-10px]">
+                                        <MoreVertIcon onClick={() => handleIconClick(index)} />
                                     </div>
-                                )}
 
-                                <div className="font-medium text-gray-800 mr-7 top-0 mt-[-20px]">{feedback.name}</div>
-                                <div className="text-gray-600 text-xs">{feedback.position}</div>
-                                <div className="mt-3.5 text-gray-700 text-[12.8px] ml-[-66px] mr-0 line-clamp-2">{feedback.comment}</div>
-                                <div className="text-gray-500 text-sm mt-2 ml-[-66px]">{feedback.date}</div>
+
+                                    {showPopup && currentPopupIndex === index && (
+                                        <div className="absolute right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                            <ul>
+                                                <li
+                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
+                                                    onClick={handleEdit}
+                                                >
+                                                    Edit
+                                                </li>
+                                                <li
+                                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm cursor-pointer"
+                                                    onClick={handleDelete}
+                                                >
+                                                    Delete
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )}
+
+                                    <div className="font-medium text-gray-800 mr-7 top-0 mt-[-20px] md:text-sm lg:text-lg">{feedback.name}</div>
+                                    <div className="text-gray-600 text-xs md:text-[11px] lg:text-sm">{feedback.position}</div>
+                                    <div className="mt-3.5 text-gray-700 text-[12.8px] md:mt-[10px] ml-[-66px] mr-0 line-clamp-2 lg:mt-5 lg:text-sm">{feedback.comment}</div>
+                                    <div className="text-gray-500 sm:text-xs md:text-sm lg:text-[15px] mt-2 ml-[-66px]">{feedback.date}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
                 </div>
 
                 {/* form to comment feedback */}
@@ -139,6 +152,14 @@ const FeedbackComponent = () => {
                     </div>
                 </form>
             </div>
+
+            {showConfirmPopup && (
+                <ConfirmPopup
+                    message="Are you sure you want to delete this item?"
+                    onConfirm={confirmDelete}
+                    onCancel={cancelDelete}
+                />
+            )}
         </main>
     );
 };
