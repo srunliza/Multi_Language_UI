@@ -60,19 +60,19 @@ const EmployeeDashboardPage = () => {
                         {/* item card 1 */}
                         <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
                             <div>
-                                <h1 className="font-semibold text-2xl text-gray-600">Pending Project</h1>
+                                <h1 className="font-semibold text-lg text-gray-600">Pending Project</h1>
                                 <div className="pr-0 rounded flex justify-end items-center">
                                     
                                     <Image src={pendingProjectIcon} width={43} height={43} alt="pending project icon"/>
                                 </div>
-                                <h3 className="font-bold sm:text-xl md:text-[20px] lg:text-[27px] text-gray-700">40,689</h3>
+                                <h3 className="font-bold sm:text-xl md:text-[18px] lg:text-[22px] text-gray-700">40,689</h3>
                             </div>
                         </div>
 
                         {/* item card 2 */}
                         <div className="bg-white p-4 rounded-xl  border-2 border-green-300 shadow-lg">
                             <div>
-                                <h1 className="font-semibold text-2xl text-gray-600">Finished Project</h1>
+                                <h1 className="font-semibold text-lg text-gray-600">Finished Project</h1>
                                 <div className="pr-0 rounded flex justify-end items-center">
 
                                 <Image src={progressProjectIcon} width={43} height={43} alt="pending project icon"/>
@@ -85,7 +85,7 @@ const EmployeeDashboardPage = () => {
                         {/* item card 3 */}
                         <div className="bg-white p-4 rounded-xl  border-2 border-yellow-300 shadow-lg">
                             <div>
-                                <h1 className="font-semibold text-2xl text-gray-600">Progress Project</h1>
+                                <h1 className="font-semibold text-lg text-gray-600">Progress Project</h1>
                                 <div className="pr-0 rounded flex justify-end items-center">
                                 <Image src={finishProjectIcon} width={43} height={43} alt="pending project icon"/>
                                 </div>
@@ -98,7 +98,7 @@ const EmployeeDashboardPage = () => {
                         {/* item card 4 */}
                         <div className="bg-white p-4 rounded-xl  border-2 border-blue-300 shadow-lg">
                             <div>
-                                <h1 className="font-semibold text-2xl text-gray-600">Total Project</h1>
+                                <h1 className="font-semibold text-lg text-gray-600">Total Project</h1>
                                 <div className="pr-0 rounded flex justify-end items-center">
                                 <Image src={totalProjectIcon} width={43} height={43} alt="pending project icon"/>
                                 </div>
@@ -148,7 +148,7 @@ const EmployeeDashboardPage = () => {
                                     5/30/2024
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Finished</span>
+                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Completed</span>
                                 </td>
                             </tr>
                             <tr class="bg-white border-b text-gray-900 dark:border-gray-300">
@@ -199,7 +199,7 @@ const EmployeeDashboardPage = () => {
                                     5/30/2024
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Finished</span>
+                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Completed</span>
                                 </td>
                             </tr>
                            
@@ -217,7 +217,7 @@ const EmployeeDashboardPage = () => {
                                     5/30/2024
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Finished</span>
+                                    <span className="bg-green-500 text-xs text-white font-semibold py-1 px-4 rounded-xl">Completed</span>
                                 </td>
                             </tr>
                             <tr class="bg-white border-b text-gray-900 dark:border-gray-300">

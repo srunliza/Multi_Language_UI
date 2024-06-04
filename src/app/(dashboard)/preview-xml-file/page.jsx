@@ -24,20 +24,20 @@ const PreviewXmlFilePage = () => {
 
 
     return ( 
-        <main className="bg-white p-4 sm:p-8 md:p-12 lg:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-12 sm:gap-6 md:gap-8 lg:gap-10">
-                <div className="col-span-12 sm:col-span-8 md:col-span-9 lg:col-span-8">
-                    <div className="bg-white shadow-md p-4 sm:p-6 md:p-8 lg:p-10 rounded-md min-h-[300px] sm:min-h-[560px] md:min-h-[500px] lg:min-h-[560px]">
+        <main className="bg-white p-8">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="sm:col-span-12 md:col-span-8 lg:col-span-9">
+                    <div className="bg-white shadow-md p-6 rounded-lg min-h-[560px] border">
 
                         {/* title */}
-                        <h1 className="text-gray-800 text-lg sm:text-xl md:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 lg:mb-5">Preview Page</h1>
+                        <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
                         <hr />
                        
-                        <div className="overflow-auto max-h-[200px] sm:max-h-[405px] md:max-h-[450px] lg:max-h-[480px] mb-3 sm:mb-4 md:mb-5 lg:mb-6 no-scrollbar">
+                        <div className="overflow-auto max-h-[440px] mt-4 mb-4 no-scrollbar">
                             
                             {/* map data as xml data */}
                             {previewXmlData.map((xmlData, index) => (
-                                <div key={index} className="text-black pl-4 sm:pl-8 md:pl-12 lg:pl-16 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
+                                <div key={index} className="text-black pl-8 mt-4">
                                     <p className="font-consolas">{xmlData.tag}</p>
                                     <p className="pl-10 font-consolas text-gray-800"> {xmlData.key} </p>
                                     <p className="pl-10 font-consolas text-gray-800"> {xmlData.value} </p>
@@ -56,7 +56,7 @@ const PreviewXmlFilePage = () => {
                 </div>
         
                 {/* feedback component */}
-                <div className="md:col-span-4">
+                <div className="sm:col-span-12 md:col-span-4 lg:col-span-3">
                     <FeedbackComponent />
                 </div>
             </div>
