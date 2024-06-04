@@ -3,9 +3,11 @@ import React from 'react'
 
 const CalendarPage = () => {
   return (
-    // <CalendarComponent />
+    
     <div>
-      gg
+      <CalendarComponent />
+      <h1>hello</h1>
+      <CalendarComponent />
     </div>
   )
 }
