@@ -1,9 +1,7 @@
 "use client";
-import { projects } from "@/obj/projects";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { projectsData } from "@/obj/projectsData";
-// import React from "react";
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -17,7 +15,7 @@ const getStatusColor = (status) => {
       return "bg-gray-200 text-gray-500";
   }
 };
-//
+
 const getStatusTextColor = (status) => {
   switch (status) {
     case "Finished":
@@ -30,6 +28,7 @@ const getStatusTextColor = (status) => {
       return "text-gray-500";
   }
 };
+
 const getStatusBgColor = (status) => {
   switch (status) {
     case "Finished":
@@ -42,6 +41,7 @@ const getStatusBgColor = (status) => {
       return "bg-gray-200";
   }
 };
+
 const ProjectListComponent = () => {
   const [projects, setProjects] = useState(projectsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -132,7 +132,7 @@ const ProjectListComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden border">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -140,33 +140,30 @@ const ProjectListComponent = () => {
       <div className="flex flex-wrap items-center mb-4 ">
         <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
           <div className="flex w-full sm:w-auto">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+            <span className="w-[5rem] inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md">
               <p>Start</p>
             </span>
             <input
               type="date"
-              className="border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white"
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+            <span className="w-[5rem] inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md">
               <p>End</p>
             </span>
             <input
               type="date"
-              className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-200 border-e-0 rounded-s-md dark:text-gray-400">
+            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-200 border-e-0 rounded-s-md">
               <p>Status</p>
             </span>
-
-            {/* ---selected option status --- */}
             <select
               name="status"
-              id=""
-              className=" bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               value={selectedStatus}
               onChange={handleStatusChange}
             >
@@ -187,7 +184,6 @@ const ProjectListComponent = () => {
           </div>
         </div>
 
-        {/* --- left icon button at navbar of card --- */}
         <div className="flex flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
           <button
             className="focus:outline-none mr-2"
@@ -234,7 +230,7 @@ const ProjectListComponent = () => {
             name="list"
           >
             <svg
-              className="h-7 w-7 text-gray-500"
+              className="h-7 w-7 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -250,23 +246,24 @@ const ProjectListComponent = () => {
         </div>
       </div>
 
-      {/* scroll list */}
-      <div className="h-[26.1rem] overflow-y-auto">
-        {projects.map((project, index) => (
+      {/* scroll-list */}
+      <div className="h-[26.1rem] overflow-y-auto no-scrollbar">
+        {filteredProjects.map((project, index) => (
           <div
             key={index}
-            className="flex flex-wrap items-center justify-between bg-slate-250 p-4 shadow rounded-lg border mb-4"
+            className="flex flex-wrap items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
           >
-            <div className="flex items-center space-x-4 w-full lg:w-auto">
-              <div className="text-lg font-semibold text-gray-700">
-                {project.name}
-                <p className="font-semibold text-sm text-green-500">{project.owner}</p>
+            <div className="flex items-center space-x-4 w-[10rem]">
+              <div className="text-base font-semibold text-gray-700">
+                {`${project.name.substring(0, 13)}...`}
+                <p className="text-sm text-green-500">{project.owner}</p>
               </div>
             </div>
-            <div className="flex flex-wrap items-center space-x-6 w-full lg:w-auto text-sm mt-4 lg:mt-0">
+
+            <div className="flex flex-wrap items-center space-x-6 w-full gap-3 lg:w-auto text-sm mt-4 lg:mt-0">
               <div className="flex items-center justify-center bg-gray-300 rounded-lg w-16 h-8 text-center text-sm ">
                 <svg
-                  className="h-4 w-4 text-white mr-1"
+                  className="h-4 w-4 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -280,7 +277,8 @@ const ProjectListComponent = () => {
                 </svg>
                 12
               </div>
-              <div className="flex items-center justify-center bg-red-100 text-red-800 rounded-lg px-5 py-1 text-sm">
+
+              <div className="flex items-center w-[8rem] justify-center bg-red-100 text-red-800 rounded-lg px-5 py-1 text-sm">
                 <svg
                   className="h-4 w-4 text-red-500 mr-1"
                   fill="none"
@@ -294,33 +292,39 @@ const ProjectListComponent = () => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                1 Day left
+                {project.daysLeft} Day left
               </div>
-              <div className="text-gray-500 text-sm">Translation Progress</div>
-              <div
-                className={`flex items-center space-x-2 text-sm ${
-                  getStatusColor(project.status).split(" ")[1]
-                }`}
-              >
-                <span>{project.status}</span>
-              </div>
-              <div className="flex-grow rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0 border bg-slate-200">
+
+              <div className="flex items-center justify-center gap-7 lg:mt-0 md:mt-3 sm:mt-3">
+                <div className="text-gray-500 text-sm lg:-ml-0 md:-ml-0 sm:-ml-5">
+                  Translation Progress
+                </div>
                 <div
-                  className={`h-full ${getStatusColor(
+                  className={`flex items-center space-x-2 text-sm ${getStatusTextColor(
                     project.status
-                  )} rounded-full`}
-                  style={{
-                    width:
-                      project.status === "Finished"
-                        ? "100%"
-                        : project.status === "Progress"
-                        ? "50%"
-                        : "20%",
-                  }}
-                ></div>
+                  )}`}
+                >
+                  <span>{project.status}</span>
+                </div>
+                <div className="flex-grow rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0 border bg-slate-200">
+                  <div
+                    className={`h-full ${getStatusBgColor(
+                      project.status
+                    )} rounded-full`}
+                    style={{
+                      width:
+                        project.status === "Finished"
+                          ? "100%"
+                          : project.status === "Progress"
+                          ? "50%"
+                          : "20%",
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
-            <div className="flex space-x-6 mt-4 lg:mt-0">
+
+            <div className="flex space-x-6 mt-4 lg:ml-8  lg:mt-0">
               <div className="flex -space-x-3">
                 <img
                   src="../assets/images/soklay.png"
@@ -347,7 +351,10 @@ const ProjectListComponent = () => {
                 </div>
               </div>
               <div className="flex space-x-2">
-                <button className="focus:outline-none">
+                <button
+                  className="focus:outline-none"
+                  onClick={() => handleEditClick(project)}
+                >
                   <svg
                     className="h-6 w-6 text-blue-500"
                     viewBox="0 0 24 24"
@@ -363,7 +370,10 @@ const ProjectListComponent = () => {
                     <line x1="16" y1="5" x2="19" y2="8" />
                   </svg>
                 </button>
-                <button className="focus:outline-none">
+                <button
+                  className="focus:outline-none"
+                  onClick={() => handleDeleteClick(project.id)}
+                >
                   <svg
                     className="h-6 w-6 text-red-500"
                     viewBox="0 0 24 24"
@@ -384,6 +394,38 @@ const ProjectListComponent = () => {
           </div>
         ))}
       </div>
+
+      {/* Edit Modal */}
+      {isEditing && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+          <div
+            ref={modalRef}
+            className="bg-white p-4 rounded-lg shadow-lg w-96"
+          >
+            <h3 className="text-lg font-semibold mb-4">Edit Project</h3>
+            <input
+              type="text"
+              value={editProject.name}
+              onChange={handleEditChange}
+              className="w-full p-2 border border-gray-300 rounded-md mb-4"
+            />
+            <div className="flex justify-end">
+              <button
+                onClick={handleEditSubmit}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+              >
+                Save
+              </button>
+              <button
+                onClick={handleModalClose}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

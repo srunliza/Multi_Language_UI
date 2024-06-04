@@ -120,7 +120,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white mt-6 shadow-lg h-full overflow-hidden border ">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border ">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -129,7 +129,7 @@ const ProjectCardComponent = () => {
       <div className="flex flex-wrap items-center mb-4">
         <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
           <div className="flex w-full sm:w-auto">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+            <span className="inline-flex items-center px-3 text-sm text-gray-900 w-[5rem] bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
               <p>Start</p>
             </span>
             <input
@@ -138,7 +138,7 @@ const ProjectCardComponent = () => {
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
+            <span className="w-[5rem] inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:text-gray-400 dark:border-gray-200">
               <p>End</p>
             </span>
             <input
@@ -242,7 +242,7 @@ const ProjectCardComponent = () => {
       {/* ---card's flex body--- */}
       <div className="h-[26.1rem] pb-1">
         <div className="overflow-auto h-full no-scrollbar">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-6">
             {filteredProjects.map((project, index) => (
               <div
                 key={index}
