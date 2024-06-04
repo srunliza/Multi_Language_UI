@@ -199,7 +199,6 @@ const ProjectCardComponent = () => {
           </button>
           <Link
             className="focus:outline-none mr-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
-            name="sortStartDate"
             href="/employee/project-card"
           >
             <svg
@@ -217,7 +216,12 @@ const ProjectCardComponent = () => {
               <rect x="3" y="14" width="7" height="7" />
             </svg>
           </Link>
-          <Link className="focus:outline-none" href="project-list" name="list">
+
+          <Link
+            className="focus:outline-none hover:bg-gray-200 rounded-md transition-colors duration-200"
+            href="project-list"
+            name="list"
+          >
             <svg
               className="h-7 w-7 text-gray-500"
               fill="none"
