@@ -260,7 +260,7 @@ const ProjectListComponent = () => {
             <div className="flex items-center space-x-4 w-full lg:w-auto">
               <div className="text-lg font-semibold text-gray-700">
                 {project.name}
-                <p className="text-sm text-gray-500">{project.owner}</p>
+                <p className="font-semibold text-sm text-green-500">{project.owner}</p>
               </div>
             </div>
             <div className="flex flex-wrap items-center space-x-6 w-full lg:w-auto text-sm mt-4 lg:mt-0">
