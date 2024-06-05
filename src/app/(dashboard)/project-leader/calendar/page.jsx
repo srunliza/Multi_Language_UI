@@ -7,8 +7,7 @@ import CalendarComponent from "@/components/CalendarComponent";
 
 const CalendarPage = () => {
   return (
-
-<div className="w-full  ">
+    <div className="w-full  ">
       <div className="flex justify-between mb-2">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />

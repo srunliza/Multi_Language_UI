@@ -7,9 +7,12 @@ import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
+
+  const router = new useRouter()
+
   return (
     <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
       <div className="flex items-center justify-center h-30">
@@ -25,7 +28,7 @@ const Sidebar = () => {
             <button
               type="button"
               className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center  "
-              onClick={redirect('/create-project')}
+              onClick={() => router.push('/project-leader/create-project')}
             >
               <AddToPhotosOutlinedIcon />
               New Project
