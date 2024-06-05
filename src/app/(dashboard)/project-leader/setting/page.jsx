@@ -152,10 +152,10 @@ const SettingPage = () => {
     return (
         <div>
             <form className="w-full p-10" onSubmit={handleSubmit}>
-                <div className="bg-white p-8 max-h-screen rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
+                <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     <hr className="border-1 border-blue-500 mb-6" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2">
                         {/* First Name and Last Name */}
                         <div>
                             <div className="grid grid-cols-2 gap-4">
@@ -167,7 +167,7 @@ const SettingPage = () => {
                                         placeholder="Enter first name"
                                         value={firstName}
                                         onChange={handaleFirstNameChange}
-                                        className={`text-gray-700 input pl-10 input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
+                                        className={`text-gray-700 input input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
                                     {firstNameError && <p className="text-red-500 text-xs mt-1">{firstNameError}</p>}
                                 </div>
                                 <div>
@@ -185,7 +185,7 @@ const SettingPage = () => {
                                 </div>
                             </div>
                             {/* Gender */}
-                            <div className="grid grid-cols-2 pt-4">
+                            <div className="grid grid-cols-2 pt-2">
                                 <div>
                                     <label htmlFor="gender_male" className="block text-gray-700 dark:text-white mb-1">Gender</label>
                                     <div className="relative">
@@ -202,7 +202,7 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="gender_female" className="block text-gray-700 dark:text-white mb-1">Gender</label>
+                                    <label htmlFor="gender_female" className="block text-white dark:text-white mb-1">Gender</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <img className="w-3" src="../assets/icons/gender2.svg" alt="gender icon" />
@@ -218,12 +218,12 @@ const SettingPage = () => {
                                 </div>
                             </div>
                             {/* Date of Birth */}
-                            <div className="mt-4">
+                            <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <input type="date" className="text-gray-700 input input-primary w-full" />
                             </div>
                             {/* Email */}
-                            <div className="mt-4">
+                            <div className="mt-2">
                                 <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base">Email</label>
                                 <div className="relative text-gray-800 ">
                                     <input
@@ -241,7 +241,7 @@ const SettingPage = () => {
                                 {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
                             </div>
                             {/* Contact */}
-                            <div className="mt-4">
+                            <div className="mt-2">
                                 <label htmlFor="contact" className="block text-gray-700 dark:text-white mb-1">Contact</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -256,7 +256,7 @@ const SettingPage = () => {
 
                         {/* Profile */}
                         <div className="flex flex-col items-center">
-                            <div className="mt-16 w-[141px] max-sm:mt-1  max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+                            <div className="mt-12 w-[141px] max-sm:mt-1  max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                                 {/* icon edit profile */}
                                 <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-28">
                                     <input type="file" name="profile" id="upload_profile" hidden required />
@@ -298,7 +298,7 @@ const SettingPage = () => {
                                     </span>
                                 </div>
                                 {/* Social Contact */}
-                                <div className="mt-4">
+                                <div className="mt-2">
                                     <label htmlFor="social_contact" className="block text-gray-700 dark:text-white mb-1">Social Contact</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -311,7 +311,7 @@ const SettingPage = () => {
                         </div>
                     </div>
                     {/* Button Cancel and Save */}
-                    <div className="mt-8 flex justify-end gap-3">
+                    <div className="mt-3 flex justify-end gap-3 mr-14">
                         <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
