@@ -23,6 +23,7 @@ const DashboardAttactComponent = () => {
 
         if (status === 'All') {
             setData(initialData);
+            
         } else {
             const filteredData = initialData.filter(item => item.status === status);
             setData(filteredData);
