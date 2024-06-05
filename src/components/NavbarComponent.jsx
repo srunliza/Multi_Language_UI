@@ -4,11 +4,11 @@ const NavbarComponent = () => {
   return (
     <nav class="bg-white pt-4 pr-10 flex justify-between items-center">
       <div class="flex items-center w-1/2">
-        <div class="relative w-full">
+        <div class="relative w-[17rem]">
           <input
             type="text"
             placeholder="Search project"
-            class="border border-gray-300 rounded-lg py-2 pl-10 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+            class="border border-gray-300 rounded-lg py-2 pl-5 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
       </div>
