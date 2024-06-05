@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import ViewMember from "./ViewMember";
 import DeleteProjectModal from "./DeleteProjectModal";
 import { projectsData } from "@/obj/projects";
@@ -419,24 +420,32 @@ const ProjectCardComponent = () => {
 
                 {/* ---image's groups--- */}
                 <div className="flex -space-x-2 mb-4">
-                  <img
-                    src="../assets/images/neath.png"
+                  <Image
+                    src={`/assets/images/${project.image}`}
                     alt="User"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/soklay.png"
+                  <Image
+                    src={`/assets/images/${project.image}`}
                     alt="User"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/sreyka.png"
+                  <Image
+                    src={`/assets/images/${project.image}`}
                     alt="User"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/sreyly.png"
+                  <Image
+                    src={`/assets/images/${project.image}`}
                     alt="User"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">

@@ -1,22 +1,10 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import DeleteProjectModal from "./DeleteProjectModal";
 import ViewMember from "./ViewMember";
 import { projectsData } from "@/obj/projects";
-
-const getStatusColor = (status) => {
-  switch (status) {
-    case "Finished":
-      return "bg-green-500 text-green-500";
-    case "Progress":
-      return "bg-yellow-500 text-yellow-500";
-    case "Pending":
-      return "bg-red-500 text-red-500";
-    default:
-      return "bg-gray-200 text-gray-500";
-  }
-};
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -106,10 +94,14 @@ const ProjectListComponent = () => {
   const handleSortClick = (criteria) => {
     setSortCriteria(criteria);
     const sortedProjects = [...projects].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a[criteria].localeCompare(b[criteria]);
+      if (criteria === "startDate" || criteria === "endDate") {
+        const dateA = new Date(a[criteria]);
+        const dateB = new Date(b[criteria]);
+        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
       } else {
-        return b[criteria].localeCompare(a[criteria]);
+        return sortOrder === "asc"
+          ? a[criteria].localeCompare(b[criteria])
+          : b[criteria].localeCompare(a[criteria]);
       }
     });
     setProjects(sortedProjects);
@@ -154,6 +146,7 @@ const ProjectListComponent = () => {
             <input
               type="date"
               className="border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white"
+              onChange={() => handleSortClick("startDate")}
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
@@ -163,6 +156,7 @@ const ProjectListComponent = () => {
             <input
               type="date"
               className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              onChange={() => handleSortClick("endDate")}
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
@@ -313,7 +307,7 @@ const ProjectListComponent = () => {
                     (project.daysLeft > 1 ? " days left" : " day left")}
               </div>
 
-              <div className="flex flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
+              <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
                 <div className="w-[10rem] md:-ml-4 text-gray-500 text-sm lg:-ml-0 sm:-ml-5">
                   Translation Progress
                 </div>
@@ -342,30 +336,38 @@ const ProjectListComponent = () => {
               </div>
             </div>
 
-            <div className="flex mt-4 lg:ml-4  lg:mt-0">
+            <div className="flex mt-4 lg:ml-4 lg:mt-0">
               <button
                 onClick={handleSeeAll}
                 className="text-gray-600 text-right ml-auto self-end grow"
               >
                 <div className="flex -space-x-3">
-                  <img
-                    src="../assets/images/soklay.png"
-                    alt="User"
+                  <Image
+                    src={`/assets/images/${project.image}`}
+                    alt={project.name}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/neath.png"
-                    alt="User"
+                  <Image
+                    src={`/assets/images/${project.image}`}
+                    alt={project.name}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/sreyka.png"
-                    alt="User"
+                  <Image
+                    src={`/assets/images/${project.image}`}
+                    alt={project.name}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
-                  <img
-                    src="../assets/images/sreyly.png"
-                    alt="User"
+                  <Image
+                    src={`/assets/images/${project.image}`}
+                    alt={project.name}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">

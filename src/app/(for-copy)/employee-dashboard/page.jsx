@@ -99,7 +99,7 @@ const EmployeeDashboardPage = () => {
                         <div className="bg-white p-4 rounded-xl  border-2 border-blue-300 shadow-lg">
                             <div>
                                 <h1 className="font-semibold text-lg text-gray-600">Total Project</h1>
-                                <div className="pr-0 rounded flex justify-end items-center">
+                                <div c  lassName="pr-0 rounded flex justify-end items-center">
                                 <Image src={totalProjectIcon} width={43} height={43} alt="pending project icon"/>
                                 </div>
                                  

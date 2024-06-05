@@ -13,7 +13,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-center h-30">
         <img
           className="w-[150px] mb-6"
-          src="./assets/images/logo1.png"
+          src="../../assets/Images/logo1.png"
           alt="multi logo"
         />
       </div>
@@ -24,7 +24,7 @@ const Sidebar = () => {
               type="button"
               className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center  "
             >
-              <img src="./icon/newproject.svg" alt="" />
+              
               <AddToPhotosOutlinedIcon />
               New Project
             </button>
@@ -32,7 +32,7 @@ const Sidebar = () => {
               href="/translator"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl  flex items-center px-6 py-4 mt-2 text-gray-100  gap-2  font-light-[16px]"
             >
-              <img src="./icon/dashboard.svg" alt="" />
+              
               <DashboardCustomizeOutlinedIcon />
               <p> Dashboard</p>
             </Link>
@@ -40,7 +40,7 @@ const Sidebar = () => {
               href="/translator/profile"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
-              <img src="./icon/profile_icon.svg" alt="" />
+              
               <AccountBoxOutlinedIcon />
               <p> Profile</p>
             </Link>
@@ -48,7 +48,7 @@ const Sidebar = () => {
               href="/translator/calendar"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
-              <img src="./icon/schedule_icon.svg" alt="" />
+              
               <CalendarMonthOutlinedIcon />
               <p>Calender</p>
             </Link>
@@ -56,7 +56,7 @@ const Sidebar = () => {
               href="/translator/project"
               className="hover:bg-gray-400 hover:bg-opacity-25  rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
-              <img src="./icon/project.svg" alt="" />
+              
               <PieChartOutlinedIcon />
               <p>Project</p>
             </Link>
@@ -67,7 +67,7 @@ const Sidebar = () => {
             href="/translator/setting"
             className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
           >
-            <img src="./icon/setting.svg" alt="" />
+            
             <SettingsOutlinedIcon />
             <p>Setting</p>
           </Link>
@@ -75,7 +75,7 @@ const Sidebar = () => {
             href="#"
             className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
           >
-            <img src="./icon/logout.svg" alt="" />
+            
             <ExitToAppOutlinedIcon />
             <p> Logout</p>
           </Link>
