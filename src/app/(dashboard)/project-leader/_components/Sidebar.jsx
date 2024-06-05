@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
@@ -37,7 +38,7 @@ const Sidebar = () => {
               <p> Dashboard</p>
             </Link>
             <Link
-              href="/project-leader"
+              href="/project-leader/profile"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <img src="./icon/profile_icon.svg" alt="" />

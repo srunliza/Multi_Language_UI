@@ -3,6 +3,7 @@ import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 // import CalendarComponent from "@/components/CalendarComponent";
 import ViewMember from "@/components/ViewMember";
+import CalendarComponent from "@/components/CalendarComponent";
 
 const CalendarPage = () => {
   return (
@@ -17,7 +18,7 @@ const CalendarPage = () => {
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* container */}
-          {/* <CalendarComponent /> */}
+          <CalendarComponent />
         </div>
         <ViewMember />
       </div>
