@@ -50,7 +50,6 @@ const LoginPage = () => {
     }
   };
 
-
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();

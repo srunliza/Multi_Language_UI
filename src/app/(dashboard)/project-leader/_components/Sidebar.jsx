@@ -6,6 +6,7 @@ import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import { redirect } from "next/navigation";
 
 const Sidebar = () => {
   return (
@@ -23,32 +24,29 @@ const Sidebar = () => {
             <button
               type="button"
               className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center  "
+              onClick={redirect('/create-project')}
             >
-              <img src="../icon/newproject.svg" alt="" />
               <AddToPhotosOutlinedIcon />
               New Project
             </button>
             <Link
-              href="/project-leader"
+              href="/project-leader/upload-file"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl  flex items-center px-6 py-4 mt-2 text-gray-100  gap-2  font-light-[16px]"
             >
-              <img src="./icon/dashboard.svg" alt="" />
               <DashboardCustomizeOutlinedIcon />
-              <p> Dashboard</p>
+              <p>Dashboard</p>
             </Link>
             <Link
-              href="/project-leader"
+              href="/project-leader/profile"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
-              <img src="./icon/profile_icon.svg" alt="" />
               <AccountBoxOutlinedIcon />
-              <p> Profile</p>
+              <p>Profile</p>
             </Link>
             <Link
               href="/project-leader/calendar"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
-              <img src="./icon/schedule_icon.svg" alt="" />
               <CalendarMonthOutlinedIcon />
               <p>Calender</p>
             </Link>
@@ -56,7 +54,6 @@ const Sidebar = () => {
               href="/project-leader/project"
               className="hover:bg-gray-400 hover:bg-opacity-25  rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
-              <img src="./icon/project.svg" alt="" />
               <PieChartOutlinedIcon />
               <p>Project</p>
             </Link>
@@ -67,7 +64,6 @@ const Sidebar = () => {
             href="/project-leader/setting"
             className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
           >
-            <img src="./icon/setting.svg" alt="" />
             <SettingsOutlinedIcon />
             <p>Setting</p>
           </Link>
@@ -75,7 +71,6 @@ const Sidebar = () => {
             href="#"
             className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
           >
-            <img src="../icon/logout.svg" alt="" />
             <ExitToAppOutlinedIcon />
             <p> Logout</p>
           </Link>

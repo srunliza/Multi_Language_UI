@@ -151,8 +151,8 @@ const SettingPage = () => {
 
     return (
         <div>
-            <form className="w-full p-10" onSubmit={handleSubmit}>
-                <div className="bg-white p-8 max-h-screen rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
+            <form className="w-full" onSubmit={handleSubmit}>
+                <div className="bg-white p-8 max-h-screen rounded-lg shadow-md border dark:border-gray-700 mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     <hr className="border-1 border-blue-500 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -256,7 +256,7 @@ const SettingPage = () => {
 
                         {/* Profile */}
                         <div className="flex flex-col items-center">
-                            <div className="mt-16 w-[141px] max-sm:mt-1  max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+                            <div className="mt-10 w-[141px] max-sm:mt-1  max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                                 {/* icon edit profile */}
                                 <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-28">
                                     <input type="file" name="profile" id="upload_profile" hidden required />
@@ -276,7 +276,7 @@ const SettingPage = () => {
                             </div>
                             {/* Password */}
                             <div>
-                                <label htmlFor="password" className="mt-[77px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
+                                <label htmlFor="password" className="mt-[60px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
                                     <input
                                         type={passwordVisible ? "text" : "password"}
@@ -311,7 +311,7 @@ const SettingPage = () => {
                         </div>
                     </div>
                     {/* Button Cancel and Save */}
-                    <div className="mt-8 flex justify-end gap-3">
+                    <div className="mt-2 flex justify-end gap-3">
                         <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
