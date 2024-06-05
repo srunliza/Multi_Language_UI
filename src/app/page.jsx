@@ -1,6 +1,6 @@
-import EmployeeDashboard from "@/components/EmployeeDashboard";
 import NavbarComponent from "@/components/NavbarComponent";
-import SidebarComponent from "@/components/SidebarComponent";
+import Sidebar from "./(dashboard)/developer/_components/Sidebar";
+import { Children } from "react";
 
 export default function Home() {
   return (
@@ -10,7 +10,9 @@ export default function Home() {
       </aside>
       <div className="flex-1 ml-[280px]">
         <NavbarComponent />
-        <main className="p-4">{children}</main>
+        <main className="p-4">
+          {Children}
+        </main>
       </div>
     </div>
   );
