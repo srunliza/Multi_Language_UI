@@ -194,7 +194,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20 pl-10 input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('male')}
                                         >
                                             Male
@@ -209,7 +209,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20 pl-10 input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('female')}
                                         >
                                             Female

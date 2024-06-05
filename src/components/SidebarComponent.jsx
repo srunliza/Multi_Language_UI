@@ -8,11 +8,12 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 const SidebarComponent = () => {
   return (
-    <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
+
+    <div className="  md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
       <div className="flex items-center justify-center h-30 bg-blue-800 ">
         <img className="w-[150px] mb-6" src="./assets/images/logo1.png" alt="multi logo" />
       </div>
-      <input class="hidden" type="checkbox" id="menu-toggle" />
+
       <div className="flex flex-col flex-1 ">
         <nav className="flex-1">
           <div>

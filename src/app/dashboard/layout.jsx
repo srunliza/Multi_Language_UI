@@ -2,27 +2,21 @@ import NavbarComponent from "@/components/NavbarComponent";
 import SidebarComponent from "@/components/SidebarComponent";
 
 
-const DashboardLayout = ({children}) => {
+const DashboardLayout = ({ children }) => {
     return (
         <>
-            <div className="grid grid-cols-12">
-                <div className="col-span-2">
-                    <div className="min-h-screen sticky top-0">
-                        <SidebarComponent/>
-                    </div>
-                </div>
-                <div className="col-span-10">
-                    <div className="sticky top-0">
-                        <NavbarComponent/>
-                    </div>
-
-
-                    <main>{children}</main>
+            <div className="flex h-full ">
+                <aside className="w-[280px] fixed top-0 left-0 h-full">
+                    <SidebarComponent/>
+                </aside>
+                <div className="flex-1 ml-[280px]">
+                    <NavbarComponent />
+                    <main className="p-4">{children}</main>
                 </div>
             </div>
         </>
-       
-     );
+
+    );
 }
- 
+
 export default DashboardLayout;
