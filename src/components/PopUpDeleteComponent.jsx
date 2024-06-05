@@ -77,7 +77,8 @@ const PopUpDeleteComponent = () => {
           </div>
         </div>
       </div>
-    )
+      </div>
+    
   );
 };
 
