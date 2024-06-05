@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import ViewMember from "./ViewMember";
 import { projectsData } from "@/obj/projectsData";
+import DeleteProjectModal from "./DeleteProjectModal";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -40,6 +41,7 @@ const ProjectCardComponent = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortCriteria, setSortCriteria] = useState("name");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const modalRef = useRef();
 
@@ -75,10 +77,16 @@ const ProjectCardComponent = () => {
     setSelectedProject(null);
   };
 
-  const handleDeleteClick = (projectId) => {
+  const handleDeleteClick = (project) => {
+    setSelectedProject(project);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
     setProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== projectId)
+      prevProjects.filter((project) => project.id !== selectedProject.id)
     );
+    setIsDeleteModalOpen(false);
     setSelectedProject(null);
   };
 
@@ -248,7 +256,9 @@ const ProjectCardComponent = () => {
               >
                 <div className="flex justify-between items-center mb-0 text-sm mt-2 text-gray-700">
                   <h3 className="text-base font-semibold mb-1">
-                    {project.name}
+                    {project.name.length > 15
+                      ? `${project.name.substring(0, 15)}...`
+                      : project.name}
                   </h3>
                   <div className="flex space-x-1">
                     {/* new dropdown */}
@@ -298,7 +308,7 @@ const ProjectCardComponent = () => {
                         <li>
                           <button
                             className="text-black hover:text-red-600"
-                            onClick={() => handleDeleteClick(project.id)} // directly call handleDeleteClick
+                            onClick={() => handleDeleteClick(project)} // directly call handleDeleteClick
                           >
                             <span>
                               <svg
@@ -329,7 +339,9 @@ const ProjectCardComponent = () => {
                   </div>
                 </div>
                 <div className="mb-5 text-sm text-green-500">
-                  {project.owner}
+                  {project.owner.length > 15
+                    ? `${project.owner.substring(0, 15)}...`
+                    : project.owner}
                   <span className="text-gray-500 text-xs m-3 ">
                     {project.role}
                   </span>
@@ -434,12 +446,12 @@ const ProjectCardComponent = () => {
 
                   {/* ---View Members Modal--- */}
                   {isViewMemberOpen && (
-                    <div className="fixed inset-0 pt-[5rem] bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
                       <div
                         ref={modalRef}
                         className="bg-white p-0 rounded-lg shadow-lg w-96"
                       >
-                        <div className="flex justify-between mt-5 px-4">
+                        <div className="flex justify-between mt-5 px-4 pt-[6.5rem]">
                           <div className="flex">
                             <svg
                               className="mr-4"
@@ -456,6 +468,7 @@ const ProjectCardComponent = () => {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                               />
+                              
                             </svg>
                             <h3 className="text-lg font-semibold mb-4">
                               40 MEMBERS
@@ -486,7 +499,6 @@ const ProjectCardComponent = () => {
         </div>
       </div>
       {/* Edit Modal */}
-      ""{" "}
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div
@@ -531,6 +543,12 @@ const ProjectCardComponent = () => {
           </div>
         </div>
       )}
+      {/* Delete Modal */}
+      <DeleteProjectModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 };

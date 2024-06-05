@@ -136,7 +136,7 @@ const ProjectListComponent = () => {
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
-      <div className="flex flex-wrap items-center mb-4 ">
+      <div className="flex flex-wrap items-center mb-4">
         <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
           <div className="flex w-full sm:w-auto">
             <span className="w-[5rem] inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md">
@@ -244,8 +244,6 @@ const ProjectListComponent = () => {
           </Link>
         </div>
       </div>
-      
-      {/* scroll-list */}
       <div className="sm:h-full lg:h-full md:h-full sm:pb-[18rem] md:pb-[18rem]  lg:pb-[12rem] overflow-y-auto no-scrollbar">
         {filteredProjects.map((project, index) => (
           <div
@@ -255,12 +253,15 @@ const ProjectListComponent = () => {
             <div className="flex items-center space-x-4 w-[10rem]">
               <div className="text-base font-semibold text-gray-700">
                 {`${project.name.substring(0, 13)}...`}
-                <p className="text-sm text-green-500">{project.owner}</p>
+                <p className="text-sm font-medium text-green-500">{`${project.owner.substring(
+                  0,
+                  13
+                )}...`}</p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center space-x-6 w-full gap-3 lg:w-auto text-sm mt-4 lg:mt-0">
-              <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-8 text-center text-sm ">
+              <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-9 text-center text-sm ">
                 <svg
                   className="h-4 w-4 text-black"
                   fill="none"
@@ -277,7 +278,7 @@ const ProjectListComponent = () => {
                 12
               </div>
 
-              <div className="flex items-center w-[8rem] justify-center bg-red-100 text-red-800 rounded-lg px-5 py-1 text-sm">
+              <div className="flex items-center w-[9rem] justify-center bg-red-100 text-red-800 rounded-lg px-5 py-2 text-sm">
                 <svg
                   className="h-4 w-4 text-red-500 mr-1"
                   fill="none"
@@ -291,10 +292,13 @@ const ProjectListComponent = () => {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                {project.daysLeft} Day left
+                {project.daysLeft > 6
+                  ? project.daysLeft + " days..."
+                  : project.daysLeft +
+                    (project.daysLeft > 1 ? " days left" : " day left")}
               </div>
 
-              <div className="flex items-center justify-center gap-7 lg:mt-0 md:mt-3 sm:mt-3">
+              <div className="flex bg-black items-center ml-4 gap-7 lg:mt-0 md:mt-3 sm:mt-3">
                 <div className="text-gray-500 text-sm lg:-ml-0 md:-ml-0 sm:-ml-5">
                   Translation Progress
                 </div>
@@ -393,9 +397,6 @@ const ProjectListComponent = () => {
           </div>
         ))}
       </div>
-
-      {/* Edit Modal */}
-      ""{" "}
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div

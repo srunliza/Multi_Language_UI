@@ -13,7 +13,7 @@ const ViewMember = () => {
 
   return (
     <div className="border">
-      <main className="flex flex-1 h-[33rem]">
+      <main className="flex flex-1 h-full">
         <div className="bg-white overflow-hidden rounded-xl sm:rounded-xl">
           {/* Header Section */}
           <div className="px-3 py-2">
@@ -74,7 +74,7 @@ const ViewMember = () => {
             </div>
             <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
           </div>
-          <div className="overflow-y-auto h-[200px] no-scrollbar pb-4">
+          <div className="overflow-y-auto h-[200px] no-scrollbar pb-[4rem]">
             {developers.map((developer) => (
               <div key={developer.id} className="flex items-center p-2 hover:bg-blue-100 ml-8">
                 <Image
