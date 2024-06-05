@@ -33,7 +33,7 @@ const Sidebar = ({ isSidebarOpen }) => {
               </button>
               <Link
                 href="/employee"
-                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl mt-1 flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
               >
                 <DashboardCustomizeOutlinedIcon />
                 <p>Dashboard</p>

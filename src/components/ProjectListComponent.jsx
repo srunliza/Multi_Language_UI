@@ -246,7 +246,7 @@ const ProjectListComponent = () => {
       </div>
       
       {/* scroll-list */}
-      <div className="h-[26.1rem] overflow-y-auto no-scrollbar">
+      <div className="sm:h-full lg:h-full md:h-full sm:pb-[18rem] md:pb-[18rem]  lg:pb-[12rem] overflow-y-auto no-scrollbar">
         {filteredProjects.map((project, index) => (
           <div
             key={index}

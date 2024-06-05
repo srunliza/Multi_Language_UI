@@ -120,7 +120,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border w-full">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -146,7 +146,7 @@ const ProjectCardComponent = () => {
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-200 border-e-0 rounded-s-md dark:text-gray-400">
+            <span className=" inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-200 border-e-0 rounded-s-md dark:text-gray-400">
               <p>Status</p>
             </span>
 
@@ -154,7 +154,7 @@ const ProjectCardComponent = () => {
             <select
               name="status"
               id=""
-              className=" bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className=" bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={selectedStatus}
               onChange={handleStatusChange}
             >
@@ -237,11 +237,10 @@ const ProjectCardComponent = () => {
           </Link>
         </div>
       </div>
-      
       {/* ---card's flex body--- */}
-      <div className="h-[26.1rem] pb-1">
+      <div className="sm:h-full lg:h-full md:h-full sm:pb-[22rem] md:pb-[22rem]  lg:pb-[13rem] overflow-y-auto no-scrollbar">
         <div className="overflow-auto h-full no-scrollbar">
-          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6">
             {filteredProjects.map((project, index) => (
               <div
                 key={index}
@@ -366,11 +365,14 @@ const ProjectCardComponent = () => {
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    {project.daysLeft} Day left
+                    {project.daysLeft > 7
+                      ? project.daysLeft + " days..."
+                      : project.daysLeft +
+                        (project.daysLeft > 1 ? " days left" : " day left")}
                   </div>
                 </div>
                 <div className="grid grid-cols-2 items-center mb-4">
-                  <div className="text-gray-500 text-xs">
+                  <div className="text-gray-500 w-[10rem] text-xs">
                     Translation Progress
                   </div>
                   <div
@@ -432,7 +434,7 @@ const ProjectCardComponent = () => {
 
                   {/* ---View Members Modal--- */}
                   {isViewMemberOpen && (
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 pt-[5rem] bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
                       <div
                         ref={modalRef}
                         className="bg-white p-0 rounded-lg shadow-lg w-96"
@@ -440,7 +442,7 @@ const ProjectCardComponent = () => {
                         <div className="flex justify-between mt-5 px-4">
                           <div className="flex">
                             <svg
-                            className="mr-4"
+                              className="mr-4"
                               width="26"
                               height="26"
                               viewBox="0 0 26 26"
@@ -483,7 +485,6 @@ const ProjectCardComponent = () => {
           </div>
         </div>
       </div>
-      
       {/* Edit Modal */}
       ""{" "}
       {isEditing && (
