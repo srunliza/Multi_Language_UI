@@ -261,7 +261,7 @@ const ProjectListComponent = () => {
             </div>
 
             <div className="flex flex-wrap items-center space-x-6 w-full gap-3 lg:w-auto text-sm mt-4 lg:mt-0">
-              <div className="flex items-center justify-center bg-gray-300 rounded-lg w-16 h-8 text-center text-sm ">
+              <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-8 text-center text-sm ">
                 <svg
                   className="h-4 w-4 text-white"
                   fill="none"

@@ -6,10 +6,10 @@ const ViewMember = () => {
   const [activeTab, setActiveTab] = useState("View Attachment");
 
   return (
-    <div className="">
-      <main className="flex flex-1 w-[360px]">
-        <div className="bg-white overflow-hidden border rounded-xl shadow-md sm:rounded-xl ml-4 p-4 border-blue-300 border-l-0">
-          <div className="flex items-center p-3 border-b">
+    <div className="border">
+      <main className="flex flex-1 h-[37rem]">
+        <div className="bg-white overflow-hidden rounded-xl  sm:rounded-xl   ">
+          {/* <div className="flex items-center p-3 border-b">
             <svg
               width="26"
               height="26"
@@ -45,11 +45,11 @@ const ViewMember = () => {
                 ></path>
               </svg>
             </div>
-          </div>
+          </div> */}
           <div className="px-3 py-2">
             <div className="flex items-center text-gray-700 justify-between">
               <span className="font-semibold m-3">Project Leader</span>
-              <svg
+              {/* <svg
                 className="h-6 w-6 text-gray-500 cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ const ViewMember = () => {
                   strokeWidth="2"
                   d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
                 />
-              </svg>
+              </svg> */}
             </div>
             <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
           </div>
@@ -101,8 +101,8 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
-                <svg
+              {/* <button className="ml-auto">
+                {/* <svg
                   className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
@@ -115,8 +115,8 @@ const ViewMember = () => {
                     strokeWidth="2"
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
-                </svg>
-              </button>
+                </svg> */}
+              {/* </button> */} 
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8">
               <Image
@@ -131,7 +131,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -146,7 +146,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8">
               <Image
@@ -161,7 +161,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -176,7 +176,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8">
               <Image
@@ -191,7 +191,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -206,7 +206,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8">
               <Image
@@ -221,7 +221,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -236,7 +236,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8">
               <Image
@@ -251,7 +251,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -266,7 +266,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -290,7 +290,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -305,7 +305,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8 text-gray-700">
               <Image
@@ -320,7 +320,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -335,7 +335,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8 text-gray-700">
               <Image
@@ -350,7 +350,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -365,7 +365,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8 text-gray-700">
               <Image
@@ -380,7 +380,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -395,7 +395,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center p-2 hover:bg-blue-100 ml-8 text-gray-700">
               <Image
@@ -410,7 +410,7 @@ const ViewMember = () => {
                   Robert Downey Jr
                 </div>
               </div>
-              <button className="ml-auto">
+              {/* <button className="ml-auto">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -425,7 +425,7 @@ const ViewMember = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

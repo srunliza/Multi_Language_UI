@@ -18,7 +18,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="md:flex h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white">
+    <div className="md:flex h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 relative">
       <div
         className={`md:hidden px-4 py-2 ${
           isSidebarOpen ? "bg-blue-800" : "bg-white w-[5rem]"
@@ -35,7 +35,7 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`flex h-full sm:w-full md:w-full lg:w-full flex-col bg-blue-800 ${
+        className={`flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800 ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >
