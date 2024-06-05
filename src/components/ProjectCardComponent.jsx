@@ -2,8 +2,8 @@
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import ViewMember from "./ViewMember";
-import { projectsData } from "@/obj/projectsData";
 import DeleteProjectModal from "./DeleteProjectModal";
+import { projectsData } from "@/obj/projects";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -93,10 +93,14 @@ const ProjectCardComponent = () => {
   const handleSortClick = (criteria) => {
     setSortCriteria(criteria);
     const sortedProjects = [...projects].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a[criteria].localeCompare(b[criteria]);
+      if (criteria === "startDate" || criteria === "endDate") {
+        const dateA = new Date(a[criteria]);
+        const dateB = new Date(b[criteria]);
+        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
       } else {
-        return b[criteria].localeCompare(a[criteria]);
+        return sortOrder === "asc"
+          ? a[criteria].localeCompare(b[criteria])
+          : b[criteria].localeCompare(a[criteria]);
       }
     });
     setProjects(sortedProjects);
@@ -142,6 +146,7 @@ const ProjectCardComponent = () => {
             <input
               type="date"
               className="border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => handleSortClick("startDate")}
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
@@ -151,6 +156,7 @@ const ProjectCardComponent = () => {
             <input
               type="date"
               className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => handleSortClick("endDate")}
             />
           </div>
           <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
@@ -451,7 +457,7 @@ const ProjectCardComponent = () => {
                         ref={modalRef}
                         className="bg-white p-0 rounded-lg shadow-lg w-96"
                       >
-                        <div className="flex justify-between mt-5 px-4 pt-[6.5rem]">
+                        <div className="flex justify-between mt-5 px-4 pt-[7rem]">
                           <div className="flex">
                             <svg
                               className="mr-4"
@@ -468,7 +474,6 @@ const ProjectCardComponent = () => {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                               />
-                              
                             </svg>
                             <h3 className="text-lg font-semibold mb-4">
                               40 MEMBERS
@@ -498,6 +503,7 @@ const ProjectCardComponent = () => {
           </div>
         </div>
       </div>
+
       {/* Edit Modal */}
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
@@ -543,6 +549,7 @@ const ProjectCardComponent = () => {
           </div>
         </div>
       )}
+
       {/* Delete Modal */}
       <DeleteProjectModal
         isOpen={isDeleteModalOpen}

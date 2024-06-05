@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { projectsData } from "@/obj/projectsData";
 import DeleteProjectModal from "./DeleteProjectModal";
 import ViewMember from "./ViewMember";
+import { projectsData } from "@/obj/projects";
 
 const getStatusColor = (status) => {
   switch (status) {
