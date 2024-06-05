@@ -136,7 +136,6 @@ const ProjectListComponent = () => {
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
-
       <div className="flex flex-wrap items-center mb-4 ">
         <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
           <div className="flex w-full sm:w-auto">
@@ -184,7 +183,7 @@ const ProjectListComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
+        <div className="flex z-30 flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
           <button
             className="focus:outline-none mr-2"
             name="sort"
@@ -245,13 +244,13 @@ const ProjectListComponent = () => {
           </Link>
         </div>
       </div>
-
+      
       {/* scroll-list */}
       <div className="h-[26.1rem] overflow-y-auto no-scrollbar">
         {filteredProjects.map((project, index) => (
           <div
             key={index}
-            className="flex flex-wrap items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
+            className="flex justify-between items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
           >
             <div className="flex items-center space-x-4 w-[10rem]">
               <div className="text-base font-semibold text-gray-700">
@@ -263,7 +262,7 @@ const ProjectListComponent = () => {
             <div className="flex flex-wrap items-center space-x-6 w-full gap-3 lg:w-auto text-sm mt-4 lg:mt-0">
               <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-8 text-center text-sm ">
                 <svg
-                  className="h-4 w-4 text-white"
+                  className="h-4 w-4 text-black"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -396,31 +395,46 @@ const ProjectListComponent = () => {
       </div>
 
       {/* Edit Modal */}
+      ""{" "}
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div
             ref={modalRef}
             className="bg-white p-4 rounded-lg shadow-lg w-96"
           >
-            <h3 className="text-lg font-semibold mb-4">Edit Project</h3>
+            <div className="flex justify-between">
+              <h3 className="text-lg font-semibold mb-4">Project Name</h3>
+              <svg
+                className="h-4 w-4 "
+                onClick={handleModalClose}
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="100"
+                height="100"
+                viewBox="0 0 50 50"
+              >
+                <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+              </svg>
+            </div>
             <input
               type="text"
               value={editProject.name}
               onChange={handleEditChange}
-              className="w-full p-2 border border-gray-300 rounded-md mb-4"
+              className="w-full p-2 border border-gray-300 rounded-md mb-4 "
             />
             <div className="flex justify-end">
               <button
-                onClick={handleEditSubmit}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+                onClick={handleModalClose}
+                className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500"
               >
-                Save
+                No
               </button>
               <button
-                onClick={handleModalClose}
-                className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                onClick={handleEditSubmit}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md "
               >
-                Cancel
+                Edit
               </button>
             </div>
           </div>

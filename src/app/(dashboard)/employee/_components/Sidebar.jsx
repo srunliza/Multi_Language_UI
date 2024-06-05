@@ -18,10 +18,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="md:flex h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 relative">
+    <div className="md:flex h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 absolute lg:w-[13.8rem]">
       <div
         className={`md:hidden px-4 py-2 ${
-          isSidebarOpen ? "bg-blue-800" : "bg-white w-[5rem]"
+          isSidebarOpen ? "bg-blue-800 w-[13.8rem]" : "bg-white w-[5rem]"
         } `}
       >
         <button
@@ -36,7 +36,7 @@ const Sidebar = () => {
 
       <div
         className={`flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800 ${
-          isSidebarOpen ? "block" : "hidden"
+          isSidebarOpen ? "block z-50" : "hidden"
         } md:block`}
       >
         <div className="flex items-center justify-center h-30 bg-blue-800 ">

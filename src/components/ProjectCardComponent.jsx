@@ -176,7 +176,7 @@ const ProjectCardComponent = () => {
         </div>
 
         {/* --- left icon button at navbar of card --- */}
-        <div className="flex flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto">
+        <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">
           <button
             className="focus:outline-none mr-2"
             name="sort"
@@ -483,6 +483,7 @@ const ProjectCardComponent = () => {
           </div>
         </div>
       </div>
+      
       {/* Edit Modal */}
       ""{" "}
       {isEditing && (
