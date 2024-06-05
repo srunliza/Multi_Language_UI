@@ -167,7 +167,7 @@ const SettingPage = () => {
                                         placeholder="Enter first name"
                                         value={firstName}
                                         onChange={handaleFirstNameChange}
-                                        className={`text-gray-700 input input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
+                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
                                     {firstNameError && <p className="text-red-500 text-xs mt-1">{firstNameError}</p>}
                                 </div>
                                 <div>
@@ -179,7 +179,7 @@ const SettingPage = () => {
                                             placeholder="Enter first name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
-                                            className={`text-gray-700 input pl-10 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
+                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
                                         {lastNameError && <p className="text-red-500 text-xs mt-1">{lastNameError}</p>}
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700 input rounded-e-none pl-10 input-bordered input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20 pl-10 input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('male')}
                                         >
                                             Male
@@ -209,7 +209,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700 input rounded-s-none pl-10 input-bordered input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20 pl-10 input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('female')}
                                         >
                                             Female
@@ -220,7 +220,7 @@ const SettingPage = () => {
                             {/* Date of Birth */}
                             <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
-                                <input type="date" className="text-gray-700 input input-primary w-full" />
+                                <input type="date" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5  input-primary w-full" />
                             </div>
                             {/* Email */}
                             <div className="mt-2">
@@ -229,7 +229,7 @@ const SettingPage = () => {
                                     <input
                                         type="email"
                                         id="email"
-                                        className={`text-gray-700 input pl-10 input-primary w-full ${emailError ? 'border-red-500' : ''}`}
+                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${emailError ? 'border-red-500' : ''}`}
                                         placeholder="example@gmail.com"
                                         value={email}
                                         onChange={handleEmailChange}
@@ -249,16 +249,16 @@ const SettingPage = () => {
                                             <path d="M11.5 0C5.14855 0 0 5.14878 0 11.5C0 13.1491 0.367987 14.7915 1.07869 16.3156C0.135687 21.1859 0.0356567 21.6344 0.0356567 21.6344C-0.118443 22.432 0.566937 23.1151 1.36619 22.9641C1.36619 22.9641 1.80204 22.8887 6.72059 21.9579C8.20524 22.6635 9.8509 23 11.5 23C17.8514 23 23 17.8512 23 11.5C23 5.14878 17.8514 0 11.5 0ZM11.5 2.3C16.5807 2.3 20.7 6.41895 20.7 11.5C20.7 16.581 16.5807 20.7 11.5 20.7C10.0544 20.7 8.66639 20.3605 7.40369 19.7296C7.17829 19.6174 6.93106 19.5751 6.68381 19.6219C2.60131 20.3947 2.9256 20.3486 2.5875 20.4125C2.6542 20.0703 2.59669 20.4255 3.37869 16.3875C3.42699 16.1375 3.38444 15.8602 3.27059 15.6329C2.62889 14.3613 2.3 12.9577 2.3 11.5C2.3 6.41895 6.4193 2.3 11.5 2.3ZM8.26619 5.75C7.18749 5.75 5.75 7.1875 5.75 8.26562C5.75 9.65505 7.1875 12.2187 8.625 13.6562C8.78025 13.8109 9.1885 14.2203 9.34375 14.375C10.7812 15.8125 13.3446 17.25 14.7338 17.25C15.8125 17.25 17.25 15.8125 17.25 14.7344C17.25 13.6562 15.8125 12.2187 14.7338 12.2187C14.375 12.2187 13.0743 12.9622 12.9375 12.9375C11.7921 12.7307 10.3017 11.2042 10.0625 10.0625C10.0291 9.90311 10.7812 8.625 10.7812 8.26562C10.7812 7.1875 9.34374 5.75 8.26619 5.75Z" fill="#949494" />
                                         </svg>
                                     </div>
-                                    <input type="text" className="text-gray-700 input pl-10 input-primary w-full" placeholder="Phone number" />
+                                    <input type="text" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full" placeholder="Phone number" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Profile */}
                         <div className="flex flex-col items-center">
-                            <div className="mt-12 w-[141px] max-sm:mt-1  max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+                            <div className="mt-12 max-sm:mt-1 w-[150px] h-[150px] max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                                 {/* icon edit profile */}
-                                <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-28">
+                                <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-[117px]">
                                     <input type="file" name="profile" id="upload_profile" hidden required />
                                     <label htmlFor="upload_profile" className="inline-flex items-center">
                                         <svg data-slot="icon" className="w-5 h-5 text-blue-700" fill="none" strokeWidth="1.5"
@@ -276,12 +276,12 @@ const SettingPage = () => {
                             </div>
                             {/* Password */}
                             <div>
-                                <label htmlFor="password" className="mt-[77px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
+                                <label htmlFor="password" className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
                                     <input
                                         type={passwordVisible ? "text" : "password"}
                                         id="password"
-                                        className={`text-gray-700 input pl-10 input-primary w-full placeholder:text-sm ${passwordError ? 'border-red-500' : ''}`}
+                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
                                         placeholder="xxxxxxxxx"
                                         value={password}
                                         onChange={handlePasswordChange}
@@ -304,14 +304,14 @@ const SettingPage = () => {
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <img className="w-[20px]" src="../assets/icons/socaicontact.svg" alt="social contact icon" />
                                         </div>
-                                        <input type="text" className="text-gray-700 input pl-10 input-primary w-full" placeholder="Enter social contact" />
+                                        <input type="text" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full" placeholder="Enter social contact" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* Button Cancel and Save */}
-                    <div className="mt-3 flex justify-end gap-3 mr-14">
+                    <div className="mt-3 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
                         <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
