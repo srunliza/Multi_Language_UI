@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
@@ -10,10 +11,10 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 const Sidebar = () => {
   return (
     <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
-      <div className="flex items-center justify-center h-30 bg-blue-800 ">
+      <div className="flex items-center justify-center h-30">
         <img
           className="w-[150px] mb-6"
-          src="./assets/images/logo1.png"
+          src="../assets/images/logo1.png"
           alt="multi logo"
         />
       </div>
@@ -24,7 +25,7 @@ const Sidebar = () => {
               type="button"
               className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center  "
             >
-              <img src="./icon/newproject.svg" alt="" />
+              <img src="../icon/newproject.svg" alt="" />
               <AddToPhotosOutlinedIcon />
               New Project
             </button>
@@ -37,7 +38,7 @@ const Sidebar = () => {
               <p> Dashboard</p>
             </Link>
             <Link
-              href="/project-leader"
+              href="/project-leader/profile"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <img src="./icon/profile_icon.svg" alt="" />
@@ -75,7 +76,7 @@ const Sidebar = () => {
             href="#"
             className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
           >
-            <img src="./icon/logout.svg" alt="" />
+            <img src="../icon/logout.svg" alt="" />
             <ExitToAppOutlinedIcon />
             <p> Logout</p>
           </Link>

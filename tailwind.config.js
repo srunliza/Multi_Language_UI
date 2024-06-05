@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -31,16 +32,25 @@ module.exports = {
         'color-text-white':'#F9FAFB',
         'primary-color':'#1A42BC',
         'neutral-color':'#F0F0F0',
-        'secodary-color':'#B030FF',
+        'secondary-color':'#B030FF',
         'color-finish':'#00D33B',
         'color-pending':'#D20303',
         'color-process':'#F8C408',
-      }
+      },
+
+      fontFamily: {
+        consolas: ['Consolas', 'monospace'],
+      },
     },
   },
+
   plugins: [
     require('daisyui'),
   ],
 };
+
+
+
+
 
 

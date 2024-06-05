@@ -120,7 +120,7 @@ const ProjectCardComponent = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border ">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white mt-6 shadow-lg h-screen overflow-hidden border w-full">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>

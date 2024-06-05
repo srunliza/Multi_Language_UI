@@ -208,7 +208,7 @@ const RegisterPage = () => {
                   />
 
                   <div className="pointer-events-none text-gray-500 absolute inset-y-0 right-0 flex items-center px-2">
-                    {/* <DateRangeOutlinedIcon fontSize='small'/> */}
+                    <DateRangeOutlinedIcon fontSize='small'/>
                   </div>
                 </div>
                 {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}

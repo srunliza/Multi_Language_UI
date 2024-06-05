@@ -8,57 +8,32 @@ import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
-import MenuIcon from "@mui/icons-material/Menu";
 
-const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
+const Sidebar = ({ isSidebarOpen }) => {
   return (
-    <div className="md:flex h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 absolute lg:w-[13.8rem]">
-      <div
-        className={`md:hidden px-4 py-2 ${
-          isSidebarOpen ? "bg-blue-800 w-[13.8rem]" : "bg-white w-[5rem]"
-        } `}
-      >
-        <button
-          onClick={toggleSidebar}
-          className={`text-black mt-2 rounded-md h-10 ${
-            isSidebarOpen ? "text-white" : "text-black"
-          } `}
-        >
-          <MenuIcon className="w-[4rem]" />
-        </button>
-      </div>
-
-      <div
-        className={`flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800 ${
-          isSidebarOpen ? "block z-50" : "hidden"
-        } md:block`}
-      >
-        <div className="flex items-center justify-center h-30 bg-blue-800 ">
-          <img
-            className={`w-[150px] mb-6`}
-            src="/assets/images/logo1.png"
-            alt="multi logo"
-          />
+    <div
+      className={`h-screen md:items-center gap-4 flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 w-full absolute ${
+        isSidebarOpen ? "block" : "hidden"
+      } md:block`}
+    >
+       <div className="flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800">
+        <div className="flex items-center justify-center h-30 bg-blue-800 sm:hidden md:block lg:block mx-auto ">
+          <img className="w-[150px]  mb-6" src="/assets/images/logo1.png" alt="multi logo" />
         </div>
-        <div className="flex flex-col flex-1 ml-6 ">
-          <nav className="flex-1">
-            <div>
+
+        <div className="flex flex-col sm:mt-[9.7rem] md:mt-3 lg:mt-3">
+          <nav className="flex flex-col items-center">
+            <div className="flex flex-col">
               <button
                 type="button"
-                className="ml-1 mt-1 gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center"
+                className="gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center"
               >
                 <AddToPhotosOutlinedIcon />
                 New Project
               </button>
               <Link
                 href="/employee"
-                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-4 text-gray-100 gap-2 font-light-[16px]"
+                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
               >
                 <DashboardCustomizeOutlinedIcon />
                 <p>Dashboard</p>
@@ -85,23 +60,24 @@ const Sidebar = () => {
                 <p>Project</p>
               </Link>
             </div>
+
+            <div className="-ml-8 mt-[6rem] flex flex-col items-center">
+              <Link
+                href="/employee/setting"
+                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+              >
+                <SettingsOutlinedIcon />
+                <p>Setting</p>
+              </Link>
+              <Link
+                href="#"
+                className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+              >
+                <ExitToAppOutlinedIcon />
+                <p>Logout</p>
+              </Link>
+            </div>
           </nav>
-          <div className="mb-[10px] px-2">
-            <Link
-              href="/employee/setting"
-              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-[6rem] -ml-2 text-gray-100 gap-2 font-light-[16px]"
-            >
-              <SettingsOutlinedIcon />
-              <p>Setting</p>
-            </Link>
-            <Link
-              href="#"
-              className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 -ml-2 text-gray-100 gap-2 font-light-[16px]"
-            >
-              <ExitToAppOutlinedIcon />
-              <p>Logout</p>
-            </Link>
-          </div>
         </div>
       </div>
     </div>

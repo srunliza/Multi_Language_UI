@@ -1,7 +1,7 @@
 'use client'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
-import changePasswordImage from '../../../../public/assets/images/reset-password.png';
+import changePasswordImage from '../../../../public/assets/icons/reset-password.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

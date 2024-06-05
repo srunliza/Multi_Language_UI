@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/multi-language-ui.iml" filepath="$PROJECT_DIR$/.idea/multi-language-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lang-net-app.iml" filepath="$PROJECT_DIR$/.idea/lang-net-app.iml" />
     </modules>
   </component>
 </project>

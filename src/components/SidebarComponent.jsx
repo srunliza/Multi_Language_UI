@@ -1,6 +1,4 @@
 import Link from "next/link";
-import IMAGES from "../../public/assets/images";
-import logo from "../../public/assets/images/logo.png"
 import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -8,15 +6,13 @@ import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import PieChartOutlinedIcon from '@mui/icons-material/PieChartOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-
-
 const SidebarComponent = () => {
   return (
-    <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800 ">
+    <div className="hidden md:flex h-full md:items-center gap-4 flex-col bg-blue-800">
       <div className="flex items-center justify-center h-30 bg-blue-800 ">
         <img className="w-[150px] mb-6" src="./assets/images/logo1.png" alt="multi logo" />
       </div>
-      <div className="flex flex-col flex-1 ">
+      <div className="flex flex-col flex-1">
         <nav className="flex-1">
           <div>
             <button

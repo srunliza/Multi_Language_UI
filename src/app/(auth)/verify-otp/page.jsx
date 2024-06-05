@@ -1,5 +1,5 @@
 'use client'
-import optImage from "../../../../public/assets/images/verify-otp.png";
+import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from "react";

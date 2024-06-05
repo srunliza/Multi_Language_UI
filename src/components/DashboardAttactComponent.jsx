@@ -94,7 +94,7 @@ const DashboardAttactComponent = () => {
                                 <td className="flex gap-2 justify-center">
                                     <div className="dropdown">
                                         <div tabIndex={0} role="button" className="m-1">
-                                            <img src="./icon/view.svg" alt="view" className="cursor-pointer" />
+                                            <img src="../assets/icons/view.svg" alt="view" className="cursor-pointer" />
                                         </div>
                                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
                                             <li><a className="text-red-500 font-semibold">XML File</a></li>
@@ -104,7 +104,7 @@ const DashboardAttactComponent = () => {
                                     </div>
                                     <div className="dropdown">
                                         <div tabIndex={0} role="button" className="m-1">
-                                            <img src="./icon/download.svg" alt="download" className="cursor-pointer" />
+                                            <img src="../assets/icons/download.svg" alt="download" className="cursor-pointer" />
                                         </div>
                                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
                                             <li><a className="text-red-500 font-semibold">XML File</a></li>

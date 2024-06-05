@@ -1,5 +1,5 @@
 'use client'
-import forgetPassword from "../../../../public/assets/images/forget-password.png"
+import forgetPassword from "../../../../public/assets/icons/forget-password.svg"
 import { EmailOutlined } from '@mui/icons-material';
 import Image from "next/image";
 import { useState } from 'react';
