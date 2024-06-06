@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const LandingPage = () => {
+const LandingPage = () => {
   return (
     <div className="bg-[#F5F5F5]">
       {/* Navbar */}
@@ -664,6 +665,9 @@ const LandingPage = () => {
       </section>
     </div>
   );
+};
+
+export default LandingPage;
 };
 
 export default LandingPage;

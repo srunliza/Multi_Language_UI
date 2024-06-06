@@ -8,7 +8,10 @@ export default function DeveloperDashboardLayout({ children }) {
         <Sidebar />
       </aside>
       <div className="flex-1 ml-[280px]">
+      </aside>
+      <div className="flex-1 ml-[280px]">
         <NavbarComponent />
+        <main className="p-4">{children}</main>
         <main className="p-4">{children}</main>
       </div>
     </div>
