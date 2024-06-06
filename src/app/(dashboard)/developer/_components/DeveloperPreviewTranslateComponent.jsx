@@ -79,10 +79,10 @@ const DeveloperPreviewTranslateComponent = () => {
     return (
         <div className="container mx-auto shadow-sm">
             <div className="overflow-x-auto">
-                <div className='flex border  p-3 rounded-t-lg justify-evenly items-center '>
+                <div className='flex border bg-gray-50  p-3 rounded-t-xl justify-evenly items-center '>
                     <h3>English</h3>
                     <Image
-                        src={"../assets/icons/switch.svg"}
+                        src={"/assets/icons/switch.svg"}
                         width={18}
                         height={18}
                     />
@@ -94,8 +94,8 @@ const DeveloperPreviewTranslateComponent = () => {
                         <tbody >
                             {translateData.map((e) => (
                                 <tr key={e.id}>
-                                    <td className="py-2 px-6 text-[15px]  border ">{e.baseLang}</td>
-                                    <td className="py-2 pr-14 px-6 border">{e.tagetLang}</td>
+                                    <td className="py-2 px-6 text-[15px] bg-white  border ">{e.baseLang}</td>
+                                    <td className="py-2 pr-14 px-6 border bg-white">{e.tagetLang}</td>
                                 </tr>
 
                             ))}
@@ -107,4 +107,4 @@ const DeveloperPreviewTranslateComponent = () => {
     )
 }
 
-export default DeveloperPreviewTranslateComponent.jsx
+export default DeveloperPreviewTranslateComponent

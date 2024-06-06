@@ -5,8 +5,8 @@ import DeveloperPreviewTranslateComponent from '../../_components/DeveloperPrevi
 const DeveloperPage = () => {
     return (
         <div className='w-[93%] mx-auto mt-5'>
-            <h2 className='font-semibold text-gray-700'>Web Designing</h2>
-            <div className='grid grid-cols-12 gap-x-10  justify-between mt-5 '>
+            <h2 className='font-semibold text-gray-800 text-xl'>Web Designing</h2>
+            <div className='grid grid-cols-12 gap-x-10 shadow-sm  justify-between mt-5 '>
                 <div className='col-span-8'>
                     <DeveloperPreviewTranslateComponent />
                     <div className='flex justify-end mt-4'>

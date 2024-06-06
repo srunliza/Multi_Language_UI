@@ -91,14 +91,14 @@ const TranslateTableComponent = () => {
             <div className="grid grid-cols-12 gap-8">
                 <div className="col-span-8">
                     <div className="overflow-x-auto">
-                        <h1 className="p-5 font-bold text-black">Web Design</h1>
-                        <div className='flex border  p-3 rounded-t-lg justify-evenly items-center'>
+                        <h1 className="p-5  text-gray-800 text-xl font-semibold">Web Design</h1>
+                        <div className='flex border bg-gray-50  p-3 rounded-t-xl justify-evenly items-center'>
                             <h3>English</h3>
                             <Image
                                 src={"/assets/icons/switch.svg"}
                                 width={18}
                                 height={18}
-
+                                alt='switch icon'
                             />
                             <h3>Korean</h3>
 
@@ -134,7 +134,7 @@ const TranslateTableComponent = () => {
                             <div className="modal-box">
                                 <p className="py-4 text-xl text-center">Do you want to save this translation?</p>
                                 <div className="modal-action ">
-                                    <form method="dialog " className="flex m-auto gap-5">
+                                    <form method="dialog" className="flex m-auto gap-5">
                                         {/* if there is a button in form, it will close the modal */}
                                         <button className="btn btn-outline btn-primary w-[100px]">No</button>
                                         <button className="btn btn-active btn-primary w-[100px]">Yes</button>
