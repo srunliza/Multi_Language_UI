@@ -1,5 +1,5 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const CalendarPage = () => {
   return (
@@ -9,11 +9,9 @@ const CalendarPage = () => {
           <h1 className="text-2xl font-semibold">May 2024</h1>
           <div>
             <button className="px-4 py-2 font-bold rounded-l hover:bg-[#f1f4f9]">
-             
               <ChevronLeftIcon />
             </button>
             <button className="px-4 py-2 font-bold rounded-r hover:bg-gray-200">
-            
               <ChevronRightIcon />
             </button>
           </div>

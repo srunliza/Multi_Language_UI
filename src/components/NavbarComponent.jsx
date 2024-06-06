@@ -1,27 +1,27 @@
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import { Input } from "@nextui-org/input";
+import SearchIcon from "@mui/icons-material/Search";
 
 const NavbarComponent = () => {
   return (
-    <nav className="bg-white sticky z-50 top-0 shadow-md h-16 flex px-3 justify-between items-center border">
-      <div className="flex items-center w-1/2">
-        <div className="relative w-full">
-          <input
-            type="text"
-            placeholder="Search project"
-            className="border border-gray-300 my-1 rounded-lg py-2 pl-10 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+    <nav className="bg-white sticky z-50 top-0 flex px-8 justify-between items-center border ">
+      <div className="flex items-center justify-between h-16">
+        <div class="flex items-center px-4">
+          <Input
+            classNames="max-w-[12rem] h-[240px] px-8 rounded-2xl flex justify-center items-center text-white shadow-lg"
+            placeholder="Type to search..."
+            size="md"
+            startContent={<SearchIcon size={18} />}
+            type="search"
           />
         </div>
       </div>
 
       <div className="flex items-center space-x-4">
-        <div className="relative">
-          <button className="focus:outline-none">
-            <NotificationsOutlinedIcon />
-          </button>
-
-          <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
-        </div>
-
+        <button className="focus:outline-none">
+          <NotificationsOutlinedIcon />
+        </button>
+        <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
         <div className="flex items-center">
           <img
             className="inline-block size-[38px] rounded-full"

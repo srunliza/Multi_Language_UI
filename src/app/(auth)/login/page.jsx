@@ -90,7 +90,7 @@ const LoginPage = () => {
 
   //use to redirect to another path
   const handleLoginClick = () => {
-    router.push('/employee-dashboard')
+    router.push('/employee')
   }
 
 

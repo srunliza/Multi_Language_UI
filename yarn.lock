@@ -535,7 +535,7 @@
     "@react-types/button" "3.9.2"
     "@react-types/shared" "3.23.1"
 
-"@nextui-org/calendar@2.0.6":
+"@nextui-org/calendar@^2.0.6", "@nextui-org/calendar@2.0.6":
   version "2.0.6"
   resolved "https://registry.npmjs.org/@nextui-org/calendar/-/calendar-2.0.6.tgz"
   integrity sha512-WH4Vzu7UlK7k0KXoDc7xnKlpVQZLecaYpwRQirFtf9N1gHr+oThjoUZmVF92O2L2V1h6tXYBXEEEucQqPOhWtA==
@@ -618,7 +618,7 @@
     "@nextui-org/shared-utils" "2.0.5"
     "@nextui-org/system-rsc" "2.1.2"
 
-"@nextui-org/date-input@2.1.0":
+"@nextui-org/date-input@^2.1.0", "@nextui-org/date-input@2.1.0":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@nextui-org/date-input/-/date-input-2.1.0.tgz"
   integrity sha512-u55jzNCwhd5DpPH0HKCNTaNUkV7SPoIdoRWaNt/KCnGh//HGcwAxo9hiwAyUQoDzJyMVbMU3JjiAWd/HcK6T2g==
@@ -700,7 +700,7 @@
     "@nextui-org/shared-utils" "2.0.5"
     "@nextui-org/use-image" "2.0.5"
 
-"@nextui-org/input@2.2.1":
+"@nextui-org/input@^2.2.1", "@nextui-org/input@2.2.1":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@nextui-org/input/-/input-2.2.1.tgz"
   integrity sha512-qXhMZUge0F7NgdGmcAfFCMSSVqdCSrFZErhMzRa/dnFKjwZlVTicbmcUAf7hlRm32tBNBv0c31viBSMA3FQeDQ==

@@ -1,96 +1,141 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CalendarComponent from "@/components/CalendarComponent";
+import NavbarComponent from "@/components/NavbarComponent";
+import Sidebar from "@/components/Sidebar";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Image from "next/image";
 
 const CalendarPage = () => {
-    return (
+  return (
+    <div class="flex h-screen bg-gray-100">
+      {/* <!-- sidebar --> */}
+      {/* <div class="hidden md:flex flex-col w-64 bg-gray-800">
+        <div class="flex items-center justify-center h-16 bg-gray-900">
+          <span class="text-white font-bold uppercase">Sidebar</span>
+        </div>
+        <div class="flex flex-col flex-1 overflow-y-auto">
+          <nav class="flex-1 px-2 py-4 bg-gray-800">
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              Dashboard
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              Messages
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              Settings
+            </a>
+          </nav>
+        </div>
+      </div> */}
+      <Sidebar />
 
-        <main className="flex items-center justify-center ">
-            <div className="w-full container  p-4 bg-white shadow-md rounded-lg pr-8 pl-8">
-                <div className="flex items-center justify-between mb-4 text-black">
-                    <h1 className="text-2xl font-semibold">May 2024</h1>
-                    <div>
-                        <button className="px-4 py-2 font-bold rounded-l hover:bg-[#f1f4f9]"> <ChevronLeftIcon/> </button>
-                        <button className="px-4 py-2 font-bold rounded-r hover:bg-gray-200"> <ChevronRightIcon/> </button>
-                    </div>
-                </div>
-                <div className="grid grid-cols-7 text-gray-800 bg-[#f1f4f9] rounded-lg">
-                    {/* <!-- Weekday Headers --> */}
-                    <div className="text-center text-sm py-2 font-semibold">MON</div>
-                    <div className="text-center text-sm py-2 font-semibold">TUE</div>
-                    <div className="text-center text-sm py-2 font-semibold">WED</div>
-                    <div className="text-center text-sm py-2 font-semibold">THU</div>
-                    <div className="text-center text-sm py-2 font-semibold">FRI</div>
-                    <div className="text-center text-sm py-2 font-semibold">SAT</div>
-                    <div className="text-center text-sm py-2 font-semibold">SUN</div>
-                    
-                    {/* <!-- Blank cells for previous month --> */}
-                  
-                    <div className="p-5 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size border">25</div>
-                    <div className="p-8 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">26</div>
-                    <div className="p-8 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">27</div>
-                    <div className="p-8 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">28</div>
-                    <div className="p-8 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">29</div>
-                    <div className="p-8 text-right pt-2 pb-12 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">30</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-4 bg-white border">1</div>
-            
-                    
-                    {/* <!-- Calendar Days --> */}
-                    <div className="p-8 text-right pt-2 pb-12 pr-4 bg-white border">2</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-4 bg-white border relative">
-                        3
-                        <div className="absolute bottom-0 left-0 right-0 bg-blue-100 border-l-4 border-blue-500 text-blue-600 text-xs p-1">Start Date</div>
-                    </div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">4</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">5</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">6</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">7</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">8</div>
-                    
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">9</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">10</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">11</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">12</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">13</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">14</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">15</div>
-                    
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border relative">
-                        16
-                        <div className="absolute bottom-0 left-0 right-0 bg-pink-100 text-pink-600 border-l-4 border-pink-500 text-xs p-1">End Date</div>
-                    </div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">17</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">18</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">19</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">20</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">21</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">22</div>
-                
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">23</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">24</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border relative">
-                        25
-                        <div className="absolute bottom-0 left-0 right-0 bg-blue-100 border-l-4 border-blue-500 text-blue-600 text-xs p-1">Start Date</div>
-                    </div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">26</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border relative">
-                        27
-                        <div className="absolute bottom-0 left-0 right-0 bg-orange-100 text-orange-600 border-l-4 border-red-500 text-xs p-1">End Date</div>
-                    </div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">28</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-white border">29</div>
-                    
-                    {/* <!-- Blank cells for next month --> */}
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">30</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">31</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">1</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">2</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">3</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">4</div>
-                    <div className="p-8 text-right pt-2 pb-12 pr-5 bg-opacity-25 bg-custom-pattern bg-custom-size bg-gray-100 border">5</div>
-                </div>
-            </div>
-        </main>
-    )
-}
+      {/* <!-- Main content --> */}
+      <div class="flex flex-col flex-1 overflow-y-auto no-scrollbar">
+        {/* <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
+          <div class="flex items-center px-4">
+            <button class="text-gray-500 focus:outline-none focus:text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+            <input
+              class="mx-4 w-full border rounded-md px-4 py-2"
+              type="text"
+              placeholder="Search"
+            />
+          </div>
+          <div class="flex items-center pr-4">
+            <button class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l-7-7 7-7m5 14l7-7-7-7"
+                />
+              </svg>
+            </button>
+          </div>
+        </div> */}
+        <NavbarComponent />
+        <div class="p-4">
+          <h1 class="text-2xl font-bold">Welcome to my dashboard!</h1>
+          <p class="mt-2 text-gray-600">
+            This is an example dashboard using Tailwind CSS.
+          </p>
+          <div className="container h-[150vh] bg-gray-500"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default CalendarPage;

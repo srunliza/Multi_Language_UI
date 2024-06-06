@@ -12,6 +12,5 @@ export default function DeveloperDashboardLayout({ children }) {
         <main className="p-4">{children}</main>
       </div>
     </div>
-  
   );
 }
