@@ -1,15 +1,18 @@
 import NavbarComponent from "@/components/NavbarComponent";
-import Sidebar from "./_components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 
 export default function DeveloperDashboardLayout({ children }) {
   return (
-    <div className="flex h-full">
-      <aside className="w-[280px] fixed top-0 left-0 h-full">
-        <Sidebar />
-      </aside>
-      <div className="flex-1 ml-[280px]">
+    <div class="flex h-screen bg-gray-100">
+      {/* sidebar */}
+      <Sidebar />
+
+      {/* Main content */}
+      <div class="flex flex-col flex-1 overflow-y-auto no-scrollbar">
         <NavbarComponent />
-        <main className="p-4">{children}</main>
+        <div class="p-4">
+          {children}
+        </div>
       </div>
     </div>
   );

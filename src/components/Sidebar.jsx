@@ -17,7 +17,7 @@ const Sidebar = () => {
           alt="multi logo"
         />
       </div>
-      <div className="flex flex-col flex-1 ">
+      <div className="flex flex-col flex-1">
         <nav className="flex-1">
           <div>
             <button
@@ -31,29 +31,29 @@ const Sidebar = () => {
               href="/developer"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl  flex items-center px-6 py-4 mt-2 text-gray-100  gap-2  font-light-[16px]"
             >
-              <DashboardCustomizeOutlinedIcon />
-              <p>Dashboard</p>
+              <DashboardCustomizeOutlinedIcon color="black" />
+              <p className="text-gray-300">Dashboard</p>
             </Link>
             <Link
               href="/developer/profile"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2 font-light-[16px]"
             >
               <AccountBoxOutlinedIcon />
-              <p> Profile</p>
+              <p className="text-gray-300">Profile</p>
             </Link>
             <Link
               href="/developer/calendar"
               className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
               <CalendarMonthOutlinedIcon />
-              <p>Calender</p>
+              <p className="text-gray-300">Calender</p>
             </Link>
             <Link
               href="/developer/project"
               className="hover:bg-gray-400 hover:bg-opacity-25  rounded-2xl flex items-center px-6 py-4 mt-2 text-gray-100 gap-2  font-light-[16px]"
             >
               <PieChartOutlinedIcon />
-              <p>Project</p>
+              <p className="text-gray-300">Project</p>
             </Link>
           </div>
         </nav>
@@ -63,14 +63,14 @@ const Sidebar = () => {
             className=" hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2  font-light-[16px]"
           >
             <SettingsOutlinedIcon />
-            <p>Setting</p>
+            <p className="text-gray-300">Setting</p>
           </Link>
           <Link
             href="#"
-            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2  font-light-[16px]"
+            className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-3 text-gray-100 gap-2  font-light-[16px]"
           >
             <ExitToAppOutlinedIcon />
-            <p> Logout</p>
+            <p className="text-gray-300">Logout</p>
           </Link>
         </div>
       </div>
