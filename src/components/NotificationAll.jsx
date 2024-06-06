@@ -1,7 +1,8 @@
 "use client";
-import Image from "next/image";
-import IMAGES from "../../../public/assets/images/index";
+
 import Link from "next/link";
+import Image from "next/image"; // Correct import
+import IMAGES from "../../public/assets/images";
 
 const NotificationAll = () => {
   const notification = [0, 1, 2, 3, 4, 5];
@@ -23,8 +24,8 @@ const NotificationAll = () => {
             {notification.map((index) => (
               <div key={index} className="px-6 py-4 flex items-center">
                 <Image
-                  width={24}
-                  height={24}
+                  width={48} // Adjusted the width
+                  height={48} // Adjusted the height
                   src={IMAGES.profile}
                   alt="User"
                   className="w-12 h-12 rounded-full mr-4"

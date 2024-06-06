@@ -136,7 +136,7 @@ const CardComponent = ({
       <div className="flex items-center mb-4 justify-between">
         <Link
           key={index}
-          href={`/${project.role.replace(" ", "-").toLowerCase()}/project`}
+          href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
           passHref
         >
           <div className="bg-gray-100 text-gray-800 rounded-lg px-7 py-2 mr-5 text-sm">
