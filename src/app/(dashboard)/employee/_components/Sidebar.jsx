@@ -32,7 +32,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                 New Project
               </button>
               <Link
-                href="/employee"
+                href="/employee/dashboard"
                 className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl mt-1 flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
               >
                 <DashboardCustomizeOutlinedIcon />
@@ -70,7 +70,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                 <p>Setting</p>
               </Link>
               <Link
-                href="#"
+                href="/login"
                 className="hover:bg-gray-400 w-[10.5rem]  hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
               >
                 <ExitToAppOutlinedIcon />
