@@ -168,6 +168,7 @@ const ProjectCardPage = () => {
               />
             </svg>
           </button>
+
           <Link
             className="focus:outline-none mr-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
             href="/employee/project-card"
@@ -313,14 +314,14 @@ const ProjectCardPage = () => {
                   </span>
                 </div>
 
-                <Link
-                  key={index}
-                  href={`/${project.role
-                    .replace(" ", "-")
-                    .toLowerCase()}/project`}
-                  passHref
-                >
-                  <div className="flex items-center mb-4 justify-between">
+                <div className="flex items-center mb-4 justify-between">
+                  <Link
+                    key={index}
+                    href={`/${project.role
+                      .replace(" ", "-")
+                      .toLowerCase()}/project`}
+                    passHref
+                  >
                     <div className="bg-gray-100 text-gray-800 rounded-lg px-7 py-2 mr-5 text-sm">
                       <svg
                         className="h-4 w-4 inline-block mr-1"
@@ -337,6 +338,15 @@ const ProjectCardPage = () => {
                       </svg>
                       12
                     </div>
+                  </Link>
+
+                  <Link
+                    key={index}
+                    href={`/${project.role
+                      .replace(" ", "-")
+                      .toLowerCase()}/calendar`}
+                    passHref
+                  >
                     <div className="bg-red-100 text-gray-700 rounded-lg px-3.5 py-2 text-sm">
                       <svg
                         className="h-4 w-4 inline-block mr-1"
@@ -356,8 +366,9 @@ const ProjectCardPage = () => {
                         : project.daysLeft +
                           (project.daysLeft > 1 ? " days left" : " day left")}
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
+
                 <div className="grid grid-cols-2 items-center mb-4">
                   <div className="text-gray-500 w-[10rem] text-xs">
                     Translation Progress
@@ -390,28 +401,28 @@ const ProjectCardPage = () => {
                 <div className="flex -space-x-2 mb-4">
                   <Image
                     src={`/assets/images/${project.image}`}
-                    alt="User"
+                    alt={project.name}
                     width={32}
                     height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <Image
                     src={`/assets/images/${project.image}`}
-                    alt="User"
+                    alt={project.name}
                     width={32}
                     height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <Image
                     src={`/assets/images/${project.image}`}
-                    alt="User"
+                    alt={project.name}
                     width={32}
                     height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
                   />
                   <Image
                     src={`/assets/images/${project.image}`}
-                    alt="User"
+                    alt={project.name}
                     width={32}
                     height={32}
                     className="w-8 h-8 rounded-full border-2 border-white"
@@ -470,7 +481,7 @@ const ProjectCardPage = () => {
                             <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
                           </svg>
                         </div>
-                        <ViewMember/>
+                        <ViewMember />
                       </div>
                     </div>
                   )}

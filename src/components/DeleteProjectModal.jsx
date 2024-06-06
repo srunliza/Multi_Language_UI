@@ -3,7 +3,7 @@ const DeleteProjectModal = ({ isOpen, onClose, onConfirm }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[35rem]">
+      <div className="bg-white p-6 rounded-lg shadow-lg lg:w-[30rem] sm:w-[30rem] xl:w-[30rem] md:w-[16rem]">
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold mb-4">
             Are you sure to delete this project?

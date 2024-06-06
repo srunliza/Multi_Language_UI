@@ -227,12 +227,14 @@ const ProjectListPage = () => {
               </div>
             </div>
 
-            <Link
-              key={index}
-              href={`/${project.role.replace(" ", "-").toLowerCase()}/project`}
-              passHref
-            >
-              <div className="ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
+            <div className="ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
+              <Link
+                key={index}
+                href={`/${project.role
+                  .replace(" ", "-")
+                  .toLowerCase()}/project`}
+                passHref
+              >
                 <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-9 text-center text-sm ">
                   <svg
                     className="h-4 w-4 text-black"
@@ -249,7 +251,15 @@ const ProjectListPage = () => {
                   </svg>
                   12
                 </div>
+              </Link>
 
+              <Link
+                key={index}
+                href={`/${project.role
+                  .replace(" ", "-")
+                  .toLowerCase()}/calendar`}
+                passHref
+              >
                 <div className="flex items-center justify-center w-[10rem] bg-red-100 rounded-lg px-5 py-2 text-sm">
                   <svg
                     className="h-4 w-4 text-red-500 mr-1"
@@ -269,36 +279,36 @@ const ProjectListPage = () => {
                     : project.daysLeft +
                       (project.daysLeft > 1 ? " days left" : " day left")}
                 </div>
+              </Link>
 
-                <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
-                  <div className="w-[10rem] md:-ml-4 text-gray-500 text-sm lg:-ml-0 sm:-ml-5">
-                    Translation Progress
-                  </div>
+              <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
+                <div className="w-[10rem] md:-ml-4 text-gray-500 text-sm lg:-ml-0 sm:-ml-5">
+                  Translation Progress
+                </div>
+                <div
+                  className={`flex items-center space-x-2 text-sm ${getStatusTextColor(
+                    project.status
+                  )}`}
+                >
+                  <span>{project.status}</span>
+                </div>
+                <div className="flex-grow sm:-ml-4 sm:-mt-4 rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0 border bg-slate-200">
                   <div
-                    className={`flex items-center space-x-2 text-sm ${getStatusTextColor(
+                    className={`h-full ${getStatusBgColor(
                       project.status
-                    )}`}
-                  >
-                    <span>{project.status}</span>
-                  </div>
-                  <div className="flex-grow sm:-ml-4 sm:-mt-4 rounded-full h-2 w-full lg:w-40 mt-2 lg:mt-0 border bg-slate-200">
-                    <div
-                      className={`h-full ${getStatusBgColor(
-                        project.status
-                      )} rounded-full`}
-                      style={{
-                        width:
-                          project.status === "Finished"
-                            ? "100%"
-                            : project.status === "Progress"
-                            ? "50%"
-                            : "20%",
-                      }}
-                    ></div>
-                  </div>
+                    )} rounded-full`}
+                    style={{
+                      width:
+                        project.status === "Finished"
+                          ? "100%"
+                          : project.status === "Progress"
+                          ? "50%"
+                          : "20%",
+                    }}
+                  ></div>
                 </div>
               </div>
-            </Link>
+            </div>
 
             <div className="flex mt-4 lg:ml-4 lg:mt-0">
               <button
