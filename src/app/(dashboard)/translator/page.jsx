@@ -6,6 +6,7 @@ import pendingProjectIcon from "../../../../public/assets/icons/pending-project.
 import finishProjectIcon from "../../../../public/assets/icons/finish-project.svg";
 import progressProjectIcon from "../../../../public/assets/icons/progress-project.svg";
 import totalProjectIcon from "../../../../public/assets/icons/total-project.svg";
+
 const DeveloperDashboardHome = () => {
   const tableData = [
     {
