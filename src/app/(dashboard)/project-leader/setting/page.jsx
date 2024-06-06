@@ -3,6 +3,10 @@
 import React from 'react'
 import { useState } from "react";
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
+import { DatePicker } from "@nextui-org/react";
+import { useRouter } from 'next/navigation';
+
+
 const SettingPage = () => {
     const [firstName, setFirstName] = useState('');
     const [firstNameError, setFirstNameError] = useState('');
@@ -14,6 +18,8 @@ const SettingPage = () => {
     const [passwordError, setPasswordError] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [selectedGender, setSelectedGender] = useState('');
+
+
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
     };
@@ -147,6 +153,11 @@ const SettingPage = () => {
         setPasswordVisible(!passwordVisible);
     };
 
+    // route to change password
+    const router = useRouter();
+    const handleUserInfoClick = () => {
+      router.push('/project-leader/change-password')
+    }
 
 
     return (
@@ -154,8 +165,14 @@ const SettingPage = () => {
             <form className="w-full p-10" onSubmit={handleSubmit}>
                 <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
-                    <hr className="border-1 border-blue-500 mb-6" />
+                    {/* field choose change password */}
+                    <div className='flex gap-5 p-3'>
+                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
+                        <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
+                    </div>
+                    <hr className=" border-blue-500 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2">
+
                         {/* First Name and Last Name */}
                         <div>
                             <div className="grid grid-cols-2 gap-4">
@@ -167,7 +184,7 @@ const SettingPage = () => {
                                         placeholder="Enter first name"
                                         value={firstName}
                                         onChange={handaleFirstNameChange}
-                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
+                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
                                     {firstNameError && <p className="text-red-500 text-xs mt-1">{firstNameError}</p>}
                                 </div>
                                 <div>
@@ -179,11 +196,12 @@ const SettingPage = () => {
                                             placeholder="Enter first name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
-                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
                                         {lastNameError && <p className="text-red-500 text-xs mt-1">{lastNameError}</p>}
                                     </div>
                                 </div>
                             </div>
+
                             {/* Gender */}
                             <div className="grid grid-cols-2 pt-2">
                                 <div>
@@ -194,7 +212,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('male')}
                                         >
                                             Male
@@ -209,7 +227,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('female')}
                                         >
                                             Female
@@ -217,19 +235,24 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
+
                             {/* Date of Birth */}
                             <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
-                                <input type="date" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5  input-primary w-full" />
+                                <DatePicker
+                                    className=" input-primary text-gray-700  focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border bg-white"
+                                />
+
                             </div>
+
                             {/* Email */}
                             <div className="mt-2">
-                                <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base">Email</label>
+                                <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base  lg:text-base">Email</label>
                                 <div className="relative text-gray-800 ">
                                     <input
                                         type="email"
                                         id="email"
-                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${emailError ? 'border-red-500' : ''}`}
+                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${emailError ? 'border-red-500' : ''}`}
                                         placeholder="example@gmail.com"
                                         value={email}
                                         onChange={handleEmailChange}
@@ -240,6 +263,7 @@ const SettingPage = () => {
                                 </div>
                                 {emailError && <p className="text-red-500 text-xs mt-1">{emailError}</p>}
                             </div>
+
                             {/* Contact */}
                             <div className="mt-2">
                                 <label htmlFor="contact" className="block text-gray-700 dark:text-white mb-1">Contact</label>
@@ -274,18 +298,21 @@ const SettingPage = () => {
                                     </label>
                                 </div>
                             </div>
+
                             {/* Password */}
                             <div>
                                 <label htmlFor="password" className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
-                                    <input
-                                        type={passwordVisible ? "text" : "password"}
-                                        id="password"
-                                        className={`text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
-                                        placeholder="xxxxxxxxx"
-                                        value={password}
-                                        onChange={handlePasswordChange}
-                                    />
+
+                                        <input
+                                            type={passwordVisible ? "text" : "password"}
+                                            id="password"
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
+                                            placeholder="xxxxxxxxx"
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                        />
+                           
 
                                     <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                         <img className="w-[20px]" src="../assets/icons/iconpassword.svg" alt="password icon" />
@@ -297,6 +324,7 @@ const SettingPage = () => {
                                         {passwordVisible ? <VisibilityOutlined fontSize="small" /> : <VisibilityOffOutlined fontSize="small" />}
                                     </span>
                                 </div>
+
                                 {/* Social Contact */}
                                 <div className="mt-2">
                                     <label htmlFor="social_contact" className="block text-gray-700 dark:text-white mb-1">Social Contact</label>
@@ -310,9 +338,10 @@ const SettingPage = () => {
                             </div>
                         </div>
                     </div>
+
                     {/* Button Cancel and Save */}
-                    <div className="mt-3 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
-                        <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
+                    <div className="mt-4 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
+                        <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
                 </div>
