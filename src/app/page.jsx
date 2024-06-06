@@ -9,7 +9,7 @@ const LandingPage = () => {
         <div className="px-6 text-xl">
           <Link href="/" className="text-indigo-900 z-10 active">
             <img
-              src="../Images/Logo.png"
+              src="./Images/Logo.png"
               alt="langnet-logo"
               className="w-22 py-2 md:py-0 g-image ml-5 md:ml-20"
             />
@@ -82,9 +82,9 @@ const LandingPage = () => {
               your work faster
             </h1>
             <p className="font-regular text-lg mb-8 text-white">
-              LangNet is Link web-based platform enabling software project leaders
-              to efficiently manage multiple languages within the software,
-              ultimately saving time for developers and translators by
+              LangNet is Link web-based platform enabling software project
+              leaders to efficiently manage multiple languages within the
+              software, ultimately saving time for developers and translators by
               streamlining the upload and download process through required
               formats like Excel, JSON, XML, and others.
             </p>
