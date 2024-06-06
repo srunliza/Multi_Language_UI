@@ -1,11 +1,14 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import React from "react";
+import { DatePicker } from "@nextui-org/react";
+
 
 
 
 const DashboardAttactComponent = () => {
-   
+
     const initialData = [
         { id: 1, title: "WebDesign", language: "Khmer", status: "Progress", from: "2024-05-14", to: "2024-05-17" },
         { id: 2, title: "WebDesign", language: "Khmer", status: "Completed", from: "2024-05-14", to: "2024-05-17" },
@@ -44,31 +47,24 @@ const DashboardAttactComponent = () => {
         router.push('/dashboard/preview-string-file')
     };
 
- 
+
 
     return (
         <div className="w-full p-6">
             {/* Filters */}
             <div className="flex-1">
                 <div className="flex gap-5 flex-wrap items-center mb-4">
-                    <div className="flex">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <div className="flex">  
+                    <p className="inline-flex items-center bg-white px-3 text-sm text-gray-900 border  border-e-0 rounded-s-md w-20 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>Start</p>
-                        </span>
-                        <input
-                            type="date"
-                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        />
+                       </p>                     
+                       <DatePicker className=" max-w-[284px] " />
                     </div>
                     <div className="flex">
                         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-white border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>End</p>
                         </span>
-           
-                        <input
-                            type="date"
-                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        />
+                        <DatePicker className=" max-w-[284px] " />
                     </div>
                     <div className="flex">
                         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -89,10 +85,10 @@ const DashboardAttactComponent = () => {
             </div>
             {/* Table */}
             <div className="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 no-scrollbar">
-                <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-sm text-gray-700 font-semibold sticky top-0 bg-[#daeaff]">
                         <tr>
-                            <th scope="col" className="px-6 py-4">Product Name</th>
+                            <th scope="col" className="px-6 py-4">File Name</th>
                             <th scope="col" className="px-10 py-4">Language</th>
                             <th scope="col" className="px-10 py-4">Status</th>
                             <th scope="col" className="px-10 py-4">From</th>
