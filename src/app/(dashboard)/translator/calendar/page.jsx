@@ -8,13 +8,11 @@ const CalendarPage = () => {
         <div className="flex items-center justify-between mb-4 text-black">
           <h1 className="text-2xl font-semibold">May 2024</h1>
           <div>
-            <button className="px-4 py-2 font-bold rounded-l hover:bg-[#f1f4f9]">
-              {" "}
-              <ChevronLeftIcon />{" "}
+            <button className="px-4 py-2 font-bold rounded-l hover:bg-[#f1f4f9]">           
+              <ChevronLeftIcon />
             </button>
             <button className="px-4 py-2 font-bold rounded-r hover:bg-gray-200">
-              {" "}
-              <ChevronRightIcon />{" "}
+              <ChevronRightIcon />
             </button>
           </div>
         </div>
