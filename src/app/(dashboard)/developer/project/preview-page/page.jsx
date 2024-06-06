@@ -2,6 +2,7 @@ import React from "react";
 import FeedbackComponent from "@/components/FeedbackComponent";
 import DeveloperPreviewTranslateComponent from "../../_components/DeveloperPreviewTranslateComponent";
 import { Button } from "@nextui-org/button";
+import { DatePicker } from "@nextui-org/react";
 
 const DeveloperPage = () => {
   return (
@@ -19,9 +20,8 @@ const DeveloperPage = () => {
     //         </div>
     //     </div>
     // </div>
-    <Button size="lg" color="primary" radius="sm">
-      Click me
-    </Button>
+    <DatePicker label="Birth date" className="max-w-[284px]" />
+
   );
 };
 

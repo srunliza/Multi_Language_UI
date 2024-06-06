@@ -3,13 +3,14 @@ const {nextui} = require('@nextui-org/theme');
 
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    './pages/**/*.{js,ts,jsx,tsx}',
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "node_modules/flowbite-react/lib/esm/**/*.js",
-    "./node_modules/@nextui-org/theme/dist/components/(button|ripple|spinner).js"
-  ],
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+ 
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/components/(accordion|button|date-picker|divider|ripple|spinner|calendar|date-input|popover).js"
+],
   theme: {
     extend: {
       backgroundSize: {
