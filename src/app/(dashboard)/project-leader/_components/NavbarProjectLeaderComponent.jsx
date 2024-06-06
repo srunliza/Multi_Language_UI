@@ -17,7 +17,7 @@ const NavbarProjectLeaderComponent = () => {
     <nav className="w-full bg-white border-b border-blue-300 rounded-t-xl flex justify-start shadow-md shadow-white flex-wrap">
       <ul className="flex px-6 py-3 gap-5 items-center justify-center text-gray-700 text-sm md:text-base">
         <li className="mx-2">
-          <Link href="/project-leader" className={`block ${isActive('/project-leader') ? 'text-blue-700 font-medium' : 'text-gray-700'}`}>
+          <Link href="/project-leader/upload-file" className={`block ${isActive('/project-leader') ? 'text-blue-700 font-medium' : 'text-gray-700'}`}>
             Upload
           </Link>
         </li>

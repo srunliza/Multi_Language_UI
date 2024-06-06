@@ -1,8 +1,8 @@
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
-import AttactmentComponent from "@/components/AttactmentComponent";
 import ViewMember from "@/components/ViewMember";
 import AddMemberModal from "@/components/AddMemberModal";
+import AttachmentComponent from "@/components/AttachmentComponent";
 
 const ViewAttachmentPage = () => {
   return (
@@ -17,7 +17,7 @@ const ViewAttachmentPage = () => {
             {/* Header */}
             <NavbarProjectLeaderComponent />
             {/* container */}
-            <AttactmentComponent />
+            <AttachmentComponent />
           </div>
           <ViewMember />
         </div>

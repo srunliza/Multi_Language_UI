@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import NavbarComponent from "@/components/NavbarComponent";
-import Sidebar from "./_components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 
 export default function EmployeeDashboardLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

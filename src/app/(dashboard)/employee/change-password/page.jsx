@@ -9,7 +9,7 @@ const ChangePassword = () => {
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
                     <div className='flex gap-5 p-3'>
-                        <Link href="/developer/setting">
+                        <Link href="/employee/setting">
                             <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>
                         </Link>
                         <button className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>

@@ -1,125 +1,129 @@
-"use client";
-import Link from "next/link";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import { useEffect, useRef, useState } from "react";
-import { projectsData } from "@/obj/projects";
-import { projectsTableData } from "@/obj/tableData";
-import SortProjectCardList from "@/components/SortProjectCardListComponent";
-
-const getStatusTextColor = (status) => {
-  switch (status) {
-    case "Finished":
-      return "text-green-500";
-    case "Progress":
-      return "text-yellow-500";
-    case "Pending":
-      return "text-red-500";
-    default:
-      return "text-gray-500";
-  }
-};
+'use client';
+import { projectsTableData } from '@/obj/tableData';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const DeveloperDashboard = () => {
-  const [projects, setProjects] = useState(projectsData);
-  const [tableData, setTableData] = useState(projectsTableData);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
-  const [sortOrder, setSortOrder] = useState("asc");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [sortCriteria, setSortCriteria] = useState("name");
+   
+    const initialData = projectsTableData; // Use the imported data as initial data
 
-  const modalRef = useRef();
+    const [data, setData] = useState(initialData);
+    const [statusFilter, setStatusFilter] = useState('All');
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-    setIsViewMemberOpen(false);
-    setIsEditing(false);
-  };
+    const handleStatusChange = (event) => {
+        const status = event.target.value;
+        setStatusFilter(status);
 
-  const handleSortClick = (criteria) => {
-    if (criteria === "status") return; // Prevent sorting by status
-    setSortCriteria(criteria);
-    const sortedData = [...tableData].sort((a, b) => {
-      if (criteria === "formDate" || criteria === "toDate") {
-        const dateA = new Date(a[criteria]);
-        const dateB = new Date(b[criteria]);
-        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-      } else {
-        return sortOrder === "asc"
-          ? a[criteria].localeCompare(b[criteria])
-          : b[criteria].localeCompare(a[criteria]);
-      }
-    });
-    setTableData(sortedData);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-  };
-
-  const handleStatusChange = (e) => {
-    setSelectedStatus(e.target.value);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleModalClose();
-      }
+        if (status === 'All') {
+            setData(initialData);
+        } else {
+            const filteredData = initialData.filter(item => item.status === status);
+            setData(filteredData);
+        }
     };
-    if (isViewMemberOpen || isModalOpen || isEditing) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+
+    const router = useRouter();
+    const handleDownloadClick = () => {
+        router.push('/dashboard/preview-json-file');
     };
-  }, [isViewMemberOpen, isModalOpen, isEditing]);
+    const handleXmlClick = () => {
+        router.push('/dashboard/preview-xml-file');
+    };
+    const handleStringClick = () => {
+        router.push('/dashboard/preview-string-file');
+    };
 
-  return (
-    <main className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white shadow-lg h-screen overflow-hidden border">
-      <div className="">
-        <SortProjectCardList
-          selectedStatus={selectedStatus}
-          handleStatusChange={handleStatusChange}
-          handleSortClick={handleSortClick}
-        />
+    return (
+        <div className="w-full p-6">
+            {/* Filters */}
+            <div className="flex-1">
+                <div className="flex gap-5 flex-wrap items-center mb-4">
+                    <div className="flex">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <p>Start</p>
+                        </span>
+                        <input
+                            type="date"
+                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                    </div>
+                    <div className="flex">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-white border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <p>End</p>
+                        </span>
+                        <input
+                            type="date"
+                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                    </div>
+                    <div className="flex">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <p>Status</p>
+                        </span>
+                        <select
+                            value={statusFilter}
+                            onChange={handleStatusChange}
+                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        >
+                            <option value="All">All</option>
+                            <option value="Pending" className="text-red-500 font-semibold">Pending</option>
+                            <option value="Progress" className="text-yellow-500 font-semibold">Progress</option>
+                            <option value="Finished" className="text-green-500 font-semibold">Finished</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-        <div className="sm:overflow-y-auto overflow-x-auto shadow-md sm:rounded-lg mt-5 no-scrollbar">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-sm text-gray-700 bg-[#daeaff]">
-              <tr>
-                <th scope="col" className="px-6 py-4 cursor-pointer" onClick={() => handleSortClick('productName')}>Product Name</th>
-                <th scope="col" className="px-10 py-4 cursor-pointer" onClick={() => handleSortClick('language')}>Language</th>
-                <th scope="col" className="px-10 py-4">Status</th>
-                <th scope="col" className="px-10 py-4 cursor-pointer" onClick={() => handleSortClick('formDate')}>Form</th>
-                <th scope="col" className="px-10 py-4 cursor-pointer" onClick={() => handleSortClick('toDate')}>To</th>
-                <th scope="col" className="px-1 py-4 text-right flex justify-center items-center pr-3">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody className="overflow-x-auto h-full no-scrollbar">
-              {tableData.map((project, index) => (
-                <tr key={index} className="bg-white border-b text-gray-900 dark:border-gray-500">
-                  <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">{project.productName}</th>
-                  <td className="px-6 py-4 pl-10">{project.language}</td>
-                  <td className={`px-6 py-4 pl-9 ${getStatusTextColor(project.status)}`}>{project.status}</td>
-                  <td className="px-6 py-4">{project.formDate}</td>
-                  <td className="px-6 py-4">{project.toDate}</td>
-                  <td className="px-1 py-4 text-right flex justify-center items-center gap-3">
-                    <Link href="#"><VisibilityOutlinedIcon color="primary" fontSize="small" /></Link>
-                    <Link href="#"><FileDownloadOutlinedIcon color="warning" fontSize="small" /></Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            {/* Table */}
+            <div className="relative h-[480px] sm:overflow-x-auto w-full shadow-md sm:rounded-lg mt-8 no-scrollbar">
+                <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-sm text-gray-700 font-semibold sticky top-0 bg-[#daeaff]">
+                        <tr>
+                            <th scope="col" className="px-6 py-4">Product Name</th>
+                            <th scope="col" className="px-10 py-4">Language</th>
+                            <th scope="col" className="px-10 py-4">Status</th>
+                            <th scope="col" className="px-10 py-4">From</th>
+                            <th scope="col" className="px-10 py-4">To</th>
+                            <th scope="col" className="pl-10 pr-6 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className="">
+                        {data.map((item) => (
+                            <tr key={item.productName + item.language} className="bg-white border-b text-gray-900 dark:border-gray-300">
+                                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">{item.productName}</th>
+                                <td className="px-6 py-4 pl-10">{item.language}</td>
+                                <td className={`px-6 py-4 pl-9 ${item.status === 'Pending' ? 'text-red-600' : item.status === 'Progress' ? 'text-yellow-600' : item.status === 'Finished' ? 'text-green-600' : ''} truncate`}>{item.status}</td>
+                                <td className="px-6 py-4 border-gray-200">{item.fromDate}</td>
+                                <td className="px-6 py-4 border-gray-200">{item.toDate}</td>
+                                <td className="flex gap-2 justify-center">
+                                    <div className="dropdown">
+                                        <div tabIndex={0} role="button" className="m-1">
+                                            <img src="../assets/icons/view.svg" alt="view" className="cursor-pointer" />
+                                        </div>
+                                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
+                                            <li><button onClick={handleXmlClick} className="text-red-500 font-semibold">XML File</button></li>
+                                            <li><button onClick={handleDownloadClick} className="text-yellow-500 font-semibold">JSON File</button></li>
+                                            <li><button onClick={handleStringClick} className="text-green-500 font-semibold">String File</button></li>
+                                        </ul>
+                                    </div>
+                                    <div className="dropdown">
+                                        <button tabIndex={0} role="button" className="m-1">
+                                            <img src="../assets/icons/download.svg" alt="download" className="cursor-pointer" />
+                                        </button>
+                                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
+                                            <li><button onClick={handleXmlClick} className="text-red-500 font-semibold">XML File</button></li>
+                                            <li><button onClick={handleDownloadClick} className="text-yellow-500 font-semibold">JSON File</button></li>
+                                            <li><button onClick={handleStringClick} className="text-green-500 font-semibold">String File</button></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-    </main>
-  );
+    );
 };
 
-export default DeveloperDashboard;
+export default  DeveloperDashboard;
