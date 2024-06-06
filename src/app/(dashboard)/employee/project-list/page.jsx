@@ -205,7 +205,9 @@ const ProjectListPage = () => {
           </Link>
         </div>
       </div>
-      <div className="sm:h-full lg:h-full md:h-full sm:pb-[18rem] md:pb-[18rem]  lg:pb-[12rem] overflow-y-auto no-scrollbar">
+
+      {/* list */}
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] overflow-y-auto no-scrollbar">
         {filteredProjects.map((project, index) => (
           <div
             key={index}

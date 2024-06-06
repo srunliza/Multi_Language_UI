@@ -17,7 +17,7 @@ export default function EmployeeDashboardLayout({ children }) {
       </aside>
       <div className="flex-1 w-full md:ml-[240px]">
         <NavbarComponent toggleSidebar={toggleSidebar} />
-        <main className="p-4 fixed">{children}</main>
+        <main className="p-4">{children}</main>
       </div>
     </div>
   );

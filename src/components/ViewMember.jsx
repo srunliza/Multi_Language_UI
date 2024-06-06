@@ -42,7 +42,7 @@ const ViewMember = () => {
           ))}
 
           {/* Translators Section */}
-          <div className="px-3 py-1 -mt-2">
+          <div className="px-3 py-1">
             <div className="flex items-center text-gray-700">
               <span className="font-semibold m-3 text-sm">Translator</span>
             </div>
@@ -68,13 +68,13 @@ const ViewMember = () => {
           </div>
 
           {/* Developers Section */}
-          <div className="px-3 py-2 -mt-3">
+          <div className="px-3 py-2">
             <div className="flex items-center text-gray-700 ">
               <span className="font-semibold m-3 text-sm">Developer</span>
             </div>
             <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
           </div>
-          <div className="overflow-y-auto h-[200px] no-scrollbar pb-[4rem]">
+          <div className="overflow-y-auto h-[200px] no-scrollbar ">
             {developers.map((developer) => (
               <div key={developer.id} className="flex items-center p-2 hover:bg-blue-100 ml-8">
                 <Image
