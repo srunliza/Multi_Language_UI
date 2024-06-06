@@ -2,7 +2,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 
 const NavbarComponent = () => {
   return (
-    <nav className="bg-white sticky top-0 shadow-md h-16 flex px-3 justify-between items-center border">
+    <nav className="bg-white sticky z-50 top-0 shadow-md h-16 flex px-3 justify-between items-center border">
       <div className="flex items-center w-1/2">
         <div className="relative w-full">
           <input
