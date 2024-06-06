@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const CreateProject = ({ onClose }) => {
@@ -42,9 +43,11 @@ const CreateProject = ({ onClose }) => {
           >
             No
           </button>
-          <button className="px-6 py-2 font-semibold text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none">
-            Create project
-          </button>
+          <Link href="/project-leader/dashboard">
+            <div className="px-6 py-2 font-semibold text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none">
+              Create project
+            </div>
+          </Link>
         </div>
       </div>
     </div>

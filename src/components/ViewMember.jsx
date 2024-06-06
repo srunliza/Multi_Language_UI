@@ -12,15 +12,15 @@ const ViewMember = () => {
   const developers = members.filter(member => member.role === "Developer");
 
   return (
-    <div className="border">
+    <div className="border w-full">
       <main className="flex flex-1 h-full">
-        <div className="bg-white overflow-hidden rounded-xl sm:rounded-xl">
+        <div className="bg-white overflow-hidden rounded-xl sm:rounded-xl w-full">
           {/* Header Section */}
           <div className="px-3 py-2">
             <div className="flex items-center text-gray-700 justify-between">
               <span className="font-semibold m-3 text-sm">Project Leader</span>
             </div>
-            <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
+            <hr className="mt-1 border-t border-gray-300 w-full ml-3" />
           </div>
 
           {/* Project Leaders Section */}
@@ -46,7 +46,7 @@ const ViewMember = () => {
             <div className="flex items-center text-gray-700">
               <span className="font-semibold m-3 text-sm">Translator</span>
             </div>
-            <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
+            <hr className="mt-1 border-t border-gray-300 w-full ml-3" />
           </div>
           <div className="overflow-y-auto h-[170px] no-scrollbar">
             {translators.map((translator) => (
@@ -72,7 +72,7 @@ const ViewMember = () => {
             <div className="flex items-center text-gray-700 ">
               <span className="font-semibold m-3 text-sm">Developer</span>
             </div>
-            <hr className="mt-1 border-t border-gray-300 w-[500px] ml-3" />
+            <hr className="mt-1 border-t border-gray-300 w-full ml-3" />
           </div>
           <div className="overflow-y-auto h-[200px] no-scrollbar ">
             {developers.map((developer) => (

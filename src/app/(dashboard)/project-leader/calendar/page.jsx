@@ -1,25 +1,27 @@
-import AddMemberModal from "@/components/AddMemberModal";
 import React from "react";
+import AddMemberModal from "@/components/AddMemberModal";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
-// import CalendarComponent from "@/components/CalendarComponent";
-import ViewMember from "@/components/ViewMember";
 import CalendarComponent from "@/components/CalendarComponent";
+import ViewMember from "@/components/ViewMember";
 
 const CalendarPage = () => {
   return (
-    <div className="w-full  ">
-      <div className="flex justify-between mb-2">
+    <div className="w-full h-screen flex flex-col">
+      <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex justify-between ">
-        <div className="w-[893px] bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 ">
-          {/* Header */}
+      <div className="flex flex-grow gap-3 overflow-hidden">
+        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
           <NavbarProjectLeaderComponent />
-          {/* container */}
-          <CalendarComponent />
+          {/* Container */}
+          <div className="flex-grow overflow-y-auto no-scrollbar">
+            <CalendarComponent />
+          </div>
         </div>
-        <ViewMember />
+        <div className="w-1/3">
+          <ViewMember />
+        </div>
       </div>
     </div>
   );

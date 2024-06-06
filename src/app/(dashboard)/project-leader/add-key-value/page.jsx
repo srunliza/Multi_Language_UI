@@ -1,7 +1,7 @@
 import AddMemberModal from "@/components/AddMemberModal";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
-import SelectComponent from "@/components/Selectomponent";
+import SelectComponent from "@/components/SelectComponent";
 import ViewMember from "@/components/ViewMember";
 
 const AddKeyValuePage = () => {
@@ -17,27 +17,25 @@ const AddKeyValuePage = () => {
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
   ];
+
   return (
-
-
-<div className="w-full  ">
-      <div className="flex justify-between mb-2">
+    <div className="w-full h-screen flex flex-col">
+      <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex justify-between ">
-        <div className="bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 ">
+      <div className="flex flex-grow gap-3 overflow-hidden">
+        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
           {/* Header */}
           <NavbarProjectLeaderComponent />
-          {/* container */}
-             {/* Form */}
-             <form action="">
-            <div className="ml-10 mt-3 lg:w-[851px]">
-              <div className="w-full lg:w-[321px] py-2 text-xs ">
+          {/* Container */}
+          <form action="" className="flex-grow overflow-y-auto no-scrollbar p-4">
+            <div>
+              <div className="w-full lg:w-[321px] py-2 text-xs">
                 <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose Language</option>
                   <option value="khmer">Khmer</option>
                   <option value="english">English</option>
@@ -46,9 +44,9 @@ const AddKeyValuePage = () => {
                 </select>
               </div>
               <SelectComponent />
-              <div className="flex flex-col lg:flex-row items-center lg:space-x-4  text-xs">
-                <div className="flex flex-col w-full lg:w-auto ">
-                  <label htmlFor="start" className="text-xs  mb-1">
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs">
+                <div className="flex flex-col w-full lg:w-auto">
+                  <label htmlFor="start" className="text-xs mb-1">
                     Start Date
                   </label>
                   <input
@@ -73,14 +71,14 @@ const AddKeyValuePage = () => {
               {/* input key */}
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs  mb-1">
+                  <label htmlFor="key" className="text-xs mb-1">
                     Key name
                   </label>
                   <input
                     type="text"
                     placeholder="Input your key name"
                     name="keyName"
-                    className="w-full lg:w-[220px] h-[37.6px]   px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
@@ -107,7 +105,7 @@ const AddKeyValuePage = () => {
                 <label htmlFor="select" className="text-xs">
                   Or choose keyword as a page
                 </label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose type of keyword</option>
                   <option value="dashboard">Dashboard</option>
                   <option value="english">English</option>
@@ -144,16 +142,14 @@ const AddKeyValuePage = () => {
                 </div>
               </div>
               {/* button */}
-
-              <div class="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
+              <div className="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
                 <input
-                  class="px-3 py-1  text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                  className="px-3 py-1 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                   type="reset"
                   value={"Reset"}
                 />
-
                 <input
-                  class="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                  className="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                   type="submit"
                   value={"Submit"}
                 />
@@ -161,12 +157,11 @@ const AddKeyValuePage = () => {
             </div>
           </form>
         </div>
-        <ViewMember />
+        <div className="w-1/3">
+          <ViewMember />
+        </div>
       </div>
     </div>
-
-
-      
   );
 };
 
