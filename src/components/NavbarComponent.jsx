@@ -6,37 +6,51 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 
 const notifications = [
   {
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s",
-    title: "Name Project",
-    description: "user name details of Notifications details of Notifica",
+    imgSrc: "/Images/Thean.png", 
+    title: "UXUI",
+    description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: true,
   },
   {
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s",
-    title: "Name Project",
-    description: "user name details of Notifications details of Notifica",
+    imgSrc: "/Images/Thean.png", 
+    title: "Java",
+    description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: false,
   },
   {
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s",
-    title: "Name Project",
-    description: "user name details of Notifications details of Notifica",
-    date: "02/05/2022",
-    unread: false,
-  },
-  {
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s",
-    title: "Name Project",
-    description: "user name details of Notifications details of Notifica",
+    imgSrc: "/Images/Thean.png", 
+    title: "UXUI",
+    description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: true,
   },
   {
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s",
-    title: "Name Project",
-    description: "user name details of Notifications details of Notifica",
+    imgSrc: "/Images/Thean.png",
+    title: "NextJS",
+    description: "add you to Project's name UXUI as Developer ",
+    date: "02/05/2022",
+    unread: false,
+  },
+  {
+    imgSrc: "/Images/Thean.png",
+    title: "UXUI",
+    description: "add you to Project's name UXUI as Developer ",
+    date: "02/05/2022",
+    unread: true,
+  },
+  {
+    imgSrc: "/Images/Thean.png",
+    title: "NextJS",
+    description: "add you to Project's name UXUI as Developer ",
+    date: "02/05/2022",
+    unread: false,
+  },
+  {
+    imgSrc: "/Images/Thean.png",
+    title: "HTML",
+    description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: true,
   },
@@ -118,7 +132,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
                   <NotificationsOutlinedIcon />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="items-start static px-1 py-2 border rounded-md  w-[25rem]  bg-white">
+              <PopoverContent className="items-start static px-1 py-2 border rounded-md  w-[35rem]  bg-white">
                 <div className="text-xl items-start font-bold pt-2 px-3">Notifications</div>
                 <div className="flex gap-4 px-3 py-2">
                   <button className="text-tiny" onClick={handleShowAll}>
@@ -167,14 +181,14 @@ const NavbarComponent = ({ toggleSidebar }) => {
                   />
                 </div>
                 <div>
-                  <div>Tep Thean</div>
-                  <div>Role</div>
+                  <div className="font-semibold">Tep Thean</div>
+                  <div>Project Leader</div>
                 </div>
               </div>
               <img
                 onClick={closePopup}
                 className="h-4 w-4 rounded-full mb-4 cursor-pointer"
-                src="../assets/icons/cancel.png"
+                src="/assets/icons/cancel.png"
                 alt="Cancel"
               />
             </div>
