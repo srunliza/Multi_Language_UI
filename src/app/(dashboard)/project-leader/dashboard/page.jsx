@@ -1,10 +1,10 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import ViewMember from "@/components/ViewMember";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import Link from "next/link";
+import MemberProjectLeader from "@/components/MemberProjectModal";
 
 const CreateProjectPage = () => {
   const searchParams = useSearchParams();
@@ -135,8 +135,8 @@ const CreateProjectPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/3">
-          <ViewMember />
+        <div className="">
+          <MemberProjectLeader/>
         </div>
       </div>
     </div>

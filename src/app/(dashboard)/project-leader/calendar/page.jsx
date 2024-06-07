@@ -2,7 +2,7 @@ import React from "react";
 import AddMemberModal from "@/components/AddMemberModal";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 import CalendarComponent from "@/components/CalendarComponent";
-import ViewMember from "@/components/ViewMember";
+import MemberProjectLeader from "@/components/MemberProjectModal";
 
 const CalendarPage = () => {
   return (
@@ -19,8 +19,8 @@ const CalendarPage = () => {
             <CalendarComponent />
           </div>
         </div>
-        <div className="w-1/3">
-          <ViewMember />
+        <div className="">
+          <MemberProjectLeader />
         </div>
       </div>
     </div>

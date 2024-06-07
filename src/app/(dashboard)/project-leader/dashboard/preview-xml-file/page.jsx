@@ -57,7 +57,7 @@ const PreviewXmlFilePage = () => {
 
                     {/* button download and go back */}
                     <div className="flex gap-4 mt-4 justify-end">
-                        <button onClick={() => router.push('/developer/dashboard')} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
+                        <button onClick={() => router.push('/project-leader/view-attachment')} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
                             Go Back
                         </button>
                         <button onClick={handleDownload} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">

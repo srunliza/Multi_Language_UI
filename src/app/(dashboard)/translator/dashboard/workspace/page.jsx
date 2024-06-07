@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorComponent";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import { Popover } from "flowbite-react";
 import Image from "next/image";
 import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorCompoent";
 
 const TranslatorWorkSpace = () => {
   const translations = [
