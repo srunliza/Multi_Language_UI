@@ -9,21 +9,9 @@ import progressProjectIcon from "../../../../public/assets/icons/progress-projec
 import totalProjectIcon from "../../../../public/assets/icons/total-project.svg";
 
 const DeveloperDashboardHome = () => {
-  const tableData = [
-    {
-      id: 1,
-      project_name: "Web Designing",
-      role: "Translator",
-      start_date: "06/01/2024",
-      end_date: "10/01/2024",
-      status: "",
-    },
-  ];
-
-
   return (
     <main>
-      <div className="bg-gray-50 p-8 w-full mx-auto">
+      <div className="p-8 w-full mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="col-span-8">
             {/* welcome employee dashboard */}

@@ -18,7 +18,7 @@ const EmployeeDashboardPage = () => {
 
   return (
     <main>
-      <div className="bg-gray-50 p-8 w-full mx-auto">
+      <div className="p-9 w-full mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="col-span-8">
             <div className="flex flex-col items-center bg-[#1A42BC] px-6 py-9 rounded-2xl shadow md:flex-row md:max-w-4xl">

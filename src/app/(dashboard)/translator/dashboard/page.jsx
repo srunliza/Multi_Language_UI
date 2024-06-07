@@ -1,4 +1,3 @@
-// pages/translator.j
 "use client"
 import { useRouter } from 'next/navigation';
 import translatorData from "@/obj/translatorData";

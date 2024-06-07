@@ -11,7 +11,7 @@ export default function EmployeeDashboardLayout({ children }) {
   };
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-gray-100">
       <aside className={`fixed top-0 left-0 h-full transition-transform duration-300 ${isSidebarOpen ? "transform-none" : "-translate-x-full"} md:transform-none md:translate-x-0 z-50 w-[280px]`}>
         <Sidebar isSidebarOpen={isSidebarOpen} />
       </aside>
