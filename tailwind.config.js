@@ -1,10 +1,10 @@
 const { nextui } = require('@nextui-org/theme');
 /** @type {import('tailwindcss').Config} */
-
+import {nextui} from "@nextui-org/react";
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    './pages/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundSize: {
-        'custom-size': '7px 7px',
+        "custom-size": "7px 7px",
       },
 
       backgroundImage: {
@@ -25,7 +25,7 @@ module.exports = {
       },
 
       colors: {
-        'custom-bg': '#f5f4fe',
+        "custom-bg": "#f5f4fe",
       },
       colors: {
         // Custom colors...
@@ -41,15 +41,9 @@ module.exports = {
       },
 
       fontFamily: {
-        consolas: ['Consolas', 'monospace'],
+        consolas: ["Consolas", "monospace"],
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(), require("daisyui")],
 };
-
-
-
-
-
-

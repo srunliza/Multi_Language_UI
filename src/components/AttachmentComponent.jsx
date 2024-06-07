@@ -15,7 +15,7 @@ const tableData = [
   { projectName: "Web Designing", language: "Korean", status: "Finished", from: "5/26/2024", to: "5/30/2024" },
 ];
 
-const AttactmentComponent = () => {
+const AttachmentComponent = () => {
   return (
     <div className="w-full lg:w-[891px] h-auto lg:h-full  ">
       <div className="overflow-y-auto shadow-md">
@@ -51,4 +51,4 @@ const AttactmentComponent = () => {
   );
 }
 
-export default AttactmentComponent;
+export default AttachmentComponent;

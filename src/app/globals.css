@@ -62,3 +62,10 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+.status-label {
+  display: inline-block;
+  min-width: 100px; /* Adjust this value as needed */
+  text-align: center;
+}
+

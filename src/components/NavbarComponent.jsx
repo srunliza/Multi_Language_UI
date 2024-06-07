@@ -2,7 +2,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import { Input } from "@nextui-org/input";
 import SearchIcon from "@mui/icons-material/Search";
 
-const NavbarComponent = () => {
+const NavbarComponent = ({ toggleSidebar }) => {
   return (
     <nav className="bg-white sticky z-50 top-0 flex px-8 justify-between items-center border ">
       <div className="flex items-center justify-between h-16">
