@@ -156,7 +156,7 @@ const SettingPage = () => {
     // route to change password
     const router = useRouter();
     const handleUserInfoClick = () => {
-      router.push('/project-leader/change-password')
+      router.push('/developer/change-password')
     }
 
 
@@ -236,8 +236,8 @@ const SettingPage = () => {
                                 </div>
                             </div>
 
-                                             {/* Date of Birth */}
-                                             <div className="mt-2">
+                            {/* Date of Birth */}
+                            <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <DatePicker
                                     id='calender'
@@ -337,14 +337,16 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
+                              
+                 
                         </div>
                     </div>
-
                     {/* Button Cancel and Save */}
-                    <div className="mt-4 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
+                    <div className="mt-4 flex gap-3 justify-end w-full xl:-ml-11 lg:ml-1">
                         <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
+                  
                 </div>
             </form>
         </div>

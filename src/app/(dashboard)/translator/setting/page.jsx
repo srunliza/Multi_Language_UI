@@ -156,7 +156,7 @@ const SettingPage = () => {
     // route to change password
     const router = useRouter();
     const handleUserInfoClick = () => {
-        router.push('/translator/change-password')
+      router.push('/developer/change-password')
     }
 
 
@@ -167,7 +167,7 @@ const SettingPage = () => {
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
                     <div className='flex gap-5 p-3'>
-                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>
+                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
                         <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
                     </div>
                     <hr className=" border-blue-500 mb-6" />
@@ -305,15 +305,15 @@ const SettingPage = () => {
                                 <label htmlFor="password" className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
 
-                                    <input
-                                        type={passwordVisible ? "text" : "password"}
-                                        id="password"
-                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
-                                        placeholder="xxxxxxxxx"
-                                        value={password}
-                                        onChange={handlePasswordChange}
-                                    />
-
+                                        <input
+                                            type={passwordVisible ? "text" : "password"}
+                                            id="password"
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
+                                            placeholder="xxxxxxxxx"
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                        />
+                           
 
                                     <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                         <img className="w-[20px]" src="../assets/icons/iconpassword.svg" alt="password icon" />
@@ -337,14 +337,16 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
+                              
+                 
                         </div>
                     </div>
-
                     {/* Button Cancel and Save */}
-                    <div className="mt-4 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
+                    <div className="mt-4 flex gap-3 justify-end w-full xl:-ml-11 lg:ml-1">
                         <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
+                  
                 </div>
             </form>
         </div>

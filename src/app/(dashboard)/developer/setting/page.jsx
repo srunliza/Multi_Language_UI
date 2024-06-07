@@ -337,11 +337,11 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
-                              {/* Button Cancel and Save */}
+                              
                  
                         </div>
                     </div>
-
+                    {/* Button Cancel and Save */}
                     <div className="mt-4 flex gap-3 justify-end w-full xl:-ml-11 lg:ml-1">
                         <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
