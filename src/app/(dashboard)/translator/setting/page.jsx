@@ -153,11 +153,7 @@ const SettingPage = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    // route to change password
-    const router = useRouter();
-    const handleUserInfoClick = () => {
-      router.push('/translator/change-password')
-    }
+  
 
 
     return (
@@ -166,9 +162,9 @@ const SettingPage = () => {
                 <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
-                    <div className='flex gap-5 '>
-                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
-                        <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
+                    <div className='flex gap-5'>
+                        <a href="#" className={activeLink === "/developer/setting" ? "text-blue-600" : " text-blue-500"} onClick={() => handleLinkClick("/developer/setting")} >User Info</a>
+                        <a href="#" className={activeLink === "/developer/change-password" ? "text-blue-600" : "text-gray-500"} onClick={() => handleLinkClick("/developer/change-password")}>Change Password</a>
                     </div>
                     <hr className=" border-gray-300 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2">

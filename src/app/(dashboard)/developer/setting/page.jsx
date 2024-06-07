@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react'
+import React from 'react';
 import { useState } from "react";
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
+
 
 
 const SettingPage = () => {
@@ -156,8 +157,15 @@ const SettingPage = () => {
     // route to change password
     const router = useRouter();
     const handleUserInfoClick = () => {
-      router.push('/developer/change-password')
+        router.push('/developer/change-password')
     }
+
+    const [activeLink, setActiveLink] = useState(router.pathname);
+
+    const handleLinkClick = (href) => {
+        setActiveLink(href);
+        router.push(href);
+    };
 
 
     return (
@@ -166,10 +174,11 @@ const SettingPage = () => {
                 <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
-                    <div className='flex gap-5 '>
-                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
-                        <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
+                    <div className='flex gap-5'>
+                        <a href="#" className={activeLink === "/developer/setting" ? "text-blue-600" : " text-blue-500"} onClick={() => handleLinkClick("/developer/setting")} >User Info</a>
+                        <a href="#" className={activeLink === "/developer/change-password" ? "text-blue-600" : "text-gray-500"} onClick={() => handleLinkClick("/developer/change-password")}>Change Password</a>
                     </div>
+
                     <hr className=" border-gray-300 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2">
 
@@ -305,15 +314,15 @@ const SettingPage = () => {
                                 <label htmlFor="password" className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
 
-                                        <input
-                                            type={passwordVisible ? "text" : "password"}
-                                            id="password"
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${passwordError ? 'border-red-500' : ''}`}
-                                            placeholder="xxxxxxxxx"
-                                            value={password}
-                                            onChange={handlePasswordChange}
-                                        />
-                           
+                                    <input
+                                        type={passwordVisible ? "text" : "password"}
+                                        id="password"
+                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${passwordError ? 'border-red-500' : ''}`}
+                                        placeholder="xxxxxxxxx"
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                    />
+
 
                                     <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                         <img className="w-[20px]" src="../assets/icons/iconpassword.svg" alt="password icon" />
@@ -337,8 +346,8 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
-                              
-                 
+
+
                         </div>
                     </div>
                     {/* Button Cancel and Save */}
@@ -346,7 +355,7 @@ const SettingPage = () => {
                         <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
-                  
+
                 </div>
             </form>
         </div>
