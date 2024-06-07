@@ -7,7 +7,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import { saveAs } from "file-saver";
 
 const AttachmentComponent = () => {
-  const initialData = projectsTableData; // Use the imported data as initial data
+  const initialData = projectsTableData;
   const [data, setData] = useState(initialData);
   const [statusFilter, setStatusFilter] = useState("All");
   const router = useRouter();
@@ -48,6 +48,10 @@ const AttachmentComponent = () => {
   const handleXmlPreview = () => handlePreview("xml");
   const handleStringPreview = () => handlePreview("string");
 
+  const handleRowClick = () => {
+    router.push("./dashboard/preview-page");
+  };
+
   return (
     <div className="w-full p-6">
       {/* Table */}
@@ -79,7 +83,8 @@ const AttachmentComponent = () => {
             {data.map((item) => (
               <tr
                 key={item.projectName}
-                className="bg-white border-b text-gray-900 dark:border-gray-300"
+                className="bg-white border-b text-gray-900 dark:border-gray-300 cursor-pointer"
+                onClick={handleRowClick}
               >
                 <th
                   scope="row"
@@ -103,7 +108,10 @@ const AttachmentComponent = () => {
                 </td>
                 <td className="px-6 py-4 border-gray-200">{item.fromDate}</td>
                 <td className="px-6 py-4 border-gray-200">{item.toDate}</td>
-                <td className="flex py-3 gap-4 pl-8 items-center">
+                <td
+                  className="flex py-3 gap-4 pl-8 items-center"
+                  onClick={(e) => e.stopPropagation()} // Prevent row click event
+                >
                   <div className="dropdown relative">
                     <div tabIndex={0} role="button" className="">
                       <RemoveRedEyeOutlinedIcon
