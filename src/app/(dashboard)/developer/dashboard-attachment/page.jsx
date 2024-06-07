@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import React from "react";
-import { DatePicker } from "@nextui-org/react";
+import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 
 
 
@@ -54,32 +54,47 @@ const DashboardAttactComponent = () => {
             {/* Filters */}
             <div className="flex-1">
                 <div className="flex gap-5 flex-wrap items-center mb-4">
-                    <div className="flex">  
-                    <p className="inline-flex items-center bg-white px-3 text-sm text-gray-900 border  border-e-0 rounded-s-md w-20 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <div className="flex">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>Start</p>
-                       </p>                     
-                       <DatePicker className=" max-w-[284px] " />
+                        </span>
+                        <div className="bg-white border border-gray-300 pl-3.5 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-5000">
+                            <DatePicker
+                                id="date"
+                                className="max-w-80px]"
+                                isRequired
+
+                            />
+                        </div>
                     </div>
                     <div className="flex">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-white border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>End</p>
                         </span>
-                        <DatePicker className=" max-w-[284px] " />
+                        <div className="bg-white border border-gray-300 pl-3.5 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-5000">
+                            <DatePicker
+                                id="date"
+                                className="max-w-80px]"
+                                isRequired
+                            />
+                        </div>
                     </div>
                     <div className="flex">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border  border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <p>Status</p>
                         </span>
-                        <select
+                        <Select
+                            id='select'
                             value={statusFilter}
                             onChange={handleStatusChange}
-                            className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-white border border-gray-300 pl-3.5 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-5000"
+
                         >
-                            <option value="All">All</option>
-                            <option value="Pending" className="text-red-500 font-semibold">Pending</option>
-                            <option value="Progress" className="text-yellow-500 font-semibold">Progress</option>
-                            <option value="Completed" className="text-green-500 font-semibold">Completed</option>
-                        </select>
+                            <SelectItem key="All" value="All">All</SelectItem>
+                            <SelectItem key="Pending" value="Pending" className="text-red-500 font-semibold">Pending</SelectItem>
+                            <SelectItem key="Progress" value="Progress" className="text-yellow-500 font-semibold">Progress</SelectItem>
+                            <SelectItem key="Completed" value="Completed" className="text-green-500 font-semibold">Completed</SelectItem>
+                        </Select>
                     </div>
                 </div>
             </div>

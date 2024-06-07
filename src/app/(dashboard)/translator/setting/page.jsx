@@ -156,7 +156,7 @@ const SettingPage = () => {
     // route to change password
     const router = useRouter();
     const handleUserInfoClick = () => {
-      router.push('/translator/change-password')
+        router.push('/translator/change-password')
     }
 
 
@@ -167,7 +167,7 @@ const SettingPage = () => {
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
                     <div className='flex gap-5 p-3'>
-                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
+                        <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>
                         <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
                     </div>
                     <hr className=" border-blue-500 mb-6" />
@@ -193,7 +193,7 @@ const SettingPage = () => {
                                         <input
                                             id="name"
                                             type="text"
-                                            placeholder="Enter first name"
+                                            placeholder="Enter last name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
                                             className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
@@ -240,6 +240,7 @@ const SettingPage = () => {
                             <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <DatePicker
+                                    id='calender'
                                     className=" input-primary text-gray-700  focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border bg-white"
                                 />
 
@@ -304,15 +305,15 @@ const SettingPage = () => {
                                 <label htmlFor="password" className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1">Password</label>
                                 <div className="relative text-gray-800 ">
 
-                                        <input
-                                            type={passwordVisible ? "text" : "password"}
-                                            id="password"
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
-                                            placeholder="xxxxxxxxx"
-                                            value={password}
-                                            onChange={handlePasswordChange}
-                                        />
-                           
+                                    <input
+                                        type={passwordVisible ? "text" : "password"}
+                                        id="password"
+                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
+                                        placeholder="xxxxxxxxx"
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                    />
+
 
                                     <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                                         <img className="w-[20px]" src="../assets/icons/iconpassword.svg" alt="password icon" />

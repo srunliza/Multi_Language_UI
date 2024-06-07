@@ -193,7 +193,7 @@ const SettingPage = () => {
                                         <input
                                             id="name"
                                             type="text"
-                                            placeholder="Enter first name"
+                                            placeholder="Enter last name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
                                             className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
@@ -236,10 +236,11 @@ const SettingPage = () => {
                                 </div>
                             </div>
 
-                            {/* Date of Birth */}
-                            <div className="mt-2">
+                                             {/* Date of Birth */}
+                                             <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <DatePicker
+                                    id='calender'
                                     className=" input-primary text-gray-700  focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border bg-white"
                                 />
 
