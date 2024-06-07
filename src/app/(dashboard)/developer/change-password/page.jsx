@@ -33,7 +33,7 @@ const ChangePassword = () => {
                                     <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base  lg:text-base">Current Password</label>
                                     <div className="relative">
                                         <input type="email" id="email" name="email"
-                                            className=" text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20  input-primary w-full" required aria-describedby="email-error"
+                                            className=" text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-2 pr-20  input-primary w-full" required aria-describedby="email-error"
                                             placeholder="Enter current password"
                                         />
 
@@ -44,7 +44,7 @@ const ChangePassword = () => {
                                     <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base  lg:text-base">New Password</label>
                                     <div className="relative">
                                         <input type="email" id="email" name="email"
-                                            className="text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 input-primary w-full" required aria-describedby="email-error"
+                                            className="text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-2 pr-20 input-primary w-full" required aria-describedby="email-error"
                                             placeholder="Enter new password"
                                         />
                                     </div>
@@ -55,7 +55,7 @@ const ChangePassword = () => {
                                     <label htmlFor="email" className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base  lg:text-base">Confirm Password</label>
                                     <div className="relative">
                                         <input type="email" id="email" name="email"
-                                            className="text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20  input-primary w-full" required aria-describedby="email-error"
+                                            className="text-gray-700 focus:ring-1 pl-5 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-2 pr-20  input-primary w-full" required aria-describedby="email-error"
                                             placeholder="Confirm your password"
                                         />
                                     </div>
