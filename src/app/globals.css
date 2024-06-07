@@ -17,7 +17,6 @@ body,
 
 /* hide scrollbar */
 @layer utilities {
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -59,7 +58,6 @@ body {
 
 /* hide scrollbar */
 @layer utilities {
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -86,12 +84,12 @@ body {
   padding: 8px;
   background-color: white;
   border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px
+  border-bottom-right-radius: 10px;
 }
 
 #calender {
   background-color: white;
-  padding: 8px
+  padding: 8px;
 }
 
 #select {
@@ -100,7 +98,7 @@ body {
   background-color: white;
   border-radius: 0px 0px;
   border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px
+  border-bottom-right-radius: 10px;
 }
 
 #date-register {
@@ -118,7 +116,6 @@ body {
   padding: 0;
   padding-right: 0;
 }
-
 
 .gradient-background {
   background: linear-gradient(300deg, #00bfffad, #0781b9, #ef8172);
@@ -139,10 +136,3 @@ body {
     background-position: 0% 50%;
   }
 }
-
-
-
-
-
-
-

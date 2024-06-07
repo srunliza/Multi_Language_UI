@@ -33,6 +33,9 @@ const TranslatorWorkSpace = () => {
     }, {})
   );
 
+  const [messages, setMessages] = useState([]);
+  const [userMessage, setUserMessage] = useState("");
+
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -86,6 +89,13 @@ const TranslatorWorkSpace = () => {
 
   const handleNoAction = (modalId) => {
     document.getElementById(modalId).close();
+  };
+
+  const handleUserMessageSend = () => {
+    if (userMessage.trim() !== "") {
+      setMessages([...messages, { sender: "user", text: userMessage }, { sender: "ai", text: "hello" }]);
+      setUserMessage("");
+    }
   };
 
   return (
@@ -280,60 +290,36 @@ const TranslatorWorkSpace = () => {
                   </div>
 
                   <div className="p-5">
-                    <div className="chat chat-start">
-                      <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                          <img
-                            src="/assets/icons/chatboot.svg"
-                            alt="chatboot"
-                          />
+                    {messages.map((msg, index) => (
+                      <div key={index} className={`chat ${msg.sender === "user" ? "chat-end" : "chat-start"}`}>
+                        <div className="chat-image avatar">
+                          <div className="w-10 rounded-full">
+                            <img src={`/assets/images/sokheng.svg`} alt="chatboot" />
+                          </div>
                         </div>
+                        <div className="chat-header">{msg.sender === "user" ? "You" : "Support Bot"}</div>
+                        <div className="chat-bubble bg-slate-100 border text-gray-950">{msg.text}</div>
                       </div>
-                      <div className="chat-header">Support Bot</div>
-                      <div className="chat-bubble bg-slate-100 border text-gray-950">
-                        Hello Thean, <br />
-                        How i can help you ?
-                      </div>
-                    </div>
-                    <div className="chat chat-end">
-                      <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                          <img
-                            alt="Tailwind CSS chat bubble component"
-                            src="/assets/images/thean.png"
-                          />
-                        </div>
-                      </div>
-                      <div className="chat-header">Tep Thean</div>
-                      <div className="chat-bubble bg-slate-100 border text-gray-950">
-                        I hate you!
-                      </div>
-                    </div>
-                    <div className="chat chat-start">
-                      <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                          <img
-                            src="/assets/icons/chatboot.svg"
-                            alt="chatboot"
-                          />
-                        </div>
-                      </div>
-                      <div className="chat-header">Support Bot</div>
-                      <div className="chat-bubble bg-slate-100 border text-gray-950">
-                        Thank you
-                      </div>
-                    </div>
+                    ))}
                   </div>
                   <div className="input-area flex items-center">
                     <input
                       type="text"
                       className="flex-1 p-2 border rounded border-gray-300 mr-2"
                       placeholder="Type your message here..."
+                      value={userMessage}
+                      onChange={(e) => setUserMessage(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleUserMessageSend();
+                        }
+                      }}
                     />
                     <img
-                      className="w-6 h-6 text-white font-bold"
+                      className="w-6 h-6 text-white font-bold cursor-pointer"
                       src="/assets/images/send.png"
                       alt=""
+                      onClick={handleUserMessageSend}
                     />
                   </div>
                 </div>

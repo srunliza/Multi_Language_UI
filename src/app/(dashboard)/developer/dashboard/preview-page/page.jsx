@@ -2,7 +2,6 @@
 import React from "react";
 import FeedbackComponent from "@/components/FeedbackComponent";
 import DeveloperPreviewTranslateComponent from "../../_components/DeveloperPreviewTranslateComponent";
-import NotificationAll from "@/components/NotificationAll";
 import { useRouter } from 'next/navigation';
 
 const DeveloperPage = () => {
