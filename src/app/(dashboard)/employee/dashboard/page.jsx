@@ -1,13 +1,13 @@
-'use client';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import employee_welcome from '../../../../../public/assets/images/employee-welcome.png';
-import EmployeeCalendarComponent from '@/components/EmployeeCalendarComponent';
-import pendingProjectIcon from '../../../../../public/assets/icons/pending-project.svg';
-import finishProjectIcon from '../../../../../public/assets/icons/finish-project.svg';
-import progressProjectIcon from '../../../../../public/assets/icons/progress-project.svg';
-import totalProjectIcon from '../../../../../public/assets/icons/total-project.svg';
-import dashboardData from '@/obj/dashboardData';
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import employee_welcome from "../../../../../public/assets/images/employee-welcome.png";
+import EmployeeCalendarComponent from "@/components/EmployeeCalendarComponent";
+import pendingProjectIcon from "../../../../../public/assets/icons/pending-project.svg";
+import finishProjectIcon from "../../../../../public/assets/icons/finish-project.svg";
+import progressProjectIcon from "../../../../../public/assets/icons/progress-project.svg";
+import totalProjectIcon from "../../../../../public/assets/icons/total-project.svg";
+import dashboardData from "@/obj/dashboardData";
 
 const EmployeeDashboardPage = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const EmployeeDashboardPage = () => {
 
   return (
     <main>
-      <div className="p-9 w-full mx-auto">
+      <div className="w-full mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="col-span-8">
             <div className="flex flex-col items-center bg-[#1A42BC] px-6 py-9 rounded-2xl shadow md:flex-row md:max-w-4xl">
@@ -30,7 +30,9 @@ const EmployeeDashboardPage = () => {
                   Sarah Conner
                 </h2>
                 <p className="mb-3 font-normal text-gray-100 text-sm dark:text-gray-100">
-                  Whether you’re here to browse, learn, or connect, we hope you find exactly what you're looking for. Enjoy exploring, and don’t hesitate to reach out if you have any questions!
+                  Whether you’re here to browse, learn, or connect, we hope you
+                  find exactly what you're looking for. Enjoy exploring, and
+                  don’t hesitate to reach out if you have any questions!
                 </p>
               </div>
               <Image
@@ -48,7 +50,7 @@ const EmployeeDashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex-grow mt-8 px-8">
+      <div className="flex-grow mt-8 ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div className=" p-4 rounded-xl border-2 border-red-300 shadow-lg">
             <div>
@@ -132,11 +134,21 @@ const EmployeeDashboardPage = () => {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-sm text-gray-700 font-semibold sticky top-0 border-b bg-white">
             <tr>
-              <th scope="col" className="px-6 py-4">Product Name</th>
-              <th scope="col" className="px-6 py-4">Role</th>
-              <th scope="col" className="px-6 py-4">Start Date</th>
-              <th scope="col" className="px-6 py-4">End Date</th>
-              <th scope="col" className="px-6 py-4 text-right pr-12">Status</th>
+              <th scope="col" className="px-6 py-4">
+                Product Name
+              </th>
+              <th scope="col" className="px-6 py-4">
+                Role
+              </th>
+              <th scope="col" className="px-6 py-4">
+                Start Date
+              </th>
+              <th scope="col" className="px-6 py-4">
+                End Date
+              </th>
+              <th scope="col" className="px-6 py-4 text-right pr-12">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -146,12 +158,19 @@ const EmployeeDashboardPage = () => {
                 className="bg-white border-b text-gray-900 dark:border-gray-300 cursor-pointer"
                 onClick={() => handleRowClick(row.role)}
               >
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">{row.productName}</th>
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium whitespace-nowrap"
+                >
+                  {row.productName}
+                </th>
                 <td className="px-6 py-4">{row.role}</td>
                 <td className="px-6 py-4">{row.startDate}</td>
                 <td className="px-6 py-4">{row.endDate}</td>
                 <td className="px-6 py-4 text-right">
-                  <span className={`status-label ${row.statusColor} text-xs text-white font-semibold py-1 px-4 rounded-xl`}>
+                  <span
+                    className={`status-label ${row.statusColor} text-xs text-white font-semibold py-1 px-4 rounded-xl`}
+                  >
                     {row.status}
                   </span>
                 </td>

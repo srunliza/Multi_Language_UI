@@ -9,7 +9,7 @@ const AddMemberModal = () => {
   const handleCloseModal = () => setIsOpen(false);
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center z-50">
       <button
         id="openContactForm"
         className="flex  bg-blue-500 text-sm hover:bg-blue-700 text-white   py-2 px-2 rounded-md"
@@ -31,9 +31,13 @@ const AddMemberModal = () => {
       </button>
 
       {isOpen && (
-        <div id="" className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-white w-[367px] p-6 rounded-lg shadow-md">
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-screen">
+          <div
+            className="fixed inset-0 bg-gray-500 bg-opacity-50"
+            onClick={handleCloseModal}
+          ></div>
+          <div className="relative z-20 bg-white w-[367px] p-6 rounded-lg shadow-md">
               <div className="flex justify-between mb-5">
                 <h2 className="text-base font-bold ">Add Member</h2>
                 <button
@@ -58,7 +62,7 @@ const AddMemberModal = () => {
                 </button>
               </div>
 
-              <form action="https://fabform.io/f/{form-id}" method="post">
+              <form action="" method="post">
                 <div class="relative">
                   <input
                     class="appearance-none border-2 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"

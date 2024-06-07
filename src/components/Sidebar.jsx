@@ -20,7 +20,7 @@ const Sidebar = ({ isSidebarOpen }) => {
   return (
     <>
       <div
-        className={`h-screen md:items-center -z-40 flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
+        className={`h-full md:items-center -z-40 flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >
@@ -74,7 +74,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </Link>
               </div>
 
-              <div className="-ml-1 w-[10rem]  mt-[7rem]  flex flex-col items-center">
+              <div className="-ml-1 w-[10rem] flex flex-col items-center">
                 <Link
                   href="/employee/setting"
                   className="hover:bg-gray-400 w-[10.5rem]  hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"

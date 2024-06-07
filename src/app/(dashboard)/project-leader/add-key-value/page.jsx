@@ -1,9 +1,10 @@
 import AddMemberModal from "@/components/AddMemberModal";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
-import SelectComponent from "@/components/Selectcomponent";
+import SelectComponent from "@/components/SelectComponent";
 import ViewMember from "@/components/ViewMember";
-import InputKeywordComponent from "@/components/InputKeywordComponent";
+import Link from "next/link";
+import InputKeywordComponent from "../_components/InputKeywordComponent";
 
 const AddKeyValuePage = () => {
   const tableData = [
@@ -19,9 +20,7 @@ const AddKeyValuePage = () => {
     { key: "More", hint: "a way of getting in touch with someone" },
   ];
   return (
-
-
-<div className="w-full  ">
+    <div className="w-full  ">
       <div className="flex justify-between mb-2">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
@@ -31,8 +30,8 @@ const AddKeyValuePage = () => {
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* container */}
-             {/* Form */}
-             <form action="">
+          {/* Form */}
+          <form action="">
             <div className="ml-10 mt-3 lg:w-[851px]">
               <div className="w-full lg:w-[321px] py-2 text-xs ">
                 <label htmlFor="select" className="text-xs">
@@ -104,7 +103,7 @@ const AddKeyValuePage = () => {
                 </div>
               </div>
               {/* choose key word */}
-              <InputKeywordComponent/>
+              <InputKeywordComponent />
               {/* table */}
               <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
                 <div className="rounded-lg w-full lg:w-[570px] overflow-hidden overflow-y-auto h-32 no-scrollbar">
@@ -142,11 +141,12 @@ const AddKeyValuePage = () => {
                   value={"Reset"}
                 />
 
-                <input
-                  class="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
-                  type="submit"
-                  value={"Submit"}
-                />
+                <Link
+                  href={"../employee/project-card"}
+                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                >
+                  <button type="submit"> Submit</button>
+                </Link>
               </div>
             </div>
           </form>
@@ -154,9 +154,6 @@ const AddKeyValuePage = () => {
         <ViewMember />
       </div>
     </div>
-
-
-      
   );
 };
 

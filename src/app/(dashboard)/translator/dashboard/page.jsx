@@ -1,5 +1,5 @@
-"use client"
-import { useRouter } from 'next/navigation';
+"use client";
+import { useRouter } from "next/navigation";
 import translatorData from "@/obj/translatorData";
 
 const TranslatorPage = () => {
@@ -39,16 +39,21 @@ const TranslatorPage = () => {
             <select className="bg-white border border-gray-300 text-gray-900 text-sm rounded-e-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option>All</option>
               <option className="text-red-500 font-semibold">Pending</option>
-              <option className="text-yellow-500 font-semibold">Progress</option>
-              <option className="text-green-500 font-semibold">Completed</option>
+              <option className="text-yellow-500 font-semibold">
+                Progress
+              </option>
+              <option className="text-green-500 font-semibold">
+                Completed
+              </option>
             </select>
           </div>
         </div>
       </div>
+
       {/* table */}
-      <div className="shadow-lg rounded-lg overflow-hidden md:mx-10 mx-10 bg-white">
+      <div className="shadow-lg h-screen no-scrollbar rounded-lg overflow-x-auto md:mx-10 mx-10 bg-white">
         <table className="min-w-full">
-          <thead className="text-gray-700 white bg-blue-200 dark:text-gray-400">
+          <thead className="text-gray-700 sticky top-0 white bg-blue-200 dark:text-gray-400">
             <tr>
               <th className="py-4 px-3 text-gray-700 font-semibold text-center">
                 File Name

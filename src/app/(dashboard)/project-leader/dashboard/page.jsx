@@ -6,13 +6,13 @@ import Link from "next/link";
 
 const CreateProject = () => {
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-screen flex flex-col ">
       <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex flex-grow gap-3">
+        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl h-[42.7rem] border border-blue-300 flex-grow">
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* Container */}

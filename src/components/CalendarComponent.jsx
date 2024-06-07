@@ -4,7 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const CalendarComponent = () => {
     return (
         <main className="flex items-center justify-center ">
-            <div className="w-full container  p-4 bg-white shadow-md rounded-lg pr-8 pl-8">
+            <div className="w-full container  p-4 bg-white rounded-lg pr-8 pl-8">
                 <div className="flex items-center justify-between mb-4 text-black">
                     <h1 className="text-2xl font-semibold">May 2024</h1>
                     <div>

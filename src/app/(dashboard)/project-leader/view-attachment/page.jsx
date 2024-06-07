@@ -6,7 +6,7 @@ import AttachmentComponent from "@/components/AttachmentComponent";
 
 const ViewAttachmentPage = () => {
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-full flex flex-col">
       <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
