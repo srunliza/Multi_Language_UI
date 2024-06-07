@@ -156,9 +156,6 @@ const SettingPage = () => {
 
     // route to change password
     const router = useRouter();
-    const handleUserInfoClick = () => {
-        router.push('/developer/change-password')
-    }
 
     const [activeLink, setActiveLink] = useState(router.pathname);
 
