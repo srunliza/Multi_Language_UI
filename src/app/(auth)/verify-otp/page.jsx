@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(''));
-  const [timeRemaining, setTimeRemaining] = useState(1 * 60); // 5 minutes in seconds
+  const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 5 minutes in seconds
   const [otpError, setOtpError] = useState('');
   const [isOtpExpired, setIsOtpExpired] = useState(false);
 
@@ -52,7 +52,7 @@ const VerifyOtpPage = () => {
 
   // Handle resend OTP
   const handleResendOtp = () => {
-    setTimeRemaining(1 * 60); // Reset timer
+    setTimeRemaining(2 * 60); // Reset timer
     setIsOtpExpired(false);
     setOtp(new Array(6).fill('')); // Clear OTP inputs
     setOtpError('');
@@ -77,7 +77,7 @@ const VerifyOtpPage = () => {
 
   return (
     // background
-    <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen">
+    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
       <div className="flex items-center justify-center min-h-screen">
         {/* card */}
         <div className="bg-white  pt-7 mt-8 rounded-2xl shadow-lg p-8 max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[28.5%]">

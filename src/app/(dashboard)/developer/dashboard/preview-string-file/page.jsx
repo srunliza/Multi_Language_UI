@@ -48,7 +48,7 @@ const PreviewStringFilePage = () => {
                             {/* data map as string data */}
                             {previewStringData.map((stringData, index) => (
                                 <div key={index} className="text-black pl-8 mt-3">
-                                    <p className="font-consolas text-gray-800">"{stringData.key}" : "{stringData.value}";</p>
+                                    <p className="font-consolas text-gray-800">"{stringData.key}" = "{stringData.value}";</p>
                                 </div>
                             ))}
                         </div>

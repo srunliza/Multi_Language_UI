@@ -96,7 +96,7 @@ const LoginPage = () => {
 
   return (
     // background image
-    <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen flex justify-center">
+    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
       <div className='flex justify-center items-center'>
         {/* card */}
         <div className="bg-white rounded-2xl mt-7 shadow-lg p-8 sm:p-5 md:px-12 max-w-md w-full">

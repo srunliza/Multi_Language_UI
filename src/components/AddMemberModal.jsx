@@ -9,7 +9,7 @@ const AddMemberModal = () => {
   const handleCloseModal = () => setIsOpen(false);
 
   return (
-    <div className="flex justify-center z-50">
+    <div className="flex justify-center">
       <button
         id="openContactForm"
         className="flex  bg-blue-500 text-sm hover:bg-blue-700 text-white   py-2 px-2 rounded-md"

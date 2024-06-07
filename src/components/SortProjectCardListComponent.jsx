@@ -41,7 +41,7 @@ const SortProjectCardList = ({ selectedStatus, handleStatusChange, handleSortCli
           <option value="Progress" className="text-yellow-500 font-medium">
             Progress
           </option>
-          <option value="Finished" className="text-green-500 font-medium">
+          <option value="Completed" className="text-green-500 font-medium">
             Completed
           </option>
         </select>

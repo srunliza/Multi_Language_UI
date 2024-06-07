@@ -37,9 +37,9 @@ const AttachmentComponent = () => {
 
   const handlePreview = (fileType) => {
     const routeMap = {
-      json: "/project/preview-json-file",
-      xml: "/project/preview-xml-file",
-      string: "/project/preview-string-file",
+      json: "./dashboard/preview-json-file",
+      xml: "./dashboard/preview-xml-file",
+      string: "./dashboard/preview-string-file",
     };
     router.push(routeMap[fileType]);
   };
@@ -56,7 +56,7 @@ const AttachmentComponent = () => {
           <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
             <tr>
               <th scope="col" className="px-6 py-4">
-                Project Name
+                File Name
               </th>
               <th scope="col" className="px-10 py-4">
                 Language
@@ -78,7 +78,7 @@ const AttachmentComponent = () => {
           <tbody className="overflow-y-auto no-scrollbar">
             {data.map((item) => (
               <tr
-                key={item.productName}
+                key={item.projectName}
                 className="bg-white border-b text-gray-900 dark:border-gray-300"
               >
                 <th
@@ -94,7 +94,7 @@ const AttachmentComponent = () => {
                       ? "text-red-600"
                       : item.status === "Progress"
                       ? "text-yellow-600"
-                      : item.status === "Finished"
+                      : item.status === "Completed"
                       ? "text-green-600"
                       : ""
                   } truncate`}
@@ -135,7 +135,7 @@ const AttachmentComponent = () => {
                           onClick={handleStringPreview}
                           className="text-green-500 font-semibold"
                         >
-                          String File
+                          Strings File
                         </button>
                       </li>
                     </ul>
@@ -169,7 +169,7 @@ const AttachmentComponent = () => {
                           onClick={handleStringClick}
                           className="text-green-500 font-semibold"
                         >
-                          String File
+                          Strings File
                         </button>
                       </li>
                     </ul>

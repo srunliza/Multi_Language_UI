@@ -1,14 +1,21 @@
+"use client";
+import { useRouter, useSearchParams } from "next/navigation";
 import ViewMember from "@/components/ViewMember";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import Link from "next/link";
 
-const CreateProject = () => {
+const CreateProjectPage = () => {
+  const searchParams = useSearchParams();
+  const projectName = searchParams.get("projectName");
+
   return (
-    <div className="w-full h-screen flex flex-col ">
+    <div className="w-full h-screen flex flex-col">
       <div className="flex justify-between mb-2 p-4">
-        <h2 className="text-lg text-color-text-black">Project Name</h2>
+        <h2 className="text-lg text-color-text-black">
+          {projectName || "Project Name"}
+        </h2>
         <AddMemberModal />
       </div>
       <div className="flex flex-grow gap-3">
@@ -136,4 +143,4 @@ const CreateProject = () => {
   );
 };
 
-export default CreateProject;
+export default CreateProjectPage;

@@ -1,7 +1,22 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CreateProject = ({ onClose }) => {
+  const [projectName, setProjectName] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleCreateProject = () => {
+    if (!projectName.trim()) {
+      setError("Project name is required");
+    } else {
+      setError("");
+      // Navigate to the CreateProject page with the project name as a query parameter
+      router.push(`/project-leader/dashboard?projectName=${encodeURIComponent(projectName)}`);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50 fixed inset-0 z-50 p-4">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6">
@@ -33,9 +48,12 @@ const CreateProject = ({ onClose }) => {
           type="text"
           id="projectName"
           name="projectName"
-          className="block w-full px-4 py-2 mb-6 border border-purple-500 rounded-md focus:outline-none text-gray-700"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+          className="block w-full px-4 py-2 mb-2 border border-purple-500 rounded-md focus:outline-none text-gray-700"
           placeholder="Enter project name ..."
         />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <div className="flex justify-end space-x-4">
           <button
             className="px-6 py-2 font-semibold text-purple-600 border border-purple-600 rounded-md hover:bg-purple-50 focus:outline-none"
@@ -43,11 +61,12 @@ const CreateProject = ({ onClose }) => {
           >
             No
           </button>
-          <Link href="/project-leader/dashboard">
-            <div className="px-6 py-2 font-semibold text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none">
-              Create project
-            </div>
-          </Link>
+          <button
+            className="px-6 py-2 font-semibold text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none"
+            onClick={handleCreateProject}
+          >
+            Create project
+          </button>
         </div>
       </div>
     </div>

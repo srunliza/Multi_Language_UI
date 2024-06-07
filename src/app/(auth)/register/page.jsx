@@ -128,7 +128,7 @@ const RegisterPage = () => {
 
   return (
     // background image
-    <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full min-h-screen flex justify-center">
+    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
       <div className="flex justify-center items-center">
 
         {/* card */}

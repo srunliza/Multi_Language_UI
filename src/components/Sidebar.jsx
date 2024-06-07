@@ -34,8 +34,8 @@ const Sidebar = ({ isSidebarOpen }) => {
           </div>
 
           <div className="flex flex-col sm:mt-[9.7rem] md:mt-3 lg:mt-3">
-            <nav className="flex flex-col items-center">
-              <div className="flex flex-col">
+            <nav className="flex flex-col items-center sm:space-y-[5rem] xl:space-y-[10rem] lg:space-y-[5rem] md:space-y-[5rem]">
+              <div className="flex flex-col space-y-1">
                 <button
                   type="button"
                   className="gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center"
@@ -74,17 +74,18 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </Link>
               </div>
 
-              <div className="-ml-1 w-[10rem] flex flex-col items-center">
+              <div className="-ml-1 w-[10rem] flex flex-col items-center space-y-1">
                 <Link
                   href="/employee/setting"
-                  className="hover:bg-gray-400 w-[10.5rem]  hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className="hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
                 >
                   <SettingsOutlinedIcon />
                   <p>Setting</p>
                 </Link>
+
                 <Link
                   href="/login"
-                  className="hover:bg-gray-400 w-[10.5rem]  hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className="hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
                 >
                   <ExitToAppOutlinedIcon />
                   <p>Logout</p>

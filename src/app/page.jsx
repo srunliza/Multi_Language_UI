@@ -9,8 +9,8 @@ const LandingPageComponent = () => {
       {/* Navbar */}
       <nav className=" top-0 left-0 w-md  flex items-center justify-between pt-4 pb-4  bg-[#2357F9] font-bold text-white relative">
         <div className=" w-9/12 mx-auto flex  justify-around items-center">
-          <a href="/">
-            <img src="../Images/Logo.png" alt="langnet-logo" className="w-21" />
+          <a href="/" className="z-50">
+            <img src="../Images/Logo.png" alt="langnet-logo" className="w-21 z-50" />
           </a>
           <div className="flex md:hidden">
             <div className="group">

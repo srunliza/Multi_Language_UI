@@ -69,7 +69,7 @@ const ForgetPasswordPage = () => {
 
 
   return ( 
-        <main className="bg-[url('/assets/images/background.jpg')] bg-cover bg-center w-full h-screen flex justify-center">
+        <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full h-screen flex justify-center">
           <div className='flex justify-center items-center'>
               <div className="bg-white rounded-2xl mt-10 shadow-lg p-8 md:px-12 pb-7 max-w-md w-full sm:ml-px">
 

@@ -9,8 +9,8 @@ const ChangePassword = () => {
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
                     <div className='flex gap-5 '>
-                            <a href="/developer/setting">User Info</a>                                         
-                            <a href="/developer/change-password" className="text-blue-500">Change Password</a>
+                            <a href="/employee/setting">User Info</a>                                         
+                            <a href="/employee/change-password" className="text-blue-500">Change Password</a>
                                         
                     </div>
                     <hr className=" border-gray-300 mb-6" />
