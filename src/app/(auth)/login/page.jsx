@@ -7,9 +7,7 @@ import {
   VisibilityOffOutlined,
   VisibilityOutlined,
 } from "@mui/icons-material";
-// import login from "/assets/icons/login.svg";
-// import google from "/assets/icons/google.svg";
-// import github from "/assets/icons/github.svg";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -222,14 +220,14 @@ const LoginPage = () => {
                 <Image src="/assets/icons/google.svg" width={20} height={20} alt="google icon" />
               </a>
               <a className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
-                <Image src="/assets/icons/hide.svg" width={20} height={20} alt="github" />
+                <Image src="/assets/icons/github.svg" width={20} height={20} alt="github" />
               </a>
             </div>
 
             {/* register link */}
             <div className="flex justify-center items-center mt-3">
               <p className="text-gray-500 sm:text-xs md:text-sm lg:text-xs">
-                If you don't have an account?{" "}
+                If you don't have an account?
                 <Link href="register" className="text-[#1A42BC]">
                   Register
                 </Link>
