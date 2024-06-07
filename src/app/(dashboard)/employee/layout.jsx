@@ -1,5 +1,5 @@
 import NavbarComponent from "@/components/NavbarComponent";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/SidebarComponent";
 
 export default function DeveloperDashboardLayout({ children }) {
   return (
@@ -10,9 +10,7 @@ export default function DeveloperDashboardLayout({ children }) {
       {/* Main content */}
       <div class="flex flex-col flex-1 overflow-y-auto no-scrollbar">
         <NavbarComponent />
-        <div class="p-4">
-          {children}
-        </div>
+        <div class="p-4">{children}</div>
       </div>
     </div>
   );
