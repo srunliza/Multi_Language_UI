@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
@@ -12,6 +13,7 @@ import CreateProject from "@/components/CreateProject";
 
 const Sidebar = ({ isSidebarOpen }) => {
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleNewProjectClick = () => {
     setIsCreateProjectOpen(!isCreateProjectOpen);
@@ -46,28 +48,44 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </button>
                 <Link
                   href="/employee/dashboard"
-                  className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl mt-1 flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl mt-1 flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/dashboard"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <DashboardCustomizeOutlinedIcon />
                   <p>Dashboard</p>
                 </Link>
                 <Link
                   href="/employee/profile"
-                  className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/profile"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <AccountBoxOutlinedIcon />
                   <p>Profile</p>
                 </Link>
                 <Link
                   href="/employee/calendar"
-                  className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/calendar"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <CalendarMonthOutlinedIcon />
                   <p>Calendar</p>
                 </Link>
                 <Link
                   href="/employee/project-card"
-                  className="hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/project-card"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <PieChartOutlinedIcon />
                   <p>Project</p>
@@ -77,7 +95,11 @@ const Sidebar = ({ isSidebarOpen }) => {
               <div className="-ml-1 w-[10rem] flex flex-col items-center space-y-1">
                 <Link
                   href="/employee/setting"
-                  className="hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/setting"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <SettingsOutlinedIcon />
                   <p>Setting</p>
@@ -85,7 +107,11 @@ const Sidebar = ({ isSidebarOpen }) => {
 
                 <Link
                   href="/login"
-                  className="hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 text-gray-100 gap-2 font-light-[16px]"
+                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/login"
+                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      : "text-gray-100"
+                  }`}
                 >
                   <ExitToAppOutlinedIcon />
                   <p>Logout</p>
