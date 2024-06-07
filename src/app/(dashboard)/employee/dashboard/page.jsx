@@ -19,20 +19,22 @@ const EmployeeDashboardPage = () => {
   return (
     <main>
       <div className="w-full mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="col-span-8">
-            <div className="flex flex-col items-center bg-[#1A42BC] px-6 py-9 rounded-2xl shadow md:flex-row md:max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-8">
+            <div className="lg:mr-0 xl:mr-0 flex flex-col items-center bg-[#1A42BC] px-6 py-9 rounded-2xl shadow md:flex-row md:max-w-4xl">
               <div className="flex flex-col justify-between p-4 leading-normal">
                 <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-50 dark:text-white">
                   Welcome
                 </h1>
                 <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-50 dark:text-white">
-                  Sarah Conner
+                  Sok Heng!
                 </h2>
-                <p className="mb-3 font-normal text-gray-100 text-sm dark:text-gray-100">
-                  Whether you’re here to browse, learn, or connect, we hope you
-                  find exactly what you're looking for. Enjoy exploring, and
-                  don’t hesitate to reach out if you have any questions!
+                <p className="mb-3 font-normal text-justify text-gray-100 text-sm dark:text-gray-100">
+                  LangNet is a web-based platform enabling software project
+                  leaders to efficiently manage multiple languages within the
+                  software, ultimately saving time for developers and
+                  translators by streamlining the upload and download process
+                  through required formats like Excel, JSON, XML, and others.
                 </p>
               </div>
               <Image
@@ -40,18 +42,19 @@ const EmployeeDashboardPage = () => {
                 width={328}
                 height={328}
                 alt="welcome card image"
+                className="md:hidden lg:hidden xl:block"
               />
             </div>
           </div>
 
-          <div className="col-span-4">
+          <div className="lg:col-span-4">
             <EmployeeCalendarComponent />
           </div>
         </div>
       </div>
 
       <div className="flex-grow mt-8 ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-4 gap-4">
           <div className=" p-4 rounded-xl border-2 border-red-300 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
@@ -65,7 +68,7 @@ const EmployeeDashboardPage = () => {
                   alt="pending project icon"
                 />
               </div>
-              <h3 className="font-bold sm:text-xl md:text-[18px] lg:text-[22px] text-gray-600">
+              <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-red-500">
                 40,689
               </h3>
             </div>
@@ -84,7 +87,7 @@ const EmployeeDashboardPage = () => {
                   alt="progress project icon"
                 />
               </div>
-              <h3 className="font-bold sm:text-xl md:text-[18px] lg:text-[22px] text-gray-600">
+              <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-green-500">
                 40,689
               </h3>
             </div>
@@ -103,7 +106,7 @@ const EmployeeDashboardPage = () => {
                   alt="finish project icon"
                 />
               </div>
-              <h3 className="font-bold sm:text-xl md:text-[18px] lg:text-[22px] text-gray-600">
+              <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-yellow-500">
                 40,689
               </h3>
             </div>
@@ -122,7 +125,7 @@ const EmployeeDashboardPage = () => {
                   alt="total project icon"
                 />
               </div>
-              <h3 className="font-bold sm:text-xl md:text-[18px] lg:text-[22px] text-gray-600">
+              <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-blue-500">
                 40,689
               </h3>
             </div>

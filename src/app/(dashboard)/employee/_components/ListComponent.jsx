@@ -63,7 +63,7 @@ const ProjectListComponent = ({
             </div>
           </div>
 
-          <div className="ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
+          <div className="sm:-ml-1 ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
             <Link
               key={index}
               href={`/${project.role.replace(" ", "-").toLowerCase()}/project`}

@@ -105,7 +105,7 @@ const ProjectListPage = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl w-full bg-white shadow-lg h-screen overflow-hidden border">
+    <div className="p-4 lg:mr-0 xl:mr-0 sm:mr-8 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white shadow-lg h-screen overflow-hidden border">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>

@@ -1,8 +1,8 @@
 const EmployeeCalendarComponent = () => {
           return ( 
               <main>
-                  <div className="bg-white sm:w-full md:w-full lg:w-full shadow-lg overflow-hidden rounded-2xl mx-auto text-gray-900 font-semibold text-center">
-                        <div className="flex items-center justify-between px-5 py-3">
+                  <div className="lg:mr-0 xl:mr-0 bg-white shadow-lg rounded-2xl text-gray-900 font-semibold text-center">
+                        <div className="flex items-center justify-between px-5 py-5">
                             <h3 className="text-base">May, 2024</h3>
         
                             <div className="gap-2 flex">
