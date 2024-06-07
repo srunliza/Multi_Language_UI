@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
@@ -10,13 +11,32 @@ import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
+import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
 
 const Sidebar = ({ isSidebarOpen }) => {
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
+  const [isLogoutPopupVisible, setIsLogoutPopupVisible] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleNewProjectClick = () => {
     setIsCreateProjectOpen(!isCreateProjectOpen);
+  };
+
+  const handleLogoutClick = () => {
+    setIsLogoutPopupVisible(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    // Perform logout functionality here
+    console.log("User confirmed logout");
+    setIsLogoutPopupVisible(false);
+    router.push("/login");
+  };
+
+  const handleLogoutCancel = () => {
+    console.log("User canceled logout");
+    setIsLogoutPopupVisible(false);
   };
 
   return (
@@ -105,23 +125,26 @@ const Sidebar = ({ isSidebarOpen }) => {
                   <p>Setting</p>
                 </Link>
 
-                <Link
-                  href="/login"
-                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
-                    pathname === "/login"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
-                      : "text-gray-100"
-                  }`}
+                <button
+                  type="button"
+                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 text-gray-100`}
+                  onClick={handleLogoutClick}
                 >
                   <ExitToAppOutlinedIcon />
                   <p>Logout</p>
-                </Link>
+                </button>
               </div>
             </nav>
           </div>
         </div>
       </div>
       {isCreateProjectOpen && <CreateProject onClose={handleNewProjectClick} />}
+      {isLogoutPopupVisible && (
+        <PopUpLogoutComponent
+          onConfirm={handleLogoutConfirm}
+          onCancel={handleLogoutCancel}
+        />
+      )}
     </>
   );
 };

@@ -123,6 +123,9 @@ const ViewMember = ({ onClose }) => {
           <div className="flex items-center p-2 border-b">
             <GroupIcon className="text-gray-500" />
             <span className="pl-2 text-base text-gray-800">40 MEMBERS</span>
+            <button onClick={onClose} className="ml-auto">
+              <CloseIcon className="text-gray-500" />
+            </button>
           </div>
           <div className="px-3 py-2">
             <div className="flex items-center">

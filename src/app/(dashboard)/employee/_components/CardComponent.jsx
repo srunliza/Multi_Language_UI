@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useState } from "react";
 import ViewMember from "@/components/ViewMember";
+import ViewMemberProjectLeader from "@/components/ViewMemberForProjectLeader";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -34,11 +35,21 @@ const CardComponent = ({
   index,
   handleEditClick,
   handleDeleteClick,
-  handleSeeAll,
-  isViewMemberOpen,
-  modalRef,
-  handleModalClose,
 }) => {
+  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
+  const [viewMemberRole, setViewMemberRole] = useState(null);
+  const modalRef = useRef(null);
+
+  const handleSeeAll = () => {
+    setViewMemberRole(project.role.toLowerCase());
+    setIsViewMemberOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsViewMemberOpen(false);
+    setViewMemberRole(null);
+  };
+
   return (
     <div
       key={index}
@@ -248,13 +259,22 @@ const CardComponent = ({
           See All
         </button>
 
-        {isViewMemberOpen && (
+        {isViewMemberOpen && viewMemberRole === "project-leader" && (
           <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
             <div ref={modalRef}>
-              <ViewMember />
+              <ViewMemberProjectLeader onClose={handleModalClose} />
             </div>
           </div>
         )}
+
+        {isViewMemberOpen &&
+          (viewMemberRole === "translator" || viewMemberRole === "developer") && (
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
+              <div ref={modalRef}>
+                <ViewMember onClose={handleModalClose} />
+              </div>
+            </div>
+          )}
       </div>
     </div>
   );

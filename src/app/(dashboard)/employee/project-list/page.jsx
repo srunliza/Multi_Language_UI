@@ -5,6 +5,7 @@ import { projectsData } from "@/obj/projects";
 import SortProjectCardList from "@/components/SortProjectCardListComponent";
 import ProjectListComponent from "../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
+import ViewMember from "@/components/ViewMember"; // Ensure the ViewMember component is imported
 
 const ProjectListPage = () => {
   const [projects, setProjects] = useState(projectsData);
@@ -16,6 +17,7 @@ const ProjectListPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortCriteria, setSortCriteria] = useState("name");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false); // State for ViewMember
 
   const modalRef = useRef();
 
@@ -105,7 +107,7 @@ const ProjectListPage = () => {
   );
 
   return (
-    <div className="p-4 lg:mr-0 xl:mr-0 sm:mr-8 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white shadow-lg h-screen overflow-hidden border">
+    <div className="p-4 lg:mr-0 xl:mr-0 md:mr-10 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white shadow-lg h-screen overflow-hidden border">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
@@ -226,6 +228,12 @@ const ProjectListPage = () => {
               </button>
             </div>
           </div>
+        </div>
+      )}
+      {/* View Member */}
+      {isViewMemberOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+          <ViewMember onClose={() => setIsViewMemberOpen(false)} />
         </div>
       )}
       {/* Delete Modal */}

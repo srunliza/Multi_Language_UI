@@ -7,7 +7,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 
-const ViewMember = () => {
+const ViewMemberProjectLeader = ({ onClose }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
   const [users, setUsers] = useState([
@@ -47,6 +47,10 @@ const ViewMember = () => {
     handleCloseAddMemberModal();
   };
 
+  const handleRemoveMember = (id) => {
+    setUsers(users.filter(user => user.id !== id));
+  };
+
   const renderUserList = (role) => {
     return users
       .filter((user) => user.role === role)
@@ -56,7 +60,13 @@ const ViewMember = () => {
           <div className="ml-2">
             <div className="text-gray-800">{user.name}</div>
           </div>
-          <CloseIcon className="ml-auto cursor-pointer text-gray-500" />
+          {role !== "Project Leader" && (
+            <CloseIcon
+              className="ml-auto cursor-pointer text-gray-500"
+              style={{ fontSize: '16px' }} // Make the CloseIcon smaller
+              onClick={() => handleRemoveMember(user.id)}
+            />
+          )}
         </div>
       ));
   };
@@ -68,9 +78,9 @@ const ViewMember = () => {
           <div className="flex items-center p-2 border-b">
             <GroupIcon className="text-gray-500" />
             <span className="pl-2 text-base text-gray-800">40 MEMBERS</span>
-            <div className="ml-auto">
-              <CloseIcon className="text-gray-500 cursor-pointer" onClick={handleCloseModal} />
-            </div>
+            <button onClick={onClose} className="ml-auto">
+              <CloseIcon className="text-gray-500" />
+            </button>
           </div>
           <div className="px-3 py-2 flex items-center justify-between">
             <div className="flex items-center">
@@ -185,4 +195,4 @@ const AddMemberModal = ({ onClose, onAddMember }) => {
   );
 };
 
-export default ViewMember;
+export default ViewMemberProjectLeader;

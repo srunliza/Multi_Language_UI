@@ -471,46 +471,48 @@ const SettingPage = () => {
                   </span>
                 </div>
 
-                {/* Social Contact */}
-                <div className="mt-2">
-                  <label
-                    htmlFor="social_contact"
-                    className="block text-gray-700 dark:text-white mb-1"
-                  >
-                    Social Contact
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <img
-                        className="w-[20px]"
-                        src="../assets/icons/socaicontact.svg"
-                        alt="social contact icon"
+                <div>
+                  {/* Social Contact */}
+                  <div className="mt-2">
+                    <label
+                      htmlFor="social_contact"
+                      className="block text-gray-700 dark:text-white mb-1"
+                    >
+                      Social Contact
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <img
+                          className="w-[20px]"
+                          src="../assets/icons/socaicontact.svg"
+                          alt="social contact icon"
+                        />
+                      </div>
+                      <input
+                        type="text"
+                        className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full"
+                        placeholder="Enter social contact"
                       />
                     </div>
-                    <input
-                      type="text"
-                      className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full"
-                      placeholder="Enter social contact"
-                    />
                   </div>
                 </div>
               </div>
+              {/* Button Cancel and Save */}
+              <div className="mt-4 flex gap-3 w-auto ml-[5rem]">
+                <button
+                  type="button"
+                  className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]"
+                >
+                  Save
+                </button>
+              </div>
             </div>
-          </div>
-          {/* Button Cancel and Save */}
-          <div className="mt-4 flex gap-3 justify-end w-full xl:-ml-11 lg:ml-1">
-            <button
-              type="button"
-              className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]"
-            >
-              Save
-            </button>
           </div>
         </div>
       </form>

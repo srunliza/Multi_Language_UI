@@ -1,26 +1,27 @@
 "use client";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 
 const notifications = [
   {
-    imgSrc: "/Images/Thean.png", 
+    imgSrc: "/Images/Thean.png",
     title: "UXUI",
     description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: true,
   },
   {
-    imgSrc: "/Images/Thean.png", 
+    imgSrc: "/Images/Thean.png",
     title: "Java",
     description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
     unread: false,
   },
   {
-    imgSrc: "/Images/Thean.png", 
+    imgSrc: "/Images/Thean.png",
     title: "UXUI",
     description: "add you to Project's name UXUI as Developer ",
     date: "02/05/2022",
@@ -56,9 +57,20 @@ const notifications = [
   },
 ];
 
+const projects = [
+  { name: "Spring translate", icon: "/path/to/icon1.png" },
+  { name: "Web Application", icon: "/path/to/icon2.png" },
+  { name: "Next js translation", icon: "/path/to/icon3.png" },
+  { name: "Java translation", icon: "/path/to/icon4.png" },
+  { name: "UX/UI", icon: "/path/to/icon5.png" },
+  { name: "Java Script", icon: "/path/to/icon6.png" },
+  { name: "Database Design", icon: "/path/to/icon7.png" },
+];
+
 const NotificationItem = ({ notification, onClick }) => (
   <div
-    className={`flex gap-1 h-auto py-2 items-center cursor-pointer ${notification.unread ? "bg-blue-100" : "hover:bg-gray-100"}`}
+    className={`flex gap-1 h-auto py-2 items-center cursor-pointer ${notification.unread ? "bg-blue-100" : "hover:bg-gray-100"
+      }`}
     onClick={() => onClick(notification)}
   >
     <div>
@@ -87,6 +99,8 @@ const NavbarComponent = ({ toggleSidebar }) => {
   const [showAll, setShowAll] = useState(true);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupContent, setPopupContent] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleShowAll = () => {
     setShowAll(true);
@@ -105,6 +119,20 @@ const NavbarComponent = ({ toggleSidebar }) => {
     setPopupVisible(false);
   };
 
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      const results = projects.filter(project =>
+        project.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   return (
     <>
       <nav className="bg-white sticky top-0 shadow-md h-16 flex px-3 justify-between items-center border z-50">
@@ -115,24 +143,37 @@ const NavbarComponent = ({ toggleSidebar }) => {
           >
             <MenuIcon className="text-black" />
           </button>
-          <div className="relative w-[17rem]">
+          <div className="relative w-full max-w-[20rem]">
             <input
               type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
               placeholder="Search project"
-              className="border border-gray-300 rounded-lg py-2 pl-5 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="border border-gray-300 rounded-lg py-2 pl-10 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
+            <SearchIcon className="absolute left-3 top-2.5 text-gray-500" />
+            {searchResults.length > 0 && (
+              <div className="absolute mt-1 bg-white border border-gray-300 rounded-lg shadow-lg w-full z-10">
+                {searchResults.map((project, index) => (
+                  <div key={index} className="flex items-center p-2 hover:bg-gray-100 cursor-pointer">
+                    <img src={project.icon} alt={project.name} className="w-5 h-5 mr-2" />
+                    <span>{project.name}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 items-center">
           <div className="relative">
             <Popover placement="bottom" offset={20} showArrow>
               <PopoverTrigger>
-                <button>
+                <button className="transition-transform duration-200 ease-in-out transform hover:scale-110 focus:outline-none">
                   <NotificationsOutlinedIcon />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="items-start static px-1 py-2 border rounded-md  w-[35rem]  bg-white">
+              <PopoverContent className="items-start static px-1 py-2 border rounded-md w-[20rem] md:w-[35rem] bg-white">
                 <div className="text-xl items-start font-bold pt-2 px-3">Notifications</div>
                 <div className="flex gap-4 px-3 py-2">
                   <button className="text-tiny" onClick={handleShowAll}>
@@ -187,7 +228,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
               </div>
               <img
                 onClick={closePopup}
-                className="h-4 w-4 rounded-full mb-4 cursor-pointer"
+                className="h-8 w-8 rounded-full mb-4 cursor-pointer"
                 src="/assets/icons/cancel.png"
                 alt="Cancel"
               />

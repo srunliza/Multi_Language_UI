@@ -228,7 +228,7 @@ const ProjectListComponent = ({
           {isViewMemberOpen && (
             <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
               <div ref={modalRef}>
-                <ViewMember />
+                <ViewMember onClose={handleModalClose} />
               </div>
             </div>
           )}
