@@ -166,11 +166,11 @@ const SettingPage = () => {
                 <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
                     <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Account Setting</h1>
                     {/* field choose change password */}
-                    <div className='flex gap-5 p-3'>
+                    <div className='flex gap-5 '>
                         <button className='rounded-lg border-1 border-red-50 p-2'>User Info</button>                  
                         <button onClick={handleUserInfoClick} className='rounded-lg border-1 border-red-50 p-2'>Change Password</button>
                     </div>
-                    <hr className=" border-blue-500 mb-6" />
+                    <hr className=" border-gray-300 mb-6" />
                     <div className="grid grid-cols-1 md:grid-cols-2">
 
                         {/* First Name and Last Name */}
@@ -184,7 +184,7 @@ const SettingPage = () => {
                                         placeholder="Enter first name"
                                         value={firstName}
                                         onChange={handaleFirstNameChange}
-                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
+                                        className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500  sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none  input-bordered w-full max-w-xs ${firstNameError ? 'border-red-500' : ''}`} />
                                     {firstNameError && <p className="text-red-500 text-xs mt-1">{firstNameError}</p>}
                                 </div>
                                 <div>
@@ -196,7 +196,7 @@ const SettingPage = () => {
                                             placeholder="Enter last name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
+                                            className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500  sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none  input-bordered w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
                                         {lastNameError && <p className="text-red-500 text-xs mt-1">{lastNameError}</p>}
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700  sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  focus:outline-none  input-bordered focus:ring-gray-500 focus:border-gray-500  w-full max-w-xs ${selectedGender === 'male' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('male')}
                                         >
                                             Male
@@ -227,7 +227,7 @@ const SettingPage = () => {
                                         </div>
                                         <button
                                             type="button"
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20  input-primary w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
+                                            className={`text-gray-700 focus:outline-none  input-bordered focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20 w-full max-w-xs ${selectedGender === 'female' ? 'bg-gray-200' : selectedGender === 'female' ? 'bg-white' : ''}`}
                                             onClick={() => handleGenderSelect('female')}
                                         >
                                             Female
@@ -241,7 +241,7 @@ const SettingPage = () => {
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <DatePicker
                                     id='calender'
-                                    className=" input-primary text-gray-700  focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border bg-white"
+                                    className=" focus:outline-none  input-bordered  focus:border-gray-500 text-gray-700  focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6 rounded-md border bg-white"
                                 />
 
                             </div>
@@ -253,7 +253,7 @@ const SettingPage = () => {
                                     <input
                                         type="email"
                                         id="email"
-                                        className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${emailError ? 'border-red-500' : ''}`}
+                                        className={`text-gray-700  focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${emailError ? 'border-red-500' : ''}`}
                                         placeholder="example@gmail.com"
                                         value={email}
                                         onChange={handleEmailChange}
@@ -274,7 +274,7 @@ const SettingPage = () => {
                                             <path d="M11.5 0C5.14855 0 0 5.14878 0 11.5C0 13.1491 0.367987 14.7915 1.07869 16.3156C0.135687 21.1859 0.0356567 21.6344 0.0356567 21.6344C-0.118443 22.432 0.566937 23.1151 1.36619 22.9641C1.36619 22.9641 1.80204 22.8887 6.72059 21.9579C8.20524 22.6635 9.8509 23 11.5 23C17.8514 23 23 17.8512 23 11.5C23 5.14878 17.8514 0 11.5 0ZM11.5 2.3C16.5807 2.3 20.7 6.41895 20.7 11.5C20.7 16.581 16.5807 20.7 11.5 20.7C10.0544 20.7 8.66639 20.3605 7.40369 19.7296C7.17829 19.6174 6.93106 19.5751 6.68381 19.6219C2.60131 20.3947 2.9256 20.3486 2.5875 20.4125C2.6542 20.0703 2.59669 20.4255 3.37869 16.3875C3.42699 16.1375 3.38444 15.8602 3.27059 15.6329C2.62889 14.3613 2.3 12.9577 2.3 11.5C2.3 6.41895 6.4193 2.3 11.5 2.3ZM8.26619 5.75C7.18749 5.75 5.75 7.1875 5.75 8.26562C5.75 9.65505 7.1875 12.2187 8.625 13.6562C8.78025 13.8109 9.1885 14.2203 9.34375 14.375C10.7812 15.8125 13.3446 17.25 14.7338 17.25C15.8125 17.25 17.25 15.8125 17.25 14.7344C17.25 13.6562 15.8125 12.2187 14.7338 12.2187C14.375 12.2187 13.0743 12.9622 12.9375 12.9375C11.7921 12.7307 10.3017 11.2042 10.0625 10.0625C10.0291 9.90311 10.7812 8.625 10.7812 8.26562C10.7812 7.1875 9.34374 5.75 8.26619 5.75Z" fill="#949494" />
                                         </svg>
                                     </div>
-                                    <input type="text" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full" placeholder="Phone number" />
+                                    <input type="text" className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full" placeholder="Phone number" />
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,7 @@ const SettingPage = () => {
                                         <input
                                             type={passwordVisible ? "text" : "password"}
                                             id="password"
-                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full ${passwordError ? 'border-red-500' : ''}`}
+                                            className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${passwordError ? 'border-red-500' : ''}`}
                                             placeholder="xxxxxxxxx"
                                             value={password}
                                             onChange={handlePasswordChange}
@@ -333,7 +333,7 @@ const SettingPage = () => {
                                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <img className="w-[20px]" src="../assets/icons/socaicontact.svg" alt="social contact icon" />
                                         </div>
-                                        <input type="text" className="text-gray-700focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 input-primary w-full" placeholder="Enter social contact" />
+                                        <input type="text" className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full" placeholder="Enter social contact" />
                                     </div>
                                 </div>
                             </div>
