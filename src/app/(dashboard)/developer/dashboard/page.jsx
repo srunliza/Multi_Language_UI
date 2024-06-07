@@ -2,11 +2,15 @@
 import { projectsTableData } from '@/obj/tableData';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { saveAs } from 'file-saver';
 
 const DeveloperDashboard = () => {
     const initialData = projectsTableData; // Use the imported data as initial data
     const [data, setData] = useState(initialData);
     const [statusFilter, setStatusFilter] = useState('All');
+    const router = useRouter();
 
     const handleStatusChange = (event) => {
         const status = event.target.value;
@@ -20,16 +24,29 @@ const DeveloperDashboard = () => {
         }
     };
 
-    const router = useRouter();
-    const handleDownloadClick = () => {
-        router.push('/developer/dashboard/preview-json-file');
+    const handleDownload = (fileType) => {
+        // Replace the below URL with your actual file URL or Blob data
+        const fileUrl = `/path/to/your/${fileType}-file.${fileType}`;
+        const fileName = `your-file.${fileType}`;
+        saveAs(fileUrl, fileName);
     };
-    const handleXmlClick = () => {
-        router.push('/developer/dashboard/preview-xml-file');
+
+    const handleDownloadClick = () => handleDownload('json');
+    const handleXmlClick = () => handleDownload('xml');
+    const handleStringClick = () => handleDownload('string');
+
+    const handlePreview = (fileType) => {
+        const routeMap = {
+            json: '/developer/dashboard/preview-json-file',
+            xml: '/developer/dashboard/preview-xml-file',
+            string: '/developer/dashboard/preview-string-file',
+        };
+        router.push(routeMap[fileType]);
     };
-    const handleStringClick = () => {
-        router.push('/developer/dashboard/preview-string-file');
-    };
+
+    const handleJsonPreview = () => handlePreview('json');
+    const handleXmlPreview = () => handlePreview('xml');
+    const handleStringPreview = () => handlePreview('string');
 
     return (
         <div className="w-full p-6">
@@ -73,9 +90,9 @@ const DeveloperDashboard = () => {
             </div>
 
             {/* Table */}
-            <div className="relative h-screen overflow-x-auto sm:overflow-x-scroll md:overflow-x-scroll lg:overflow-x-scroll xl:overflow-x-visible w-full shadow-md sm:rounded-lg mt-8 no-scrollbar">
+            <div className="relative h-screen overflow-x-auto w-full shadow-md rounded-lg mt-8 no-scrollbar">
                 <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-sm text-gray-700 font-semibold sticky top-0 bg-[#daeaff]">
+                    <thead className="text-sm text-gray-700 font-semibold sticky top-0 z-30 bg-[#daeaff]">
                         <tr>
                             <th scope="col" className="px-6 py-4">Product Name</th>
                             <th scope="col" className="px-10 py-4">Language</th>
@@ -93,20 +110,20 @@ const DeveloperDashboard = () => {
                                 <td className={`px-6 py-4 pl-9 ${item.status === 'Pending' ? 'text-red-600' : item.status === 'Progress' ? 'text-yellow-600' : item.status === 'Finished' ? 'text-green-600' : ''} truncate`}>{item.status}</td>
                                 <td className="px-6 py-4 border-gray-200">{item.fromDate}</td>
                                 <td className="px-6 py-4 border-gray-200">{item.toDate}</td>
-                                <td className="flex gap-2 justify-center relative">
-                                    <div className="dropdown relative pb-5">
+                                <td className="flex py-3 gap-4 pl-8 items-center">
+                                    <div className="dropdown relative">
                                         <div tabIndex={0} role="button" className="">
-                                            <img src="../assets/icons/view.svg" alt="view" className="cursor-pointer" />
+                                            <RemoveRedEyeOutlinedIcon style={{ color: '#4F81FF' }}></RemoveRedEyeOutlinedIcon>
                                         </div>
                                         <ul tabIndex={0} className="dropdown-content absolute z-[1] left-1/2 transform -translate-x-1/2 menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
-                                            <li><button onClick={handleXmlClick} className="text-red-500 font-semibold">XML File</button></li>
-                                            <li><button onClick={handleDownloadClick} className="text-yellow-500 font-semibold">JSON File</button></li>
-                                            <li><button onClick={handleStringClick} className="text-green-500 font-semibold">String File</button></li>
+                                            <li><button onClick={handleXmlPreview} className="text-red-500 font-semibold">XML File</button></li>
+                                            <li><button onClick={handleJsonPreview} className="text-yellow-500 font-semibold">JSON File</button></li>
+                                            <li><button onClick={handleStringPreview} className="text-green-500 font-semibold">String File</button></li>
                                         </ul>
                                     </div>
                                     <div className="dropdown relative">
                                         <button tabIndex={0} role="button" className="">
-                                            <img src="../assets/icons/download.svg" alt="download" className="cursor-pointer" />
+                                            <FileDownloadOutlinedIcon style={{ color: '#F8C408' }} />                                         
                                         </button>
                                         <ul tabIndex={0} className="dropdown-content absolute z-[1] left-1/2 transform -translate-x-1/2 menu p-2 shadow bg-base-100 rounded-box w-[8rem]">
                                             <li><button onClick={handleXmlClick} className="text-red-500 font-semibold">XML File</button></li>

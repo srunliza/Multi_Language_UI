@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react'
 import { useState } from "react";
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
@@ -192,7 +193,7 @@ const SettingPage = () => {
                                         <input
                                             id="name"
                                             type="text"
-                                            placeholder="Enter first name"
+                                            placeholder="Enter last name"
                                             value={lastName}
                                             onChange={handaleLastNameChange}
                                             className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 input-primary w-full max-w-xs ${lastNameError ? 'border-red-500' : ''}`} />
@@ -239,6 +240,7 @@ const SettingPage = () => {
                             <div className="mt-2">
                                 <label htmlFor="dob" className="block text-gray-700 dark:text-white mb-1">Date of Birth</label>
                                 <DatePicker
+                                    id='calender'
                                     className=" input-primary text-gray-700  focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border bg-white"
                                 />
 
@@ -335,14 +337,16 @@ const SettingPage = () => {
                                     </div>
                                 </div>
                             </div>
+                              
+                 
                         </div>
                     </div>
-
                     {/* Button Cancel and Save */}
-                    <div className="mt-4 flex sm:ml-12 md:ml-12 justify-end gap-3 mr-10">
+                    <div className="mt-4 flex gap-3 justify-end w-full xl:-ml-11 lg:ml-1">
                         <button type="button" className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]">Cancel</button>
                         <button type="submit" className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]">Save</button>
                     </div>
+                  
                 </div>
             </form>
         </div>

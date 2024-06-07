@@ -20,7 +20,7 @@ const Sidebar = ({ isSidebarOpen }) => {
   return (
     <>
       <div
-        className={`h-screen md:items-center flex-col lg:bg-blue-800 md:bg-white sm:bg-white z-50 w-[15rem] absolute ${
+        className={`h-screen md:items-center -z-40 flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >

@@ -1,8 +1,9 @@
 import AddMemberModal from "@/components/AddMemberModal";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
-import SelectComponent from "@/components/SelectComponent";
+import SelectComponent from "@/components/Selectcomponent";
 import ViewMember from "@/components/ViewMember";
+import InputKeywordComponent from "@/components/InputKeywordComponent";
 
 const AddKeyValuePage = () => {
   const tableData = [
@@ -17,25 +18,27 @@ const AddKeyValuePage = () => {
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
   ];
-
   return (
-    <div className="w-full h-screen flex flex-col">
-      <div className="flex justify-between mb-2 p-4">
+
+
+<div className="w-full  ">
+      <div className="flex justify-between mb-2">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex justify-between ">
+        <div className="bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 ">
           {/* Header */}
           <NavbarProjectLeaderComponent />
-          {/* Container */}
-          <form action="" className="flex-grow overflow-y-auto no-scrollbar p-4">
-            <div>
-              <div className="w-full lg:w-[321px] py-2 text-xs">
+          {/* container */}
+             {/* Form */}
+             <form action="">
+            <div className="ml-10 mt-3 lg:w-[851px]">
+              <div className="w-full lg:w-[321px] py-2 text-xs ">
                 <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
+                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose Language</option>
                   <option value="khmer">Khmer</option>
                   <option value="english">English</option>
@@ -44,9 +47,9 @@ const AddKeyValuePage = () => {
                 </select>
               </div>
               <SelectComponent />
-              <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs">
-                <div className="flex flex-col w-full lg:w-auto">
-                  <label htmlFor="start" className="text-xs mb-1">
+              <div className="flex flex-col lg:flex-row items-center lg:space-x-4  text-xs">
+                <div className="flex flex-col w-full lg:w-auto ">
+                  <label htmlFor="start" className="text-xs  mb-1">
                     Start Date
                   </label>
                   <input
@@ -71,14 +74,14 @@ const AddKeyValuePage = () => {
               {/* input key */}
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs mb-1">
-                    Key name
+                  <label htmlFor="key" className="text-xs  mb-1">
+                    Keyword
                   </label>
                   <input
                     type="text"
-                    placeholder="Input your key name"
+                    placeholder="Input your keyword"
                     name="keyName"
-                    className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    className="w-full lg:w-[220px] h-[37.6px]   px-3 text-xs py-2 border border-gray-300 rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
@@ -101,28 +104,17 @@ const AddKeyValuePage = () => {
                 </div>
               </div>
               {/* choose key word */}
-              <div className="w-full lg:w-[321px] pb-2 mb-2 mt-0">
-                <label htmlFor="select" className="text-xs">
-                  Or choose keyword as a page
-                </label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
-                  <option value="language">Choose type of keyword</option>
-                  <option value="dashboard">Dashboard</option>
-                  <option value="english">English</option>
-                  <option value="korea">Korea</option>
-                  <option value="spain">Spain</option>
-                </select>
-              </div>
+              <InputKeywordComponent/>
               {/* table */}
-              <div className="border w-full lg:w-[590px] p-2 rounded-lg border-gray-300">
+              <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
                 <div className="rounded-lg w-full lg:w-[570px] overflow-hidden overflow-y-auto h-32 no-scrollbar">
                   <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
                     <thead>
-                      <tr className="text-center text-md bg-gray-300 rounded-r-lg sticky top-0">
-                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-bold">
-                          Key name
+                      <tr className="text-center text-md bg-gray-100 rounded-r-lg sticky top-0">
+                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-medium">
+                          Keyword
                         </th>
-                        <th className="w-1/2 py-2 px-1 text-gray-600 font-bold">
+                        <th className="w-1/2 py-2 px-1 text-gray-600 font-medium">
                           Hint
                         </th>
                       </tr>
@@ -142,14 +134,16 @@ const AddKeyValuePage = () => {
                 </div>
               </div>
               {/* button */}
-              <div className="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
+
+              <div class="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
                 <input
-                  className="px-3 py-1 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                  class="px-3 py-1  text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                   type="reset"
                   value={"Reset"}
                 />
+
                 <input
-                  className="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                  class="px-3 py-1 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                   type="submit"
                   value={"Submit"}
                 />
@@ -157,11 +151,12 @@ const AddKeyValuePage = () => {
             </div>
           </form>
         </div>
-        <div className="w-1/3">
-          <ViewMember />
-        </div>
+        <ViewMember />
       </div>
     </div>
+
+
+      
   );
 };
 

@@ -50,7 +50,7 @@ const EmployeeDashboardPage = () => {
 
       <div className="flex-grow mt-8 px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
+          <div className=" p-4 rounded-xl border-2 border-red-300 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
                 Pending Project
@@ -128,9 +128,9 @@ const EmployeeDashboardPage = () => {
         </div>
       </div>
 
-      <div className="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 px-8 no-scrollbar">
+      <div className="relative overflow-x-auto h-[480px] shadow-md sm:rounded-lg mt-8 px-8 bg-white no-scrollbar">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-sm text-gray-700 font-semibold sticky top-0 bg-[#F1F4F9]">
+          <thead className="text-sm text-gray-700 font-semibold sticky top-0 border-b bg-white">
             <tr>
               <th scope="col" className="px-6 py-4">Product Name</th>
               <th scope="col" className="px-6 py-4">Role</th>
