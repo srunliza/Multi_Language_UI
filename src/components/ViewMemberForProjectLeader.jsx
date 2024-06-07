@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import ModalForSearch from "./ModalForSearch";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import GroupIcon from '@mui/icons-material/Group';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+import AddMemberModal from "./AddMember";
 
 const ViewMemberProjectLeader = ({ onClose }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
   const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
   const [users, setUsers] = useState([
     { id: 1, name: "Robert Downey Jr", role: "Project Leader", image: "/assets/images/vandy.png" },
@@ -25,14 +25,6 @@ const ViewMemberProjectLeader = ({ onClose }) => {
     { id: 12, name: "Sokhim", role: "Developer", image: "/assets/images/sokhim.png" },
     { id: 13, name: "Sreyly", role: "Developer", image: "/assets/images/sreyly.png" }
   ]);
-
-  const handleSearchClick = () => {
-    setModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
 
   const handleAddMemberClick = () => {
     setAddMemberModalVisible(true);
@@ -91,7 +83,7 @@ const ViewMemberProjectLeader = ({ onClose }) => {
               className="bg-blue-500 text-white p-1 rounded"
               onClick={handleAddMemberClick}
             >
-              <AddIcon />
+              <PersonAddOutlinedIcon />
             </button>
           </div>
           <hr className="mt-1 border-t border-gray-300" />
@@ -119,78 +111,9 @@ const ViewMemberProjectLeader = ({ onClose }) => {
         </div>
       </main>
 
-      <ModalForSearch isVisible={isModalVisible} onClose={handleCloseModal}>
-        <h2 className="text-xl font-bold mb-4">Search Members</h2>
-        <input
-          type="text"
-          placeholder="Search by name..."
-          className="w-full p-2 border border-gray-300 rounded-md"
-        />
-        <button
-          onClick={handleCloseModal}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md"
-        >
-          Close
-        </button>
-      </ModalForSearch>
-
       {isAddMemberModalVisible && (
-        <AddMemberModal onClose={handleCloseAddMemberModal} onAddMember={handleAddMember} />
+        <AddMemberModal isOpen={isAddMemberModalVisible} onClose={handleCloseAddMemberModal} />
       )}
-    </div>
-  );
-};
-
-const AddMemberModal = ({ onClose, onAddMember }) => {
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("Project Leader");
-  const [image, setImage] = useState("");
-
-  const handleSubmit = () => {
-    const newMember = { id: Date.now(), name, role, image };
-    onAddMember(newMember);
-  };
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-4 rounded-md shadow-md">
-        <h2 className="text-xl font-bold mb-4">Add Member</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded-md"
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded-md"
-        />
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded-md"
-        >
-          <option value="Project Leader">Project Leader</option>
-          <option value="Translator">Translator</option>
-          <option value="Developer">Developer</option>
-        </select>
-        <button
-          onClick={handleSubmit}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md"
-        >
-          Add Member
-        </button>
-        <button
-          onClick={onClose}
-          className="mt-4 px-4 py-2 bg-gray-600 text-white rounded-md"
-        >
-          Close
-        </button>
-      </div>
     </div>
   );
 };
