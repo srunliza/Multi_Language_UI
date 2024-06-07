@@ -8,21 +8,27 @@ body,
   height: 100%;
   box-sizing: border-box;
 }
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
 /* hide scrollbar */
 @layer utilities {
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }
 
@@ -33,6 +39,7 @@ body,
     --background-end-rgb: 0, 0, 0;
   }
 }
+
 /* 
 body {
   color: rgb(var(--foreground-rgb));
@@ -52,39 +59,45 @@ body {
 
 /* hide scrollbar */
 @layer utilities {
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }
 
 .status-label {
   display: inline-block;
-  min-width: 100px; /* Adjust this value as needed */
+  min-width: 100px;
+  /* Adjust this value as needed */
   text-align: center;
 }
 
 #date {
   border-radius: 0px 0px;
-  padding : 8px;
-  background-color : white;
+  padding: 8px;
+  background-color: white;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px
 }
-#calender {
-  background-color : white;
-  padding : 8px
 
+#calender {
+  background-color: white;
+  padding: 8px
 }
+
 #select {
   width: 200px;
-  padding : 8px;
-  background-color : white;
+  padding: 8px;
+  background-color: white;
   border-radius: 0px 0px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px
@@ -105,3 +118,31 @@ body {
   padding: 0;
   padding-right: 0;
 }
+
+
+.gradient-background {
+  background: linear-gradient(300deg, #00bfffad, #0781b9, #ef8172);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
+
+

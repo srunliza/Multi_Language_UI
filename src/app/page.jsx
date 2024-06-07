@@ -5,12 +5,12 @@ import Link from "next/link";
 
 const LandingPageComponent = () => {
   return (
-    <div className="bg-[#e5e5e5]">
+    <div className=" bg-[#e5e5e5] ">
       {/* Navbar */}
-      <nav className=" top-0 left-0 w-md  flex items-center justify-between pt-4 pb-4  bg-[#2357F9] font-bold text-white relative">
+      <nav className="sticky z-50 top-0 flex items-center justify-between shadow-lg  pt-4 pb-4  bg-white font-bold text-white ">
         <div className=" w-9/12 mx-auto flex  justify-around items-center">
           <a href="/">
-            <img src="../Images/Logo.png" alt="langnet-logo" className="w-21" />
+            <img src="../Images/logo3.png" width={200} alt="langnet-logo" />
           </a>
           <div className="flex md:hidden">
             <div className="group">
@@ -31,7 +31,7 @@ const LandingPageComponent = () => {
                 <div>
                   <a
                     href="#home"
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-3 py-2 text-red-700 text-sm  hover:bg-gray-100"
                   >
                     Home
                   </a>
@@ -51,22 +51,22 @@ const LandingPageComponent = () => {
               </div>
             </div>
           </div>
-          <div className=" flex justify-around w-full md:w-auto md:flex gap-4 text-right">
+          <div className=" flex justify-between items-center w-full md:w-auto md:flex gap-4 text-right">
             <a
               href="#home"
-              className="font-medium  block  text-white rounded-full md:inline-block hover:text-blue-500 px-10"
+              className="block  font-normal  text-blue-700  md:inline-block hover:text-blue-500 px-10"
             >
               Home
             </a>
             <a
               href="#aboutus"
-              className="font-medium block md:inline-block text-white hover:text-blue-500 px-3"
+              className="font-normal   text-blue-700 block md:inline-block  hover:text-blue-500 px-3"
             >
               About us
             </a>
             <a
               href="#contactus"
-              className="font-normal block md:inline-block text-white hover:text-blue-500 px-3"
+              className="font-normal   text-blue-700 block md:inline-block  hover:text-blue-500 px-3"
             >
               Contact Us
             </a>
@@ -74,13 +74,13 @@ const LandingPageComponent = () => {
           <div className="hidden md:flex gap-4 text-end px-4">
             <a
               href="../login"
-              className="font-normal block md:inline-block text-white hover:text-blue-500 px-6"
+              className="font-normal block md:inline-block text-blue-700 hover:text-blue-500 px-6"
             >
               Login
             </a>
             <a
               href="../register"
-              className="font-normal block  text-white rounded-full md:inline-block hover:text-blue-500 px-6"
+              className="font-normal block  text-blue-700 rounded-full md:inline-block hover:text-blue-500 px-6"
             >
               Sign Up
             </a>
@@ -88,7 +88,7 @@ const LandingPageComponent = () => {
         </div>
       </nav>
       {/* secondNav */}
-      <div className="relative h-[650px] bg-[#2357F9]" id="home">
+      <div className="relative h-[650px] bg-[#2357F9] gradient-background" id="home">
         <div className="absolute inset-2 flex flex-col md:flex-row justify-between md:ml-20">
           <div className="md:w-1/2 items-center mx-auto md:text-left ml-[130px]">
             <h1 className="font-bold md:text-lg lg:text-2xl leading-tight mb-4 mt-40 text-white">
@@ -566,15 +566,15 @@ const LandingPageComponent = () => {
 
       {/* Footer */}
       <section>
-        <div className="mt-8 bg-[#2357F9] pt-9">
+        <div className="mt-8 gradient-background shadow-lg pt-9">
           <div>
-            <div className="flex justify-evenly sm:px-[18px] md:flex-row md:px-10">
-              <div className="md:w-[316px]">
-                <a href="/" className="text-indigo-900 z-10 active">
+            <div className="flex justify-evenly  sm:px-[18px] md:flex-row md:px-10">
+              <div className="md:w-[316px] flex flex-col items-center gap-4">
+                <a href="/" className="text-indigo-900 z-10 block active">
                   <img
-                    src="../Images/Logo.png"
+                    src="../Images/Logo3.png"
                     alt="langnet-logo"
-                    className="w-22 mx-auto "
+                    width={290}
                   />
                 </a>
                 <div className="mt-[18px] flex gap-6 justify-center">
@@ -654,7 +654,7 @@ const LandingPageComponent = () => {
                 </p>
               </div>
               <div className="mt-12 md:mt-0 text-center ">
-                <img src="./Images/Map.png" alt="" className="w-20 mx-auto" />
+                <img src="./Images/Map.png" alt="" className="w-20  mx-auto" />
                 <p className="mt-6 mb-2 font-bold text-white">
                   OUR OFFICE LOCATION
                 </p>
