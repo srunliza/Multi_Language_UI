@@ -66,7 +66,7 @@ const ProjectListComponent = ({
           <div className="sm:-ml-1 ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
             <Link
               key={index}
-              href={`/${project.role.replace(" ", "-").toLowerCase()}/project`}
+              href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
               passHref
             >
               <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-9 text-center text-sm ">

@@ -1,14 +1,13 @@
 import React from "react";
 import { Carousel } from "flowbite-react";
 import teamMembers from "@/obj/teamMembers";
-import Link from "next/link";
 
 const LandingPageComponent = () => {
   return (
     <div className=" bg-[#e5e5e5] ">
       {/* Navbar */}
-      <nav className="sticky z-50 top-0 flex items-center justify-between shadow-lg  pt-4 pb-4  bg-white font-bold text-white ">
-        <div className=" w-9/12 mx-auto flex  justify-around items-center">
+      <nav className="sticky z-50 top-0 shadow-lg   py-4 bg-white font-bold text-white ">
+        <div className=" w-9/12 mx-auto flex px-8 justify-between items-center">
           <a href="/">
             <img src="../Images/logo3.png" width={200} alt="langnet-logo" />
           </a>
@@ -71,16 +70,16 @@ const LandingPageComponent = () => {
               Contact Us
             </a>
           </div>
-          <div className="hidden md:flex gap-4 text-end px-4">
+          <div className="hidden md:flex items-center gap-4">
             <a
               href="../login"
-              className="font-normal block md:inline-block text-blue-700 hover:text-blue-500 px-6"
+              className=" text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
             >
               Login
             </a>
             <a
               href="../register"
-              className="font-normal block  text-blue-700 rounded-full md:inline-block hover:text-blue-500 px-6"
+              className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
             >
               Sign Up
             </a>
@@ -88,13 +87,14 @@ const LandingPageComponent = () => {
         </div>
       </nav>
       {/* secondNav */}
-      <div className="relative h-[650px] bg-[#2357F9] gradient-background" id="home">
+      <div className="relative h-[650px] gradient-background" id="home">
         <div className="absolute inset-2 flex flex-col md:flex-row justify-between md:ml-20">
-          <div className="md:w-1/2 items-center mx-auto md:text-left ml-[130px]">
-            <h1 className="font-bold md:text-lg lg:text-2xl leading-tight mb-4 mt-40 text-white">
+          <div className="md:w-1/2 items-center mx-auto md:text-left ml-[155px]">
+            <h1 className="font-bold md:text-lg lg:text-2xl leading-tight mb-4 mt-32 text-white">
               We bring the solution to make <br />
               your work faster
             </h1>
+
             <p className="font-regular text-md mb-8 text-white text-justify w-[500px]">
               LangNet is a web-based platform enabling software project leaders
               to efficiently manage multiple languages within the software,
@@ -121,7 +121,7 @@ const LandingPageComponent = () => {
 
         {/* fly card */}
         <div className="relative">
-          <div className="pt-24 md:pt-[30rem] flex flex-col justify-around md:flex-row flex-wrap gap- w-11/12 md:w-9/12 mx-auto">
+          <div className="pt-24 md:pt-[30rem] flex flex-col px-[30px] justify-between md:flex-row flex-wrap gap- w-11/12 md:w-9/12 mx-auto">
             <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
               <div className="relative z-10 mx-auto text-center md:text-left">
                 <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
@@ -176,6 +176,7 @@ const LandingPageComponent = () => {
                 </div>
               </div>
             </div>
+
             <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
               <div className="relative z-10 mx-auto text-center md:text-left">
                 <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
@@ -570,7 +571,10 @@ const LandingPageComponent = () => {
           <div>
             <div className="flex justify-evenly  sm:px-[18px] md:flex-row md:px-10">
               <div className="md:w-[316px] flex flex-col items-center gap-4">
-                <a href="/" className="text-indigo-900 z-10 block active">
+                <a
+                  href="/"
+                  className="z-10  rounded-lg overflow-hidden  block active"
+                >
                   <img
                     src="../Images/Logo3.png"
                     alt="langnet-logo"

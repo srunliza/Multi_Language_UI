@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import { useRouter } from 'next/navigation';
 
 const notifications = [
   {
@@ -58,13 +59,13 @@ const notifications = [
 ];
 
 const projects = [
-  { name: "Spring translate", icon: "/path/to/icon1.png" },
-  { name: "Web Application", icon: "/path/to/icon2.png" },
-  { name: "Next js translation", icon: "/path/to/icon3.png" },
-  { name: "Java translation", icon: "/path/to/icon4.png" },
-  { name: "UX/UI", icon: "/path/to/icon5.png" },
-  { name: "Java Script", icon: "/path/to/icon6.png" },
-  { name: "Database Design", icon: "/path/to/icon7.png" },
+  { name: "Spring translate", icon: "/Images/search1.png" },
+  { name: "Web Application", icon: "/Images/search1.png" },
+  { name: "Next js translation", icon: "/Images/search1.png" },
+  { name: "Java translation", icon: "/Images/search1.png" },
+  { name: "UX/UI", icon: "/Images/search1.png" },
+  { name: "Java Script", icon: "/Images/search2.png" },
+  { name: "Database Design", icon: "/Images/search2.png" },
 ];
 
 const NotificationItem = ({ notification, onClick }) => (
@@ -101,6 +102,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
   const [popupContent, setPopupContent] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const router = useRouter();
 
   const handleShowAll = () => {
     setShowAll(true);
@@ -131,6 +133,10 @@ const NavbarComponent = ({ toggleSidebar }) => {
     } else {
       setSearchResults([]);
     }
+  };
+
+  const handleProfileClick = () => {
+    router.push('/employee/profile');
   };
 
   return (
@@ -201,9 +207,10 @@ const NavbarComponent = ({ toggleSidebar }) => {
 
           <div className="flex items-center">
             <img
-              className="inline-block h-[38px] w-[38px] rounded-full"
+              className="inline-block h-[38px] w-[38px] rounded-full cursor-pointer"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s"
               alt="Profile Image"
+              onClick={handleProfileClick}
             />
           </div>
         </div>
