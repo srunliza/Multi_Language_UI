@@ -12,7 +12,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
 import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
-import langnet from "../../public/Images/langnet3.jpg"
+import langnet from "../../public/Images/langNet3.jpg"
 import Image from "next/image";
 
 const Sidebar = ({ isSidebarOpen }) => {
@@ -44,19 +44,18 @@ const Sidebar = ({ isSidebarOpen }) => {
   return (
     <>
       <div
-        className={`h-full md:items-center -z-40 flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
+        className={`bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 h-full md:items-center flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >
         <div className="flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800">
-          <div className="flex items-center justify-center h-30 bg-blue-800 sm:hidden md:block lg:block mx-auto ">
+          <div className="flex items-center justify-center sm:hidden md:block lg:block mx-auto ">
             <Image  
-            src={langnet}
-            />
-                            
+            src={langnet} className="shadow-md h-[4rem]"
+            />          
           </div>
 
-          <div className="flex flex-col sm:mt-[9.7rem] md:mt-3 lg:mt-3">
+          <div className="flex flex-col sm:mt-[9.7rem] md:mt-8 lg:mt-8 xl:mt-8">
             <nav className="flex flex-col items-center sm:space-y-[5rem] xl:space-y-[10rem] lg:space-y-[5rem] md:space-y-[5rem]">
               <div className="flex flex-col space-y-1">
                 <button
