@@ -1,10 +1,10 @@
+"use client";
 
-import React from 'react'
 
 const DeveloperDashboardHome = () => {
   return (
-    <div>DeveloperDashboardHome</div>
+    <h1>hello</h1>
   )
-}
+};
 
-export default DeveloperDashboardHome
+export default DeveloperDashboardHome;
