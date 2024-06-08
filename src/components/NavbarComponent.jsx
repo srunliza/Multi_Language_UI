@@ -82,8 +82,10 @@ const NotificationItem = ({ notification, onClick }) => (
       />
     </div>
     <div className="flex flex-col w-[400px]">
-      <div className="font-semibold">UX UI</div>
-      <div className="text-sm">{notification.description}</div>
+      <div className="font-semibold">{notification.title}</div>
+      <div className="text-sm overflow-hidden overflow-ellipsis line-clamp-2">
+        {notification.description}
+      </div>
     </div>
     <div className="flex flex-col items-center">
       <div className="text-sm">{notification.date}</div>
@@ -240,7 +242,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
                 alt="Cancel"
               />
             </div>
-            <div className="text-xl">UX UI</div>
+            <div className="text-xl">{popupContent.title}</div>
             <div className="text-sm mb-4">
               {popupContent.description}
             </div>
