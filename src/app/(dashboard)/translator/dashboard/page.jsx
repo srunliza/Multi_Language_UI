@@ -101,7 +101,7 @@ const TranslatorPage = () => {
           <thead className="text-gray-700 sticky top-0 white bg-blue-200 dark:text-gray-400">
             <tr>
               <th className="py-4 px-3 text-gray-700 font-semibold text-center">
-                Project Name
+                File Name
                 <button onClick={() => handleSortClick("name")}>
                   <svg
                     className="h-4 w-4 inline"

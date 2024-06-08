@@ -55,7 +55,7 @@ const ProjectListComponent = ({
                 ? `${project.name.substring(0, 15)}...`
                 : project.name}
             </div>
-            <div className="w-[12rem] text-sm text-green-500">
+            <div className="w-[10rem] text-sm text-green-500">
               {project.owner.length > 15
                 ? `${project.owner.substring(0, 15)}...`
                 : project.owner}
