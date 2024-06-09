@@ -1,7 +1,7 @@
 import { NextUIProvider } from "@nextui-org/system";
 
 
-export function Providers({children}) {
+export function Providers({ children }) {
     return (
         <NextUIProvider>
             {children}

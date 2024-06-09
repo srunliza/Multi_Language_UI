@@ -1,241 +1,129 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-import {
-  EmailOutlined,
-  HttpsOutlined,
-  VisibilityOffOutlined,
-  VisibilityOutlined,
-} from "@mui/icons-material";
-
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  //handle validate email
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  //handle email change
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    if (!value) {
-      setEmailError("Email is required.");
-    } else if (!validateEmail(value)) {
-      setEmailError("Invalid email format.");
-    } else {
-      setEmailError("");
-    }
-  };
-
-  //handle password change
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-
-    if (!value) {
-      setPasswordError("Password is required.");
-    } else if (value.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
-    } else {
-      setPasswordError("");
-    }
-  };
-
-  //handle submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let valid = true;
-
-    if (!email) {
-      setEmailError("Email is required.");
-      valid = false;
-    } else if (!validateEmail(email)) {
-      setEmailError("Invalid email format.");
-      valid = false;
-    } else {
-      setEmailError("");
-    }
-
-    if (!password) {
-      setPasswordError("Password is required.");
-      valid = false;
-    } else if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
-      valid = false;
-    } else {
-      setPasswordError("");
-    }
-
-    if (valid) {
-      console.log("Form submitted successfully!");
-    }
-  };
-
-  //handle hide and show password
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
   const router = useRouter();
 
-  //use to redirect to another path
-  const handleLoginClick = () => {
-    router.push("/employee/dashboard");
-  };
+  // define handle login
+  async function handleLogin(userInfo) {
+    // define structure object
+    const newUserInfo = {
+      email: userInfo.get("email"),
+      password: userInfo.get("password"),
+    };
+
+    // calling next auth service and passing " newUseInfo "
+    const res = await signIn("credentials", {
+      redirect: false,
+      ...newUserInfo,
+    });
+    // checking is login success nor not
+    if (res.ok) {
+      router.push("/employee/dashboard");
+    }
+  }
 
   return (
-    // background image
-    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
-      <div className="flex justify-center items-center">
-        {/* card */}
-        <div className="bg-white rounded-2xl mt-7 shadow-lg p-8 sm:p-5 md:px-12 max-w-md w-full">
-          {/* title */}
-          <h2 className="sm:text-lg md:text-xl lg:text-2xl mt-2 font-bold text-[#1A42BC] mb-2">
-            Welcome to Sign in!
-          </h2>
-          {/* subtitle */}
-          <p className="text-gray-600 sm:text-xs md:text-xs lg:text-sm mb-4">
-            Hi, enter your details to login to your account
-          </p>
-
-          {/* image */}
-          <div className="flex justify-center items-center mb-3">
-            <Image
-              src='/assets/icons/login.svg'
-              width={120}
-              height={120}
-              alt="change password image"
+    <main>
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <a
+            href="#"
+            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            <img
+              className="w-8 h-8 mr-2"
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+              alt="logo"
             />
-          </div>
-
-          {/* form */}
-          <form onSubmit={handleSubmit}>
-            {/* email input */}
-            <div className="mb-2">
-              <label
-                htmlFor="email"
-                className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
-              >
-                Email
-              </label>
-              <div className="relative text-gray-800 w-80">
-                <input
-                  type="email"
-                  id="email"
-                  className={`w-full px-10 py-2.5 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${
-                    emailError ? "border-red-500" : ""
-                  }`}
-                  placeholder="example@gmail.com"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-                <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
-                  <EmailOutlined fontSize="small" />
-                </span>
-              </div>
-
-              {emailError && (
-                <p className="text-red-500 text-xs mt-1">{emailError}</p>
-              )}
-            </div>
-
-            {/* password input */}
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
-              >
-                Password
-              </label>
-              <div className="relative text-gray-800 w-80">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  id="password"
-                  className={`w-full px-10 py-2.5 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${
-                    passwordError ? "border-red-500" : ""
-                  }`}
-                  placeholder="Enter Your Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-
-                <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
-                  <HttpsOutlined fontSize="small" />
-                </span>
-                <span
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
-                  onClick={togglePasswordVisibility}
+            Flowbite
+          </a>
+          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Sign in to your account
+              </h1>
+              <form className="space-y-4 md:space-y-6" action={handleLogin}>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Your email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="name@company.com"
+                    required=""
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-start">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="remember"
+                        aria-describedby="remember"
+                        type="checkbox"
+                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                        required=""
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label
+                        htmlFor="remember"
+                        className="text-gray-500 dark:text-gray-300"
+                      >
+                        Remember me
+                      </label>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full text-white bg-orange-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  {passwordVisible ? (
-                    <VisibilityOutlined fontSize="small" />
-                  ) : (
-                    <VisibilityOffOutlined fontSize="small" />
-                  )}
-                </span>
-              </div>
-
-              {passwordError && (
-                <p className="text-red-500 text-xs mt-1">{passwordError}</p>
-              )}
+                  Sign in
+                </button>
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                  Don’t have an account yet?{" "}
+                  <a
+                    href="#"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Sign up
+                  </a>
+                </p>
+              </form>
             </div>
-
-            {/* button submit */}
-            <button
-              onClick={handleLoginClick}
-              type="submit"
-              className="w-full mt-2 bg-[#1A42BC] text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              Sign in
-            </button>
-
-            {/* link to forget password */}
-            <div className="flex justify-end items-center mt-3">
-              <Link href="forget-password" className="text-xs text-[#1A42BC]">
-                Forgot Password
-              </Link>
-            </div>
-
-            {/* or sign in with */}
-            <div className="flex justify-center items-center">
-              <p className="text-gray-500 sm:text-xs md:text-sm lg:text-sm">
-                Or Sign in With
-              </p>
-            </div>
-
-            {/* login with google or github */}
-            <div className="flex justify-center items-center mt-3 gap-5">
-              <a className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
-                <Image src="/assets/icons/google.svg" width={20} height={20} alt="google icon" />
-              </a>
-              <a className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100">
-                <Image src="/assets/icons/github.svg" width={20} height={20} alt="github" />
-              </a>
-            </div>
-
-            {/* register link */}
-            <div className="flex justify-center items-center mt-3">
-              <p className="text-gray-500 sm:text-xs md:text-sm lg:text-xs">
-                If you don't have an account?
-                <Link href="register" className="text-[#1A42BC]">
-                  Register
-                </Link>
-              </p>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 };

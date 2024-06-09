@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@nextui-org/input";
 import Image from "next/image";
 
 export default function NotFound() {
