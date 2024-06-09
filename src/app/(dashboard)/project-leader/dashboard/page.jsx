@@ -1,25 +1,26 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import Link from "next/link";
-import MemberProjectLeader from "@/components/MemberProjectModal";
+import MemberProjectLeader from "@/components/MemberProjectLeader";
 
 const CreateProjectPage = () => {
   const searchParams = useSearchParams();
   const projectName = searchParams.get("projectName");
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-full flex flex-col">
       <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">
           {projectName || "Project Name"}
         </h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3">
-        <div className="flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl h-[42.7rem] border border-blue-300 flex-grow">
+
+      <div className="flex flex-wrap justify-between gap-4">
+        <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* Container */}
@@ -38,8 +39,8 @@ const CreateProjectPage = () => {
               <div className="pt-10 px-10 w-full lg:w-1/2 sm:w max-w-md">
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
-                    <Link href={"/project-leader/upload-file"}>
-                      <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
+                    <Link href={"/project-leader/dashboard/upload-file"}>
+                      <div className="relative w-[90%] h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
                             File Upload
@@ -87,8 +88,8 @@ const CreateProjectPage = () => {
               <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
-                    <Link href={"/project-leader/add-key-value"}>
-                      <div className="relative w-[90%] h-[200px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
+                    <Link href={"/project-leader/dashboard/add-key-value"}>
+                      <div className="relative w-[90%] h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
                             Add keys manually
@@ -135,8 +136,8 @@ const CreateProjectPage = () => {
             </div>
           </div>
         </div>
-        <div className="">
-          <MemberProjectLeader/>
+        <div>
+          <MemberProjectLeader />
         </div>
       </div>
     </div>

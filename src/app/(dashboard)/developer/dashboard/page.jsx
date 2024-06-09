@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import { saveAs } from "file-saver";
-import SortProjectCardListComponent from "@/components/SortProjectCardListComponent";
+import SortProjectCardListComponent from "@/components/SortComponent";
 
 const getStatusTextColor = (status) => {
   switch (status) {

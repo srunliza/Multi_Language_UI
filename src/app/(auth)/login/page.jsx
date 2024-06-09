@@ -202,14 +202,14 @@ const LoginPage = () => {
 
             {/* link to forget password */}
             <div className="flex justify-end items-center mt-3">
-              <Link href="forget-password" className="text-xs text-[#1A42BC]">
+              <Link href="forget-password" className="text-sm text-[#1A42BC]">
                 Forgot Password
               </Link>
             </div>
 
             {/* or sign in with */}
             <div className="flex justify-center items-center">
-              <p className="text-gray-500 sm:text-xs md:text-sm lg:text-sm">
+              <p className="text-gray-500 md:text-sm lg:text-sm">
                 Or Sign in With
               </p>
             </div>
@@ -228,7 +228,7 @@ const LoginPage = () => {
             <div className="flex justify-center items-center mt-3">
               <p className="text-gray-500 sm:text-xs md:text-sm lg:text-xs">
                 If you don't have an account?
-                <Link href="register" className="text-[#1A42BC]">
+                <Link href="register" className="px-2 text-sm text-[#1A42BC]">
                   Register
                 </Link>
               </p>

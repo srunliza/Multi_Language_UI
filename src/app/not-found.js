@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="bg-[url('/assets/icons/a2.jpg')] flex  items-center justify-center min-h-screen bg-[#2357F9] gap-10 ">
+    <div className="flex  items-center justify-center min-h-screen bg-[#2357F9] gap-10 ">
       <div className="  p-8 rounded-md text-center">
         <Image
           src="https://carlelieser.github.io/tiper-js/img/empty-state.svg"

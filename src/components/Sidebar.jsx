@@ -30,10 +30,9 @@ const Sidebar = ({ isSidebarOpen }) => {
   };
 
   const handleLogoutConfirm = () => {
-    // Perform logout functionality here
     console.log("User confirmed logout");
     setIsLogoutPopupVisible(false);
-    router.push("/login");
+    router.push("/");
   };
 
   const handleLogoutCancel = () => {
@@ -44,7 +43,7 @@ const Sidebar = ({ isSidebarOpen }) => {
   return (
     <>
       <div
-        className={`bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 h-full md:items-center flex-col lg:bg-blue-800 md:bg-white sm:bg-white w-[15rem] absolute ${
+        className={`h-full md:items-center flex-col md:bg-white sm:bg-white w-[15rem] absolute ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >
@@ -56,8 +55,8 @@ const Sidebar = ({ isSidebarOpen }) => {
           </div>
 
           <div className="flex flex-col sm:mt-[9.7rem] md:mt-8 lg:mt-8 xl:mt-8">
-            <nav className="flex flex-col items-center sm:space-y-[5rem] xl:space-y-[10rem] lg:space-y-[5rem] md:space-y-[5rem]">
-              <div className="flex flex-col space-y-1">
+            <nav className="flex flex-col items-center xl:space-y-[15rem] lg:space-y-[15rem] md:space-y-[15rem] sm:space-y-[13rem]">
+              <div className="flex flex-col space-y-1 mt-5">
                 <button
                   type="button"
                   className="gap-1 px-5 py-3 text-base font-medium text-blue-800 inline-flex items-center bg-white rounded-t-lg rounded-br-lg text-center"
@@ -68,9 +67,9 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </button>
                 <Link
                   href="/employee/dashboard"
-                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl mt-1 flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                     pathname === "/employee/dashboard"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      ? "text-gray-100 bg-gray-400 bg-opacity-25"
                       : "text-gray-100"
                   }`}
                 >
@@ -79,9 +78,9 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </Link>
                 <Link
                   href="/employee/profile"
-                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                     pathname === "/employee/profile"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      ? "text-gray-100 bg-gray-400 bg-opacity-25"
                       : "text-gray-100"
                   }`}
                 >
@@ -90,9 +89,9 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </Link>
                 <Link
                   href="/employee/calendar"
-                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                     pathname === "/employee/calendar"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      ? "text-gray-100 bg-gray-400 bg-opacity-25"
                       : "text-gray-100"
                   }`}
                 >
@@ -101,9 +100,9 @@ const Sidebar = ({ isSidebarOpen }) => {
                 </Link>
                 <Link
                   href="/employee/project-card"
-                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
-                    pathname === "/employee/project-card"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                  className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                    pathname === "/employee/project-card" || pathname.startsWith("/project-leader/dashboard")
+                      ? "text-gray-100 bg-gray-400 bg-opacity-25"
                       : "text-gray-100"
                   }`}
                 >
@@ -115,9 +114,9 @@ const Sidebar = ({ isSidebarOpen }) => {
               <div className="-ml-1 w-[10rem] flex flex-col items-center space-y-1">
                 <Link
                   href="/employee/setting"
-                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
+                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                     pathname === "/employee/setting"
-                      ? "text-gray-100 bg-gradient-to-r from-blue-500 to-green-500"
+                      ? "text-gray-100 bg-gray-400 bg-opacity-25"
                       : "text-gray-100"
                   }`}
                 >
@@ -127,7 +126,7 @@ const Sidebar = ({ isSidebarOpen }) => {
 
                 <button
                   type="button"
-                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-2xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 text-gray-100`}
+                  className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 text-gray-100`}
                   onClick={handleLogoutClick}
                 >
                   <ExitToAppOutlinedIcon />

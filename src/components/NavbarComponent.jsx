@@ -161,7 +161,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
                 {searchResults.map((project, index) => (
                   <div
                     key={index}
-                    className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+                    className="flex items-center p-2 hover:bg-gray-200 rounded-lg]  cursor-pointer"
                   >
                     <img
                       src={project.icon}

@@ -1,9 +1,9 @@
 import React from "react";
-import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
+import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
-import MemberProjectLeader from "@/components/MemberProjectModal";
+import MemberProjectLeader from "@/components/MemberProjectLeader";
 
 const UploadFilePage = () => {
   const tableData = [
