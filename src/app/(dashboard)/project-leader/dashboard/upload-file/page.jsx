@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
-import CloseIcon from "@mui/icons-material/Close"; 
+import CloseIcon from "@mui/icons-material/Close";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 
 const UploadFilePage = () => {
@@ -39,7 +39,10 @@ const UploadFilePage = () => {
             <form action="">
               <p className="text-color-text-black mb-3">Upload Your Files</p>
               <div className="border border-dashed border-color-text-grey bg-gray-50 p-2 rounded-xl shadow-md w-[100px] h-24 mb-5">
-                <label htmlFor="upload" className="flex flex-col items-center gap-2 cursor-pointer pt-1">
+                <label
+                  htmlFor="upload"
+                  className="flex flex-col items-center gap-2 cursor-pointer pt-1"
+                >
                   <svg
                     width="28"
                     height="26"
@@ -52,13 +55,17 @@ const UploadFilePage = () => {
                       fill="black"
                     />
                   </svg>
-                  <span className="text-gray-600 text-xs text-center">Upload your files here</span>
+                  <span className="text-gray-600 text-xs text-center">
+                    Upload your files here
+                  </span>
                 </label>
                 <input id="upload" type="file" className="hidden" />
               </div>
               <div className="w-full border-b-[1px] border-gray-400 mb-4"></div>
               <div className="w-full lg:w-[321px] py-4 text-xs">
-                <label htmlFor="select" className="text-xs">Translating from (base, source language)</label>
+                <label htmlFor="select" className="text-xs">
+                  Translating from (base, source language)
+                </label>
                 <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-2 bg-none">
                   <option value="language">Choose Language</option>
                   <option value="khmer">Khmer</option>
@@ -70,7 +77,9 @@ const UploadFilePage = () => {
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
                 <div className="flex flex-col w-full lg:w-auto">
-                  <label htmlFor="start" className="text-xs text-gray-600 mb-2">Start Date</label>
+                  <label htmlFor="start" className="text-xs text-gray-600 mb-2">
+                    Start Date
+                  </label>
                   <input
                     type="date"
                     id="start"
@@ -79,7 +88,9 @@ const UploadFilePage = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="end" className="text-xs text-gray-600 mb-2">End Date</label>
+                  <label htmlFor="end" className="text-xs text-gray-600 mb-2">
+                    End Date
+                  </label>
                   <input
                     type="date"
                     id="end"
@@ -90,7 +101,9 @@ const UploadFilePage = () => {
               </div>
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs text-gray-600 mb-2">Keyword</label>
+                  <label htmlFor="key" className="text-xs text-gray-600 mb-2">
+                    Keyword
+                  </label>
                   <input
                     type="text"
                     placeholder="Input your keyword"
@@ -99,7 +112,9 @@ const UploadFilePage = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="hint" className="text-xs text-gray-600 mb-2">Add Hint</label>
+                  <label htmlFor="hint" className="text-xs text-gray-600 mb-2">
+                    Add Hint
+                  </label>
                   <input
                     type="text"
                     placeholder="Hints for some keywords"
@@ -139,7 +154,7 @@ const UploadFilePage = () => {
                           <td>
                             {row.hint}
                             <CloseIcon
-                              className="float-end w-3 text-gray-500 h-6 cursor-pointer"
+                              className="float-end w-3 text-gray-500 h-3 cursor-pointer"
                               onClick={() => handleDelete(row.key)}
                             />
                           </td>
@@ -155,14 +170,17 @@ const UploadFilePage = () => {
                   type="reset"
                   value={"Reset"}
                 />
-                <Link href={"/employee/project-card"} className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer">
+                <Link
+                  href={"/employee/project-card"}
+                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                >
                   <button type="submit"> Submit</button>
                 </Link>
               </div>
             </form>
           </div>
         </div>
-        <MemberProjectLeader/>
+        <MemberProjectLeader />
       </div>
     </div>
   );

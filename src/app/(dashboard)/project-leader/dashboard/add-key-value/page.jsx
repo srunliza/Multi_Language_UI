@@ -130,7 +130,7 @@ const AddKeyValuePage = () => {
                           <td>
                             {row.hint}
                             <CloseIcon
-                              className="float-end w-3 text-gray-500 h-6 cursor-pointer"
+                              className="float-end w-3 text-gray-500 h-3 cursor-pointer"
                               onClick={() => handleDelete(row.key)}
                             />
                           </td>
