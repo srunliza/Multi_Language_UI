@@ -8,7 +8,7 @@ const getStatusTextColor = (status) => {
     case "Completed":
       return "text-green-500";
     case "Progress":
-      return "text-yellow-500";
+      return "text-orange-300";
     case "Pending":
       return "text-red-500";
     default:
@@ -21,7 +21,7 @@ const getStatusBgColor = (status) => {
     case "Completed":
       return "bg-green-500";
     case "Progress":
-      return "bg-yellow-500";
+      return "bg-orange-300";
     case "Pending":
       return "bg-red-500";
     default:
@@ -47,29 +47,29 @@ const ProjectListComponent = ({
       {projects.map((project, index) => (
         <div
           key={index}
-          className="flex flex-wrap justify-between items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
+          className="bg-white flex flex-wrap justify-between items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
         >
-          <div className="flex flex-col w-[10rem]">
+          <div className="flex flex-col w-[12rem] ">
             <div className="text-base font-semibold text-gray-700">
-              {project.name.length > 15
-                ? `${project.name.substring(0, 15)}...`
+              {project.name.length > 12
+                ? `${project.name.substring(0, 12)}...`
                 : project.name}
             </div>
             <div className="w-[10rem] text-sm text-green-500">
-              {project.owner.length > 15
-                ? `${project.owner.substring(0, 15)}...`
+              {project.owner.length > 12
+                ? `${project.owner.substring(0, 12)}...`
                 : project.owner}
-              <span className="text-gray-500 text-xs m-3 ">{project.role}</span>
+              <span className="text-gray-700 text-xs m-3 ">{project.role}</span>
             </div>
           </div>
 
-          <div className="sm:-ml-1 ml-4 flex flex-wrap items-center gap-3 w-full lg:w-auto text-sm mt-4 lg:mt-0">
+          <div className="sm:-ml-1 ml-4 flex flex-wrap gap-3 lg:w-auto text-md text-black mt-4 lg:mt-0">
             <Link
               key={index}
               href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
               passHref
             >
-              <div className="flex items-center justify-center bg-gray-100 rounded-lg w-16 h-9 text-center text-sm ">
+              <div className="flex text-black items-center justify-center bg-gray-200 rounded-lg w-16 h-9 text-center text-sm ">
                 <svg
                   className="h-4 w-4 text-black"
                   fill="none"
@@ -92,7 +92,7 @@ const ProjectListComponent = ({
               href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
               passHref
             >
-              <div className="flex items-center justify-center w-[10rem] bg-red-100 rounded-lg px-5 py-2 text-sm">
+              <div className="flex items-center justify-center w-[10rem] bg-red-300 rounded-lg px-5 py-2 text-sm">
                 <svg
                   className="h-4 w-4 text-red-500 mr-1"
                   fill="none"
@@ -114,7 +114,7 @@ const ProjectListComponent = ({
             </Link>
 
             <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
-              <div className="w-[10rem] md:-ml-4 text-gray-500 text-sm lg:-ml-0 sm:-ml-5">
+              <div className="w-[10rem] md:-ml-4 text-black text-sm lg:-ml-0 sm:-ml-5">
                 Translation Progress
               </div>
               <div

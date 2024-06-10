@@ -53,9 +53,9 @@ const AttachmentComponent = () => {
   };
 
   return (
-    <div className="">
+    <div>
       {/* Table */}
-      <div className="h-full overflow-x-auto shadow-md rounded-lg no-scrollbar">
+      <div className="h-full shadow-md no-scrollbar w-full rounded-lg">
         <table className=" text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
             <tr>
