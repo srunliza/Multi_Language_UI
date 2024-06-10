@@ -1,24 +1,29 @@
+'use client'
 import AddMemberModal from "@/components/AddMemberModal";
-import React from "react";
+import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
 import InputKeywordComponent from "../../_components/InputKeywordComponent";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
-
+import CloseIcon from "@mui/icons-material/Close";
 const AddKeyValuePage = () => {
-  const tableData = [
-    { key: "Home", hint: "relating to the place where one lives" },
+  const [tableData, setTableData] = useState([
+    { key: "Home", hint: "relating to the start of page" },
     { key: "About", hint: "information about something or someone" },
+    { key: "Contact", hint: "a way of getting in touch with someone" },
+    { key: "More", hint: "a way of getting in touch with someone" },
+    { key: "Detail", hint: "information about something or someone" },
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
     { key: "About", hint: "information about something or someone" },
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
-    { key: "About", hint: "information about something or someone" },
-    { key: "Contact", hint: "a way of getting in touch with someone" },
-    { key: "More", hint: "a way of getting in touch with someone" },
-  ];
+  ]);
+  const handleDelete = (keyToDelete) => {
+    const updatedData = tableData.filter((row) => row.key !== keyToDelete);
+    setTableData(updatedData);
+  };
 
   return (
     <div className="w-full h-screen flex flex-col">
@@ -33,7 +38,9 @@ const AddKeyValuePage = () => {
           <div className="flex-grow overflow-y-auto no-scrollbar p-4">
             <form action="">
               <div className="w-full lg:w-[321px] py-2 text-xs">
-                <label htmlFor="select" className="text-xs">Translating from (base, source language)</label>
+                <label htmlFor="select" className="text-xs">
+                  Translating from (base, source language)
+                </label>
                 <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none">
                   <option value="language">Choose Language</option>
                   <option value="khmer">Khmer</option>
@@ -45,7 +52,9 @@ const AddKeyValuePage = () => {
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto">
-                  <label htmlFor="start" className="text-xs mb-1">Start Date</label>
+                  <label htmlFor="start" className="text-xs mb-1">
+                    Start Date
+                  </label>
                   <input
                     type="date"
                     id="start"
@@ -54,7 +63,9 @@ const AddKeyValuePage = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="end" className="text-xs mb-1">End Date</label>
+                  <label htmlFor="end" className="text-xs mb-1">
+                    End Date
+                  </label>
                   <input
                     type="date"
                     id="end"
@@ -65,7 +76,9 @@ const AddKeyValuePage = () => {
               </div>
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs mb-1">Keyword</label>
+                  <label htmlFor="key" className="text-xs mb-1">
+                    Keyword
+                  </label>
                   <input
                     type="text"
                     placeholder="Input your keyword"
@@ -74,7 +87,9 @@ const AddKeyValuePage = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="hint" className="text-xs mb-1">Add Hint</label>
+                  <label htmlFor="hint" className="text-xs mb-1">
+                    Add Hint
+                  </label>
                   <input
                     type="text"
                     placeholder="Hints for some keywords"
@@ -91,20 +106,34 @@ const AddKeyValuePage = () => {
                 </div>
               </div>
               <InputKeywordComponent />
+              {/* table */}
               <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
                 <div className="rounded-lg w-full lg:w-[570px] overflow-hidden overflow-y-auto h-32 no-scrollbar">
                   <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
                     <thead>
                       <tr className="text-center text-md bg-gray-100 rounded-r-lg sticky top-0">
-                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-medium">Keyword</th>
-                        <th className="w-1/2 py-2 px-1 text-gray-600 font-medium">Hint</th>
+                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-medium">
+                          Keyword
+                        </th>
+                        <th className="w-1/2 py-2 px-1 text-gray-600 font-medium">
+                          Hint
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="bg-none text-xs">
                       {tableData.map((row) => (
-                        <tr key={row.key} className="py-5 px-6 border-b border-gray-200 text-gray-700 truncate">
+                        <tr
+                          key={row.key}
+                          className="py-5 px-6 border-b border-gray-200 text-gray-700 truncate"
+                        >
                           <td className="py-1">{row.key}</td>
-                          <td>{row.hint}</td>
+                          <td>
+                            {row.hint}
+                            <CloseIcon
+                              className="float-end w-3 text-gray-500 h-6 cursor-pointer"
+                              onClick={() => handleDelete(row.key)}
+                            />
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -118,7 +147,7 @@ const AddKeyValuePage = () => {
                   value={"Reset"}
                 />
                 <Link
-                  href={"../employee/project-card"}
+                  href={"/employee/project-card"}
                   className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                 >
                   <button type="submit"> Submit</button>

@@ -93,7 +93,11 @@ const TranslatorWorkSpace = () => {
 
   const handleUserMessageSend = () => {
     if (userMessage.trim() !== "") {
-      setMessages([...messages, { sender: "user", text: userMessage }, { sender: "ai", text: "hello" }]);
+      setMessages([
+        ...messages,
+        { sender: "user", text: userMessage },
+        { sender: "ai", text: "hello" },
+      ]);
       setUserMessage("");
     }
   };
@@ -291,14 +295,26 @@ const TranslatorWorkSpace = () => {
 
                   <div className="p-5">
                     {messages.map((msg, index) => (
-                      <div key={index} className={`chat ${msg.sender === "user" ? "chat-end" : "chat-start"}`}>
+                      <div
+                        key={index}
+                        className={`chat ${
+                          msg.sender === "user" ? "chat-end" : "chat-start"
+                        }`}
+                      >
                         <div className="chat-image avatar">
                           <div className="w-10 rounded-full">
-                            <img src={`/assets/images/sokheng.svg`} alt="chatboot" />
+                            <img
+                              src={`/assets/images/sokheng.svg`}
+                              alt="chatboot"
+                            />
                           </div>
                         </div>
-                        <div className="chat-header">{msg.sender === "user" ? "You" : "Support Bot"}</div>
-                        <div className="chat-bubble bg-slate-100 border text-gray-950">{msg.text}</div>
+                        <div className="chat-header">
+                          {msg.sender === "user" ? "You" : "Support Bot"}
+                        </div>
+                        <div className="chat-bubble bg-slate-100 border text-gray-950">
+                          {msg.text}
+                        </div>
                       </div>
                     ))}
                   </div>
