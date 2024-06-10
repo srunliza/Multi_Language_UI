@@ -1,86 +1,62 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { useRouter } from "next/navigation";
 import { DatePicker } from "@nextui-org/react";
-import { Select, SelectItem } from "@nextui-org/react";
 import Link from "next/link";
-import { registerSchema } from "@/validationSchema";
 import { registerService } from "@/service/auth.service";
+import { Select } from "flowbite-react";
+import { registerSchema } from "@/validationSchema";
 
 const RegisterPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [date, setDate] = useState(null);
-  const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
-  const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter();
+  const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    validateForm();
-  }, [firstName, lastName, email, date, password, gender]);
-
-  const validateForm = () => {
-    const validationResult = registerSchema.safeParse({
-      firstName,
-      lastName,
-      email,
-      gender,
-      birthDate: date ? date.toISOString().split("T")[0] : "",
-      password,
-    });
-
-    if (!validationResult.success) {
-      const fieldErrors = validationResult.error.errors.reduce((acc, err) => {
-        acc[err.path[0]] = err.message;
-        return acc;
-      }, {});
-      setErrors(fieldErrors);
-      setIsFormValid(false);
-    } else {
-      setErrors({});
-      setIsFormValid(true);
+  const handleValidation = (name, value) => {
+    try {
+      registerSchema.pick({ [name]: true }).parse({ [name]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
+    } catch (e) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: e.errors[0].message,
+      }));
     }
-  };
-
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setDate(date);
-    validateForm();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    validateForm();
+    const data = new FormData(event.target);
+    const userDetail = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      gender: data.get("gender"),
+      birthDate: data.get("birthDate"),
+      password: data.get("password"),
+    };
 
-    if (isFormValid) {
-      try {
-        const userDetail = {
-          firstName,
-          lastName,
-          email,
-          gender,
-          birthDate: date ? date.toISOString().split("T")[0] : "",
-          password,
-        };
-        console.log(userDetail);
+    // Ensure the object is in the desired order
+    const orderedUserDetail = {
+      firstName: userDetail.firstName,
+      lastName: userDetail.lastName,
+      email: userDetail.email,
+      gender: userDetail.gender,
+      birthDate: userDetail.birthDate,
+      password: userDetail.password,
+    };
 
-        const result = await registerService(userDetail);
-        console.log("Registration successful:", result);
-        router.push("/verify-otp");
-      } catch (error) {
-        console.error("Registration failed:", error);
-      }
-    } else {
-      console.log("Form has errors. Please correct them.");
+    console.log(orderedUserDetail);
+
+    try {
+      registerSchema.parse(orderedUserDetail);
+      const result = await registerService(orderedUserDetail);
+      console.log("Registration successful:", result);
+      router.push("/verify-otp");
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
   };
 
@@ -108,17 +84,19 @@ const RegisterPage = () => {
                   type="text"
                   id="first-name"
                   aria-label="First Name"
-                  className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={firstName}
-                  onChange={handleChange(setFirstName)}
+                  name="firstName"
+                  className={`w-full px-10 py-2.5 text-sm border ${
+                    errors.firstName ? "border-red-500" : "border-[#1A42BC]"
+                  } bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm`}
                   placeholder="Enter Your First Name"
+                  onBlur={(e) => handleValidation("firstName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
                 </span>
               </div>
               {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                <p className="text-red-500 text-xs">{errors.firstName}</p>
               )}
             </div>
 
@@ -134,78 +112,78 @@ const RegisterPage = () => {
                   type="text"
                   id="last-name"
                   aria-label="Last Name"
-                  className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={lastName}
-                  onChange={handleChange(setLastName)}
+                  name="lastName"
+                  className={`w-full px-10 py-2.5 text-sm border ${
+                    errors.lastName ? "border-red-500" : "border-[#1A42BC]"
+                  } bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm`}
                   placeholder="Enter Your Last Name"
+                  onBlur={(e) => handleValidation("lastName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
                 </span>
               </div>
               {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                <p className="text-red-500 text-xs">{errors.lastName}</p>
               )}
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-3">
               <div className="flex flex-col">
                 <label
-                  htmlFor="gender"
+                  htmlFor="Gender"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Gender
                 </label>
                 <div className="relative">
-                  <div className="block appearance-none w-full bg-white border border-blue-600 text-gray-700 text-sm pl-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  <div className="block appearance-none w-full bg-white border border-blue-600 text-gray-700 text-sm rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <Select
-                      id="gender"
+                      name="gender"
                       placeholder="Select Gender"
-                      className="min-w-full"
-                      onChange={handleChange(setGender)}
+                      className="w-full"
+                      onBlur={(e) => handleValidation("gender", e.target.value)}
                     >
-                      <SelectItem key="male" value="Male">
-                        Male
-                      </SelectItem>
-                      <SelectItem key="female" value="Female">
-                        Female
-                      </SelectItem>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                     </Select>
                   </div>
                 </div>
                 {errors.gender && (
-                  <p className="text-red-500 text-sm mt-1">{errors.gender}</p>
+                  <p className="text-red-500 text-xs">{errors.gender}</p>
                 )}
               </div>
 
               <div className="flex flex-col">
                 <label
-                  htmlFor="dob"
+                  htmlFor="Birth-Date"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Date of birth
                 </label>
                 <div className="relative">
-                  <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
+                  <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
                     <DatePicker
-                      id="date-register"
+                      id="birthDate"
                       aria-label="Date of Birth"
-                      className="max-w-80px"
+                      name="birthDate"
+                      className="w-full"
                       isRequired
-                      value={date}
-                      onChange={handleDateChange}
+                      onBlur={(e) =>
+                        handleValidation("birthDate", e.target.value)
+                      }
                     />
                   </div>
                 </div>
-                {errors.date && (
-                  <p className="text-red-500 text-sm mt-1">{errors.date}</p>
+                {errors.birthDate && (
+                  <p className="text-red-500 text-xs">{errors.birthDate}</p>
                 )}
               </div>
             </div>
 
             <div className="mb-3">
               <label
-                htmlFor="email"
+                htmlFor="Email"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Email
@@ -215,23 +193,25 @@ const RegisterPage = () => {
                   type="email"
                   id="email"
                   aria-label="Email"
-                  className="w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={email}
-                  onChange={handleChange(setEmail)}
+                  name="email"
+                  className={`w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border ${
+                    errors.email ? "border-red-500" : "border-[#1A42BC]"
+                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm`}
                   placeholder="Enter Your Email"
+                  onBlur={(e) => handleValidation("email", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlinedIcon fontSize="small" />
                 </span>
               </div>
               {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                <p className="text-red-500 text-xs">{errors.email}</p>
               )}
             </div>
 
             <div className="mb-4">
               <label
-                htmlFor="password"
+                htmlFor="Password"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Password
@@ -241,17 +221,19 @@ const RegisterPage = () => {
                   type="password"
                   id="password"
                   aria-label="Password"
-                  className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={password}
-                  onChange={handleChange(setPassword)}
+                  name="password"
+                  className={`w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border ${
+                    errors.password ? "border-red-500" : "border-[#1A42BC]"
+                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm`}
                   placeholder="Enter Your Password"
+                  onBlur={(e) => handleValidation("password", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
                 </span>
               </div>
               {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                <p className="text-red-500 text-xs">{errors.password}</p>
               )}
             </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import {
   EmailOutlined,
@@ -20,24 +20,15 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    validateForm();
-  }, [email, password]);
-
-  const validateForm = () => {
-    const validationResult = loginSchema.safeParse({
-      email,
-      password,
-    });
-
-    if (!validationResult.success) {
-      const fieldErrors = validationResult.error.errors.reduce((acc, err) => {
-        acc[err.path[0]] = err.message;
-        return acc;
-      }, {});
-      setErrors(fieldErrors);
-    } else {
-      setErrors({});
+  const validateField = (name, value) => {
+    try {
+      loginSchema.pick({ [name]: true }).parse({ [name]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
+    } catch (e) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: e.errors[0].message,
+      }));
     }
   };
 
@@ -51,9 +42,12 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    validateForm();
+    const validationResult = loginSchema.safeParse({
+      email,
+      password,
+    });
 
-    if (Object.keys(errors).length === 0) {
+    if (validationResult.success) {
       const res = await signIn("credentials", {
         redirect: false,
         email,
@@ -65,6 +59,12 @@ const LoginPage = () => {
       } else {
         console.log("Login failed");
       }
+    } else {
+      const fieldErrors = validationResult.error.errors.reduce((acc, err) => {
+        acc[err.path[0]] = err.message;
+        return acc;
+      }, {});
+      setErrors(fieldErrors);
     }
   };
 
@@ -108,6 +108,7 @@ const LoginPage = () => {
                   placeholder="example@gmail.com"
                   value={email}
                   onChange={handleEmailChange}
+                  onBlur={(e) => validateField("email", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlined fontSize="small" />
@@ -134,6 +135,7 @@ const LoginPage = () => {
                   placeholder="Enter Your Password"
                   value={password}
                   onChange={handlePasswordChange}
+                  onBlur={(e) => validateField("password", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlined fontSize="small" />
