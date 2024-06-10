@@ -56,7 +56,7 @@ const Sidebar = ({ isSidebarOpen }) => {
           </div>
 
           <div className="flex flex-col sm:mt-[9.7rem] md:mt-8 lg:mt-8 xl:mt-8">
-            <nav className="flex flex-col items-center xl:space-y-[15rem] lg:space-y-[15rem] md:space-y-[15rem] sm:space-y-[13rem]">
+            <nav className="flex flex-col items-center">
               <div className="flex flex-col space-y-1 mt-5">
                 <button
                   type="button"
