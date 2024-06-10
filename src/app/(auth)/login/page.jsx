@@ -209,7 +209,7 @@ const LoginPage = () => {
 
             {/* or sign in with */}
             <div className="flex justify-center items-center">
-              <p className="text-gray-500 sm:text-xs md:text-sm lg:text-sm">
+              <p className="text-gray-500 text-sm">
                 Or Sign in With
               </p>
             </div>
@@ -226,9 +226,9 @@ const LoginPage = () => {
 
             {/* register link */}
             <div className="flex justify-center items-center mt-3">
-              <p className="text-gray-500 sm:text-xs md:text-sm lg:text-xs">
+              <p className="text-gray-500 sm:text-sm md:text-sm lg:text-sm">
                 If you don't have an account?
-                <Link href="register" className="text-[#1A42BC]">
+                <Link href="register" className="px-2 text-sm text-[#1A42BC]">
                   Register
                 </Link>
               </p>

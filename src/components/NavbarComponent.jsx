@@ -1,12 +1,13 @@
 "use client";
+import React, { useState, useEffect, useRef } from "react";
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useRef, useState } from "react";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
 import notifications from "@/obj/notifications";
 import styles from "./style/styles.css";
+import PopUpProfileComponent from "./PopUpProfileComponent"; 
 
 const projects = [
   { name: "Spring translate", icon: "/Images/search1.png" },
@@ -61,7 +62,6 @@ const NavbarComponent = ({ toggleSidebar }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [animateNotification, setAnimateNotification] = useState(false);
-  const [animateProfile, setAnimateProfile] = useState(false);
   const [animateSearch, setAnimateSearch] = useState(false);
   const router = useRouter();
   const notificationRef = useRef();
@@ -96,21 +96,15 @@ const NavbarComponent = ({ toggleSidebar }) => {
     }
   };
 
-  const handleProfileClick = () => {
-    setAnimateProfile(true);
-    setTimeout(() => setAnimateProfile(false), 300); // Remove animation class after animation ends
-    router.push("/employee/profile");
-  };
-
   const handleNotificationIconClick = () => {
     setAnimateNotification(true);
-    setTimeout(() => setAnimateNotification(false), 300); // Remove animation class after animation ends
+    setTimeout(() => setAnimateNotification(false), 300);
     setPopupVisible(!popupVisible);
   };
 
   const handleSearchBarClick = () => {
     setAnimateSearch(true);
-    setTimeout(() => setAnimateSearch(false), 500); // Remove animation class after animation ends
+    setTimeout(() => setAnimateSearch(false), 500);
   };
 
   useEffect(() => {
@@ -161,7 +155,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
                 {searchResults.map((project, index) => (
                   <div
                     key={index}
-                    className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+                    className="flex items-center p-2 hover:bg-gray-200 rounded-lg]  cursor-pointer"
                   >
                     <img
                       src={project.icon}
@@ -215,51 +209,10 @@ const NavbarComponent = ({ toggleSidebar }) => {
             </Popover>
             <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
           </div>
-
-          <div className="flex items-center">
-            <img
-              className={`inline-block h-[38px] w-[38px] rounded-full cursor-pointer ${
-                animateProfile ? "animate-scale-up" : ""
-              }`}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s"
-              alt="Profile Image"
-              onClick={handleProfileClick}
-            />
-          </div>
+          <PopUpProfileComponent />
         </div>
       </nav>
-
-      {popupContent && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-6 w-[500px] shadow-lg z-50">
-            <div className="flex justify-between pb-5">
-              <div className="flex items-center gap-4">
-                <div>
-                  <img
-                    className="h-[60px] w-[60px] rounded-full"
-                    src={popupContent.imgSrc}
-                    alt="Profile Image"
-                  />
-                </div>
-                <div>
-                  <div className="font-semibold text-blue-600">Tep Thean</div>
-                  <div className="text-gray-500">Project Leader</div>
-                </div>
-              </div>
-              <img
-                onClick={closePopup}
-                className="h-8 w-8 rounded-full mb-4 cursor-pointer"
-                src="/assets/icons/cancel.png"
-                alt="Cancel"
-              />
-            </div>
-            <div className="text-2xl text-blue-600">{popupContent.title}</div>
-            <div className="text-md text-gray-700 mb-4">
-              {popupContent.description}
-            </div>
-          </div>
-        </div>
-      )}
+    
     </>
   );
 };

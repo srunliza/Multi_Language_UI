@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { translatorData } from "@/obj/translatorData";
-import SortProjectCardList from "@/components/SortProjectCardListComponent";
+import SortProjectCardList from "@/components/SortComponent";
 
 const getStatusTextColor = (status) => {
   switch (status) {

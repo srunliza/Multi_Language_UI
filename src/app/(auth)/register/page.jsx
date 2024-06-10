@@ -242,15 +242,6 @@ const RegisterPage = () => {
                   Date of birth
                 </label>
                 <div className="relative">
-                  {/* <input
-                    type="date"
-                    id="dob"
-                    className="block w-full border bg-gray-50 border-blue-600 text-gray-700 py-2.5 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm"
-                    value={date}
-                    onChange={handleDateChange}
-                    placeholder="dd/mm/yyyy"
-                  /> */}
-
                   <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
                     <DatePicker
                       id="date-register"
