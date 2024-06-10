@@ -7,8 +7,10 @@ export const loginService = async (userInfo) => {
     const res = await fetch(`${baseUrl}/api/v1/auth/login`, {
         method: 'POST',
         body: JSON.stringify(userInfo),
-        headers: header
-    })  
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
     const data = await res.json()
     return data;
 }
