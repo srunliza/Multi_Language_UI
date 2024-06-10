@@ -1,7 +1,6 @@
 import React from "react";
 import { Carousel } from "flowbite-react";
 import teamMembers from "@/obj/teamMembers";
-import StaticChatbot from "@/components/StaticChatbot";
 
 const LandingPageComponent = () => {
   return (
@@ -676,8 +675,8 @@ const LandingPageComponent = () => {
                   panhach3495@gmail.com <br />
                   sokheng.tey03@gmail.com
                 </p>
-                <StaticChatbot></StaticChatbot>
               </div>
+              
             </div>
             <hr className="mt-[30px] text-white" />
           </div>
