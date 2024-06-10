@@ -576,7 +576,7 @@ const LandingPageComponent = () => {
                   className="z-10  rounded-lg overflow-hidden  block active"
                 >
                   <img
-                    src="../Images/Logo3.png"
+                    src="../Images/logo3.png"
                     alt="langnet-logo"
                     width={290}
                   />

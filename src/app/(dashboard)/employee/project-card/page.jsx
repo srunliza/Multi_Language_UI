@@ -1,10 +1,10 @@
 "use client";
-import SortProjectCardList from "@/components/SortProjectCardListComponent";
 import { projectsData } from "@/obj/projects";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import CardComponent from "../_components/CardComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
+import SortComponent from "@/components/SortComponent";
 
 const ProjectCardPage = () => {
   const [projects, setProjects] = useState(projectsData);
@@ -107,13 +107,13 @@ const ProjectCardPage = () => {
   );
 
   return (
-    <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 rounded-xl bg-white shadow-lg h-screen overflow-hidden border">
+    <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl shadow-md h-screen overflow-hidden">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
         My Projects
       </h2>
 
       <div className="flex flex-wrap items-center mb-4">
-        <SortProjectCardList
+        <SortComponent
           selectedStatus={selectedStatus}
           handleStatusChange={handleStatusChange}
           handleSortClick={handleSortClick}

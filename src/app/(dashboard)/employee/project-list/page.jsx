@@ -2,10 +2,10 @@
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { projectsData } from "@/obj/projects";
-import SortProjectCardList from "@/components/SortProjectCardListComponent";
 import ProjectListComponent from "../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
-import ViewMember from "@/components/ViewMember"; // Ensure the ViewMember component is imported
+import ViewMember from "@/components/ViewMember"; 
+import SortComponent from "@/components/SortComponent";
 
 const ProjectListPage = () => {
   const [projects, setProjects] = useState(projectsData);
@@ -112,7 +112,7 @@ const ProjectListPage = () => {
         My Projects
       </h2>
       <div className="flex flex-wrap items-center mb-4">
-        <SortProjectCardList
+        <SortComponent
           selectedStatus={selectedStatus}
           handleStatusChange={handleStatusChange}
           handleSortClick={handleSortClick}
