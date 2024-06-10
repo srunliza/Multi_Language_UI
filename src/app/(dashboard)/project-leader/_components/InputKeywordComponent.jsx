@@ -49,13 +49,12 @@ export default function InputKeywordComponent() {
 
   return (
     <>
-      <div className="w-full lg:w-[321px] pb-2 mb-2 mt-0">
+      <div className="w-full lg:w-[321px] rounded-lg pb-2 mb-2 mt-0">
         <label htmlFor="select" className="text-xs">
           Or choose keyword as a page
         </label>
         <select
-          id="select"
-          className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm  focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
+          className="block sm:w-full w-[220px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
           onChange={handleSelectChange}
         >
           <option value="language">Choose type of keyword</option>

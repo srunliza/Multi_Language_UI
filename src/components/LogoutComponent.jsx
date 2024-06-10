@@ -18,7 +18,7 @@ const LogoutComponent = () => {
   const handleCloseModal = () => setOpenModal(false);
 
   const handleLogout = () => {
-    window.location.href = "../";
+    window.location.href = "/";
   };
 
   return (

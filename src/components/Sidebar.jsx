@@ -14,6 +14,7 @@ import CreateProject from "@/components/CreateProject";
 import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
 import langnet from "../../public/Images/langNet3.jpg"
 import Image from "next/image";
+import LogoutComponent from "./LogoutComponent";
 
 const Sidebar = ({ isSidebarOpen }) => {
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
@@ -130,7 +131,8 @@ const Sidebar = ({ isSidebarOpen }) => {
                   onClick={handleLogoutClick}
                 >
                   <ExitToAppOutlinedIcon />
-                  <p>Logout</p>
+                  <LogoutComponent/>
+                  {/* <p>Logout</p> */}
                 </button>
               </div>
             </nav>
@@ -138,12 +140,12 @@ const Sidebar = ({ isSidebarOpen }) => {
         </div>
       </div>
       {isCreateProjectOpen && <CreateProject onClose={handleNewProjectClick} />}
-      {isLogoutPopupVisible && (
+      {/* {isLogoutPopupVisible && (
         <PopUpLogoutComponent
           onConfirm={handleLogoutConfirm}
           onCancel={handleLogoutCancel}
         />
-      )}
+      )} */}
     </>
   );
 };
