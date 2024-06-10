@@ -125,7 +125,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                   <p>Setting</p>
                 </Link>
 
-                <button
+                <div
                   type="button"
                   className={`hover:bg-gray-400 w-[10.5rem] hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 text-gray-100`}
                   onClick={handleLogoutClick}
@@ -133,7 +133,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                   <ExitToAppOutlinedIcon />
                   <LogoutComponent/>
                   {/* <p>Logout</p> */}
-                </button>
+                </div>
               </div>
             </nav>
           </div>
