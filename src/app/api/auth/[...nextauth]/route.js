@@ -15,7 +15,7 @@ export const authOption = {
         };
         //  call login services
         const login = await loginService(newUserInfo);
-  
+
         return login;
       },
     }),
