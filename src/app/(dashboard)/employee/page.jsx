@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import employee_welcome from "../../../../public/assets/images/employee-welcome.png";
+import employee_welcome from "./assets/images/employee-welcome.png";
 import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
 import EmployeeCalendarComponent from "@/components/EmployeeCalendarComponent";
-import pendingProjectIcon from "../../../../public/assets/icons/pending-project.svg";
-import finishProjectIcon from "../../../../public/assets/icons/finish-project.svg";
-import progressProjectIcon from "../../../../public/assets/icons/progress-project.svg";
-import totalProjectIcon from "../../../../public/assets/icons/total-project.svg";
+import pendingProjectIcon from "./assets/icons/pending-project.svg";
+import finishProjectIcon from "./assets/icons/finish-project.svg";
+import progressProjectIcon from "./assets/icons/progress-project.svg";
+import totalProjectIcon from "./assets/icons/total-project.svg";
 
 // import {DateInput} from "@nextui-org/react";
 // import {CalendarDate} from "@internationalized/date";

@@ -1,6 +1,9 @@
 "use client";
-import { user } from "@nextui-org/theme";
+import EmailOutlined from "@mui/icons-material/EmailOutlined";
+import HttpsOutlined from "@mui/icons-material/HttpsOutlined";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
@@ -10,16 +13,18 @@ const LoginPage = () => {
   async function handleLogin(userInfo) {
     // define structure object
     const newUserInfo = {
-      email: userInfo.get('email'),
-      password: userInfo.get('password')
-    }
+      email: userInfo.get("email"),
+      password: userInfo.get("password"),
+    };
 
 
-    // calling next auth service and passing " newUseInfo "
+    // // calling next auth service and passing " newUseInfo "
     const res = await signIn("credentials", {
       redirect: false,
       ...newUserInfo,
     });
+
+    // console.log("Res:", res.status)
     // checking is login success nor not
     if (res.ok) {
       router.push("/employee/dashboard");

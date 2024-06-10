@@ -15,8 +15,8 @@ export const authOption = {
         };
         //  call login services
         const login = await loginService(newUserInfo);
-        console.log(login)
-        return login.payload;
+  
+        return login;
       },
     }),
   ],
