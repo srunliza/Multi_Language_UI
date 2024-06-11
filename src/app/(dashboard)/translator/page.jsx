@@ -42,7 +42,7 @@ const DeveloperDashboardHome = () => {
           {/* calendar */}
           <div className="col-span-4">
             {/* Calendar date picker */}
-            <EmployeeCalendarComponent />
+            {/* <EmployeeCalendarComponent /> */}
           </div>
         </div>
       </div>
