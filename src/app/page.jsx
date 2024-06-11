@@ -1,690 +1,451 @@
-import React from "react";
-import { Carousel } from "flowbite-react";
+"use client"
+import { useState } from "react"
+import MenuIcon from '@mui/icons-material/Menu';
+import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
+import Link from "next/link";
+import Image from "next/image";
 import teamMembers from "@/obj/teamMembers";
-import StaticChatbot from "@/components/StaticChatbot";
+import 'animate.css';
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/swiper-bundle.css';
+
 
 const LandingPageComponent = () => {
-  return (
-    <div className=" bg-[#e5e5e5] ">
-      {/* Navbar */}
-      <nav className="sticky z-50 top-0 shadow-lg   py-4 bg-white font-bold text-white ">
-        <div className=" w-9/12 mx-auto flex px-8 justify-between items-center">
-          <a href="/">
-            <img src="../Images/logo3.png" width={200} alt="langnet-logo" />
-          </a>
-          <div className="flex md:hidden">
-            <div className="group">
-              <button
-                id="hamburger"
-                type="button"
-                className="justify-center items-center"
-              >
-                <img
-                  className="toggle block md:mr-20"
-                  src="https://img.icons8.com/ios-filled/50/menu--v6.png"
-                  width="30"
-                  height="30"
-                  alt="menu"
-                />
-              </button>
-              <div className="absolute w-20 origin-bottom bg-white divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
-                <div>
-                  <a
-                    href="#home"
-                    className="block px-3 py-2 text-red-700 text-sm  hover:bg-gray-100"
-                  >
-                    Home
-                  </a>
-                  <a
-                    href="#aboutus"
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    About Us
-                  </a>
-                  <a
-                    href="#contactus"
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Contact Us
-                  </a>
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className='bg-gray-100 '>
+
+            {/*  Navbar Section*/}
+            <nav className="bg-gray-100 sticky top-0 z-10 shadow-sm border-b border-b-gray-200">
+                <div className="max-w-[1320px] mx-auto  px-4 sm:px-6 lg:px-8  lg:py-3">
+                    <div className="flex justify-between items-center h-16">
+                        <div className="flex-shrink-0">
+                            <Link href="/">
+                                <img src="./Images/logo3.png" alt="LangNet" className="h-12" />
+                            </Link>
+                        </div>
+                        <div className="hidden md:flex space-x-12 text-[17px] font-medium">
+                            <a href="/" className="text-gray-700 active:text-blue-700 hover:text-purple-900 transition-all  underline-animation">Home</a>
+                            <a href="#about-us" className="text-gray-700 active:text-blue-700 hover:text-purple-900 transition-all  underline-animation">About us</a>
+                            <a href="#contact-us" className="text-gray-700 active:text-blue-700 hover:text-purple-900 transition-all  underline-animation">Contact Us</a>
+                        </div>
+                        <div className="hidden md:flex">
+                            <Link href="/login"
+                                className=" text-purple-700 transition-all hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 lg:font-medium rounded-lg text:xs lg:text-base px-4 py-1 lg:px-5 lg:py-1.5 text-center me-4  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                            >Login
+                            </Link>
+                            <Link href="/register"
+                                className="focus:outline-none transition-all text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300  lg:font-medium  rounded-lg  lg:text-base  px-4 py-1 lg:px-5 lg:py-1.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                            >Sign Up
+                            </Link>
+                        </div>
+
+                        {/* Button call mobile screen */}
+                        <div className="md:hidden flex items-center">
+                            <button className="mobile-menu-button"
+                                onClick={() => setIsOpen(!isOpen)}
+                            >
+                                <MenuIcon fontSize="large" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className=" flex justify-between items-center w-full md:w-auto md:flex gap-4 text-right">
-            <a
-              href="#home"
-              className="block  font-normal  text-blue-700  md:inline-block hover:text-blue-500 px-10"
-            >
-              Home
-            </a>
-            <a
-              href="#aboutus"
-              className="font-normal   text-blue-700 block md:inline-block  hover:text-blue-500 px-3"
-            >
-              About us
-            </a>
-            <a
-              href="#contactus"
-              className="font-normal   text-blue-700 block md:inline-block  hover:text-blue-500 px-3"
-            >
-              Contact Us
-            </a>
-          </div>
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href="../login"
-              className=" text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-            >
-              Login
-            </a>
-            <a
-              href="../register"
-              className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-            >
-              Sign Up
-            </a>
-          </div>
-        </div>
-      </nav>
-      {/* secondNav */}
-      <div className="relative h-[650px] gradient-background" id="home">
-        <div className="absolute inset-2 flex flex-col md:flex-row justify-between md:ml-20">
-          <div className="md:w-1/2 items-center mx-auto md:text-left ml-[155px]">
-            <h1 className="font-bold md:text-lg lg:text-2xl leading-tight mb-4 mt-32 text-white">
-              We bring the solution to make <br />
-              your work faster
-            </h1>
 
-            <p className="font-regular text-md mb-8 text-white text-justify w-[500px]">
-              LangNet is a web-based platform enabling software project leaders
-              to efficiently manage multiple languages within the software,
-              ultimately saving time for developers and translators by
-              streamlining the upload and download process through required
-              formats like Excel, JSON, XML, and others.
-            </p>
-            <a
-              href="../register"
-              className="px-5 py-3 bg-white text-black rounded-md hover:bg-[#c09858] transition duration-200"
-            >
-              Get Started
-            </a>
-          </div>
+                {/* Mobile menu button */}
+                {isOpen && (
+                    <div className="mobile-menu  md:hidden">
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <a href="#" className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">Home</a>
+                            <a href="#" className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">About us</a>
+                            <a href="#" className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">Contact Us</a>
+                            <a href="#" className="block text-purple-700 border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</a>
+                            <a href="#" className="block bg-purple-600 text-white rounded-md px-3 py-2">Sign Up</a>
+                        </div>
+                    </div>
+                )}
 
-          <div className=" items-center  ">
-            <img
-              src="../Images/landing-page.png"
-              alt="landing-page"
-              className="mx-auto w-8/12 "
-            />
-          </div>
-        </div>
+            </nav>
+            {/*End Navbar Seciton */}
 
-        {/* fly card */}
-        <div className="relative">
-          <div className="pt-24 md:pt-[30rem] flex flex-col px-[30px] justify-between md:flex-row flex-wrap gap- w-11/12 md:w-9/12 mx-auto">
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
-              <div className="relative z-10 mx-auto text-center md:text-left">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
-                  <img src="./Images/feedback.png" alt="feedback" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
-                  <h1 className="font-semibold text-xl">Feedback System</h1>
-                  <p className="text-sm text-justify">
-                    Project leaders and developers can provide, edit, and remove
-                    feedback on translations, facilitating continuous
-                    improvement and high-quality outcomes.
-                  </p>
+            {/* Hero Section*/}
+            <section className="gradient-background  text-white">
+                <div className="max-w-[1320px] mx-auto px-4 overflow-hidden sm:px-6 lg:px-8 py-12">
+                    <div className="lg:flex lg:items-center  lg:justify-between">
+                        <div className="lg:w-1/2 animate__animated animate__fadeInLeft">
+                            <h1 className="text-4xl font-bold mb-6 leading-normal">We bring the solution to make your work faster</h1>
+                            <p className="mb-8">
+                                LangNet is a web-based platform enabling software project leaders to efficiently manage multiple languages within the software, ultimately saving time for developers and translators by streamlining the upload and download process through required formats like Excel, JSON, XML, and others.
+                            </p>
+                            <Link href="/register"
+                                className="block md:inline bg-white text-purple-700 hover:text-white shadow-sm hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium transition-all rounded-lg text-lg px-8 py-2.5 text-center me-4 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+                                Get Start
+                                <NavigateNextOutlinedIcon />
+                            </Link>
+                        </div>
+                        <div className="lg:w-1/2 mt-8 lg:mt-0 animate__animated animate__fadeInRight">
+                            <img className="w-full" src="./Images/landing-page.png" alt="LangNet" />
+                        </div>
+                    </div>
                 </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 hover:text-white"
+            </section>
+            {/* End Hero Section*/}
+
+            {/*  Features  Section*/}
+            <section className="max-w-[1320px] mx-auto px-4 py-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Card 1 */}
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div className="p-6">
+                            <div className="flex items-center justify-center">
+                                <img src="/assets/icons/review.gif"
+                                    width={128}
+                                    height={128}
+                                    alt="review-icon"
+                                />
+                            </div>
+                            <h3 className="mt-4 text-xl font-semibold text-center">Feedback System</h3>
+                            <p className="mt-2 text-gray-600 text-center">Project leaders and developers can provide, edit, and remove feedback on translations, facilitating continuous improvement and high-quality outcomes.</p>
+                            <div className="mt-4 text-center">
+                                <a href="#" className="text-blue-600 hover:underline">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Card 2 */}
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div className="p-6">
+                            <div className="flex items-center justify-center">
+
+                                <img
+                                    src="/assets/icons/artificial-intelligence.gif"
+                                    width={128}
+                                    height={0}
+                                    alt="ai-icon"
+                                />
+
+                            </div>
+                            <h3 className="mt-4 text-xl font-semibold text-center">AI Chat Generator</h3>
+                            <p className="mt-2 text-gray-600 text-center">Our AI-powered keyword meaning generation tool assists translators by providing context and enhancing translation accuracy.</p>
+                            <div className="mt-4 text-center">
+                                <a href="#" className="text-blue-600 hover:underline">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Card 3 */}
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div className="p-6">
+                            <div className="flex items-center justify-center">
+                                <img
+                                    src="/assets/icons/feedback.gif"
+                                    width={128}
+                                    height={0}
+                                    alt="ai-icon"
+                                />
+                            </div>
+                            <h3 className="mt-4 text-xl font-semibold text-center">Project Creation</h3>
+                            <p className="mt-2 text-gray-600 text-justify">Project leaders can create projects, assign roles, set deadlines, and choose translation options. This feature streamlines project setup and management.</p>
+                            <div className="mt-4 text-center">
+                                <a href="#" className="text-blue-600 hover:underline">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* End Features Section */}
+
+
+            {/* Reasons Section */}
+            <section class="max-w-[1320px] mx-auto px-4 py-12">
+                <h2 class="text-3xl font-bold text-center mb-8 leading-normal">Here are a few reasons <br></br>Why our customers choose LangNet</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class=" p-4 rounded-full text-[#454545]">
+                                <Image
+                                    src="/assets/icons/team-management.png"
+                                    width={200}
+                                    height={200}
+                                    alt="teamwork icon" />
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-semibold">Team Management</h3>
+                                <p class="text-gray-600">Our system supports three distinct user roles: Project Leader, Translator, and Developer.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class=" p-4 rounded-full text-white">
+                                <Image
+                                    src="/assets/icons/saving.png"
+                                    width={200}
+                                    height={200}
+                                    alt="saving icon"
+                                />
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Save Time</h3>
+                                <p class="text-gray-600">Services that offer automation, accessibility, expertise, resource management, and scalability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class=" p-4 rounded-full text-white">
+                                <Image
+                                    src="/assets/icons/file-download.png"
+                                    width={200}
+                                    height={200}
+                                    alt="saving icon"
+                                />
+
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">File Download</h3>
+                                <p class="text-gray-600">Developers can preview and download translations in multiple formats, ensuring smooth integration.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/*End Reasons Section */}
+
+            {/* Team Section */}
+            <section className="py-12" id="about-us">
+                <div className="max-w-[1320px] mx-auto px-4 py-4">
+                    <h2 className="text-3xl  font-bold text-center mb-8">Meet Our Team</h2>
+                    <Swiper
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        // pagination={{
+                        //     clickable: true,
+                        // }}
+                        navigation={true}
+                        modules={[Autoplay, Navigation]}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 1,
+                                spaceBetween: 20,
+                            },
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 30,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                                spaceBetween: 40,
+                            },
+                        }}
                     >
-                      Read more &rarr;
-                    </a>
-                  </p>
+                        {teamMembers.map((member, index) => (
+                            <SwiperSlide key={index}>
+                                <div className="bg-white   p-6 rounded-lg shadow-md text-center">
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="w-32 h-32 mx-auto rounded-full"
+                                    />
+                                    <h3 className="mt-4 text-xl font-semibold line-clamp-1">
+                                        {member.name}
+                                    </h3>
+                                    <p className="text-gray-600">{member.role}</p>
+                                    <div className="flex justify-center space-x-4 mt-4">
+                                        <a
+                                            className="hover:scale-125 w-6 h-6 transition-all"
+                                            target="_blank"
+                                            href={member.links.telegram}
+                                            rel="noreferrer"
+                                        >
+                                            <img
+                                                alt="Telegram icon"
+                                                loading="lazy"
+                                                width="30"
+                                                height="30"
+                                                decoding="async"
+                                                src="/images/tele.png"
+                                            />
+                                        </a>
+                                        <a
+                                            className="hover:scale-125 w-6 h-6 transition-all"
+                                            target="_blank"
+                                            href={member.links.facebook}
+                                            rel="noreferrer"
+                                        >
+                                            <img
+                                                alt="Facebook icon"
+                                                loading="lazy"
+                                                width="30"
+                                                height="30"
+                                                decoding="async"
+                                                src="/images/facebook.png"
+                                            />
+                                        </a>
+                                        <a
+                                            className="hover:scale-125 w-6 h-6 transition-all"
+                                            target="_blank"
+                                            href={`mailto:${member.links.google}`}
+                                            rel="noreferrer"
+                                        >
+                                            <img
+                                                alt="Google icon"
+                                                loading="lazy"
+                                                width="30"
+                                                height="30"
+                                                decoding="async"
+                                                src="/images/google.png"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
-              </div>
-            </div>
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
-              <div className="relative z-10 mx-auto text-center md:text-left">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
-                  <img
-                    src="./Images/AIChatGenerator.png"
-                    alt="AI chat generator"
-                    className="w-full h-full"
-                  />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
-                  <h1 className="font-semibold text-xl">AI Chat Generator</h1>
-                  <p className="text-sm text-justify">
-                    Our AI-powered keyword meaning generation tool assists
-                    translators by providing context and enhancing translation
-                    accuracy.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
+            </section>
+            {/* End Team Section */}
 
-            <div className="bg-white pt-6 pb-6 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl rounded-lg px-6 w-full md:w-5/12 lg:w-1/4">
-              <div className="relative z-10 mx-auto text-center md:text-left">
-                <span className="grid h-12 w-12 place-items-center transition-all duration-300 mx-auto md:mx-0">
-                  <img src="../Images/File.png" alt="File system" />
-                </span>
-                <div className="space-y-4 pt-5 font-semibold text-base leading-7 text-[#475568] transition-all duration-300">
-                  <h1 className="font-semibold text-xl">Project Creation</h1>
-                  <p className="text-sm text-justify">
-                    Project leaders can create projects, assign roles, set
-                    deadlines, and choose translation options. This feature
-                    streamlines project setup and management.
-                  </p>
-                </div>
-                <div className="pt-5 text-base font-semibold leading-7">
-                  <p>
-                    <a
-                      href="#"
-                      className="text-sky-500 transition-all duration-300 hover:text-white"
-                    >
-                      Read more &rarr;
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Reason */}
-      <div className="m-4 md:m-20  md:mt-60 justify-between">
-        <div className="text-center font-bold text-lg md:text-2xl text-[#454545] mt-10 md:mt-30">
-          <p>
-            Here are a few reasons why our <br />
-            customers choose LangNet
-          </p>
-        </div>
-        <div class="grid gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 lg:gap-8 md:p-4 ">
-          {/*Reason1 */}
-          <div class="max-w-2xl mx-auto mt-5">
-            <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
-              <div className="duration-300 hover:-translate-y-1 hover:shadow-2xl h-[8.8rem] bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
-                <div className="md:flex">
-                  <div className="flex-shrink-0 m-4 w-16 h-14 rounded-full text-[#454545] self-center">
-                    <img src="./Images/teamwork.png" alt="teamwork" />
-                  </div>
-                  <div className="p-8">
-                    <p className="mt-2 text-[#454545] text-sm">
-                      <strong>Team Management</strong> <br />
-                      Our system supports three distinct user roles: Project
-                      Leader, Translator, ...
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/*Reason2 */}
-          <div class="max-w-2xl mx-auto mt-5">
-            <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
-              <div className="duration-300 hover:-translate-y-1 hover:shadow-2xl h-[8.8rem] bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
-                <div className="md:flex">
-                  <div className="flex-shrink-0 m-4 w-16 h-14 rounded-full text-[#454545] self-center">
-                    <img src="../Images/time.png" alt="time saving" />
-                  </div>
-                  <div className="p-8">
-                    <p className="mt-2 text-[#454545] text-sm">
-                      <strong>Save Time</strong> <br />
-                      Services that offer automation, accessibility, expertise,
-                      resource ...
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/*Reason3 */}
-          <div class="max-w-2xl mx-auto mt-5">
-            <div className="flex flex-col md:flex-row justify-evenly py-5 gap-5">
-              <div className="duration-300 hover:-translate-y-1 hover:shadow-2xl h-[8.8rem] bg-white rounded-xl md:max-w-fit flex my-4 md:my-0">
-                <div className="md:flex">
-                  <div className="flex-shrink-0 m-4 w-16 h-14 rounded-full text-[#454545] self-center">
-                    <img src="../Images/fileDown.png" alt="file download" />
-                  </div>
-                  <div className="p-8">
-                    <p className="mt-2 text-[#454545] text-sm">
-                      <strong>File Download</strong> <br />
-                      Developers can preview and download translations in
-                      multiple formats,...
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* test Carousel */}
-
-      <section
-        id="aboutus"
-        className="bg-[#e5e5e5] sm:px-[10px] md:flex-row md:px-5"
-      >
-        <div className="container mx-auto ">
-          <h2 className="text-3xl font-bold text-[#454545] mb-10 p-2 text-center">
-            Meet Our Team
-          </h2>
-          <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 ">
-            <Carousel leftControl="" rightControl="" slideInterval={2000}>
-              <div className="pb-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-7">
-                {/* Members*/}
-                {teamMembers.slice(0, 4).map((member, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md p-6 my-6 text-center"
-                  >
-                    <img
-                      src={member.image}
-                      alt={`Team Member ${index + 1}`}
-                      className="mb-4 rounded-full h-32 w-32 mx-auto"
-                    />
-                    <h3 className="text-xl font-semibold mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-[#454545]">{member.role}</p>
-                    <div className="mt-4 flex justify-center gap-4">
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.telegram}
-                      >
-                        <img
-                          alt="Tele icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/tele.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.facebook}
-                      >
-                        <img
-                          alt="Facebook icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/facebook.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={`mailto:${member.links.google}`}
-                      >
-                        <img
-                          alt="Google icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/google.png"
-                        />
-                      </a>
+            {/*  Contact Section*/}
+            <section className="pt-12 pb-16" id="contact-us">
+                <div className="max-w-[1320px] mx-auto px-4">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="bg-white p-6 rounded-lg shadow-sm w-full max-w-2xl  lg:w-2/3">
+                            <h2 className="text-3xl font-bold mb-8 text-left">Contact Us</h2>
+                            <p className="mb-8 text-gray-600 text-left">Please use the form below to contact us. Thank you!</p>
+                            <form className="space-y-4">
+                                <div>
+                                    <label htmlFor="name" className="sr-only">Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        placeholder="username"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="email" className="sr-only">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        placeholder="example@gmail.com"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="message" className="sr-only">Message</label>
+                                    <textarea
+                                        id="message"
+                                        placeholder="message"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+                                        rows="4"
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                        <div className="flex justify-center w-full max-w-sm">
+                            <img
+                                src="../Images/contact.png"
+                                alt="Contact illustration"
+                                className="max-w-full h-auto"
+                            />
+                        </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pb-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-7">
-                {teamMembers.slice(4, 8).map((member, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md p-6 my-6 text-center"
-                  >
-                    <img
-                      src={member.image}
-                      alt={`Team Member ${index + 1}`}
-                      className="mb-4 rounded-full h-32 w-32 mx-auto"
-                    />
-                    <h3 className="text-xl font-semibold mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-[#454545]">{member.role}</p>
-                    <div className="mt-4 flex justify-center gap-4">
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.telegram}
-                      >
-                        <img
-                          alt="Tele icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/tele.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.facebook}
-                      >
-                        <img
-                          alt="Facebook icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/facebook.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={`mailto:${member.links.google}`}
-                      >
-                        <img
-                          alt="Google icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/google.png"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pb-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-7 justify-center]">
-                {teamMembers.slice(8, 11).map((member, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md p-6 my-6 text-center"
-                  >
-                    <img
-                      src={member.image}
-                      alt={`Team Member ${index + 1}`}
-                      className="mb-4 rounded-full h-32 w-32 mx-auto"
-                    />
-                    <h3 className="text-xl font-semibold mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-[#454545]">{member.role}</p>
-                    <div className="mt-4 flex justify-center gap-4">
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.telegram}
-                      >
-                        <img
-                          alt="Tele icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/tele.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={member.links.facebook}
-                      >
-                        <img
-                          alt="Facebook icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/facebook.png"
-                        />
-                      </a>
-                      <a
-                        className="hover:scale-110"
-                        target="_blank"
-                        href={`mailto:${member.links.google}`}
-                      >
-                        <img
-                          alt="Google icon"
-                          loading="lazy"
-                          width="30"
-                          height="30"
-                          decoding="async"
-                          data-nimg="1"
-                          src="../Images/google.png"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Carousel>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Us */}
-      <section className="mt-" id="contactus">
-        <h2 className="text-2xl font-extrabold tracking-tight text-[#454545] sm:text-3xl leading-6 text-center py-10">
-          Contact Us
-        </h2>
-        <div className="flex flex-col md:flex-row justify-evenly items-center">
-          <div className="overflow-hidden pb-16 px-6 sm:px-8 lg:px-10 lg:pb-24">
-            <div className="relative mx-auto max-w-xl">
-              <div>
-                <p className="mt-4 text-lg leading-6 text-gray-500 dark:text-slate-400">
-                  Please use the form below to contact us. Thank you!
-                </p>
-              </div>
-              <div className="mt-5">
-                <form className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-                  <div className="sm:col-span-2">
-                    <div className="mt-1">
-                      <input
-                        name="name"
-                        type="text"
-                        id="name"
-                        placeholder="username"
-                        required=""
-                        className="block w-full rounded-md py-3 px-4 border-zinc-300 focus:ring-sky-500 dark:text-white placeholder-zinc-300"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <div className="mt-1">
-                      <input
-                        name="email"
-                        id="email"
-                        required=""
-                        type="email"
-                        placeholder="example@gmail.com"
-                        className=" block w-full rounded-md py-3 px-4 border-zinc-300 focus:border-sky-500 focus:ring-sky-500 dark:text-white placeholder-zinc-300"
-                      />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <div className="mt-1">
-                      <textarea
-                        required=""
-                        name="message"
-                        id="message"
-                        placeholder="message"
-                        rows="4"
-                        className="block w-full rounded-md py-3 px-4 border-zinc-300 focus:border-sky-500 focus:ring-sky-500 text-black placeholder-zinc-300"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div className="flex justify-end sm:col-span-2">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center rounded-md px-4 py-3 font-medium shadow-md focus:outline-none focus-visible:ring focus-visible:ring-sky-500 sm:text-sm transition-colors duration-75 text-white bg-[#003FFF] hover:bg-blue active:bg-blue disabled:bg-blue dark:hover:bg-blue dark:active:bg-white dark:disabled:bg-white disabled:cursor-not-allowed"
-                    >
-                      <span>Submit</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 md:mt-0">
-            <div className=" md:mb-0">
-              <img
-                src="../Images/contact.png"
-                alt="contact"
-                className="mx-auto md:w-9/12"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <section>
-        <div className="mt-8 gradient-background shadow-lg pt-9">
-          <div>
-            <div className="flex justify-evenly  sm:px-[18px] md:flex-row md:px-10">
-              <div className="md:w-[316px] flex flex-col items-center gap-4">
-                <a
-                  href="/"
-                  className="z-10  rounded-lg overflow-hidden  block active"
-                >
-                  <img
-                    src="../Images/logo3.png"
-                    alt="langnet-logo"
-                    width={290}
-                  />
-                </a>
-                <div className="mt-[18px] flex gap-6 justify-center">
-                  <a
-                    className="hover:scale-110"
-                    target="_blank"
-                    href="@srunlisa"
-                  >
-                    <img
-                      alt="Tele icon"
-                      loading="lazy"
-                      width="32"
-                      height="32"
-                      decoding="async"
-                      data-nimg="1"
-                      src="../Images/tele.png"
-                    />
-                  </a>
-                  <a
-                    className="hover:scale-110"
-                    target="_blank"
-                    href="https://web.facebook.com/srun.liza/"
-                  >
-                    <img
-                      alt="Facebook icon"
-                      loading="lazy"
-                      width="32"
-                      height="32"
-                      decoding="async"
-                      data-nimg="1"
-                      src="../Images/facebook.png"
-                    />
-                  </a>
-                  <a
-                    className="hover:scale-110"
-                    target="_blank"
-                    href="srunliza@gmail.com"
-                  >
-                    <img
-                      alt="google icon"
-                      loading="lazy"
-                      width="32"
-                      height="32"
-                      decoding="async"
-                      data-nimg="1"
-                      src="../Images/google.png"
-                    />
-                  </a>
-                  <a
-                    className="hover:scale-110"
-                    target="_blank"
-                    href="https://github.com/ksga-12th-generation-basic-course/multi-language-ui"
-                  >
-                    <img
-                      alt="github icon"
-                      loading="lazy"
-                      width="32"
-                      height="32"
-                      decoding="async"
-                      data-nimg="1"
-                      src="../Images/github.png"
-                    />
-                  </a>
                 </div>
-              </div>
-              <div className="mt-12 md:mt-0 text-center ">
-                <img
-                  src="../Images/phone.png"
-                  alt=""
-                  className="w-20 mx-auto "
-                />
-                <p className="mt-6 mb-2 font-bold text-white">BY PHONE</p>
-                <p className="mb-2 text-white">Monday to Friday. 9AM to 6 PM</p>
-                <p className="text-[12px] font-medium text-white">
-                  Tel: +855 698 720 60 <br />
-                  Tel: +855 698 720 60
-                </p>
-              </div>
-              <div className="mt-12 md:mt-0 text-center ">
-                <img src="./Images/Map.png" alt="" className="w-20  mx-auto" />
-                <p className="mt-6 mb-2 font-bold text-white">
-                  OUR OFFICE LOCATION
-                </p>
-                <p className="text-[12px] font-medium text-white">
-                  No 12, st.323, Boeung Kak 2, Toul Kork, <br />
-                  Phnom Penh, Cambodia
-                </p>
-              </div>
-              <div className="mt-12 md:mt-0 text-center">
-                <img src="../Images/mail.png" alt="" className="w-20 mx-auto" />
-                <p className="mt-6 mb-2 font-bold text-white">MAIL</p>
-                <p className="text-[12px] font-medium text-white">
-                  Langnet_help@gmail.com <br />
-                  panhach3495@gmail.com <br />
-                  sokheng.tey03@gmail.com
-                </p>
-                <StaticChatbot></StaticChatbot>
-              </div>
-            </div>
-            <hr className="mt-[30px] text-white" />
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+            </section>
+            {/* End Contact Section  */}
 
-export default LandingPageComponent;
+
+            {/*  Footer Section*/}
+            <footer className="bg-[#EDF2F7] shadow-sm border-t-gray-200  border-t pt-11">
+                <div className="max-w-[1320px] mx-auto px-4">
+                    <div className="flex flex-col md:flex-row md:items-start items-center   justify-between space-y-8 md:space-y-0">
+                        {/* Logo and Social Media */}
+                        <div className="flex flex-col items-center">
+                            <img src="./Images/Logo3.png" alt="LangNet Logo" className="h-12  mb-4" />
+                            <div className="flex space-x-4">
+                                <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                                    <img src="./Images/tele.png" alt="Telegram" className="h-6 hover:scale-125 w-6  transition-all" />
+                                </a>
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                                    <img src="./Images/facebook.png" alt="Facebook" className="hover:scale-125 w-6 h-6 transition-all" />
+                                </a>
+                                <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+                                    <img src="./Images/google.png" alt="Google" className="hover:scale-125 w-6 h-6 transition-all" />
+                                </a>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                                    <img src="./Images/github.png" alt="GitHub" className="h-6 hover:scale-125 w-6  transition-all" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* By Phone */}
+                        <div className="md:text-left text-center ">
+                            <div className="flex md:justify-start items-center gap-3 justify-center  mb-2">
+                                <img src="./assets/icons/phone-call.png" alt="Phone" className="h-7" />
+                                <h4 className="font-semibold">BY PHONE</h4>
+                            </div>
+                            <div className="flex flex-col text-gray-600 gap-2">
+                                <p>Monday to Friday. 9AM to 6 PM</p>
+                                <p>Tel: +855 698 720 60</p>
+                                <p>Tel: +855 698 720 60</p>
+                            </div>
+                        </div>
+
+                        {/* Our Office Location */}
+                        <div className="md:text-left text-center">
+                            <div className="flex items-center gap-3 md:justify-start justify-center mb-2">
+                                <img src="./assets/icons/map-pin.png" alt="Location" className="h-8 " />
+                                <h4 className="font-semibold">OUR OFFICE LOCATION</h4>
+                            </div>
+                            <div className="flex flex-col text-gray-600 gap-2">
+                                <p className="space-y-5">No 12, st.323, Boeung Kak 2, Toul Kork,</p>
+                                <p className="space-y-5">Phnom Penh, Cambodia</p>
+                                <p className="space-y-5">Phnom Penh, Cambodia</p>
+                                <p className="space-y-5">Phnom Penh, Cambodia</p>
+                            </div>
+                        </div>
+
+                        {/* Mail */}
+                        <div className="md:text-left text-center">
+                            <div className="flex items-center gap-3 md:justify-start justify-center mb-2">
+                                <img src="./assets/icons/message.png" alt="Mail" className="h-8 " />
+                                <h4 className="font-semibold">MAIL</h4>
+                            </div>
+                            <div className="flex flex-col text-gray-600 gap-2">
+                                <p>Langnet_help@gmail.com</p>
+                                <p>panhach3495@gmail.com</p>
+                                <p>sokheng.tey03@gmail.com</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    {/* Below Footer */}
+                    <div className=" text-center border-t  border-t-gray-400 py-6 mt-8">
+                        <p className="text-sm">&copy; 2024 LangNet Corporation. All rights reserved.</p>
+                        <div className="flex justify-center space-x-4 mt-2">
+                            <a href="#" className="text-sm text-gray-700 hover:text-gray-800 underline">
+                                Terms of Service
+                            </a>
+                            <a href="#" className="text-sm text-gray-700 hover:text-gray-800 underline">
+                                Privacy Notice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            {/* End Footer Section  */}
+        </div>
+    )
+}
+
+export default LandingPageComponent
