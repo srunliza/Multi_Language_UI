@@ -28,3 +28,16 @@ export const registerService = async (userDetail) => {
   const data = await res.json();
   return data;
 }
+
+export const otpService = async (otp) => {
+  console.log("otp in service: ", otp)
+  const res = await fetch(`${baseUrl}/api/v1/auth/verify?otp=${otp}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  const data = await res.json();
+  return data;
+}

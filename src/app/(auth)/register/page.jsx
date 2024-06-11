@@ -22,9 +22,17 @@ const RegisterPage = () => {
       password: userDetail.get("password"),
     };
 
+    console.log("User Details: ", newUserDetail)
+
     const register = await registerService(newUserDetail);
 
-    console.log("Register: ", register);
+    if (register.code === 201) {
+      router.push('/verify-otp')
+    } else {
+      console.log("failed")
+    }
+
+   
   }
 
   return (

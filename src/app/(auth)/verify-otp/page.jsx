@@ -1,13 +1,22 @@
-
+"use client";
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { otpService } from "@/service/auth.service";
+
 const VerifyOtpPage = () => {
-  const [otp, setOtp] = useState(new Array(6).fill(''));
+  const [value, setValue] = useState('');
+
+  const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 5 minutes in seconds
-  const [otpError, setOtpError] = useState('');
+  const [otpError, setOtpError] = useState("");
   const [isOtpExpired, setIsOtpExpired] = useState(false);
 
   // Initialize the router
@@ -31,7 +40,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} Sec`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")} Sec`;
   };
 
   // Handle OTP change
@@ -54,98 +65,107 @@ const VerifyOtpPage = () => {
   const handleResendOtp = () => {
     setTimeRemaining(2 * 60); // Reset timer
     setIsOtpExpired(false);
-    setOtp(new Array(6).fill('')); // Clear OTP inputs
-    setOtpError('');
+    setOtp(new Array(6).fill("")); // Clear OTP inputs
+    setOtpError("");
     // TODO: Add logic to re-send OTP to user's email
   };
 
   // Function to handle button click
   const handleVerifyOtp = () => {
-    const enteredOtp = otp.join('');
+    const enteredOtp = otp.join("");
     if (enteredOtp.length < 6) {
-      setOtpError('Please enter a valid 6-digit OTP.');
+      setOtpError("Please enter a valid 6-digit OTP.");
       return;
     }
     // TODO: Add logic to verify OTP
-    router.push('/reset-password'); // Navigate to the reset password page
+    router.push("/reset-password"); // Navigate to the reset password page
   };
 
-  const handleVerifyOtpClick = () => {
-    router.push('/reset-password')
-  }
+  const handleVerifyOtpClick = async () => {
+    const otp_service = await otpService(value)
+    // router.push("/reset-password");
+
+    console.log("response: ", otp_service)
+  };
 
 
   return (
-    // background
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
         {/* card */}
-        <div className="bg-white  pt-7 mt-8 rounded-2xl shadow-lg p-8 max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[28.5%]">
-
+        <div className="bg-white pt-10 pb-8 px-8 mt-8 rounded-3xl shadow-xl max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%]">
           {/* title */}
-          <h2 className="text-2xl font-bold text-[#1A42BC] mb-4 pl-1">
+          <h2 className="text-3xl font-bold text-[#1A42BC] mb-4 text-center">
             Verification
           </h2>
-          
-          {/* subtitle */}
-          <p className="text-gray-600 text-xs mb-1 pl-1">
-            Don't worry! It happens.
-          </p>
-          <p className="text-gray-600 text-xs mb-1 pl-1">
-            We will send you a one-time password to this email address.
-          </p>
 
-          {/* opt image */}
-          <div className="flex justify-center">
-            <Image src={optImage} width={310} height={310} alt="opt image" />
+          {/* subtitle */}
+          <div className="text-gray-600 text-sm mb-6 text-center">
+            <p>Don't worry! It happens.</p>
+            <p>We will send you a one-time password to this email address.</p>
           </div>
 
-          <h3 className="text-[24px] font-semibold text-center text-gray-700 mb-1">
+          {/* otp image */}
+          <div className="flex justify-center mb-6">
+            <Image src={optImage} width={310} height={310} alt="OTP Image" />
+          </div>
+
+          <h3 className="text-2xl font-semibold text-center text-gray-700 mb-2">
             OTP VERIFICATION
           </h3>
-          <p className="text-center text-gray-600 text-sm mb-6">
+          <p className="text-center text-gray-600 text-sm mb-8">
             Enter the OTP sent to your email address
           </p>
 
-          
-          {/* input opt code */}
-          <div className="flex justify-center mb-4 gap-2">
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
-            <input type="text"
-                maxLength="1"
-                className="otp-input mx-1 text-center w-8 h-8 border rounded-lg bg-gray-50 text-black border-[#1A42BC]" />
+          {/* input otp code */}
+          <div className="flex justify-center mb-6">
+            <div className="space-y-4">
+              <InputOTP
+                maxLength={6}
+                value={value}
+                onChange={(value) => setValue(value)}
+              >
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+              <div className="text-center text-sm text-gray-700">
+                {value === ""
+                  ? "Enter your one-time password."
+                  : `You entered: ${value}`}
+              </div>
+            </div>
           </div>
-          {otpError && <p className='text-red-500 text-sm text-center'>{otpError}</p>}
 
           {/* countdown timer */}
-          <div className="text-center text-gray-700 text-sm font-normal mb-3">
+          <div className="text-center text-gray-700 text-sm font-medium mb-3">
             {formatTime(timeRemaining)}
           </div>
 
-          <div className="text-center text-gray-600 text-xs mb-3">
-            Don't receive code?{" "}
-            <a href="#" onClick={handleResendOtp} className="text-black font-medium text-sx">
+          {/* resend code link */}
+          <div className="text-center text-gray-600 text-xs mb-6">
+            Didn't receive code?{" "}
+            <a
+              href="#"
+              onClick={handleResendOtp}
+              className="text-[#1A42BC] font-medium hover:underline"
+            >
               Re-send
             </a>
           </div>
 
-          {/* button submit */}
+          {/* submit button */}
           <div className="text-center">
-            <button onClick={handleVerifyOtpClick} type="button" className="bg-[#1A42BC] hover:bg-[#2d1abc] text-white text-md py-2 px-16 sm:px-20 md:px-24 lg:px-32 rounded-xl">
+            <button
+              onClick={handleVerifyOtpClick}
+              type="button"
+              className="bg-[#1A42BC] hover:bg-[#2d1abc] text-white text-md py-3 px-24 rounded-xl transition duration-300"
+            >
               Submit
             </button>
           </div>
