@@ -54,6 +54,8 @@ const LoginPage = () => {
         password,
       });
 
+      console.log(res)
+
       if (res.ok) {
         router.push("/employee/dashboard");
       } else {
