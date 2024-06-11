@@ -438,49 +438,6 @@ const SettingPage = () => {
                   </label>
                 </div>
               </div>
-              {/* Password */}
-              <div className="mt-[50px]">
-                <label
-                  htmlFor="password"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    id="password"
-                    className={`text-gray-700 focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full ${
-                      passwordError ? "border-red-500" : ""
-                    }`}
-                    placeholder="xxxxxxxxx"
-                    value={password}
-                    onChange={handlePasswordChange}
-                  />
-
-                  <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
-                    <img
-                      className="w-[20px]"
-                      src="../assets/icons/iconpassword.svg"
-                      alt="password icon"
-                    />
-                  </span>
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {passwordVisible ? (
-                      <VisibilityOffOutlined />
-                    ) : (
-                      <VisibilityOutlined />
-                    )}
-                  </button>
-                </div>
-                {passwordError && (
-                  <p className="text-red-500 text-xs mt-1">{passwordError}</p>
-                )}
-              </div>
               <div>
                 <label
                   htmlFor="social_contact"
@@ -532,7 +489,6 @@ const SettingPage = () => {
                     <>
                       <ModalHeader className="flex  gap-1">
                         <div>Enter your {selectedSocialContact} username</div>
-                        
                       </ModalHeader>
                       <ModalBody>
                         <div className="relative mb-4">
