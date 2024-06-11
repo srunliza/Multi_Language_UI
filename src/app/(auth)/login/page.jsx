@@ -1,16 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   EmailOutlined,
   HttpsOutlined,
-  VisibilityOffOutlined,
-  VisibilityOutlined,
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { loginSchema } from "@/validationSchema";
-import { loginService } from "@/service/auth.service";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
   const router = new useRouter();
@@ -21,16 +17,12 @@ const LoginPage = () => {
       password: userInfo.get("password"),
     };
 
-    const res = await loginService(newUserInfo);
+    const res = await signIn("credentials", {
+      email: newUserInfo.email,
+      password: newUserInfo.password,
+    });
 
-
-    console.log("Token: ", res.token);
-
-    if (res.code === 200) {
-      router.push("/employee/dashboard");
-    } else {
-      console.log("login failed!");
-    }
+    console.log('res in login: ', res)
   }
 
   return (

@@ -3,13 +3,13 @@ import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-
+import { otpVerifyService } from "@/service/auth.service";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { otpVerifyService } from "@/service/auth.service";
+
 
 const VerifyOtpPage = () => {
   const [value, setValue] = useState('');
@@ -85,7 +85,6 @@ const VerifyOtpPage = () => {
     const otp_service = await otpVerifyService(value)
     // router.push("/reset-password");
 
-    console.log("value ",value)
 
     console.log("response: ", otp_service)
   };

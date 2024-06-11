@@ -1,8 +1,6 @@
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { headerToken } from "@/app/api/headerToken";
 import { baseUrl } from "@/utils/constants";
 
-// Get all category services
 export const getAllProjectServices = async () => {
   const header = await headerToken();
   const res = await fetch(
@@ -13,6 +11,5 @@ export const getAllProjectServices = async () => {
   );
 
   const data = await res.json();
-  console.log("Base URL: ", baseUrl);
   return data;
 };
