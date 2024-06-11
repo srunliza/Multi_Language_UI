@@ -131,7 +131,7 @@ const FeedbackTranslatorComponent = () => {
                 </div>
 
                 <div className="ml-0 sm:ml-3 mt-3 sm:mt-0 flex-1 relative">
-                  <div className="font-medium text-gray-800 mr-7 top-0  md:text-sm text-lg">{feedback.name}</div>
+                  <div className="font-medium text-gray-800 mr-7 top-0  md:text-sm lg:text-lg">{feedback.name}</div>
                   <div className="text-gray-600 text-xs md:text-[11px] lg:text-sm">{feedback.position}</div>
                   <div className="mt-3.5 text-gray-700 text-[12.8px] md:mt-[10px] ml-[-66px] mr-0 line-clamp-2 lg:mt-5 lg:text-sm">{feedback.comment}</div>
                   <div className="text-gray-500 sm:text-xs md:text-sm lg:text-[15px] mt-2 ml-[-66px]">{feedback.date}</div>
