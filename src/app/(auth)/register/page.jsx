@@ -3,10 +3,9 @@ import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { useRouter } from "next/navigation";
-import { DatePicker } from "@nextui-org/react";
+import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 import Link from "next/link";
 import { registerService } from "@/service/auth.service";
-import { Select } from "flowbite-react";
 import { registerSchema } from "@/validationSchema";
 
 const RegisterPage = () => {
@@ -14,25 +13,23 @@ const RegisterPage = () => {
 
   async function handleRegister(userDetail) {
     const newUserDetail = {
-      firstName: userDetail.get("first-name"),
-      lastName: userDetail.get("last-name"),
+      firstName: userDetail.get("firstName"),
+      lastName: userDetail.get("lastName"),
       email: userDetail.get("email"),
       gender: userDetail.get("gender"),
-      birthDate: userDetail.get("date-register"),
+      birthDate: userDetail.get("birthDate"),
       password: userDetail.get("password"),
     };
 
-    console.log("User Details: ", newUserDetail)
+    console.log("User Details: ", newUserDetail);
 
     const register = await registerService(newUserDetail);
 
     if (register.code === 201) {
-      router.push('/verify-otp')
+      router.push("/verify-otp");
     } else {
-      console.log("failed")
+      console.log("failed");
     }
-
-   
   }
 
   return (
@@ -58,7 +55,7 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="first-name"
-                  name="first-name"
+                  name="firstName"
                   aria-label="First Name"
                   className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your First Name"
@@ -81,7 +78,7 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="last-name"
-                  name="last-name"
+                  name="lastName"
                   aria-label="Last Name"
                   className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Last Name"
@@ -107,10 +104,10 @@ const RegisterPage = () => {
                       id="gender"
                       name="gender"
                       placeholder="Select Gender"
-                      className="min-w-full"
-                    >
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
+                      className="min-w-full pl-3"
+                    > 
+                      <SelectItem  key="Male" value="Male">Male</SelectItem>
+                      <SelectItem key="Female" value="Female">Female</SelectItem>
                     </Select>
                   </div>
                 </div>
@@ -127,10 +124,9 @@ const RegisterPage = () => {
                   <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
                     <DatePicker
                       id="date-register"
-                      name="date-register"
                       aria-label="Date of Birth"
                       name="birthDate"
-                      className="w-full"
+                      className="pl-3"
                       isRequired
                     />
                   </div>

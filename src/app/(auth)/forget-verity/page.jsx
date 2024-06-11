@@ -58,7 +58,7 @@ const VerifyOtpPage = () => {
 
   const handleVerifyOtpClick = async () => {
     const enteredOtp = otp.join("");
-    console.log(enteredOtp)
+    console.log(enteredOtp);
     if (enteredOtp.length < 6) {
       setOtpError("Please enter a valid 6-digit OTP.");
       return;
