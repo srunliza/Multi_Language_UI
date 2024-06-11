@@ -3,7 +3,7 @@ import Popover from "@mui/material/Popover";
 import IconButton from "@mui/material/IconButton";
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 
 const ChatbotPopover = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,12 +20,19 @@ const ChatbotPopover = () => {
 
   const handleSend = () => {
     if (input.trim()) {
-      setMessages([...messages, { sender: "user", text: input, avatar: "/path/to/user/avatar.png" }]);
+      setMessages([
+        ...messages,
+        { sender: "user", text: input, avatar: "/path/to/user/avatar.png" },
+      ]);
       setInput("");
       setTimeout(() => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { sender: "bot", text: "This is a response from the chatbot.", avatar: "/assets/images/chatboot.svg" },
+          {
+            sender: "bot",
+            text: "This is a response from the chatbot.",
+            avatar: "/assets/images/chatboot.svg",
+          },
         ]);
       }, 1000);
     }
@@ -62,15 +69,22 @@ const ChatbotPopover = () => {
         }}
       >
         <div className=" w-[400px] rounded-2xl">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="flex text-lg font-semibold text-gray-800">
-              <Avatar alt="Support Bot" src="/assets/images/chatboot.svg" className=""/>
-              Support Bot
-            </h2>
+          <div className="flex justify-between bg-[#2357F9] items-center p-4">
+            <div className="flex items-center">
+              <Avatar
+                alt="Support Bot"
+                src="/assets/images/chatboot.svg"
+                className="mr-2"
+              />
+              <h2 className="text-lg font-semibold text-white">
+                Support Bot
+              </h2>
+            </div>
             <IconButton onClick={handleClose}>
-              <CloseIcon />
+            <CloseIcon style={{ color: 'white' }} />
             </IconButton>
           </div>
+
           <div className="flex flex-col h-64 w-[400px] overflow-y-auto border ">
             {messages.map((msg, index) => (
               <div
@@ -81,7 +95,11 @@ const ChatbotPopover = () => {
               >
                 <div className="flex items-end ">
                   {msg.sender === "bot" && (
-                    <Avatar alt="Support Bot" src={msg.avatar} className="mr-2"/>
+                    <Avatar
+                      alt="Support Bot"
+                      src={msg.avatar}
+                      className="mr-2"
+                    />
                   )}
                   <div
                     className={`p-2 rounded ${
@@ -93,7 +111,7 @@ const ChatbotPopover = () => {
                     {msg.text}
                   </div>
                   {msg.sender === "user" && (
-                    <Avatar alt="User" src={msg.avatar} className="ml-2"/>
+                    <Avatar alt="Thean" src="/Images/Thean.png" className="ml-2" />
                   )}
                 </div>
               </div>
