@@ -1,4 +1,4 @@
-'use client'
+
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';

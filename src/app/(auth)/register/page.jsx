@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -11,78 +10,22 @@ import { registerSchema } from "@/validationSchema";
 import { registerService } from "@/service/auth.service";
 
 const RegisterPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [date, setDate] = useState(null);
-  const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
-  const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    validateForm();
-  }, [firstName, lastName, email, date, password, gender]);
+  async function handleRegister(userDetail) {
+    const newUserDetail = {
+      firstName: userDetail.get("first-name"),
+      lastName: userDetail.get("last-name"),
+      email: userDetail.get("email"),
+      gender: userDetail.get("gender"),
+      birthDate: userDetail.get("date-register"),
+      password: userDetail.get("password"),
+    };
 
-  const validateForm = () => {
-    const validationResult = registerSchema.safeParse({
-      firstName,
-      lastName,
-      email,
-      gender,
-      birthDate: date ? date.toISOString().split("T")[0] : "",
-      password,
-    });
+    const register = await registerService(newUserDetail);
 
-    if (!validationResult.success) {
-      const fieldErrors = validationResult.error.errors.reduce((acc, err) => {
-        acc[err.path[0]] = err.message;
-        return acc;
-      }, {});
-      setErrors(fieldErrors);
-      setIsFormValid(false);
-    } else {
-      setErrors({});
-      setIsFormValid(true);
-    }
-  };
-
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setDate(date);
-    validateForm();
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    validateForm();
-
-    if (isFormValid) {
-      try {
-        const userDetail = {
-          firstName,
-          lastName,
-          email,
-          gender,
-          birthDate: date ? date.toISOString().split("T")[0] : "",
-          password,
-        };
-        console.log(userDetail);
-
-        const result = await registerService(userDetail);
-        console.log("Registration successful:", result);
-        router.push("/verify-otp");
-      } catch (error) {
-        console.error("Registration failed:", error);
-      }
-    } else {
-      console.log("Form has errors. Please correct them.");
-    }
-  };
+    console.log("Register: ", register);
+  }
 
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
@@ -95,7 +38,7 @@ const RegisterPage = () => {
             Enter your details to create an account
           </p>
 
-          <form onSubmit={handleSubmit}>
+          <form action={handleRegister}>
             <div className="mb-3">
               <label
                 htmlFor="first-name"
@@ -107,19 +50,15 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="first-name"
+                  name="first-name"
                   aria-label="First Name"
                   className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={firstName}
-                  onChange={handleChange(setFirstName)}
                   placeholder="Enter Your First Name"
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
                 </span>
               </div>
-              {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-              )}
             </div>
 
             <div className="mb-3">
@@ -133,19 +72,15 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="last-name"
+                  name="last-name"
                   aria-label="Last Name"
                   className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={lastName}
-                  onChange={handleChange(setLastName)}
                   placeholder="Enter Your Last Name"
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
                 </span>
               </div>
-              {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-              )}
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-3">
@@ -160,9 +95,9 @@ const RegisterPage = () => {
                   <div className="block appearance-none w-full bg-white border border-blue-600 text-gray-700 text-sm pl-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <Select
                       id="gender"
+                      name="gender"
                       placeholder="Select Gender"
                       className="min-w-full"
-                      onChange={handleChange(setGender)}
                     >
                       <SelectItem key="male" value="Male">
                         Male
@@ -173,9 +108,6 @@ const RegisterPage = () => {
                     </Select>
                   </div>
                 </div>
-                {errors.gender && (
-                  <p className="text-red-500 text-sm mt-1">{errors.gender}</p>
-                )}
               </div>
 
               <div className="flex flex-col">
@@ -189,17 +121,13 @@ const RegisterPage = () => {
                   <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
                     <DatePicker
                       id="date-register"
+                      name="date-register"
                       aria-label="Date of Birth"
                       className="max-w-80px"
                       isRequired
-                      value={date}
-                      onChange={handleDateChange}
                     />
                   </div>
                 </div>
-                {errors.date && (
-                  <p className="text-red-500 text-sm mt-1">{errors.date}</p>
-                )}
               </div>
             </div>
 
@@ -214,19 +142,15 @@ const RegisterPage = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   aria-label="Email"
                   className="w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={email}
-                  onChange={handleChange(setEmail)}
                   placeholder="Enter Your Email"
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlinedIcon fontSize="small" />
                 </span>
               </div>
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
             </div>
 
             <div className="mb-4">
@@ -240,19 +164,15 @@ const RegisterPage = () => {
                 <input
                   type="password"
                   id="password"
+                  name="password"
                   aria-label="Password"
                   className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-                  value={password}
-                  onChange={handleChange(setPassword)}
                   placeholder="Enter Your Password"
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
                 </span>
               </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-              )}
             </div>
 
             <button
@@ -265,11 +185,10 @@ const RegisterPage = () => {
 
           <div className="mt-3 flex justify-center items-center">
             <span className="text-gray-700 text-xs">
-              Do you have an account?{" "}
+              Do you have an account?
             </span>
             <Link href="login" className="text-blue-800 text-xs pl-1">
-              {" "}
-              Sign In{" "}
+              Sign In
             </Link>
           </div>
         </div>

@@ -1,3 +1,4 @@
+'use server'
 import { baseUrl } from "@/utils/constants";
 
 export const loginService = async (userInfo) => {
@@ -12,15 +13,18 @@ export const loginService = async (userInfo) => {
   return data;
 };
 
+
+
 export const registerService = async (userDetail) => {
-  console.log(userDetail);
+
   const res = await fetch(`${baseUrl}/api/v1/auth/register`, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(userDetail),
     headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const result = await res.json();
-  return result;
-};
+      'Content-Type': 'application/json'
+    }
+  })
+
+  const data = await res.json();
+  return data;
+}
