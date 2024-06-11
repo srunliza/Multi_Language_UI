@@ -9,70 +9,29 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { loginSchema } from "@/validationSchema";
+import { loginService } from "@/service/auth.service";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const router = new useRouter();
 
-  const router = useRouter();
+  async function handleLogin(userInfo) {
+    const newUserInfo = {
+      email: userInfo.get("email"),
+      password: userInfo.get("password"),
+    };
 
-  const validateField = (name, value) => {
-    try {
-      loginSchema.pick({ [name]: true }).parse({ [name]: value });
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
-    } catch (e) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: e.errors[0].message,
-      }));
-    }
-  };
+    const res = await loginService(newUserInfo);
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+    console.log("Token: ", res.token);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationResult = loginSchema.safeParse({
-      email,
-      password,
-    });
-
-    if (validationResult.success) {
-      const res = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-
-      console.log(res)
-
-      if (res.ok) {
-        router.push("/employee/dashboard");
-      } else {
-        console.log("Login failed");
-      }
+    if (res.code === 200) {
+      router.push("/employee/dashboard");
     } else {
-      const fieldErrors = validationResult.error.errors.reduce((acc, err) => {
-        acc[err.path[0]] = err.message;
-        return acc;
-      }, {});
-      setErrors(fieldErrors);
+      console.log("login failed!");
     }
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+  }
 
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
@@ -92,7 +51,7 @@ const LoginPage = () => {
               alt="change password image"
             />
           </div>
-          <form onSubmit={handleSubmit}>
+          <form action={handleLogin}>
             <div className="mb-2">
               <label
                 htmlFor="email"
@@ -104,21 +63,14 @@ const LoginPage = () => {
                 <input
                   type="email"
                   id="email"
-                  className={`w-full px-10 py-2.5 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
+                  name="email"
+                  className="w-full px-10 py-2.5 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="example@gmail.com"
-                  value={email}
-                  onChange={handleEmailChange}
-                  onBlur={(e) => validateField("email", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlined fontSize="small" />
                 </span>
               </div>
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-              )}
             </div>
             <div className="mb-4">
               <label
@@ -129,33 +81,17 @@ const LoginPage = () => {
               </label>
               <div className="relative text-gray-800 w-80">
                 <input
-                  type={passwordVisible ? "text" : "password"}
+                  type="password"
                   id="password"
-                  className={`w-full px-10 py-2.5 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm ${
-                    errors.password ? "border-red-500" : ""
-                  }`}
+                  name="password"
+                  className="w-full px-10 py-2.5 border bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  onBlur={(e) => validateField("password", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlined fontSize="small" />
                 </span>
-                <span
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
-                  onClick={togglePasswordVisibility}
-                >
-                  {passwordVisible ? (
-                    <VisibilityOutlined fontSize="small" />
-                  ) : (
-                    <VisibilityOffOutlined fontSize="small" />
-                  )}
-                </span>
+                <span className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"></span>
               </div>
-              {errors.password && (
-                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-              )}
             </div>
             <button
               type="submit"

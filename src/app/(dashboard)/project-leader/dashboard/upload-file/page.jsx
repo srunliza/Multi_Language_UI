@@ -66,13 +66,12 @@ const UploadFilePage = () => {
                 <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-2 bg-none">
-                  <option value="language">Choose Language</option>
-                  <option value="khmer">Khmer</option>
-                  <option value="english">English</option>
-                  <option value="korea">Korea</option>
-                  <option value="spain">Spain</option>
-                </select>
+                <input
+                    type="text"
+                    id="base-language"
+                    name="base-language"
+                    className="w-full mt-2  h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
+                  />
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
