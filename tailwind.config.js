@@ -30,7 +30,7 @@ module.exports = {
         "custom-bg": "#f5f4fe",
       },
       colors: {
-        // Custom colors...
+        
         'color-text-black': '#475568',
         'color-text-grey': '#949494',
         'color-text-white': '#F9FAFB',

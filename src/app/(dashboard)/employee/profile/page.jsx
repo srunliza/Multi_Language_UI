@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfilePage = () => {
   return (
-    <main className=" md:px-10 lg:px-36 sm:mr-8">
+    <main className="sm:px-8 md:px-[5rem] lg:px-[8rem] xl:px-[13rem]">
       <div className="bg-white w-full pl-8 md:pl-10 lg:pl-32 rounded-xl shadow-md py-10">
         <h1 className="text-xl text-gray-800 font-semibold">Personal Details</h1>
         <div className="flex gap-x-8 items-center mt-10">

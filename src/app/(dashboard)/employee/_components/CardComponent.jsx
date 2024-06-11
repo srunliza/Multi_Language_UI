@@ -9,7 +9,7 @@ const getStatusTextColor = (status) => {
     case "Completed":
       return "text-green-500";
     case "Progress":
-      return "text-yellow-500";
+      return "text-orange-300";
     case "Pending":
       return "text-red-500";
     default:
@@ -22,7 +22,7 @@ const getStatusBgColor = (status) => {
     case "Completed":
       return "bg-green-500";
     case "Progress":
-      return "bg-yellow-500";
+      return "bg-orange-300";
     case "Pending":
       return "bg-red-500";
     default:
@@ -141,16 +141,16 @@ const CardComponent = ({
         {project.owner.length > 15
           ? `${project.owner.substring(0, 15)}...`
           : project.owner}
-        <span className="text-gray-500 text-xs m-3 ">{project.role}</span>
+        <span className="text-gray-700 text-xs m-3 ">{project.role}</span>
       </div>
 
-      <div className="flex items-center mb-4 justify-between">
+      <div className="text-black text-md flex items-center mb-4 justify-between">
         <Link
           key={index}
           href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
           passHref
         >
-          <div className="bg-gray-100 text-gray-800 rounded-lg px-7 py-2 mr-5 text-sm">
+          <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-sm">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -173,7 +173,7 @@ const CardComponent = ({
           href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
           passHref
         >
-          <div className="bg-red-100 text-gray-700 rounded-lg px-3.5 py-2 text-sm">
+          <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-sm">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -196,11 +196,11 @@ const CardComponent = ({
       </div>
 
       <div className="grid grid-cols-2 items-center mb-4">
-        <div className="text-gray-500 w-[10rem] text-xs">
+        <div className="text-black w-[10rem] text-sm">
           Translation Progress
         </div>
         <div
-          className={`text-xs text-right ${getStatusTextColor(project.status)}`}
+          className={`text-sm text-right ${getStatusTextColor(project.status)}`}
         >
           {project.status}
         </div>
@@ -268,7 +268,8 @@ const CardComponent = ({
         )}
 
         {isViewMemberOpen &&
-          (viewMemberRole === "translator" || viewMemberRole === "developer") && (
+          (viewMemberRole === "translator" ||
+            viewMemberRole === "developer") && (
             <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
               <div ref={modalRef}>
                 <ViewMember onClose={handleModalClose} />

@@ -1,10 +1,18 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 
 const SettingPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -17,28 +25,44 @@ const SettingPage = () => {
   const [passwordError, setPasswordError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [selectedGender, setSelectedGender] = useState("");
+  const [selectedSocialContact, setSelectedSocialContact] = useState("");
+  const [socialContactUsername, setSocialContactUsername] = useState("");
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
   };
+
+  const handleSocialContactChange = (event) => {
+    setSelectedSocialContact(event.target.value);
+    onOpen();
+  };
+
+  const handleSocialContactUsernameChange = (event) => {
+    setSocialContactUsername(event.target.value);
+  };
+
   // Validate on Email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
   // Validate on First Name
   const validateFirstName = (firstName) => {
     const nameRegex = /[a-zA-Z]+/;
     return nameRegex.test(firstName);
   };
+
   // Validate on Last Name
   const validateLastName = (lastName) => {
     const nameRegex = /[a-zA-Z]+/;
     return nameRegex.test(lastName);
   };
 
-  // Handal First Name
-  const handaleFirstNameChange = (e) => {
+  // Handle First Name
+  const handleFirstNameChange = (e) => {
     const value = e.target.value;
     setFirstName(value);
     if (!value) {
@@ -50,8 +74,8 @@ const SettingPage = () => {
     }
   };
 
-  // Handal Last Name
-  const handaleLastNameChange = (e) => {
+  // Handle Last Name
+  const handleLastNameChange = (e) => {
     const value = e.target.value;
     setLastName(value);
     if (!value) {
@@ -63,7 +87,7 @@ const SettingPage = () => {
     }
   };
 
-  // Hanal Eamil
+  // Handle Email
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -77,7 +101,7 @@ const SettingPage = () => {
     }
   };
 
-  //Handal password
+  // Handle Password
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -97,27 +121,28 @@ const SettingPage = () => {
     let valid = true;
 
     // Condition on First Name
-
     if (!firstName) {
       setFirstNameError("First name is required.");
-    } else if (!validateFirstName(value)) {
+      valid = false;
+    } else if (!validateFirstName(firstName)) {
       setFirstNameError("First name can't not input number.");
+      valid = false;
     } else {
       setFirstNameError("");
     }
 
     // Condition on Last Name
-
     if (!lastName) {
-      setFirstNameError("Last name is required.");
-    } else if (!validateFirstName(value)) {
-      setFirstNameError("Last name can't not input number.");
+      setLastNameError("Last name is required.");
+      valid = false;
+    } else if (!validateLastName(lastName)) {
+      setLastNameError("Last name can't not input number.");
+      valid = false;
     } else {
-      setFirstNameError("");
+      setLastNameError("");
     }
 
     // Condition on Email
-
     if (!email) {
       setEmailError("Email is required.");
       valid = false;
@@ -128,7 +153,7 @@ const SettingPage = () => {
       setEmailError("");
     }
 
-    //condition on Password
+    // Condition on Password
     if (!password) {
       setPasswordError("Password is required.");
       valid = false;
@@ -151,10 +176,6 @@ const SettingPage = () => {
 
   // route to change password
   const router = useRouter();
-  const handleUserInfoClick = () => {
-    router.push("/employee/change-password");
-  };
-
   const [activeLink, setActiveLink] = useState(router.pathname);
 
   const handleLinkClick = (href) => {
@@ -164,19 +185,18 @@ const SettingPage = () => {
 
   return (
     <div>
-      <form className="w-full p-10" onSubmit={handleSubmit}>
+      <form className="w-full p-4 sm:p-10" onSubmit={handleSubmit}>
         <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
             Account Setting
           </h1>
-          {/* field choose change password */}
           <div className="flex gap-5">
             <a
               href="#"
               className={
                 activeLink === "/employee/setting"
                   ? "text-blue-600"
-                  : " text-blue-500"
+                  : "text-blue-500"
               }
               onClick={() => handleLinkClick("/employee/setting")}
             >
@@ -195,11 +215,10 @@ const SettingPage = () => {
             </a>
           </div>
 
-          <hr className=" border-gray-300 mb-6" />
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* First Name and Last Name */}
+          <hr className="border-gray-300 mb-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label
                     htmlFor="first_name"
@@ -212,8 +231,8 @@ const SettingPage = () => {
                     type="text"
                     placeholder="Enter first name"
                     value={firstName}
-                    onChange={handaleFirstNameChange}
-                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500  sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none  input-bordered w-full max-w-xs ${
+                    onChange={handleFirstNameChange}
+                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 md:pr-[10px] sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none input-bordered w-full max-w-xs ${
                       firstNameError ? "border-red-500" : ""
                     }`}
                   />
@@ -224,34 +243,29 @@ const SettingPage = () => {
                   )}
                 </div>
                 <div>
-                  <div>
-                    <label
-                      htmlFor="first_name"
-                      className="block text-gray-700 dark:text-white mb-1"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      placeholder="Enter last name"
-                      value={lastName}
-                      onChange={handaleLastNameChange}
-                      className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500  sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none  input-bordered w-full max-w-xs ${
-                        lastNameError ? "border-red-500" : ""
-                      }`}
-                    />
-                    {lastNameError && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {lastNameError}
-                      </p>
-                    )}
-                  </div>
+                  <label
+                    htmlFor="last_name"
+                    className="block text-gray-700 dark:text-white mb-1"
+                  >
+                    Last Name
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    placeholder="Enter last name"
+                    value={lastName}
+                    onChange={handleLastNameChange}
+                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
+                      lastNameError ? "border-red-500" : ""
+                    }`}
+                  />
+                  {lastNameError && (
+                    <p className="text-red-500 text-xs mt-1">{lastNameError}</p>
+                  )}
                 </div>
               </div>
-
-              {/* Gender */}
-              <div className="grid grid-cols-2 pt-2">
+              {/* gender */}
+              <div className="grid grid-cols-1 md:grid-cols-2 pt-2 gap-4">
                 <div>
                   <label
                     htmlFor="gender_male"
@@ -264,16 +278,13 @@ const SettingPage = () => {
                       <img
                         src="../assets/icons/gender1.svg"
                         alt="gender icon"
+                        className="w-4 h-4 md:w-6 md:h-6"
                       />
                     </div>
                     <button
                       type="button"
-                      className={`text-gray-700  sm:text-sm sm:leading-6 rounded-s-md border py-1.5 pr-20  focus:outline-none  input-bordered focus:ring-gray-500 focus:border-gray-500  w-full max-w-xs ${
-                        selectedGender === "male"
-                          ? "bg-gray-200"
-                          : selectedGender === "female"
-                          ? "bg-white"
-                          : ""
+                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
+                        selectedGender === "male" ? "bg-gray-200" : "bg-white"
                       }`}
                       onClick={() => handleGenderSelect("male")}
                     >
@@ -284,26 +295,22 @@ const SettingPage = () => {
                 <div>
                   <label
                     htmlFor="gender_female"
-                    className="block text-white dark:text-white mb-1"
+                    className="block text-gray-700 dark:text-white mb-1"
                   >
                     Gender
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        className="w-3"
+                        className="w-4 h-4 md:w-6 md:h-6"
                         src="../assets/icons/gender2.svg"
                         alt="gender icon"
                       />
                     </div>
                     <button
                       type="button"
-                      className={`text-gray-700 focus:outline-none  input-bordered focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-e-md border py-1.5 pr-20 w-full max-w-xs ${
-                        selectedGender === "female"
-                          ? "bg-gray-200"
-                          : selectedGender === "female"
-                          ? "bg-white"
-                          : ""
+                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
+                        selectedGender === "female" ? "bg-gray-200" : "bg-white"
                       }`}
                       onClick={() => handleGenderSelect("female")}
                     >
@@ -323,44 +330,44 @@ const SettingPage = () => {
                 </label>
                 <DatePicker
                   id="calender"
-                  className=" focus:outline-none  input-bordered  focus:border-gray-500 text-gray-700  focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6 rounded-md border bg-white"
+                  className="focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 rounded-md border bg-white"
                 />
               </div>
 
               {/* Email */}
-              <div className="mt-2">
+              <div>
                 <label
                   htmlFor="email"
-                  className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base  lg:text-base"
+                  className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
                 >
                   Email
                 </label>
-                <div className="relative text-gray-800 ">
-                  <input
-                    type="email"
-                    id="email"
-                    className={`text-gray-700  focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${
-                      emailError ? "border-red-500" : ""
-                    }`}
-                    placeholder="example@gmail.com"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                  <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
-                    <img
-                      className="w-[20px]"
-                      src="../assets/icons/mail.svg"
-                      alt="email icon"
-                    />
-                  </span>
-                </div>
-                {emailError && (
-                  <p className="text-red-500 text-xs mt-1">{emailError}</p>
-                )}
               </div>
+              <div className="relative text-gray-800">
+                <input
+                  type="email"
+                  id="email"
+                  className={`text-gray-700 focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full ${
+                    emailError ? "border-red-500" : ""
+                  }`}
+                  placeholder="example@gmail.com"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+                <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
+                  <img
+                    className="w-[20px]"
+                    src="../assets/icons/mail.svg"
+                    alt="email icon"
+                  />
+                </span>
+              </div>
+              {emailError && (
+                <p className="text-red-500 text-xs mt-1">{emailError}</p>
+              )}
 
               {/* Contact */}
-              <div className="mt-2">
+              <div>
                 <label
                   htmlFor="contact"
                   className="block text-gray-700 dark:text-white mb-1"
@@ -384,18 +391,18 @@ const SettingPage = () => {
                   </div>
                   <input
                     type="text"
-                    className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full"
+                    className="text-gray-700 focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full"
                     placeholder="Phone number"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Profile */}
-            <div className="flex flex-col items-center">
-              <div className="mt-12 max-sm:mt-1 w-[150px] h-[150px] max-md:mt-1 bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+            {/* profile and password */}
+            <div className="">
+              <div className="m-auto w-[150px] h-[150px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                 {/* icon edit profile */}
-                <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-[117px]">
+                <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-[117px] lg-ml-[35px]">
                   <input
                     type="file"
                     name="profile"
@@ -431,77 +438,99 @@ const SettingPage = () => {
                   </label>
                 </div>
               </div>
-
-              {/* Password */}
               <div>
                 <label
-                  htmlFor="password"
-                  className="mt-[35px] max-sm:mt-1  max-md:mt-1 block text-gray-700 dark:text-white mb-1"
+                  htmlFor="social_contact"
+                  className="block text-gray-700 dark:text-white mb-1"
                 >
-                  Password
+                  Social Contact
                 </label>
-                <div className="relative text-gray-800 ">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    id="password"
-                    className={`text-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full ${
-                      passwordError ? "border-red-500" : ""
-                    }`}
-                    placeholder="xxxxxxxxx"
-                    value={password}
-                    onChange={handlePasswordChange}
-                  />
-
-                  <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <img
                       className="w-[20px]"
-                      src="../assets/icons/iconpassword.svg"
-                      alt="password icon"
+                      src="../assets/icons/socaicontact.svg"
+                      alt="social contact icon"
                     />
-                  </span>
-                  <span
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {passwordVisible ? (
-                      <VisibilityOutlined fontSize="small" />
-                    ) : (
-                      <VisibilityOffOutlined fontSize="small" />
-                    )}
-                  </span>
-                </div>
-
-                <div>
-                  {/* Social Contact */}
-                  <div className="mt-2">
-                    <label
-                      htmlFor="social_contact"
-                      className="block text-gray-700 dark:text-white mb-1"
-                    >
-                      Social Contact
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <img
-                          className="w-[20px]"
-                          src="../assets/icons/socaicontact.svg"
-                          alt="social contact icon"
-                        />
-                      </div>
-                      <input
-                        type="text"
-                        className="text-gray-700 focus:outline-none  input-bordered  focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10  w-full"
-                        placeholder="Enter social contact"
-                      />
-                    </div>
                   </div>
+                  <select
+                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                    value={selectedSocialContact}
+                    onChange={handleSocialContactChange}
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select social contact
+                    </option>
+                    <option value="gmail" disabled>
+                      Gmail
+                    </option>
+                    <option value="phone" disabled>
+                      Phone Number
+                    </option>
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
               </div>
-              {/* Button Cancel and Save */}
-              <div className="mt-4 flex gap-3 w-auto ml-[5rem]">
+              {/* Modal */}
+              <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                placement="center"
+                isDismissable={false}
+                isKeyboardDismissDisabled={true}
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalHeader className="flex  gap-1">
+                        <div>Enter your {selectedSocialContact} username</div>
+                      </ModalHeader>
+                      <ModalBody>
+                        <div className="relative mb-4">
+                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <img
+                              className="w-[20px]"
+                              // src={`../assets/icons/${selectedSocialContact}.svg`}
+                              src="../Images/phone.png"
+                              alt={`${selectedSocialContact} icon`}
+                            />
+                          </div>
+                          <input
+                            type="text"
+                            className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                            placeholder={`Enter your ${selectedSocialContact} username`}
+                            value={socialContactUsername}
+                            onChange={handleSocialContactUsernameChange}
+                          />
+                        </div>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button
+                          color="danger"
+                          variant="light"
+                          onPress={onOpenChange}
+                          className="border border-rose-500 "
+                        >
+                          Close
+                        </Button>
+                        <Button color="primary" onPress={onOpenChange}>
+                          Save
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
+              {/* Button  */}
+              <div className="mt-4 flex gap-3 w-auto ml-[5rem] float-end">
                 <button
                   type="button"
-                  className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600  dark:text-white dark:hover:bg-teal-900 w-[100px]"
+                  className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]"
                 >
                   Cancel
                 </button>

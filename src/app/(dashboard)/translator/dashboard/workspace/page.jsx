@@ -8,6 +8,7 @@ import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorCompoent";
 
+
 const TranslatorWorkSpace = () => {
   const translations = [
     { id: 1, english: "Home" },

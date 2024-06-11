@@ -1,10 +1,10 @@
 import AddMemberModal from "@/components/AddMemberModal";
 import React from "react";
-import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
+import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
-import InputKeywordComponent from "../_components/InputKeywordComponent";
-import MemberProjectLeader from "@/components/MemberProjectModal";
+import InputKeywordComponent from "../../_components/InputKeywordComponent";
+import MemberProjectLeader from "@/components/MemberProjectLeader";
 
 const AddKeyValuePage = () => {
   const tableData = [

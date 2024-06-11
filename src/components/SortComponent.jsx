@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const SortProjectCardList = ({ selectedStatus, handleStatusChange, handleSortClick }) => {
+const SortComponent = ({ selectedStatus, handleStatusChange, handleSortClick }) => {
   return (
     <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
       <div className="flex w-full sm:w-auto">
@@ -50,4 +50,4 @@ const SortProjectCardList = ({ selectedStatus, handleStatusChange, handleSortCli
   );
 };
 
-export default SortProjectCardList;
+export default SortComponent;
