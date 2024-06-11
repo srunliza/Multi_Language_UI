@@ -24,7 +24,7 @@ const LoginPage = () => {
     const res = await loginService(newUserInfo);
 
 
-    console.log("Tokern: ", res.token);
+    console.log("Token: ", res.token);
 
     if (res.code === 200) {
       router.push("/employee/dashboard");

@@ -9,7 +9,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { otpService } from "@/service/auth.service";
+import { otpVerifyService } from "@/service/auth.service";
 
 const VerifyOtpPage = () => {
   const [value, setValue] = useState('');
@@ -82,8 +82,10 @@ const VerifyOtpPage = () => {
   };
 
   const handleVerifyOtpClick = async () => {
-    const otp_service = await otpService(value)
+    const otp_service = await otpVerifyService(value)
     // router.push("/reset-password");
+
+    console.log("value ",value)
 
     console.log("response: ", otp_service)
   };

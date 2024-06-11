@@ -29,8 +29,7 @@ export const registerService = async (userDetail) => {
   return data;
 }
 
-export const otpService = async (otp) => {
-  console.log("otp in service: ", otp)
+export const otpVerifyService = async (otp) => {
   const res = await fetch(`${baseUrl}/api/v1/auth/verify?otp=${otp}`, {
     method: 'PUT',
     headers: {
@@ -41,3 +40,17 @@ export const otpService = async (otp) => {
   const data = await res.json();
   return data;
 }
+
+export const forgotPasswordService = async (email) => {
+  const res = await fetch(`${baseUrl}/api/v1/auth/forgot-password/${email}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  const data = await res.json();
+  return data;
+}
+
+
