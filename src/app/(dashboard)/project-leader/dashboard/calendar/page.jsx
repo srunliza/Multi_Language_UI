@@ -11,8 +11,8 @@ const CalendarPage = () => {
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="h-[42.7rem]  flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex flex-wrap justify-between gap-4">
+      <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
           <NavbarProjectLeaderComponent />
           {/* Container */}
           <div className="flex-grow overflow-y-auto no-scrollbar">

@@ -19,11 +19,11 @@ function SelectComponent() {
 
   return (
     <div className="w-full lg:w-[321px] py-2">
-      <div className="container mx-auto text-xs">
+      <div className=" text-xs">
         <label htmlFor="select" className=" block">
           Translating to (target language)
         </label>
-        <div className="flex flex-wrap items-center justify-center lg:justify-between">
+        <div className="flex flex-wrap">
           <div className="w-full lg:w-[321px] text-xs py-2 text-gray-400">
             <Select
               styles={{

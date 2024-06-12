@@ -1,222 +1,212 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { translatorData } from "@/obj/translatorData";
+import { projectsTableData } from "@/obj/tableData";
 import SortProjectCardList from "@/components/SortComponent";
 
 const getStatusTextColor = (status) => {
-  switch (status) {
-    case "Completed":
-      return "text-green-500";
-    case "Progress":
-      return "text-yellow-500";
-    case "Pending":
-      return "text-red-500";
-    default:
-      return "text-gray-500";
-  }
+    switch (status) {
+        case "Completed":
+            return "text-green-500";
+        case "Progress":
+            return "text-yellow-500";
+        case "Pending":
+            return "text-red-500";
+        default:
+            return "text-gray-500";
+    }
 };
 
 const TranslatorPage = () => {
-  const router = useRouter();
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [sortedData, setSortedData] = useState(translatorData);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [sortCriteria, setSortCriteria] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
+    const router = useRouter();
+    const [selectedStatus, setSelectedStatus] = useState("All");
+    const [sortedData, setSortedData] = useState(projectsTableData);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [sortCriteria, setSortCriteria] = useState("name");
+    const [sortOrder, setSortOrder] = useState("asc");
 
-  useEffect(() => {
-    sortData();
-  }, [selectedStatus, startDate, endDate, sortCriteria, sortOrder]);
+    const sortData = useCallback(() => {
+        let filteredData = [...projectsTableData];
 
-  const handleRowClick = (id) => {
-    router.push(`/translator/dashboard/workspace`);
-  };
+        if (selectedStatus !== "All") {
+            filteredData = filteredData.filter(
+                (item) => item.status === selectedStatus
+            );
+        }
 
-  const handleStatusChange = (status) => {
-    setSelectedStatus(status);
-  };
+        if (startDate) {
+            filteredData = filteredData.filter(
+                (item) => new Date(item.startDate) >= new Date(startDate)
+            );
+        }
 
-  const handleSortClick = (criteria) => {
-    setSortCriteria(criteria);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-  };
+        if (endDate) {
+            filteredData = filteredData.filter(
+                (item) => new Date(item.endDate) <= new Date(endDate)
+            );
+        }
 
-  const sortData = () => {
-    let filteredData = [...translatorData];
-
-    if (selectedStatus !== "All") {
-      filteredData = filteredData.filter(
-        (item) => item.status === selectedStatus
-      );
-    }
-
-    if (startDate) {
-      filteredData = filteredData.filter(
-        (item) => new Date(item.startDate) >= new Date(startDate)
-      );
-    }
-
-    if (endDate) {
-      filteredData = filteredData.filter(
-        (item) => new Date(item.endDate) <= new Date(endDate)
-      );
-    }
-
-    filteredData.sort((a, b) => {
-      if (sortCriteria === "startDate" || sortCriteria === "endDate") {
-        const dateA = new Date(a[sortCriteria]);
-        const dateB = new Date(b[sortCriteria]);
-        return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-      } else {
-        return sortOrder === "asc"
-          ? a[sortCriteria].localeCompare(b[sortCriteria])
-          : b[sortCriteria].localeCompare(a[sortCriteria]);
-      }
-    });
-
-    setSortedData(filteredData);
-  };
-
-  return (
-    <div className="mt-2">
-      <div className="ml-10">
-        <SortProjectCardList
-          selectedStatus={selectedStatus}
-          handleStatusChange={(e) => handleStatusChange(e.target.value)}
-          handleSortClick={(value, type) => {
-            if (type === "startDate") {
-              setStartDate(value);
+        filteredData.sort((a, b) => {
+            if (sortCriteria === "fromDate" || sortCriteria === "toDate") {
+                const dateA = new Date(a[sortCriteria]);
+                const dateB = new Date(b[sortCriteria]);
+                return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
             } else {
-              setEndDate(value);
+                const valueA = a[sortCriteria] ?? "";
+                const valueB = b[sortCriteria] ?? "";
+                return sortOrder === "asc"
+                    ? valueA.localeCompare(valueB)
+                    : valueB.localeCompare(valueA);
             }
-          }}
-        />
-      </div>
+        });
 
-      {/* table */}
-      <div className="shadow-lg h-screen no-scrollbar rounded-lg overflow-x-auto md:mx-10 mx-10 bg-white">
-        <table className="min-w-full">
-          <thead className="text-gray-700 sticky top-0 white bg-blue-200 dark:text-gray-400">
-            <tr>
-              <th className="py-4 px-3 text-gray-700 font-semibold text-center">
-                File Name
-                <button onClick={() => handleSortClick("name")}>
-                  <svg
-                    className="h-4 w-4 inline"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
-                </button>
-              </th>
-              <th className="py-4 px-3 text-center text-gray-700 font-semibold">
-                Owner
-                <button onClick={() => handleSortClick("owner")}>
-                  <svg
-                    className="h-4 w-4 inline"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
-                </button>
-              </th>
-              <th className="py-4 px-3 text-center text-gray-700 font-semibold">
-                Status
-              </th>
-              <th className="py-3 px-3 text-center text-gray-700 font-semibold">
-                Start Date
-                <button onClick={() => handleSortClick("startDate")}>
-                  <svg
-                    className="h-4 w-4 inline"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
-                </button>
-              </th>
-              <th className="py-4 px-3 text-center text-gray-700 font-semibold">
-                End Date
-                <button onClick={() => handleSortClick("endDate")}>
-                  <svg
-                    className="h-4 w-4 inline"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 15l7-7 7 7"
-                    />
-                  </svg>
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedData.map((data) => (
-              <tr
-                key={data.id}
-                className="bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
-                onClick={() => handleRowClick(data.id)}
-              >
-                <th
-                  scope="row"
-                  className="text-center px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  <div className="overflow-auto">{data.name}</div>
-                </th>
-                <td className="text-center py-4 px-3 border-b border-gray-200">
-                  <div className="overflow-auto">{data.owner}</div>
-                </td>
-                <td
-                  className={`text-center py-4 px-3 border-b border-gray-200 ${getStatusTextColor(
-                    data.status
-                  )}`}
-                >
-                  <div className="overflow-auto">{data.status}</div>
-                </td>
-                <td className="text-center py-4 px-3 border-b border-gray-200">
-                  <div className="overflow-auto">{data.startDate}</div>
-                </td>
-                <td className="text-center py-4 px-3 border-b border-gray-200">
-                  <div className="overflow-auto">{data.endDate}</div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+        setSortedData(filteredData);
+    }, [selectedStatus, startDate, endDate, sortCriteria, sortOrder]);
+
+    useEffect(() => {
+        sortData();
+    }, [sortData]);
+
+    const handleRowClick = (id) => {
+        router.push(`/translator/dashboard/workspace`);
+    };
+
+    const handleStatusChange = (status) => {
+        setSelectedStatus(status);
+    };
+
+    const handleSortClick = (criteria) => {
+        setSortCriteria(criteria);
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    };
+
+    return (
+        <div className="w-full p-6">
+            <SortProjectCardList
+                selectedStatus={selectedStatus}
+                handleStatusChange={(e) => handleStatusChange(e.target.value)}
+                handleSortClick={(value, type) => {
+                    if (type === "startDate") {
+                        setStartDate(value);
+                    } else {
+                        setEndDate(value);
+                    }
+                }}
+            />
+
+            {/* Table */}
+            <div className="shadow-lg h-screen  no-scrollbar overflow-y-scroll rounded-lg ">
+                <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
+                        <tr>
+                            <th className="px-6 py-4">
+                                File Name
+                                <button onClick={() => handleSortClick("projectName")}>
+                                    <svg
+                                        className="h-4 w-4 inline"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M5 15l7-7 7 7"
+                                        />
+                                    </svg>
+                                </button>
+                            </th>
+                            <th className="px-10 py-4">
+                                Language
+                                <button onClick={() => handleSortClick("language")}>
+                                    <svg
+                                        className="h-4 w-4 inline"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M5 15l7-7 7 7"
+                                        />
+                                    </svg>
+                                </button>
+                            </th>
+                            <th className="px-10 py-4">
+                                Status
+                            </th>
+                            <th className="px-10 py-4">
+                                Start Date
+                                <button onClick={() => handleSortClick("fromDate")}>
+                                    <svg
+                                        className="h-4 w-4 inline"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M5 15l7-7 7 7"
+                                        />
+                                    </svg>
+                                </button>
+                            </th>
+                            <th className="px-10 py-4">
+                                End Date
+                                <button onClick={() => handleSortClick("toDate")}>
+                                    <svg
+                                        className="h-4 w-4 inline"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M5 15l7-7 7 7"
+                                        />
+                                    </svg>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sortedData.map((data) => (
+                            <tr
+                                key={data.id}
+                                className="bg-white border-b text-gray-900 hover:bg-gray-100  dark:border-gray-300 cursor-pointer"
+                                onClick={() => handleRowClick(data.id)}
+                            >
+                                <td className="px-6 py-4 font-medium whitespace-nowrap">
+                                    {data.projectName}
+                                </td>
+                                <td className=" py-4 pl-10">
+                                    {data.language}
+                                </td>
+                                <td className={`py-4 pl-10 ${getStatusTextColor(data.status)} truncate`}>
+                                    {data.status}
+                                </td>
+                                <td className="pl-10 py-4 border-gray-200">{data.fromDate}</td>
+                                <td className="pl-10 py-4 border-gray-200">{data.toDate}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 };
 
 export default TranslatorPage;

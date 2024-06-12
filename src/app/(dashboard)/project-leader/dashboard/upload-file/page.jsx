@@ -6,6 +6,7 @@ import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
 import CloseIcon from "@mui/icons-material/Close";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
+import LanguageSelect from "@/components/LanguageSelect";
 
 const UploadFilePage = () => {
   const [tableData, setTableData] = useState([
@@ -63,15 +64,9 @@ const UploadFilePage = () => {
               </div>
               <div className="w-full border-b-[1px] border-gray-400 mb-4"></div>
               <div className="w-full lg:w-[321px] py-4 text-xs">
-                <label htmlFor="select" className="text-xs">
-                  Translating from (base, source language)
-                </label>
-                <input
-                    type="text"
-                    id="base-language"
-                    name="base-language"
-                    className="w-full mt-2  h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
-                  />
+                <label htmlFor="select" className="text-xs ">Translating from (base, source language)</label>
+              
+                  <LanguageSelect/>
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
