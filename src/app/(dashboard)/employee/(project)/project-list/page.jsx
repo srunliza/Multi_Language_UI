@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { projectsData } from "@/obj/projects";
-import ProjectListComponent from "../_components/ListComponent";
+import ProjectListComponent from "../../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
 import ViewMember from "@/components/ViewMember"; 
 import SortComponent from "@/components/SortComponent";

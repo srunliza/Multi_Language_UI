@@ -1,64 +1,54 @@
-"use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import employee_welcome from "../../../../../public/assets/images/employee-welcome.png";
-import pendingProjectIcon from "../../../../../public/assets/icons/pending-project.svg";
-import finishProjectIcon from "../../../../../public/assets/icons/finish-project.svg";
-import progressProjectIcon from "../../../../../public/assets/icons/progress-project.svg";
-import totalProjectIcon from "../../../../../public/assets/icons/total-project.svg";
-import dashboardData from "@/obj/dashboardData";
+import Link from "next/link";
 import EmployeeCalendarComponent from "../_components/EmployeeCalendarComponent";
+import { getAllProjectService } from "@/service/project.service";
 
-const EmployeeDashboardPage = () => {
-  const router = useRouter();
-
-  const handleRowClick = (role) => {
-    router.push(`/${role.toLowerCase()}/dashboard`);
-  };
+const EmployeeDashboardPage = async () => {
+  const projectData = await getAllProjectService();
 
   return (
     <main>
-      <div className="flex flex-wrap gap-3 justify-between">
-        <div className="xl:w-[50rem] lg:w-[45rem] md:w-full sm:w-full md:flex md:flex-wrap lg:flex lg:flex-wrap overflow-hidden">
-          <div className="h-full flex flex-col items-center bg-[#1A42BC] px-4 py-9 rounded-xl shadow md:flex-row md:max-w-4xl">
-            <div className="flex flex-col justify-between p-4 leading-normal">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+        <div className="col-span-1 xl:col-span-8 lg:col-span-8 md:col-span-1">
+          <div className="h-full flex flex-col items-center bg-[#1A42BC] rounded-xl shadow md:flex-row md:max-w-4xl">
+            <div className="pl-10 flex flex-col justify-between p-4">
               <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-50 dark:text-white">
                 Greeting
               </h1>
               <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-50 dark:text-white">
                 Sok Heng!
               </h2>
-              <p className="xl:w-[30rem] lg:w-[25rem] mb-3 font-normal text-justify text-gray-100 text-sm dark:text-gray-100 md:w-[30rem]">
+              <p className="xl:w-[27rem] lg:w-[25rem] mb-3 font-normal text-justify text-gray-100 text-sm dark:text-gray-100 md:w-[30rem]">
                 Welcome to LangNet! Manage multiple languages efficiently,
                 streamline uploads and downloads in formats like Excel, JSON,
                 and XML.
               </p>
             </div>
             <Image
-              src={employee_welcome}
-              width={328}
-              height={328}
+              src="/assets/images/Hello.png"
+              width={240}
+              height={240}
               alt="welcome card image"
-              className="hidden lg:block xl:block overflow-hidden"
+              className="hidden xl:block"
             />
           </div>
         </div>
 
-        <div className="sm:w-full md:w-[25rem]">
+        <div className="col-span-1 lg:col-span-4 md:col-span-3">
           <EmployeeCalendarComponent />
         </div>
       </div>
 
-      <div className="mt-8 ">
-        <div className="flex flex-wrap justify-between gap-5">
-          <div className="xl:w-[17rem]  lg:w-[19rem] md:w-[25rem] sm:w-full bg-white p-4 rounded-xl border-2 border-blue-300 shadow-lg">
+      <div className="mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="bg-white p-4 rounded-xl border-2 border-blue-300 shadow-lg">
             <div>
-              <h1 className="font-semibold text-lg text-blue-500">
+              <h1 className="font-semibold text-lg text-gray-600">
                 Total Project
               </h1>
               <div className="pr-0 rounded flex justify-end items-center">
                 <Image
-                  src={totalProjectIcon}
+                  src="/assets/icons/progress-project.svg"
                   width={43}
                   height={43}
                   alt="total project icon"
@@ -69,17 +59,17 @@ const EmployeeDashboardPage = () => {
               </h3>
             </div>
           </div>
-          <div className="xl:w-[17rem] lg:w-[19rem] md:w-[25rem] sm:w-full bg-white p-4 rounded-xl border-2 border-green-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 border-green-300 shadow-lg">
             <div>
-              <h1 className="font-semibold text-lg text-green-500">
+              <h1 className="font-semibold text-lg text-gray-600">
                 Finished Project
               </h1>
               <div className="pr-0 rounded flex justify-end items-center">
                 <Image
-                  src={progressProjectIcon}
+                  src="/assets/icons/total-project.svg"
                   width={43}
                   height={43}
-                  alt="progress project icon"
+                  alt="finish project icon"
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-green-500">
@@ -87,17 +77,17 @@ const EmployeeDashboardPage = () => {
               </h3>
             </div>
           </div>
-          <div className="xl:w-[17rem] lg:w-[19rem] md:w-[25rem] sm:w-full bg-white p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
             <div>
-              <h1 className="font-semibold text-lg text-yellow-500">
+              <h1 className="font-semibold text-lg text-gray-600">
                 Progress Project
               </h1>
               <div className="pr-0 rounded flex justify-end items-center">
                 <Image
-                  src={finishProjectIcon}
+                  src="/assets/icons/pending-project.svg"
                   width={43}
                   height={43}
-                  alt="finish project icon"
+                  alt="progress project icon"
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-yellow-500">
@@ -105,14 +95,14 @@ const EmployeeDashboardPage = () => {
               </h3>
             </div>
           </div>
-          <div className="xl:w-[17rem] lg:w-[19rem] md:w-[25rem] sm:w-full bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
             <div>
-              <h1 className="text-red-500 font-semibold text-lg">
+              <h1 className="font-semibold text-lg text-gray-600">
                 Pending Project
               </h1>
               <div className="pr-0 rounded flex justify-end items-center">
                 <Image
-                  src={pendingProjectIcon}
+                  src="/assets/icons/finish-project.svg"
                   width={43}
                   height={43}
                   alt="pending project icon"
@@ -131,7 +121,7 @@ const EmployeeDashboardPage = () => {
           <thead className="text-sm text-gray-700 font-semibold sticky top-0 border-b bg-white">
             <tr>
               <th scope="col" className="px-6 py-4">
-                Product Name
+                Project Name
               </th>
               <th scope="col" className="px-6 py-4">
                 Role
@@ -148,27 +138,70 @@ const EmployeeDashboardPage = () => {
             </tr>
           </thead>
           <tbody>
-            {dashboardData.map((row, index) => (
+            {projectData.payload.map((project, index) => (
               <tr
                 key={index}
                 className="bg-white border-b text-gray-900 dark:border-gray-300 cursor-pointer"
-                onClick={() => handleRowClick(row.role)}
               >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium whitespace-nowrap"
                 >
-                  {row.productName}
-                </th>
-                <td className="px-6 py-4">{row.role}</td>
-                <td className="px-6 py-4">{row.startDate}</td>
-                <td className="px-6 py-4">{row.endDate}</td>
-                <td className="px-6 py-4 text-right">
-                  <span
-                    className={`status-label ${row.statusColor} text-xs text-white font-semibold py-1 px-4 rounded-xl`}
+                  <Link
+                    href={`/${project.members[0].role
+                      .toLowerCase()
+                      .replace(/ /g, "-")}/dashboard`}
                   >
-                    {row.status}
-                  </span>
+                    {project.projectName}
+                  </Link>
+                </th>
+                <td className="px-6 py-4">
+                  <Link
+                    href={`/${project.members[0].role
+                      .toLowerCase()
+                      .replace(/ /g, "-")}/dashboard`}
+                  >
+                    {project.members[0].role}
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link
+                    href={`/${project.members[0].role
+                      .toLowerCase()
+                      .replace(/ /g, "-")}/dashboard`}
+                  >
+                    {new Date(project.createDate).toLocaleDateString()}
+                  </Link>
+                </td>
+                <td className="px-6 py-4">
+                  <Link
+                    href={`/${project.members[0].role
+                      .toLowerCase()
+                      .replace(/ /g, "-")}/dashboard`}
+                  >
+                    {project.updatedDate
+                      ? new Date(project.updatedDate).toLocaleDateString()
+                      : "N/A"}
+                  </Link>
+                </td>
+                <td className="px-6 py-4 text-right">
+                  <Link
+                    href={`/${project.members[0].role
+                      .toLowerCase()
+                      .replace(/ /g, "-")}/dashboard`}
+                  >
+                    <span
+                      className={`status-label ${
+                        project.status === "PENDING"
+                          ? "bg-yellow-500"
+                          : project.status === "ACTIVE"
+                          ? "bg-blue-500"
+                          : "bg-gray-500"
+                      } text-xs text-white font-semibold py-1 px-4 rounded-xl`}
+                    >
+                      {project.status}
+                    </span>
+                  </Link>
                 </td>
               </tr>
             ))}

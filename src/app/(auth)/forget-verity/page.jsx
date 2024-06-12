@@ -8,6 +8,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { otpVerifyService } from "@/service/auth.service";
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -134,13 +135,11 @@ const VerifyOtpPage = () => {
             {formatTime(timeRemaining)}
           </div>
           <div className="text-center text-gray-600 text-xs mb-6">
-            Didn't receive code?
+            Didn't receive code?{" "}
             <a
               href="#"
               onClick={handleResendOtp}
-              className={`text-[#1A42BC] font-medium hover:underline ${
-                canResend ? "" : "pointer-events-none text-gray-400"
-              }`}
+              className="text-[#1A42BC] font-medium hover:underline"
             >
               Re-send
             </a>
@@ -166,4 +165,3 @@ const VerifyOtpPage = () => {
 };
 
 export default VerifyOtpPage;
-

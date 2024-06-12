@@ -2,7 +2,7 @@
 import { projectsData } from "@/obj/projects";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
-import CardComponent from "../_components/CardComponent";
+import CardComponent from "../../_components/CardComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
 import SortComponent from "@/components/SortComponent";
 

@@ -3,36 +3,33 @@ import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { useRouter } from "next/navigation";
-import { DatePicker } from "@nextui-org/react";
-import { Select, SelectItem } from "@nextui-org/react";
+import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 import Link from "next/link";
-import { registerSchema } from "@/validationSchema";
 import { registerService } from "@/service/auth.service";
+import { registerSchema } from "@/validationSchema";
 
 const RegisterPage = () => {
   const router = useRouter();
 
   async function handleRegister(userDetail) {
     const newUserDetail = {
-      firstName: userDetail.get("first-name"),
-      lastName: userDetail.get("last-name"),
+      firstName: userDetail.get("firstName"),
+      lastName: userDetail.get("lastName"),
       email: userDetail.get("email"),
       gender: userDetail.get("gender"),
-      birthDate: userDetail.get("date-register"),
+      birthDate: userDetail.get("birthDate"),
       password: userDetail.get("password"),
     };
 
-    console.log("User Details: ", newUserDetail)
+    console.log("User Details: ", newUserDetail);
 
     const register = await registerService(newUserDetail);
 
     if (register.code === 201) {
-      router.push('/verify-otp')
+      router.push("/verify-otp");
     } else {
-      console.log("failed")
+      console.log("failed");
     }
-
-   
   }
 
   return (
@@ -58,10 +55,11 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="first-name"
-                  name="first-name"
+                  name="firstName"
                   aria-label="First Name"
                   className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your First Name"
+                  onBlur={(e) => handleValidation("firstName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
@@ -80,10 +78,11 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   id="last-name"
-                  name="last-name"
+                  name="lastName"
                   aria-label="Last Name"
                   className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Last Name"
+                  onBlur={(e) => handleValidation("lastName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
@@ -94,23 +93,23 @@ const RegisterPage = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-3">
               <div className="flex flex-col">
                 <label
-                  htmlFor="gender"
+                  htmlFor="Gender"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Gender
                 </label>
                 <div className="relative">
-                  <div className="block appearance-none w-full bg-white border border-blue-600 text-gray-700 text-sm pl-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                  <div className="block appearance-none w-full bg-white border border-blue-600 text-gray-700 text-sm rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <Select
                       id="gender"
                       name="gender"
                       placeholder="Select Gender"
-                      className="min-w-full"
+                      className="min-w-full pl-3"
                     >
-                      <SelectItem key="male" value="Male">
+                      <SelectItem key="Male" value="Male">
                         Male
                       </SelectItem>
-                      <SelectItem key="female" value="Female">
+                      <SelectItem key="Female" value="Female">
                         Female
                       </SelectItem>
                     </Select>
@@ -120,18 +119,18 @@ const RegisterPage = () => {
 
               <div className="flex flex-col">
                 <label
-                  htmlFor="dob"
+                  htmlFor="Birth-Date"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Date of birth
                 </label>
                 <div className="relative">
-                  <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm px-4 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
+                  <div className="block w-full border bg-white border-blue-600 text-gray-700 text-sm rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm">
                     <DatePicker
                       id="date-register"
-                      name="date-register"
                       aria-label="Date of Birth"
-                      className="max-w-80px"
+                      name="birthDate"
+                      className="pl-3"
                       isRequired
                     />
                   </div>
@@ -141,7 +140,7 @@ const RegisterPage = () => {
 
             <div className="mb-3">
               <label
-                htmlFor="email"
+                htmlFor="Email"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Email
@@ -154,6 +153,7 @@ const RegisterPage = () => {
                   aria-label="Email"
                   className="w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Email"
+                  onBlur={(e) => handleValidation("email", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlinedIcon fontSize="small" />
@@ -163,7 +163,7 @@ const RegisterPage = () => {
 
             <div className="mb-4">
               <label
-                htmlFor="password"
+                htmlFor="Password"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Password
@@ -176,6 +176,7 @@ const RegisterPage = () => {
                   aria-label="Password"
                   className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Password"
+                  onBlur={(e) => handleValidation("password", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />

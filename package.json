@@ -11,6 +11,11 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fullcalendar/core": "^6.1.14",
+    "@fullcalendar/daygrid": "^6.1.14",
+    "@fullcalendar/interaction": "^6.1.14",
+    "@fullcalendar/react": "^6.1.14",
+    "@fullcalendar/timegrid": "^6.1.14",
     "@internationalized/date": "^3.5.4",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
@@ -23,6 +28,8 @@
     "@nextui-org/react": "^2.4.1",
     "@nextui-org/system": "^2.2.1",
     "@nextui-org/theme": "^2.2.5",
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",
@@ -34,18 +41,23 @@
     "next-auth": "^4.24.7",
     "nextui-cli": "^0.3.1",
     "react": "^18",
+    "react-calendar": "^5.0.0",
     "react-chatbotify": "^1.7.0",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-modal": "^3.16.1",
     "react-select": "^5.8.0",
+    "react-simple-chatbot": "^0.6.1",
+    "swiper": "^11.1.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "20.14.2",
     "daisyui": "^4.12.2",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.4.5"
   }
 }

@@ -1,7 +1,8 @@
-'use server'
+"use server";
 import { baseUrl } from "@/utils/constants";
 
 export const loginService = async (userInfo) => {
+  console.log(userInfo);
   const res = await fetch(`${baseUrl}/api/v1/auth/login`, {
     method: "POST",
     body: JSON.stringify(userInfo),
@@ -10,47 +11,51 @@ export const loginService = async (userInfo) => {
     },
   });
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
-
-
 export const registerService = async (userDetail) => {
-
   const res = await fetch(`${baseUrl}/api/v1/auth/register`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(userDetail),
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(res);
   const data = await res.json();
   return data;
-}
+};
 
 export const otpVerifyService = async (otp) => {
   const res = await fetch(`${baseUrl}/api/v1/auth/verify?otp=${otp}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 
-  const data = await res.json();
+  // Check the content type of the response
+  const contentType = res.headers.get("content-type");
+  let data;
+  if (contentType && contentType.includes("application/json")) {
+    data = await res.json();
+  } else {
+    data = await res.text();
+  }
+
   return data;
-}
+};
 
 export const forgotPasswordService = async (email) => {
   const res = await fetch(`${baseUrl}/api/v1/auth/forgot-password/${email}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await res.json();
   return data;
-}
-
-
+};

@@ -1,9 +1,6 @@
 "use client";
 import Image from "next/image";
-import {
-  EmailOutlined,
-  HttpsOutlined,
-} from "@mui/icons-material";
+import { EmailOutlined, HttpsOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -17,16 +14,17 @@ const LoginPage = () => {
       password: userInfo.get("password"),
     };
 
-    const res = await signIn("credentials", {
-      email: newUserInfo.email,
-      password: newUserInfo.password,
+    const res = signIn("credentials", {
+      redirect: false,
+      ...newUserInfo,
     });
 
-    if(res.ok) {
-      router.push("/employee/dashboard")
+    console.log("Response: ", res);
+    if ((await res).ok) {
+      router.push("/employee/dashboard");
+    } else {
+      console.log("login failed!");
     }
-
-    
   }
  
 
