@@ -10,7 +10,6 @@ export const authOption = {
           email: userDetail.email,
           password: userDetail.password,
         };
-        console.log(detail);
         const login = await loginService(detail);
         return login;
       },

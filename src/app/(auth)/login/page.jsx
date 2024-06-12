@@ -19,7 +19,6 @@ const LoginPage = () => {
       ...newUserInfo,
     });
 
-    console.log("Response: ", res);
     if ((await res).ok) {
       router.push("/employee/dashboard");
     } else {
