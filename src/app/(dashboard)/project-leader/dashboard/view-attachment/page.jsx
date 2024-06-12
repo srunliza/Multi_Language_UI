@@ -23,7 +23,7 @@ const ViewAttachmentPage = () => {
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* Container */}
-          <div className="flex-grow overflow-y-auto no-scrollbar mt-5 mb-5 flex justify-center items-center">
+          <div className="flex-grow overflow-y-auto no-scrollbar mt-1 mb-5 flex justify-center items-center">
             <AttachmentComponent />
           </div>
         </div>

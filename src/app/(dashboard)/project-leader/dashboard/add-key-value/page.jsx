@@ -7,6 +7,7 @@ import Link from "next/link";
 import InputKeywordComponent from "../../_components/InputKeywordComponent";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 import CloseIcon from "@mui/icons-material/Close";
+import LanguageSelect from "@/components/LanguageSelect";
 const AddKeyValuePage = () => {
   const [tableData, setTableData] = useState([
     { key: "Home", hint: "relating to the start of page" },
@@ -41,12 +42,7 @@ const AddKeyValuePage = () => {
                 <label htmlFor="select" className="text-xs">
                   Translating from (base, source language)
                 </label>
-                <input
-                    type="text"
-                    id="base-language"
-                    name="base-language"
-                    className="w-full mt-2  h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
-                  />
+               <LanguageSelect/>
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
