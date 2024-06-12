@@ -38,7 +38,7 @@ const PreviewStringFilePage = () => {
     return (
         <main className="bg-white p-8">
             <div className="grid grid-cols-12 gap-6">
-                <div className="sm:col-span-12 md:col-span-8 lg:col-span-9">
+                <div className="sm:col-span-12 md:col-span-8 lg:col-span-8">
                     <div className="bg-white shadow-md p-6 rounded-lg min-h-[560px] border">
                         {/* title */}
                         <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
@@ -66,7 +66,7 @@ const PreviewStringFilePage = () => {
                 </div>
 
                 {/* feedback  */}
-                <div className="sm:col-span-12 md:col-span-4 lg:col-span-3">
+                <div className="sm:col-span-12 md:col-span-4 lg:col-span-4">
                     <FeedbackComponent />
                 </div>
             </div>
