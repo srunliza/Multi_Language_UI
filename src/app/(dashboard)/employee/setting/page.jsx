@@ -266,7 +266,7 @@ const SettingPage = () => {
               </div>
               {/* gender */}
               <div className="">
-                <div>
+                <div className="mt-3">
                   <label
                     htmlFor="gender"
                     className="block text-gray-700 dark:text-white mb-1"
