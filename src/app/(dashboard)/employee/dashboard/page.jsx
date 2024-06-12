@@ -151,7 +151,7 @@ const EmployeeDashboardPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {projectData.payload.map((project, index) => (
+            {projectData?.payload?.map((project, index) => (
               <tr
                 key={index}
                 className="bg-white border-b text-gray-900 dark:border-gray-300 cursor-pointer"
@@ -184,7 +184,7 @@ const EmployeeDashboardPage = async () => {
                   <Link
                     href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
-                    {project.updatedDate
+                    {project?.updatedDate
                       ? new Date(project.updatedDate).toLocaleDateString()
                       : "N/A"}
                   </Link>

@@ -25,7 +25,9 @@ const RegisterPage = () => {
 
     const res = await registerService(newUserDetail);
 
-    if (register.code === 201) {
+    console.log("Res: ", res)
+
+    if (res.code === 201) {
       router.push("/verify-otp");
     } else {
       console.log("failed");

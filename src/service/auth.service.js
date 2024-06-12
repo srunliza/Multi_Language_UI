@@ -1,4 +1,4 @@
-'use client'
+'use server'
 import { baseUrl } from "@/utils/constants";
 
 export const loginService = async (userInfo) => {
@@ -21,6 +21,7 @@ export const registerService = async (userDetail) => {
       "Content-Type": "application/json",
     },
   });
+
   const data = await res.json();
   return data;
 };
@@ -45,14 +46,33 @@ export const otpVerifyService = async (otp) => {
   return data;
 };
 
-export const forgotPasswordService = async (email) => {
-  const res = await fetch(`${baseUrl}/api/v1/auth/forgot-password/${email}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
 
-  const data = await res.json();
-  return data;
+export const forgotPasswordService = async (email) => {
+  try {
+    console.log("email: ", email);
+
+    const res = await fetch(`${baseUrl}/auth/send-otp?email=${encodeURIComponent(email)}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to send OTP");
+    }
+
+    // Check if the response has a body
+    const text = await res.text();
+    if (text) {
+      const data = JSON.parse(text);
+      return data;
+    }
+
+    return "OTP sent successfully.";
+  } catch (error) {
+    console.error("Error sending OTP:", error);
+    return { error: error.message };
+  }
 };
+

@@ -8,6 +8,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { otpVerifyService } from "@/service/auth.service";
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -30,9 +31,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
+    return `${minutes
       .toString()
-      .padStart(2, "0")} Sec`;
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} Sec`;
   };
 
   const handleOtpChange = (element, index) => {
@@ -83,7 +84,6 @@ const VerifyOtpPage = () => {
       console.error("Error verifying OTP: ", error);
     }
   };
-
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
@@ -134,13 +134,11 @@ const VerifyOtpPage = () => {
             {formatTime(timeRemaining)}
           </div>
           <div className="text-center text-gray-600 text-xs mb-6">
-            Didn't receive code?
+            Didn't receive code?{" "}
             <a
               href="#"
               onClick={handleResendOtp}
-              className={`text-[#1A42BC] font-medium hover:underline ${
-                canResend ? "" : "pointer-events-none text-gray-400"
-              }`}
+              className="text-[#1A42BC] font-medium hover:underline"
             >
               Re-send
             </a>
@@ -166,4 +164,3 @@ const VerifyOtpPage = () => {
 };
 
 export default VerifyOtpPage;
-
