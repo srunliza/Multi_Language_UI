@@ -72,45 +72,21 @@ const LandingPageComponent = () => {
           </div>
         </div>
 
-        {/* Mobile menu button */}
-        {isOpen && (
-          <div className="mobile-menu  md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a
-                href="#"
-                className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2"
-              >
-                About us
-              </a>
-              <a
-                href="#"
-                className="block text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2"
-              >
-                Contact Us
-              </a>
-              <a
-                href="#"
-                className="block text-purple-700 border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2"
-              >
-                Login
-              </a>
-              <a
-                href="#"
-                className="block bg-purple-600 text-white rounded-md px-3 py-2"
-              >
-                Sign Up
-              </a>
-            </div>
-          </div>
-        )}
-      </nav>
-      {/*End Navbar Seciton */}
+                {/* Mobile menu button */}
+                {isOpen && (
+                    <div className="mobile-menu  md:hidden">
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Home</a>
+                            <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">About us</a>
+                            <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Contact Us</a>
+                            <a href="#" className="block text-purple-700 border hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</a>
+                            <a href="#" className="block bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-2">Sign Up</a>
+                        </div>
+                    </div>
+                )}
+
+            </nav>
+            {/*End Navbar Seciton */}
 
       {/* Hero Section*/}
       <section className="gradient-background  text-white">
