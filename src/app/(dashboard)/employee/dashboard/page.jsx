@@ -6,6 +6,19 @@ import { getAllProjectService } from "@/service/project.service";
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
 
+  const getRoleRoute = (role) => {
+    switch (role) {
+      case "Project Leader":
+        return "project-leader";
+      case "Developer":
+        return "developer";
+      case "Translator":
+        return "translator";
+      default:
+        return "";
+    }
+  };
+
   return (
     <main>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
@@ -148,36 +161,28 @@ const EmployeeDashboardPage = async () => {
                   className="px-6 py-4 font-medium whitespace-nowrap"
                 >
                   <Link
-                    href={`/${project.members[0].role
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/dashboard`}
+                    href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
                     {project.projectName}
                   </Link>
                 </th>
                 <td className="px-6 py-4">
                   <Link
-                    href={`/${project.members[0].role
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/dashboard`}
+                    href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
                     {project.members[0].role}
                   </Link>
                 </td>
                 <td className="px-6 py-4">
                   <Link
-                    href={`/${project.members[0].role
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/dashboard`}
+                    href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
                     {new Date(project.createDate).toLocaleDateString()}
                   </Link>
                 </td>
                 <td className="px-6 py-4">
                   <Link
-                    href={`/${project.members[0].role
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/dashboard`}
+                    href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
                     {project.updatedDate
                       ? new Date(project.updatedDate).toLocaleDateString()
@@ -186,9 +191,7 @@ const EmployeeDashboardPage = async () => {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <Link
-                    href={`/${project.members[0].role
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/dashboard`}
+                    href={`/${getRoleRoute(project.members[0].role)}/dashboard`}
                   >
                     <span
                       className={`status-label ${
