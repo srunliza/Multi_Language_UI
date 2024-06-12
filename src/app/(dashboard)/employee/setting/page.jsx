@@ -28,7 +28,7 @@ const SettingPage = () => {
   const [selectedSocialContact, setSelectedSocialContact] = useState("");
   const [socialContactUsername, setSocialContactUsername] = useState("");
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
@@ -36,7 +36,7 @@ const SettingPage = () => {
 
   const handleSocialContactChange = (event) => {
     setSelectedSocialContact(event.target.value);
-    onOpen();
+    document.getElementById("my_modal_3").showModal();
   };
 
   const handleSocialContactUsernameChange = (event) => {
@@ -265,57 +265,37 @@ const SettingPage = () => {
                 </div>
               </div>
               {/* gender */}
-              <div className="grid grid-cols-1 md:grid-cols-2 pt-2 gap-4">
+              <div className="">
                 <div>
                   <label
-                    htmlFor="gender_male"
+                    htmlFor="gender"
                     className="block text-gray-700 dark:text-white mb-1"
                   >
                     Gender
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <img
-                        src="../assets/icons/gender1.svg"
-                        alt="gender icon"
-                        className="w-4 h-4 md:w-6 md:h-6"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
-                        selectedGender === "male" ? "bg-gray-200" : "bg-white"
-                      }`}
-                      onClick={() => handleGenderSelect("male")}
+                    <select
+                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                      value={selectedGender}
+                      onChange={(e) => handleGenderSelect(e.target.value)}
                     >
-                      Male
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="gender_female"
-                    className="block text-gray-700 dark:text-white mb-1"
-                  >
-                    Gender
-                  </label>
-                  <div className="relative">
+                      <option value="" disabled>
+                        Select Gender
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        className="w-4 h-4 md:w-6 md:h-6"
-                        src="../assets/icons/gender2.svg"
+                        className="w-[20px]"
+                        src={
+                          selectedGender === "male"
+                            ? "../assets/icons/gender1.svg"
+                            : "../assets/icons/gender2.svg"
+                        }
                         alt="gender icon"
                       />
                     </div>
-                    <button
-                      type="button"
-                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
-                        selectedGender === "female" ? "bg-gray-200" : "bg-white"
-                      }`}
-                      onClick={() => handleGenderSelect("female")}
-                    >
-                      Female
-                    </button>
                   </div>
                 </div>
               </div>
@@ -469,64 +449,13 @@ const SettingPage = () => {
                       Phone Number
                     </option>
                     <option value="facebook">Facebook</option>
-                    <option value="twitter">Twitter</option>
+                    <option value="x">X</option>
                     <option value="linkedin">LinkedIn</option>
                     <option value="instagram">Instagram</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
               </div>
-              {/* Modal */}
-              <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                placement="center"
-                isDismissable={false}
-                isKeyboardDismissDisabled={true}
-              >
-                <ModalContent>
-                  {(onClose) => (
-                    <>
-                      <ModalHeader className="flex  gap-1">
-                        <div>Enter your {selectedSocialContact} username</div>
-                      </ModalHeader>
-                      <ModalBody>
-                        <div className="relative mb-4">
-                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <img
-                              className="w-[20px]"
-                              // src={`../assets/icons/${selectedSocialContact}.svg`}
-                              src="../Images/phone.png"
-                              alt={`${selectedSocialContact} icon`}
-                            />
-                          </div>
-                          <input
-                            type="text"
-                            className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-                            placeholder={`Enter your ${selectedSocialContact} username`}
-                            value={socialContactUsername}
-                            onChange={handleSocialContactUsernameChange}
-                          />
-                        </div>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button
-                          color="danger"
-                          variant="light"
-                          onPress={onOpenChange}
-                          className="border border-rose-500 "
-                        >
-                          Close
-                        </Button>
-                        <Button color="primary" onPress={onOpenChange}>
-                          Save
-                        </Button>
-                      </ModalFooter>
-                    </>
-                  )}
-                </ModalContent>
-              </Modal>
-              {/* Button  */}
               <div className="mt-4 flex gap-3 w-auto ml-[5rem] float-end">
                 <button
                   type="button"
@@ -545,6 +474,58 @@ const SettingPage = () => {
           </div>
         </div>
       </form>
+
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              ✕
+            </button>
+          </form>
+
+          <h3 className="font-bold text-lg">
+            Enter your {selectedSocialContact} username
+          </h3>
+
+          <div className="relative mb-4">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <img
+                className="w-[20px]"
+                src={`../Images/${selectedSocialContact}.png`}
+                onError={(e) =>
+                  (e.target.src = `../Images/${selectedSocialContact}.webp`)
+                }
+                alt={`${selectedSocialContact} icon`}
+              />
+            </div>
+            <input
+              type="text"
+              className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+              placeholder={`Enter your ${selectedSocialContact} username`}
+              value={socialContactUsername}
+              onChange={handleSocialContactUsernameChange}
+            />
+          </div>
+
+          <div className="modal-action">
+            <button
+              className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              Close
+            </button>
+            <button
+              className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
