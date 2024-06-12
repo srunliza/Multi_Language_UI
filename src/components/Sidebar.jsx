@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
@@ -11,7 +10,6 @@ import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
-import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
 import langnet from "../../public/Images/langNet3.jpg";
 import Image from "next/image";
 import LogoutComponent from "./LogoutComponent";
@@ -32,7 +30,7 @@ const Sidebar = ({ isSidebarOpen }) => {
   return (
     <>
       <div
-        className={`h-full md:items-center flex-col md:bg-white sm:bg-white w-[15rem] absolute ${
+        className={`h-full md:items-center flex-col md:bg-white sm:bg-white w-[15rem] absolute${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >

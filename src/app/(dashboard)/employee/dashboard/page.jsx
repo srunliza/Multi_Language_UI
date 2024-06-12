@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import EmployeeCalendarComponent from "../_components/EmployeeCalendarComponent";
-import { getAllProjectService } from "@/service/project.service";
+import {
+  getAllProjectService,
+  getAllProjectWithStatusService,
+} from "@/service/project.service";
 
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
+  const totalProject = await getAllProjectWithStatusService();
 
   const getRoleRoute = (role) => {
     switch (role) {
@@ -68,14 +72,14 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-blue-500">
-                40,689
+                {totalProject?.payload?.total}
               </h3>
             </div>
           </div>
           <div className="bg-white p-4 rounded-xl border-2 border-green-300 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
-                Finished Project
+                Completed Project
               </h1>
               <div className="pr-0 rounded flex justify-end items-center">
                 <Image
@@ -86,7 +90,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-green-500">
-                40,689
+                {totalProject?.payload?.countsByStatus?.COMPLETED}
               </h3>
             </div>
           </div>
@@ -104,7 +108,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-yellow-500">
-                40,689
+                {totalProject?.payload?.countsByStatus?.PROGRESS}
               </h3>
             </div>
           </div>
@@ -122,7 +126,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-red-500">
-                40,689
+                {totalProject?.payload?.countsByStatus?.PENDING}
               </h3>
             </div>
           </div>
@@ -198,11 +202,11 @@ const EmployeeDashboardPage = async () => {
                   >
                     <span
                       className={`status-label ${
-                        project.status === "PENDING"
+                        project.status === "PROGRESS"
                           ? "bg-yellow-500"
-                          : project.status === "ACTIVE"
-                          ? "bg-blue-500"
-                          : "bg-gray-500"
+                          : project.status === "COMPLETED"
+                          ? "bg-green-500"
+                          : "bg-red-500"
                       } text-xs text-white font-semibold py-1 px-4 rounded-xl`}
                     >
                       {project.status}

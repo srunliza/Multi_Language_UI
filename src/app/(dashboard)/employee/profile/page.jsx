@@ -1,14 +1,10 @@
 import {
   getAllUserProfileService,
-  getProfileImageService,
 } from "@/service/user.service";
 import React from "react";
 
 const ProfilePage = async () => {
   const userData = await getAllUserProfileService();
-  console.log(userData);
-  const userImage = await getProfileImageService(userData?.payload?.image);
-  console.log(userImage);
 
   return (
     <main className="sm:px-8 md:px-[5rem] lg:px-[8rem] xl:px-[13rem]">
@@ -19,8 +15,7 @@ const ProfilePage = async () => {
         <div className="flex gap-x-8 items-center mt-10">
           <div className="h-24 w-24 rounded-full overflow-hidden">
             <img
-              src="http://68.183.234.148:8180/api/v1/image/view-profile-image/411249419_252999710977298_3536379553431986264_n.jpg
-"
+              src="../../assets/images/sokheng.png"
               alt="User Profile"
             />{" "}
           </div>
@@ -64,15 +59,15 @@ const ProfilePage = async () => {
           <h2 className="text-sm font-semibold text-gray-600">Phone</h2>
           <h2 className="text-sm font-semibold text-gray-600">Email</h2>
           <p className="text-gray-600">
-            {userData?.payload?.contact.phoneNumber}
+            {userData?.payload?.contact?.phoneNumber}
           </p>
           <p className="text-gray-600">{userData?.payload?.email}</p>
         </div>
         <div className="w-full md:w-[85%] lg:w-[70%] grid grid-cols-2 mt-9 gap-2">
           <h2 className="text-sm font-semibold text-gray-600">Telegram</h2>
           <h2 className="text-sm font-semibold text-gray-600">Facebook</h2>
-          <p className="text-gray-600">{userData?.payload?.contact.telegram}</p>
-          <p className="text-gray-600">{userData?.payload?.contact.facebook}</p>
+          <p className="text-gray-600">{userData?.payload?.contact?.telegram}</p>
+          <p className="text-gray-600">{userData?.payload?.contact?.facebook}</p>
         </div>
       </div>
     </main>

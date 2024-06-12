@@ -113,11 +113,7 @@ const ProjectCardPage = () => {
       </h2>
 
       <div className="flex flex-wrap items-center mb-4">
-        <SortComponent
-          selectedStatus={selectedStatus}
-          handleStatusChange={handleStatusChange}
-          handleSortClick={handleSortClick}
-        />
+        <SortComponent/>
 
         <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">
           <button

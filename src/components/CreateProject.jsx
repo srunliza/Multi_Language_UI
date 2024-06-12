@@ -2,9 +2,29 @@ import React from "react";
 import { createProjectAction } from "@/action/project-action";
 
 const CreateProject = ({ onClose }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const result = await createProjectAction(formData);
+    if (result.success) {
+      const popup = document.getElementById("successPopup");
+      popup.style.display = "block";
+      setTimeout(() => {
+        popup.style.display = "none";
+        onClose();
+      }, 3000);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50 fixed inset-0 p-4">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6">
+    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50 fixed inset-0 p-4 z-50">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6 relative">
+        <div
+          id="successPopup"
+          className="hidden absolute top-0 left-1/2 transform -translate-x-1/2 p-6 bg-green-500 text-white rounded-md shadow-lg w-11/12 max-w-lg"
+        >
+          Project created successfully!
+        </div>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-600">Create Project</h2>
           <button
@@ -29,7 +49,7 @@ const CreateProject = ({ onClose }) => {
             </div>
           </button>
         </div>
-        <form action={createProjectAction}>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             id="projectName"
