@@ -124,7 +124,7 @@ const Sidebar = ({ isSidebarOpen }) => {
           </div>
         </div>
       </div>
-      {isCreateProjectOpen && <CreateProject />}
+      {isCreateProjectOpen && <CreateProject onClose={handleNewProjectClick} />}
     </>
   );
 };

@@ -8,5 +8,4 @@ export const createProjectAction = async (formData) => {
   };
   console.log("Project object in action: ", project);
   await createProjectService(project);
-  revalidateTag("projectName");
 };

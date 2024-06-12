@@ -1,8 +1,10 @@
+"use client"
 import CalendarTest from "@/components/CalendarTest";
 import { calendarData } from "@/obj/calendarData";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { EventSourceInput } from "@fullcalendar/core/index.js";
+import { useEffect, useState } from "react";
 
 export default function CalendarComponent() {
   const [allEvents, setAllEvents] = useState([]);

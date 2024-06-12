@@ -20,8 +20,6 @@ const RegisterPage = () => {
       password: userDetail.get("password"),
     };
 
-    console.log("User Details: ", newUserDetail);
-
     const register = await registerService(newUserDetail);
 
     if (register.code === 201) {

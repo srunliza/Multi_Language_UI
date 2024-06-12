@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
 
 html,
 body,
@@ -138,22 +137,18 @@ body {
   }
 }
 
-
-
-
-
-:root {
+/* :root {
   @apply bg-gray-50;
 }
 
 input {
   @apply px-2;
 }
-  .fc-header-toolbar {
-    display: inline-block;
-    padding: 4px 4px;
-    
-    @apply space-x-8;
+.fc-header-toolbar {
+  display: inline-block;
+  padding: 4px 4px;
+
+  @apply space-x-8;
 }
 
 .fc-day {
@@ -169,16 +164,15 @@ input {
 }
 
 .fc-h-event {
-  @apply bg-violet-500 border border-violet-600 ;
-  
+  @apply bg-violet-500 border border-violet-600;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-  @apply bg-violet-100 ;
+  @apply bg-violet-100;
 }
 
-.fc .fc-button{
-  @apply bg-violet-800 hover:bg-violet-900  ;
+.fc .fc-button {
+  @apply bg-violet-800 hover:bg-violet-900;
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active {
@@ -189,9 +183,8 @@ input {
   @apply bg-violet-600;
 }
 .fc-v-event {
-  @apply bg-violet-500 border border-violet-600 ;
-  
-}
+  @apply bg-violet-500 border border-violet-600;
+} */
 
 /* make style for navbar in landing page */
 .underline-animation {

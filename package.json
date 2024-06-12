@@ -33,6 +33,7 @@
     "@nextui-org/system": "^2.2.1",
     "@nextui-org/theme": "^2.2.5",
     "animate.css": "^4.1.1",
+    "aws-sdk": "^2.1639.0",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
