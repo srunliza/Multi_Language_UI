@@ -21,9 +21,22 @@ const UploadFilePage = () => {
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
   ]);
+
+  const [keyword, setKeyword] = useState("");
+  const [hint, setHint] = useState("");
+
   const handleDelete = (keyToDelete) => {
     const updatedData = tableData.filter((row) => row.key !== keyToDelete);
     setTableData(updatedData);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (keyword.trim() !== "") {
+      setTableData([...tableData, { key: keyword, hint: hint }]);
+      setKeyword("");
+      setHint("");
+    }
   };
 
   return (
@@ -37,7 +50,7 @@ const UploadFilePage = () => {
           <NavbarProjectLeaderComponent />
           {/* Container */}
           <div className="flex-grow overflow-y-auto no-scrollbar p-4">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <p className="text-color-text-black mb-3">Upload Your Files</p>
               <div className="border border-dashed border-color-text-grey bg-gray-50 p-2 rounded-xl shadow-md w-[100px] h-24 mb-5">
                 <label
@@ -100,9 +113,12 @@ const UploadFilePage = () => {
                   </label>
                   <input
                     type="text"
+                    id="key"
                     placeholder="Input your keyword"
                     name="keyName"
                     className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
@@ -111,16 +127,20 @@ const UploadFilePage = () => {
                   </label>
                   <input
                     type="text"
+                    id="hint"
                     placeholder="Hints for some keywords"
                     name="hint"
                     className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    value={hint}
+                    onChange={(e) => setHint(e.target.value)}
                   />
                 </div>
                 <div className="flex lg:mt-6 mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    className="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${keyword.trim() === "" ? "bg-gray-100 text-gray-500 border-gray-300" : "bg-blue-600 text-white hover:bg-blue-700"}`}
                     type="submit"
                     value={"Add key"}
+                    disabled={keyword.trim() === ""}
                   />
                 </div>
               </div>
