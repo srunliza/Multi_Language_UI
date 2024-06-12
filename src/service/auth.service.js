@@ -1,8 +1,6 @@
-"use server";
 import { baseUrl } from "@/utils/constants";
 
 export const loginService = async (userInfo) => {
-  console.log(userInfo);
   const res = await fetch(`${baseUrl}/api/v1/auth/login`, {
     method: "POST",
     body: JSON.stringify(userInfo),
@@ -11,7 +9,6 @@ export const loginService = async (userInfo) => {
     },
   });
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
@@ -23,7 +20,6 @@ export const registerService = async (userDetail) => {
       "Content-Type": "application/json",
     },
   });
-  console.log(res);
   const data = await res.json();
   return data;
 };
