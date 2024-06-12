@@ -520,39 +520,47 @@ const LandingPageComponent = () => {
               </div>
             </div>
 
-            {/* By Phone */}
-            <div className="md:text-left text-center ">
-              <div className="flex md:justify-start items-center gap-3 justify-center  mb-2">
+            {/* Phone */}
+            <div className="md:text-left text-center text-sm">
+              <div className="flex md:justify-start items-center gap-3 justify-center mb-2">
                 <img
                   src="./assets/icons/phone-call.png"
                   alt="Phone"
                   className="h-7"
                 />
-                <h4 className="font-semibold">BY PHONE</h4>
+                <h4 className="font-semibold">PHONE</h4>
               </div>
               <div className="flex flex-col text-gray-600 gap-2">
                 <p>Monday to Friday. 9AM to 6 PM</p>
-                <p>Tel: +855 698 720 60</p>
-                <p>Tel: +855 698 720 60</p>
+                <a
+                  href="tel:+85569872060"
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  Tel: +855 698 720 60
+                </a>
+                <a
+                  href="tel:+85569872060"
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  Tel: +855 698 720 60
+                </a>
               </div>
             </div>
 
             {/* Our Office Location */}
-            <div className="md:text-left text-center">
+            <div className="md:text-left text-center text-sm">
               <div className="flex items-center gap-3 md:justify-start justify-center mb-2">
                 <img
                   src="./assets/icons/map-pin.png"
                   alt="Location"
                   className="h-8 "
                 />
-                <h4 className="font-semibold">OUR OFFICE LOCATION</h4>
+                <h4 className="font-semibold">OFFICE LOCATION</h4>
               </div>
               <div className="flex flex-col text-gray-600 gap-2">
                 <p className="space-y-5">
                   No 12, st.323, Boeung Kak 2, Toul Kork,
                 </p>
-                <p className="space-y-5">Phnom Penh, Cambodia</p>
-                <p className="space-y-5">Phnom Penh, Cambodia</p>
                 <p className="space-y-5">Phnom Penh, Cambodia</p>
               </div>
             </div>
@@ -563,14 +571,29 @@ const LandingPageComponent = () => {
                 <img
                   src="./assets/icons/message.png"
                   alt="Mail"
-                  className="h-8 "
+                  className="h-8"
                 />
                 <h4 className="font-semibold">MAIL</h4>
               </div>
               <div className="flex flex-col text-gray-600 gap-2">
-                <p>Langnet_help@gmail.com</p>
-                <p>panhach3495@gmail.com</p>
-                <p>sokheng.tey03@gmail.com</p>
+                <a
+                  href="mailto:Langnet_help@gmail.com"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  Langnet_help@gmail.com
+                </a>
+                <a
+                  href="mailto:panhach3495@gmail.com"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  panhach3495@gmail.com
+                </a>
+                <a
+                  href="mailto:sokheng.tey03@gmail.com"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  sokheng.tey03@gmail.com
+                </a>
               </div>
             </div>
           </div>

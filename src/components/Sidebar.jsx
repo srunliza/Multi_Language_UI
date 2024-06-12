@@ -20,7 +20,6 @@ const Sidebar = ({ isSidebarOpen }) => {
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
   const [isLogoutPopupVisible, setIsLogoutPopupVisible] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleNewProjectClick = () => {
     setIsCreateProjectOpen(!isCreateProjectOpen);
@@ -28,17 +27,6 @@ const Sidebar = ({ isSidebarOpen }) => {
 
   const handleLogoutClick = () => {
     setIsLogoutPopupVisible(true);
-  };
-
-  const handleLogoutConfirm = () => {
-    console.log("User confirmed logout");
-    setIsLogoutPopupVisible(false);
-    router.push("/");
-  };
-
-  const handleLogoutCancel = () => {
-    console.log("User canceled logout");
-    setIsLogoutPopupVisible(false);
   };
 
   return (
@@ -136,13 +124,7 @@ const Sidebar = ({ isSidebarOpen }) => {
           </div>
         </div>
       </div>
-      {isCreateProjectOpen && <CreateProject onClose={handleNewProjectClick} />}
-      {/* {isLogoutPopupVisible && (
-        <PopUpLogoutComponent
-          onConfirm={handleLogoutConfirm}
-          onCancel={handleLogoutCancel}
-        />
-      )} */}
+      {isCreateProjectOpen && <CreateProject />}
     </>
   );
 };

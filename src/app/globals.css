@@ -142,6 +142,7 @@ body {
   position: relative;
   display: inline-block;
 }
+
 .underline-animation::after {
   content: "";
   position: absolute;
@@ -154,6 +155,7 @@ body {
   transform-origin: bottom right;
   transition: transform 0.2s ease-in-out;
 }
+
 .underline-animation:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
@@ -215,4 +217,9 @@ body {
 
 .input-container button:hover {
   background-color: #005bb5;
+}
+
+.bg-custom-pattern {
+  background: linear-gradient(135deg, #93c5fd 0%, #bfdbfe 100%);
+  background-size: cover;
 }

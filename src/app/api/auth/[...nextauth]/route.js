@@ -1,26 +1,21 @@
-import { loginService } from "@/service/auth.service";
-import nextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import nextAuth from "next-auth";
+import { loginService } from "@/service/auth.service";
 
 export const authOption = {
   providers: [
-    // login by email and password
     CredentialsProvider({
-      // get email and password from login form
-      async authorize(userInfo) {
-        // define object structure
-        const newUserInfo = {
-          email: userInfo.email,
-          password: userInfo.password,
+      async authorize(userDetail) {
+        const detail = {
+          email: userDetail.email,
+          password: userDetail.password,
         };
-        //  call login services
-        const login = await loginService(newUserInfo);
-
+        console.log(detail);
+        const login = await loginService(detail);
         return login;
       },
     }),
   ],
-  // used to set token into cookies
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };

@@ -1,17 +1,15 @@
-
-const { nextui } = require('@nextui-org/theme');
+const { nextui } = require("@nextui-org/theme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
-   "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
     "./node_modules/@nextui-org/theme/dist/components/(accordion|button|calendar|date-input|date-picker|input|divider|ripple|spinner|popover).js",
-   
   ],
   prefix: "",
   theme: {
@@ -39,5 +37,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), nextui(),nextui(), require("daisyui"), ],
-}
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui(),
+    nextui(),
+    require("daisyui"),
+  ],
+};

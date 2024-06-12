@@ -93,7 +93,7 @@ const teamMembers = [
   },
   {
     name: "Tey Sok Heng",
-    role: "Front-end Developer",
+    role: "Back-end Developer",
     image: "../Images/Sokheng.png",
     links: {
       telegram: "https://t.me/TeySokHeng",
@@ -103,7 +103,7 @@ const teamMembers = [
   },
   {
     name: "Ret Sokhim",
-    role: "Front-end Developer",
+    role: "Back-end Developer",
     image: "../Images/Sokhim.png",
     links: {
       telegram: "https://t.me/sokhimret",

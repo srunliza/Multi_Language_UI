@@ -1,16 +1,9 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
-import {
-  EmailOutlined,
-  HttpsOutlined,
-  VisibilityOffOutlined,
-  VisibilityOutlined,
-} from "@mui/icons-material";
+import { EmailOutlined, HttpsOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { loginSchema } from "@/validationSchema";
-import { loginService } from "@/service/auth.service";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
   const router = new useRouter();
@@ -21,12 +14,13 @@ const LoginPage = () => {
       password: userInfo.get("password"),
     };
 
-    const res = await loginService(newUserInfo);
+    const res = signIn("credentials", {
+      redirect: false,
+      ...newUserInfo,
+    });
 
-
-    console.log("Token: ", res.token);
-
-    if (res.code === 200) {
+    console.log("Response: ", res);
+    if ((await res).ok) {
       router.push("/employee/dashboard");
     } else {
       console.log("login failed!");

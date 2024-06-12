@@ -105,9 +105,13 @@ const RegisterPage = () => {
                       name="gender"
                       placeholder="Select Gender"
                       className="min-w-full pl-3"
-                    > 
-                      <SelectItem  key="Male" value="Male">Male</SelectItem>
-                      <SelectItem key="Female" value="Female">Female</SelectItem>
+                    >
+                      <SelectItem key="Male" value="Male">
+                        Male
+                      </SelectItem>
+                      <SelectItem key="Female" value="Female">
+                        Female
+                      </SelectItem>
                     </Select>
                   </div>
                 </div>

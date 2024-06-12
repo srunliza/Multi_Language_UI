@@ -14,8 +14,12 @@ export default function NotFound() {
         />
       </div>
       <div className="text-center w-full md:w-[600px] gap-5">
-        <h2 className="text-[40px] md:text-[60px] lg:text-[100px] font-semibold text-white">404 - error</h2>
-        <p className="text-[20px] md:text-[30px] lg:text-[50px] text-white">PAGE NOT FOUND</p>
+        <h2 className="text-[40px] md:text-[60px] lg:text-[100px] font-semibold text-white">
+          404 - error
+        </h2>
+        <p className="text-[20px] md:text-[30px] lg:text-[50px] text-white">
+          PAGE NOT FOUND
+        </p>
         <p className="mb-8 text-white text-[16px] md:text-[18px] lg:text-[20px]">
           Your search has ventured beyond the known universe.
         </p>
