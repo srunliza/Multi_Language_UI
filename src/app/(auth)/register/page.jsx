@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 import Link from "next/link";
 import { registerService } from "@/service/auth.service";
-import { registerSchema } from "@/validationSchema";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -59,7 +58,6 @@ const RegisterPage = () => {
                   aria-label="First Name"
                   className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg text-gray-800 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your First Name"
-                  onBlur={(e) => handleValidation("firstName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
@@ -82,7 +80,6 @@ const RegisterPage = () => {
                   aria-label="Last Name"
                   className="w-full px-10 text-gray-800 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Last Name"
-                  onBlur={(e) => handleValidation("lastName", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <GroupOutlinedIcon fontSize="small" />
@@ -153,7 +150,6 @@ const RegisterPage = () => {
                   aria-label="Email"
                   className="w-full px-10 py-2.5 text-sm bg-gray-50 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Email"
-                  onBlur={(e) => handleValidation("email", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlinedIcon fontSize="small" />
@@ -176,7 +172,6 @@ const RegisterPage = () => {
                   aria-label="Password"
                   className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Password"
-                  onBlur={(e) => handleValidation("password", e.target.value)}
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
