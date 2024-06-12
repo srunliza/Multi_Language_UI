@@ -1118,6 +1118,14 @@
     "@nextui-org/react-utils" "2.0.13"
     "@nextui-org/shared-utils" "2.0.5"
 
+"@nextui-org/skeleton@^2.0.28":
+  version "2.0.28"
+  resolved "https://registry.yarnpkg.com/@nextui-org/skeleton/-/skeleton-2.0.28.tgz#82b76c7fe9926bec48530839f37550dfbe700967"
+  integrity sha512-Xt1m+Y1RPRDupSQ7BI2QVVNsZZO6f0N0/V9eEKurpuINkRYC/GyWrWr/yGFAjk6tMsSQrDlWLB6Mm/FH/0uNyg==
+  dependencies:
+    "@nextui-org/react-utils" "2.0.13"
+    "@nextui-org/shared-utils" "2.0.5"
+
 "@nextui-org/slider@2.2.11":
   version "2.2.11"
   resolved "https://registry.npmjs.org/@nextui-org/slider/-/slider-2.2.11.tgz"

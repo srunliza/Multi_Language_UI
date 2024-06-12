@@ -9,6 +9,12 @@ import Image from "next/image";
 import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import FeedbackTranslatorComponent from "../../../translator/_components/FeedbackTranslatorCompoent";
+import chatBotImage from '../../../../../../public/assets/icons/sreyly.svg'
+import userImage from '../../../../../../public/assets/icons/vandy.png'
+import { resolve } from "styled-jsx/css";
+import LoadingChatbotPage from "@/app/LoadingChatbot";
+
+
 
 const TranslatorWorkSpace = () => {
   
@@ -17,6 +23,7 @@ const TranslatorWorkSpace = () => {
   const [chat, setChat] = useState(null);
   const [theme, setTheme] = useState("light");
   const [error, setError] = useState(null);
+
 
   const API_KEY = "AIzaSyDjr_GaiM86TzUEty7Ey-HkghaHZjbLNHU";
   const MODEL_NAME = "gemini-1.0-pro-001";
@@ -344,7 +351,7 @@ const TranslatorWorkSpace = () => {
               placement="top-start"
               aria-labelledby="default-popover"
               content={
-                <div className="w-[357px] text-sm text-gray-500 dark:text-gray-400">
+                <div className="w-[360px] text-sm text-gray-500 dark:text-gray-400">
                   <div className="flex justify-between items-center border-b border-gray-200 bg-gray-100 px-3 py-2">
                     <div tabIndex={0} className="flex items-center gap-2">
                       <div className="avatar placeholder">
@@ -365,46 +372,71 @@ const TranslatorWorkSpace = () => {
                     </div>
                   </div>
 
-
+                        
+                  {/* ai chat generator */}
                   <div className={`p-5 ${secondary} flex-1 overflow-auto h-[410px]`}>
                     {messages.map((msg, index) => (
-                      <div key={index} className={`mb-4 ${msg.role === "user" ? "text-right" : "text-left"}`}>
-                        <span className={`inline-block p-2 rounded-lg ${msg.role === "user" ? `${accent} text-white` : `${primary} ${text} border border-gray-300`}`}>
-                          {msg.text}
-                        </span>
-                        <p className={`text-xs ${text} mt-1`}>
-                          {msg.role === "bot" ? "Bot" : "You"} - {msg.timestamp.toLocaleTimeString()}
-                        </p>
+                      <div key={index} className={`mb-4 flex ${msg.role === "user" ? "justify-end" : "justify-start"} items-start`}>
+
+                        {/* ai role */}
+                        {msg.role === "bot" && (
+
+                          <Image 
+                          src={chatBotImage} 
+                          width={40} 
+                          height={40} 
+                          alt="chat bot image" 
+                          className="w-8 h-8 rounded-full mr-2"/>
+                        
+                        )
+                        }
+
+                        <div className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+                          <span className={`inline-block p-2 rounded-lg ${msg.role === "user" ? `${accent} text-white` : `${primary} ${text} border border-gray-300`}`}>
+                            {msg.text}
+                          </span>
+                          <p className={`text-xs ${text} mt-1`}>
+                            {msg.role === "bot" ? "Bot" : "You"} - {msg.timestamp.toLocaleTimeString()}
+                          </p>
+                        </div>
+
+                        {/* user role */}
+                        {msg.role === "user" && (
+
+                          <Image 
+                          src={userImage} 
+                          width={50} 
+                          height={45} 
+                          alt="user image"
+                          className="w-8 h-8 rounded-full ml-2"/>
+                      
+                        )}
                       </div>
                     ))}
                   </div>
 
+
                   {/* {error && <div className="text-red-500 text-sm mb-4">{error}</div>} */}
 
 
-                  <div className="input-area flex items-center">
+                  <div className="input-area flex items-center pb-2 p-1">
+                    {/* input text to ask ai */}
                     <input
                       type="text"
                       placeholder="Type your message..."
                       value={userInput}
                       onChange={(e) => setUserInput(e.target.value)}
                       onKeyDown={handleKeyPress}
-                      className={`flex-1 p-2 border rounded-l-lg focus:outline-none ${`border-${accent}`}`}
-                    />
+                      className={`flex-1 p-2 border text-gray-600 rounded-l-lg placeholder:text-gray-400 placeholder:text-sm focus:outline-none ${`border-${accent}`}`}
+                      />
 
-                    {/* <img
-                      className={`w-6 h-6 text-white font-bold cursor-pointer ${accent}`}
-                      src="/assets/images/send.png"
-                      alt=""
+                    {/* button send to ai */}
+                    <button
                       onClick={handleSendMessage}
-                    /> */}
-
-                  <button
-                    onClick={handleSendMessage}
-                    className={`bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-800 ${accent}`}
-                  >
-                    Send
-                  </button>
+                      className={`bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-800 ${accent}`}
+                    >
+                      Send
+                    </button>
 
                   </div>
                 </div>
