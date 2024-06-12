@@ -32,6 +32,7 @@
     "@nextui-org/skeleton": "^2.0.28",
     "@nextui-org/system": "^2.2.1",
     "@nextui-org/theme": "^2.2.5",
+    "animate.css": "^4.1.1",
     "file-saver": "^2.0.5",
     "flowbite-react": "^0.9.0",
     "framer-motion": "^11.2.10",
@@ -41,8 +42,9 @@
     "react-chatbotify": "^1.7.0",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
-    "react-modal": "^3.16.1",
     "react-select": "^5.8.0",
+    "swiper": "^11.1.4",
+    "react-modal": "^3.16.1",
     "react-simple-chatbot": "^0.6.1"
   },
   "devDependencies": {
