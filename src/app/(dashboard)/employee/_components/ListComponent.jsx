@@ -1,14 +1,17 @@
-import React, { useRef } from "react";
+// components/ProjectListComponent.js
+
+import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import ViewMember from "@/components/ViewMember";
+import MemberImage from "./MemberImage";
+import ActionButtons from "./ActionButton";
+import ViewMemberModal from "./ViewMemberModal";
 
 const getStatusTextColor = (status) => {
   switch (status) {
     case "Completed":
       return "text-green-500";
     case "Progress":
-      return "text-orange-300";
+      return "text-yellow-500";
     case "Pending":
       return "text-red-500";
     default:
@@ -21,7 +24,7 @@ const getStatusBgColor = (status) => {
     case "Completed":
       return "bg-green-500";
     case "Progress":
-      return "bg-orange-300";
+      return "bg-yellow-500";
     case "Pending":
       return "bg-red-500";
     default:
@@ -35,8 +38,7 @@ const ProjectListComponent = ({
   handleEditClick,
   handleDeleteClick,
 }) => {
-  const [isViewMemberOpen, setIsViewMemberOpen] = React.useState(false);
-  const modalRef = useRef();
+  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
 
   const handleModalClose = () => {
     setIsViewMemberOpen(false);
@@ -49,27 +51,26 @@ const ProjectListComponent = ({
           key={index}
           className="bg-white flex flex-wrap justify-between items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
         >
-          <div className="flex flex-col w-[12rem] ">
-            <div className="text-base font-semibold text-gray-700">
+          <div className="flex flex-col w-[14rem] ">
+            <div className="text-md font-semibold text-gray-700">
               {project.name.length > 12
                 ? `${project.name.substring(0, 12)}...`
                 : project.name}
             </div>
-            <div className="w-[10rem] text-sm text-green-500">
-              {project.owner.length > 12
-                ? `${project.owner.substring(0, 12)}...`
-                : project.owner}
-              <span className="text-gray-700 text-xs m-3 ">{project.role}</span>
+            <div className="w-[14rem]">
+              <span className="text-xs text-green-500">{project.role}</span>
             </div>
           </div>
 
           <div className="sm:-ml-1 ml-4 flex flex-wrap gap-3 lg:w-auto text-md text-black mt-4 lg:mt-0">
             <Link
               key={index}
-              href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
+              href={`/${project.role
+                .replace(" ", "-")
+                .toLowerCase()}/dashboard`}
               passHref
             >
-              <div className="flex text-black items-center justify-center bg-gray-200 rounded-lg w-16 h-9 text-center text-sm ">
+              <div className="flex text-black items-center justify-center bg-gray-200 rounded-lg w-16 h-9 text-center text-xs">
                 <svg
                   className="h-4 w-4 text-black"
                   fill="none"
@@ -92,7 +93,7 @@ const ProjectListComponent = ({
               href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
               passHref
             >
-              <div className="flex items-center justify-center w-[10rem] bg-red-300 rounded-lg px-5 py-2 text-sm">
+              <div className="flex items-center justify-center w-[7rem] bg-red-300 rounded-lg px-1 py-2 text-xs">
                 <svg
                   className="h-4 w-4 text-red-500 mr-1"
                   fill="none"
@@ -114,11 +115,11 @@ const ProjectListComponent = ({
             </Link>
 
             <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
-              <div className="w-[10rem] md:-ml-4 text-black text-sm lg:-ml-0 sm:-ml-5">
+              <div className="w-[10rem] md:-ml-4 text-black text-xs lg:-ml-0 sm:-ml-5">
                 Translation Progress
               </div>
               <div
-                className={`flex items-center space-x-2 text-sm ${getStatusTextColor(
+                className={`flex items-center space-x-2 text-xs ${getStatusTextColor(
                   project.status
                 )}`}
               >
@@ -141,97 +142,21 @@ const ProjectListComponent = ({
               </div>
             </div>
           </div>
-
           <div className="flex mt-4 lg:ml-4 lg:mt-0">
-            <button
+            <MemberImage
+              image={project.image}
               onClick={() => setIsViewMemberOpen(true)}
-              className="text-gray-600 text-right ml-auto self-end grow"
-            >
-              <div className="flex -space-x-3">
-                <Image
-                  src={`/assets/images/${project.image}`}
-                  alt={project.name}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                />
-                <Image
-                  src={`/assets/images/${project.image}`}
-                  alt={project.name}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                />
-                <Image
-                  src={`/assets/images/${project.image}`}
-                  alt={project.name}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                />
-                <Image
-                  src={`/assets/images/${project.image}`}
-                  alt={project.name}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                />
-                <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">
-                  +2
-                </div>
-              </div>
-            </button>
-
-            <div className="flex space-x-1 ml-5">
-              <button
-                className="focus:outline-none"
-                onClick={() => handleEditClick(project)}
-              >
-                <svg
-                  className="h-6 w-6 text-blue-500"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                  <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                  <line x1="16" y1="5" x2="19" y2="8" />
-                </svg>
-              </button>
-
-              <button
-                className="focus:outline-none"
-                onClick={() => handleDeleteClick(project)}
-              >
-                <svg
-                  className="h-6 w-6 text-red-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="3 6 5 6 21 6" />
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                  <line x1="10" y1="11" x2="10" y2="17" />
-                  <line x1="14" y1="11" x2="14" y2="17" />
-                </svg>
-              </button>
-            </div>
+            />
+            <ActionButtons
+              onEditClick={() => handleEditClick(project)}
+              onDeleteClick={() => handleDeleteClick(project)}
+            />
           </div>
 
-          {isViewMemberOpen && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
-              <div ref={modalRef}>
-                <ViewMember onClose={handleModalClose} />
-              </div>
-            </div>
-          )}
+          <ViewMemberModal
+            isOpen={isViewMemberOpen}
+            onClose={handleModalClose}
+          />
         </div>
       ))}
     </div>

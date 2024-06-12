@@ -12,7 +12,7 @@ const CreateProject = ({ onClose }) => {
       setTimeout(() => {
         popup.style.display = "none";
         onClose();
-      }, 3000);
+      }, 1000);
     }
   };
 

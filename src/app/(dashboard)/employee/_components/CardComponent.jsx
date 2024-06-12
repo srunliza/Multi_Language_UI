@@ -1,15 +1,14 @@
+import DropdownMenu from "@/components/DropDownMenu";
+import MemberImages from "@/components/MemberComponent";
 import Link from "next/link";
-import Image from "next/image";
 import React, { useRef, useState } from "react";
-import ViewMember from "@/components/ViewMember";
-import ViewMemberProjectLeader from "@/components/ViewMemberForProjectLeader";
 
 const getStatusTextColor = (status) => {
   switch (status) {
     case "Completed":
       return "text-green-500";
     case "Progress":
-      return "text-orange-300";
+      return "text-yellow-500";
     case "Pending":
       return "text-red-500";
     default:
@@ -22,7 +21,7 @@ const getStatusBgColor = (status) => {
     case "Completed":
       return "bg-green-500";
     case "Progress":
-      return "bg-orange-300";
+      return "bg-yellow-500";
     case "Pending":
       return "bg-red-500";
     default:
@@ -55,93 +54,21 @@ const CardComponent = ({
       key={index}
       className="bg-white p-4 rounded-2xl shadow-md border border-gray-200"
     >
-      <div className="flex justify-between items-center mb-0 text-sm mt-2 text-gray-700">
+      <div className="flex justify-between items-center text-sm mt-2 text-gray-700">
         <h3 className="text-base font-semibold mb-1">
           {project.name.length > 15
             ? `${project.name.substring(0, 15)}...`
             : project.name}
         </h3>
-        <div className="flex space-x-1">
-          {/* new dropdown */}
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0}>
-              <svg
-                className="h-6 w-6 text-gray-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" />
-              </svg>
-            </div>
-
-            {/* edit and delete */}
-            <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
-              <li>
-                <button
-                  className="text-black hover:text-blue-600"
-                  onClick={() => handleEditClick(project)}
-                >
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                      />
-                    </svg>
-                  </span>
-                  <span className="hidden md:inline-block">Edit</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  className="text-black hover:text-red-600"
-                  onClick={() => handleDeleteClick(project)}
-                >
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                      />
-                    </svg>
-                  </span>
-                  <span className="hidden md:inline-block" name="delete">
-                    Delete
-                  </span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <DropdownMenu
+          project={project}
+          handleEditClick={handleEditClick}
+          handleDeleteClick={handleDeleteClick}
+        />
       </div>
 
-      <div className="mb-5 text-sm text-green-500">
-        {project.owner.length > 15
-          ? `${project.owner.substring(0, 15)}...`
-          : project.owner}
-        <span className="text-gray-700 text-xs m-3 ">{project.role}</span>
+      <div className="mb-5">
+        <span className="text-green-500 text-xs">{project.role}</span>
       </div>
 
       <div className="text-black text-md flex items-center mb-4 justify-between">
@@ -150,7 +77,7 @@ const CardComponent = ({
           href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
           passHref
         >
-          <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-sm">
+          <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-xs">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -173,7 +100,7 @@ const CardComponent = ({
           href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
           passHref
         >
-          <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-sm">
+          <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-xs">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -196,11 +123,9 @@ const CardComponent = ({
       </div>
 
       <div className="grid grid-cols-2 items-center mb-4">
-        <div className="text-black w-[10rem] text-sm">
-          Translation Progress
-        </div>
+        <div className="text-black w-[10rem] text-xs">Translation Progress</div>
         <div
-          className={`text-sm text-right ${getStatusTextColor(project.status)}`}
+          className={`text-xs text-right ${getStatusTextColor(project.status)}`}
         >
           {project.status}
         </div>
@@ -219,64 +144,14 @@ const CardComponent = ({
         ></div>
       </div>
 
-      <div className="flex -space-x-2 mb-4">
-        <Image
-          src={`/assets/images/${project.image}`}
-          alt={project.name}
-          width={32}
-          height={32}
-          className="w-8 h-8 rounded-full border-2 border-white"
-        />
-        <Image
-          src={`/assets/images/${project.image}`}
-          alt={project.name}
-          width={32}
-          height={32}
-          className="w-8 h-8 rounded-full border-2 border-white"
-        />
-        <Image
-          src={`/assets/images/${project.image}`}
-          alt={project.name}
-          width={32}
-          height={32}
-          className="w-8 h-8 rounded-full border-2 border-white"
-        />
-        <Image
-          src={`/assets/images/${project.image}`}
-          alt={project.name}
-          width={32}
-          height={32}
-          className="w-8 h-8 rounded-full border-2 border-white"
-        />
-        <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">
-          +2
-        </div>
-
-        <button
-          onClick={handleSeeAll}
-          className="text-gray-600 text-right ml-auto self-end grow"
-        >
-          See All
-        </button>
-
-        {isViewMemberOpen && viewMemberRole === "project-leader" && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
-            <div ref={modalRef}>
-              <ViewMemberProjectLeader onClose={handleModalClose} />
-            </div>
-          </div>
-        )}
-
-        {isViewMemberOpen &&
-          (viewMemberRole === "translator" ||
-            viewMemberRole === "developer") && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
-              <div ref={modalRef}>
-                <ViewMember onClose={handleModalClose} />
-              </div>
-            </div>
-          )}
-      </div>
+      <MemberImages
+        project={project}
+        handleSeeAll={handleSeeAll}
+        isViewMemberOpen={isViewMemberOpen}
+        viewMemberRole={viewMemberRole}
+        modalRef={modalRef}
+        handleModalClose={handleModalClose}
+      />
     </div>
   );
 };

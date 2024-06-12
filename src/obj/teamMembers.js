@@ -83,7 +83,7 @@ const teamMembers = [
   {
     name: "Kroem Vandy",
     role: "Front-end Developer",
-    image: "../Images/Vandy.png",
+    image: "../assets/images/vandy.jpg",
     links: {
       telegram: "https://t.me/Kroemvandy",
       facebook:
