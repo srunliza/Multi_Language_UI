@@ -232,7 +232,7 @@ const SettingPage = () => {
                     placeholder="Enter first name"
                     value={firstName}
                     onChange={handleFirstNameChange}
-                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 md:pr-[10px] sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none input-bordered w-full max-w-xs ${
+                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
                       firstNameError ? "border-red-500" : ""
                     }`}
                   />
@@ -399,7 +399,7 @@ const SettingPage = () => {
             </div>
 
             {/* profile and password */}
-            <div className="">
+            <div className="mt-10">
               <div className="m-auto w-[150px] h-[150px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                 {/* icon edit profile */}
                 <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-[117px] lg-ml-[35px]">
@@ -438,7 +438,7 @@ const SettingPage = () => {
                   </label>
                 </div>
               </div>
-              <div>
+              <div className="mt-[80px]">
                 <label
                   htmlFor="social_contact"
                   className="block text-gray-700 dark:text-white mb-1"

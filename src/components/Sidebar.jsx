@@ -12,7 +12,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
 import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
-import langnet from "../../public/Images/langNet3.jpg"
+import langnet from "../../public/Images/langnet3.jpg"
 import Image from "next/image";
 
 const Sidebar = ({ isSidebarOpen }) => {
