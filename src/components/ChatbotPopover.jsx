@@ -22,7 +22,7 @@ const ChatbotPopover = () => {
     if (input.trim()) {
       setMessages([
         ...messages,
-        { sender: "user", text: input, avatar: "/path/to/user/avatar.png" },
+        { sender: "user", text: input, avatar: "/Images/Thean.png" },
       ]);
       setInput("");
       setTimeout(() => {
@@ -68,7 +68,7 @@ const ChatbotPopover = () => {
           },
         }}
       >
-        <div className=" w-[400px] rounded-2xl">
+        <div className="w-[400px] rounded-2xl">
           <div className="flex justify-between bg-[#2357F9] items-center p-4">
             <div className="flex items-center">
               <Avatar
@@ -76,43 +76,31 @@ const ChatbotPopover = () => {
                 src="/assets/images/chatboot.svg"
                 className="mr-2"
               />
-              <h2 className="text-lg font-semibold text-white">
-                Support Bot
-              </h2>
+              <h2 className="text-lg font-semibold text-white">Support Bot</h2>
             </div>
             <IconButton onClick={handleClose}>
-            <CloseIcon style={{ color: 'white' }} />
+              <CloseIcon style={{ color: "white" }} />
             </IconButton>
           </div>
 
-          <div className="flex flex-col h-64 w-[400px] overflow-y-auto border ">
+          <div className="flex flex-col h-64 w-[400px] overflow-y-auto border">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex mb-2 ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
+                className={`chat ${
+                  msg.sender === "user" ? "chat-end" : "chat-start"
+                } mb-2`}
               >
-                <div className="flex items-end ">
-                  {msg.sender === "bot" && (
-                    <Avatar
-                      alt="Support Bot"
-                      src={msg.avatar}
-                      className="mr-2"
-                    />
-                  )}
-                  <div
-                    className={`p-2 rounded ${
-                      msg.sender === "user"
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-800"
-                    }`}
-                  >
-                    {msg.text}
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img alt="Avatar" src={msg.avatar} />
                   </div>
-                  {msg.sender === "user" && (
-                    <Avatar alt="Thean" src="/Images/Thean.png" className="ml-2" />
-                  )}
+                </div>
+                <div className="chat-header">
+                  {msg.sender === "user" ? "You" : "Support Bot"}
+                </div>
+                <div className="chat-bubble h-auto w-[350px]">
+                  {msg.text}
                 </div>
               </div>
             ))}

@@ -9,7 +9,6 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorCompoent";
 import ChatbotPopover from "@/components/ChatbotPopover";
 
-
 const TranslatorWorkSpace = () => {
   const translations = [
     { id: 1, english: "Home" },
@@ -95,7 +94,11 @@ const TranslatorWorkSpace = () => {
 
   const handleUserMessageSend = () => {
     if (userMessage.trim() !== "") {
-      setMessages([...messages, { sender: "user", text: userMessage }, { sender: "ai", text: "hello" }]);
+      setMessages([
+        ...messages,
+        { sender: "user", text: userMessage },
+        { sender: "ai", text: "hello" },
+      ]);
       setUserMessage("");
     }
   };
@@ -252,8 +255,8 @@ const TranslatorWorkSpace = () => {
         <div className="col-span-4 flex flex-col items-end">
           <FeedbackTranslatorComponent />
           <div className="">
-      <ChatbotPopover></ChatbotPopover>
-    </div>
+            <ChatbotPopover></ChatbotPopover>
+          </div>
         </div>
       </div>
     </div>
