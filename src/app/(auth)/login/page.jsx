@@ -22,8 +22,13 @@ const LoginPage = () => {
       password: newUserInfo.password,
     });
 
-    console.log('res in login: ', res)
+    if(res.ok) {
+      router.push("/employee/dashboard")
+    }
+
+    
   }
+ 
 
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">

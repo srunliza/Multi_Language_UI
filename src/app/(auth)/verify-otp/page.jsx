@@ -3,6 +3,7 @@ import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { otpVerifyService } from "@/service/auth.service";
 import {
   InputOTP,
@@ -10,85 +11,53 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-
 const VerifyOtpPage = () => {
-  const [value, setValue] = useState('');
-
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 5 minutes in seconds
-  const [otpError, setOtpError] = useState("");
-  const [isOtpExpired, setIsOtpExpired] = useState(false);
+  const [value, setValue] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes countdown
+  const [canResend, setCanResend] = useState(false);
 
   // Initialize the router
   const router = useRouter();
 
-  // Countdown timer
+  // Countdown timer effect
   useEffect(() => {
-    if (timeRemaining <= 0) {
-      setIsOtpExpired(true);
-      return;
+    if (timeRemaining > 0) {
+      const timerId = setTimeout(() => setTimeRemaining(timeRemaining - 1), 1000);
+      return () => clearTimeout(timerId);
+    } else {
+      setCanResend(true);
     }
-
-    const timer = setInterval(() => {
-      setTimeRemaining((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
-    }, 1000);
-
-    return () => clearInterval(timer);
   }, [timeRemaining]);
 
-  // Format time as mm:ss
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")} Sec`;
-  };
-
-  // Handle OTP change
-  const handleOtpChange = (element, index) => {
-    if (/[^0-9]/.test(element.value)) {
-      return;
-    }
-
-    const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-
-    // Focus next input
-    if (element.nextSibling && element.value) {
-      element.nextSibling.focus();
-    }
-  };
-
-  // Handle resend OTP
-  const handleResendOtp = () => {
-    setTimeRemaining(2 * 60); // Reset timer
-    setIsOtpExpired(false);
-    setOtp(new Array(6).fill("")); // Clear OTP inputs
-    setOtpError("");
-    // TODO: Add logic to re-send OTP to user's email
-  };
-
-  // Function to handle button click
-  const handleVerifyOtp = () => {
-    const enteredOtp = otp.join("");
-    if (enteredOtp.length < 6) {
-      setOtpError("Please enter a valid 6-digit OTP.");
-      return;
-    }
-    // TODO: Add logic to verify OTP
-    router.push("/reset-password"); // Navigate to the reset password page
-  };
-
   const handleVerifyOtpClick = async () => {
-    const otp_service = await otpVerifyService(value)
-    // router.push("/reset-password");
-
-
-    console.log("response: ", otp_service)
+    try {
+      const response = await otpVerifyService(value);
+      console.log("response: ", response);
+      // handle response here (e.g., navigate to a success page or show an error)
+      if (response.success) {
+        router.push("/success"); // replace with your success page route
+      } else {
+        // handle error (e.g., show a message)
+      }
+    } catch (error) {
+      console.error("OTP Verification Error: ", error);
+    }
   };
 
+  const handleResendOtp = () => {
+    if (canResend) {
+      // call the resend OTP service here
+      console.log("Resending OTP...");
+      setTimeRemaining(120);
+      setCanResend(false);
+    }
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
 
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
@@ -150,11 +119,13 @@ const VerifyOtpPage = () => {
 
           {/* resend code link */}
           <div className="text-center text-gray-600 text-xs mb-6">
-            Didn't receive code?{" "}
+            Didn't receive code?
             <a
               href="#"
               onClick={handleResendOtp}
-              className="text-[#1A42BC] font-medium hover:underline"
+              className={`text-[#1A42BC] font-medium hover:underline ${
+                canResend ? "" : "pointer-events-none text-gray-400"
+              }`}
             >
               Re-send
             </a>
@@ -177,3 +148,4 @@ const VerifyOtpPage = () => {
 };
 
 export default VerifyOtpPage;
+
