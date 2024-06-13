@@ -229,6 +229,11 @@ const TranslatorWorkSpace = () => {
         { sender: "user", text: userMessage },
         { sender: "ai", text: "hello" },
       ]);
+      setMessages([
+        ...messages,
+        { sender: "user", text: userMessage },
+        { sender: "ai", text: "hello" },
+      ]);
       setUserMessage("");
     }
   };
