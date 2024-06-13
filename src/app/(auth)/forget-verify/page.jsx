@@ -1,7 +1,7 @@
 "use client";
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   InputOTP,
@@ -16,6 +16,8 @@ const VerifyOtpPage = () => {
   const [otpError, setOtpError] = useState("");
   const [isOtpExpired, setIsOtpExpired] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
 
   useEffect(() => {
     if (timeRemaining <= 0) {
@@ -54,8 +56,6 @@ const VerifyOtpPage = () => {
     setOtp(new Array(6).fill(""));
     setOtpError("");
     // TODO: Add logic to re-send OTP to user's email
-
-    
   };
 
   const handleVerifyOtpClick = async () => {
@@ -65,9 +65,13 @@ const VerifyOtpPage = () => {
       setOtpError("Please enter a valid 6-digit OTP.");
       return;
     }
+    const res = await otpVerifyService(enteredOtp);
 
-    const response = await otpVerifyService(enteredOtp);
-    console.log("response: ", response);
+    if (res.code === 200) {
+      router.push(`/reset-password?email=${email}`);
+    } else {
+      console.log("failed at otp page");
+    }
   };
 
   return (

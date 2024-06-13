@@ -29,7 +29,6 @@ export const registerService = async (userDetail) => {
 
 
 export const otpVerifyService = async (otp) => {
-  console.log("otp: ", otp)
   const res = await fetch(`${baseUrl}/api/v1/auth/verify?otp=${otp}`, {
     method: "PUT",
     headers: {
@@ -37,30 +36,36 @@ export const otpVerifyService = async (otp) => {
     },
   });
 
-  
-  let data = await res.text();
+  const data = await res.json();
   return data;
 };
 
 
-
-
 export const forgotPasswordService = async (email) => {
-  try {
-    console.log("email: ", email);
 
-    const res = await fetch(`${baseUrl}/api/v1/auth/send-otp?email=${encodeURIComponent(email)}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  const res = await fetch(`${baseUrl}/api/v1/auth/send-otp?email=${email}`, {
+    method: 'POST',
+  })
+  
 
-    const text = await res.text();
-    return text;
-  } catch (error) {
-    console.error("Error sending OTP: ", error);
-    throw error;
-  }
+  const data = await res.json()
+  const code = data.code;
+  return { code, email};
+
 };
+
+
+export const resetPasswordService = async (email, passowrds) => {
+
+  const res = await fetch(`${baseUrl}/api/v1/auth/forgot-password/${email}`, {
+    method: 'PUT',
+    body: JSON.stringify(passowrds),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+
+  const data = res.json()
+  return data;
+}
 

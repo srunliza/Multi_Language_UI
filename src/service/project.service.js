@@ -12,8 +12,9 @@ export const getAllProjectService = async () => {
     }
   );
 
-  const data = await res.json();
-  return data;
+  console.log("res: ", header)
+  // const data = await res.json();
+  // return data;
 };
 
 export const createProjectService = async (projectDetails) => {

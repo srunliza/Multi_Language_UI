@@ -6,6 +6,8 @@ import { getAllProjectService } from "@/service/project.service";
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
 
+  console.log("Projects data: ", projectData)
+
   const getRoleRoute = (role) => {
     switch (role) {
       case "Project Leader":

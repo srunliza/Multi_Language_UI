@@ -2,28 +2,28 @@
 import forgetPassword from "../../../../public/assets/icons/forget-password.svg";
 import { EmailOutlined } from "@mui/icons-material";
 import Image from "next/image";
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { forgotPasswordService } from "@/service/auth.service";
+import { useState } from "react";
 
 const ForgetPasswordPage = () => {
   // Initialize the router
   const router = useRouter();
+  const [error, setError] = useState(null);
 
   // Function to handle button click
   async function handleForgot(data) {
     const email = data.get("email");
-
+    
     const res = await forgotPasswordService(email);
+    console.log(res.code);
 
-    console.log("res: ", res);
-
-    if (res.match("Your new verification code has already been resent")) {
-      router.push("/verify-otp");
+    if (res.code === 200) {
+      router.push(`/forget-verify?email=${email}`);
+    } else {
+      setError("Failed to send forgot password email");
     }
-
-    //  router.push("/forget-verify");
   }
 
   return (
