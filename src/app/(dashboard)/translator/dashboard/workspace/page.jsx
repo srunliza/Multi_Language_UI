@@ -12,10 +12,9 @@ import { Popover } from "flowbite-react";
 import Image from "next/image";
 import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FeedbackTranslatorComponent from "../../../translator/_components/FeedbackTranslatorCompoent";
-import chatBotImage from "../../../../../../public/assets/icons/sreyly.svg";
-import { resolve } from "styled-jsx/css";
+import FeedbackTranslatorComponent from "../../../translator/_components/FeedbackTranslatorComponent";
 import LoadingChatbotPage from "@/app/LoadingChatbot";
+import ChatbotPopover from "@/components/ChatbotPopover";
 
 const TranslatorWorkSpace = () => {
   const [messages, setMessages] = useState([]);
@@ -222,22 +221,6 @@ const TranslatorWorkSpace = () => {
     document.getElementById(modalId).close();
   };
 
-  const handleUserMessageSend = () => {
-    if (userMessage.trim() !== "") {
-      setMessages([
-        ...messages,
-        { sender: "user", text: userMessage },
-        { sender: "ai", text: "hello" },
-      ]);
-      setMessages([
-        ...messages,
-        { sender: "user", text: userMessage },
-        { sender: "ai", text: "hello" },
-      ]);
-      setUserMessage("");
-    }
-  };
-
   return (
     <div className="container mx-auto px-10">
       <div className="grid grid-cols-12">
@@ -389,134 +372,8 @@ const TranslatorWorkSpace = () => {
         <div className="col-span-4 flex flex-col items-end">
           <FeedbackTranslatorComponent />
           
-          <div>
-            <Popover
-              placement="top-start"
-              aria-labelledby="default-popover"
-              content={
-                <div className="w-[360px] text-sm text-gray-500 dark:text-gray-400">
-                  <div className="flex justify-between items-center border-b border-gray-200 bg-gray-100 px-3 py-2">
-                    <div tabIndex={0} className="flex items-center gap-2">
-                      <div className="avatar placeholder">
-                        <div className="bg-neutral text-neutral-content rounded-full w-8">
-                          <span className="text-xs">
-                            <img
-                              src="/assets/icons/chatboot.svg"
-                              alt="chatboot"
-                            />
-                          </span>
-                        </div>
-                      </div>
-                      <h3
-                        id="default-popover"
-                        className="font-semibold text-gray-900 dark:text-white"
-                      >
-                        Support Bot
-                      </h3>
-                    </div>
-                    <div>
-                      <svg
-                        className="h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        width="100"
-                        height="100"
-                        viewBox="0 0 50 50"
-                      >
-                        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-                      </svg>
-                    </div>
-                  </div>
+          <ChatbotPopover />
 
-                  {/* ai chat generator */}
-                  <div
-                    className={`p-5 ${secondary} flex-1 overflow-auto h-[410px]`}
-                  >
-                    {messages.map((msg, index) => (
-                      <div
-                        key={index}
-                        className={`mb-4 flex ${
-                          msg.role === "user" ? "justify-end" : "justify-start"
-                        } items-start`}
-                      >
-                        {/* ai role */}
-                        {msg.role === "bot" && (
-                          <Image
-                            src={chatBotImage}
-                            width={40}
-                            height={40}
-                            alt="chat bot image"
-                            className="w-8 h-8 rounded-full mr-2"
-                          />
-                        )}
-
-                        <div
-                          className={`flex flex-col ${
-                            msg.role === "user" ? "items-end" : "items-start"
-                          }`}
-                        >
-                          <span
-                            className={`inline-block p-2 rounded-lg ${
-                              msg.role === "user"
-                                ? `${accent} text-white`
-                                : `${primary} ${text} border border-gray-300`
-                            }`}
-                          >
-                            {msg.text}
-                          </span>
-                          <p className={`text-xs ${text} mt-1`}>
-                            {msg.role === "bot" ? "Bot" : "You"} -{" "}
-                            {msg.timestamp.toLocaleTimeString()}
-                          </p>
-                        </div>
-
-                        {/* user role */}
-                        {msg.role === "user" && (
-                          <Image
-                            src=""
-                            width={50}
-                            height={45}
-                            alt="user image"
-                            className="w-8 h-8 rounded-full ml-2"
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* {error && <div className="text-red-500 text-sm mb-4">{error}</div>} */}
-
-                  <div className="input-area flex items-center pb-2 p-1">
-                    {/* input text to ask ai */}
-                    <input
-                      type="text"
-                      placeholder="Type your message..."
-                      value={userInput}
-                      onChange={(e) => setUserInput(e.target.value)}
-                      onKeyDown={handleKeyPress}
-                      className={`flex-1 p-2 border text-gray-600 rounded-l-lg placeholder:text-gray-400 placeholder:text-sm focus:outline-none ${`border-${accent}`}`}
-                    />
-
-                    {/* button send to ai */}
-                    <button
-                      onClick={handleSendMessage}
-                      className={`bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-800 ${accent}`}
-                    >
-                      Send
-                    </button>
-                  </div>
-                </div>
-              }
-            > 
-              <Image
-                src={"/assets/icons/chatboot.svg"}
-                alt="chatboot"
-                width={100}
-                height={100}
-              />
-            </Popover>
-          </div>
         </div>
       </div>
     </div>
