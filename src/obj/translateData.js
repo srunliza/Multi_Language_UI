@@ -2,7 +2,7 @@
 export const translateData = [
   {
     id: 1,
-    baseLang: "Home",
+    baseLang: "Computer",
     tagetLang: "집",
   },
   {
@@ -67,6 +67,76 @@ export const translateData = [
   },
   {
     id: 14,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 15,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 16,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 17,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 18,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 19,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 20,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 21,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 15,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 16,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 17,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 18,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 19,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 20,
+    baseLang: "Home",
+    tagetLang: "집",
+  },
+  {
+    id: 21,
     baseLang: "Home",
     tagetLang: "집",
   },

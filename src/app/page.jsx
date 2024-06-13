@@ -34,11 +34,11 @@ const LandingPageComponent = () => {
                         </div>
                         <div className="hidden md:flex">
                             <Link href={"/login"}
-                                className=" text-purple-700 transition-all hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 lg:font-medium rounded-lg text:xs lg:text-base px-4 py-1 lg:px-5 lg:py-1.5 text-center me-4  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                                className=" text-blue-700 transition-all hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 lg:font-medium rounded-md text:xs lg:text-base px-4 py-1 lg:px-5 lg:py-1.5 text-center me-4  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
                             >Login
                             </Link>
                             <Link href={"/register"}
-                                className="focus:outline-none transition-all text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300  lg:font-medium  rounded-lg  lg:text-base  px-4 py-1 lg:px-5 lg:py-1.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                                className="focus:outline-none transition-all text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300  lg:font-medium  rounded-md  lg:text-base  px-4 py-1 lg:px-5 lg:py-1.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                             >Sign Up
                             </Link>
                         </div>
@@ -61,8 +61,8 @@ const LandingPageComponent = () => {
                             <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Home</a>
                             <a href="#about-us" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">About us</a>
                             <a href="#contact-us" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Contact Us</a>
-                            <Link href={"/login"} className="block text-purple-700 border hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</Link>
-                            <Link href={"/register"} className="block bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-2">Sign Up</Link>
+                            <Link href={"/login"} className="block text-blue-800 border hover:text-white border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</Link>
+                            <Link href={"/register"} className="block bg-blue-700 hover:bg-blue-800 text-white rounded-md px-3 py-2">Sign Up</Link>
                         </div>
                     </div>
                 )}
@@ -80,7 +80,7 @@ const LandingPageComponent = () => {
                                 LangNet is a web-based platform enabling software project leaders to efficiently manage multiple languages within the software, ultimately saving time for developers and translators by streamlining the upload and download process through required formats like Excel, JSON, XML, and others.
                             </p>
                             <Link href="/register"
-                                className="block md:inline bg-white text-purple-700 hover:text-white shadow-sm hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium transition-all rounded-lg text-lg px-8 py-2.5 text-center me-4 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+                                className="block md:inline bg-white text-blue-800 hover:text-white shadow-sm hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium transition-all rounded-lg text-lg px-8 py-2.5 text-center me-4 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
                                 Get Start
                                 <NavigateNextOutlinedIcon />
                             </Link>
