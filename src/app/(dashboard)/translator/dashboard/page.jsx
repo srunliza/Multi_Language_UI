@@ -1,212 +1,455 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+
+import { useState, useRef, useEffect, Suspense } from "react";
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 import { useRouter } from "next/navigation";
-import { translatorData } from "@/obj/translatorData";
-import { projectsTableData } from "@/obj/tableData";
-import SortProjectCardList from "@/components/SortComponent";
+import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
+import { Popover } from "flowbite-react";
+import Image from "next/image";
+import HintPopupComponent from "../../translator/_components/HintPopupComponent";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import FeedbackTranslatorComponent from "../../translator/_components/FeedbackTranslatorCompoent";
+import userImage from '../../../../../public/assets/icons/vandy.png'
+import LoadingChatbotPage from "@/app/LoadingChatbot";
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import chatbot from '../../../../../public/assets/icons/chatboot.svg'
 
-const getStatusTextColor = (status) => {
-    switch (status) {
-        case "Completed":
-            return "text-green-500";
-        case "Progress":
-            return "text-yellow-500";
-        case "Pending":
-            return "text-red-500";
-        default:
-            return "text-gray-500";
-    }
-};
 
-const TranslatorPage = () => {
-    const router = useRouter();
-    const [selectedStatus, setSelectedStatus] = useState("All");
-    const [sortedData, setSortedData] = useState(projectsTableData);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [sortCriteria, setSortCriteria] = useState("name");
-    const [sortOrder, setSortOrder] = useState("asc");
 
-    const sortData = useCallback(() => {
-        let filteredData = [...projectsTableData];
+const TranslatorWorkSpace = () => {
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [chat, setChat] = useState(null);
+  const [theme, setTheme] = useState("light");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-        if (selectedStatus !== "All") {
-            filteredData = filteredData.filter(
-                (item) => item.status === selectedStatus
-            );
-        }
+  const API_KEY = "AIzaSyDjr_GaiM86TzUEty7Ey-HkghaHZjbLNHU";
+  const MODEL_NAME = "gemini-1.0-pro-001";
 
-        if (startDate) {
-            filteredData = filteredData.filter(
-                (item) => new Date(item.startDate) >= new Date(startDate)
-            );
-        }
+  const genAI = new GoogleGenerativeAI(API_KEY);
 
-        if (endDate) {
-            filteredData = filteredData.filter(
-                (item) => new Date(item.endDate) <= new Date(endDate)
-            );
-        }
+  const generationConfig = {
+    temperature: 0.9,
+    topK: 1,
+    topP: 1,
+    maxOutputTokens: 2048,
+  };
 
-        filteredData.sort((a, b) => {
-            if (sortCriteria === "fromDate" || sortCriteria === "toDate") {
-                const dateA = new Date(a[sortCriteria]);
-                const dateB = new Date(b[sortCriteria]);
-                return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-            } else {
-                const valueA = a[sortCriteria] ?? "";
-                const valueB = b[sortCriteria] ?? "";
-                return sortOrder === "asc"
-                    ? valueA.localeCompare(valueB)
-                    : valueB.localeCompare(valueA);
-            }
+  const safetySettings = [
+    { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+    { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+    { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+    { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+  ];
+
+  useEffect(() => {
+    const initChat = async () => {
+      try {
+        const newChat = await genAI.getGenerativeModel({ model: MODEL_NAME }).startChat({
+          generationConfig,
+          safetySettings,
+          history: messages.map((msg) => ({ text: msg.text, role: msg.role })),
         });
-
-        setSortedData(filteredData);
-    }, [selectedStatus, startDate, endDate, sortCriteria, sortOrder]);
-
-    useEffect(() => {
-        sortData();
-    }, [sortData]);
-
-    const handleRowClick = (id) => {
-        router.push(`/translator/dashboard/workspace`);
+        setChat(newChat);
+      } catch (err) {
+        setError("Failed to initialize chat. Please try again.");
+      }
     };
 
-    const handleStatusChange = (status) => {
-        setSelectedStatus(status);
-    };
+    initChat();
+  }, [messages]);
 
-    const handleSortClick = (criteria) => {
-        setSortCriteria(criteria);
-        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    };
+  const handleSendMessage = async () => {
+    try {
+      setLoading(true);
+      const userMessage = {
+        text: userInput,
+        role: "user",
+        timestamp: new Date(),
+      };
 
-    return (
-        <div className="w-full p-6">
-            <SortProjectCardList
-                selectedStatus={selectedStatus}
-                handleStatusChange={(e) => handleStatusChange(e.target.value)}
-                handleSortClick={(value, type) => {
-                    if (type === "startDate") {
-                        setStartDate(value);
-                    } else {
-                        setEndDate(value);
-                    }
-                }}
-            />
+      setMessages((prevMessages) => [...prevMessages, userMessage]);
+      setUserInput("");
 
-            {/* Table */}
-            <div className="shadow-lg h-screen  no-scrollbar overflow-y-scroll rounded-lg ">
-                <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
-                        <tr>
-                            <th className="px-6 py-4">
-                                File Name
-                                <button onClick={() => handleSortClick("projectName")}>
-                                    <svg
-                                        className="h-4 w-4 inline"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5 15l7-7 7 7"
-                                        />
-                                    </svg>
-                                </button>
-                            </th>
-                            <th className="px-10 py-4">
-                                Language
-                                <button onClick={() => handleSortClick("language")}>
-                                    <svg
-                                        className="h-4 w-4 inline"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5 15l7-7 7 7"
-                                        />
-                                    </svg>
-                                </button>
-                            </th>
-                            <th className="px-10 py-4">
-                                Status
-                            </th>
-                            <th className="px-10 py-4">
-                                Start Date
-                                <button onClick={() => handleSortClick("fromDate")}>
-                                    <svg
-                                        className="h-4 w-4 inline"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5 15l7-7 7 7"
-                                        />
-                                    </svg>
-                                </button>
-                            </th>
-                            <th className="px-10 py-4">
-                                End Date
-                                <button onClick={() => handleSortClick("toDate")}>
-                                    <svg
-                                        className="h-4 w-4 inline"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5 15l7-7 7 7"
-                                        />
-                                    </svg>
-                                </button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sortedData.map((data) => (
-                            <tr
-                                key={data.id}
-                                className="bg-white border-b text-gray-900 hover:bg-gray-100  dark:border-gray-300 cursor-pointer"
-                                onClick={() => handleRowClick(data.id)}
-                            >
-                                <td className="px-6 py-4 font-medium whitespace-nowrap">
-                                    {data.projectName}
-                                </td>
-                                <td className=" py-4 pl-10">
-                                    {data.language}
-                                </td>
-                                <td className={`py-4 pl-10 ${getStatusTextColor(data.status)} truncate`}>
-                                    {data.status}
-                                </td>
-                                <td className="pl-10 py-4 border-gray-200">{data.fromDate}</td>
-                                <td className="pl-10 py-4 border-gray-200">{data.toDate}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+      if (chat) {
+        const result = await chat.sendMessage(userInput);
+        const botMessage = {
+          text: await result.response.text(), // Ensure the method exists and works correctly
+          role: "bot",
+          timestamp: new Date(),
+        };
+
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
+        console.log("Response: ", result);
+      }
+    } catch (error) {
+      setError("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value);
+  };
+
+  const getThemeColors = () => {
+    switch (theme) {
+      case "light":
+        return {
+          primary: "bg-white",
+          secondary: "bg-gray-100",
+          accent: "bg-blue-700",
+          text: "text-gray-800",
+        };
+      case "dark":
+        return {
+          primary: "bg-gray-900",
+          secondary: "bg-gray-800",
+          accent: "bg-yellow-100",
+          text: "text-gray-100",
+        };
+      default:
+        return {
+          primary: "bg-white",
+          secondary: "bg-gray-100",
+          accent: "bg-blue-500",
+          text: "text-gray-800",
+        };
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const { primary, secondary, accent, text } = getThemeColors();
+
+  const translations = [
+    { id: 1, english: "Home" },
+    { id: 2, english: "About" },
+    { id: 3, english: "Contact" },
+    { id: 4, english: "Services" },
+    { id: 5, english: "Products" },
+    { id: 6, english: "Blog" },
+    { id: 7, english: "Careers" },
+    { id: 8, english: "Support" },
+    { id: 9, english: "Privacy" },
+    { id: 10, english: "Terms" },
+    { id: 11, english: "Login" },
+    { id: 12, english: "Register" },
+  ];
+
+  const router = useRouter();
+
+  const [koreanTranslations, setKoreanTranslations] = useState(
+    translations.reduce((acc, item) => {
+      acc[item.id] = "";
+      return acc;
+    }, {})
+  );
+
+  const inputRefs = useRef([]);
+
+  useEffect(() => {
+    if (inputRefs.current.length > 0) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
+
+  const handleInputChange = (id, value) => {
+    setKoreanTranslations({
+      ...koreanTranslations,
+      [id]: value,
+    });
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const nextIndex = index + 1;
+      if (nextIndex < inputRefs.current.length) {
+        inputRefs.current[nextIndex].focus();
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prevIndex = index - 1;
+      if (prevIndex >= 0) {
+        inputRefs.current[prevIndex].focus();
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const nextIndex = index + 1;
+      if (nextIndex < inputRefs.current.length) {
+        inputRefs.current[nextIndex].focus();
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitted translations:", koreanTranslations);
+    router.push("/translator/dashboard");
+  };
+
+  const handleSave = () => {
+    console.log("Saved translations:", koreanTranslations);
+    router.push("/translator/dashboard");
+  };
+
+  const handleCloseAndExit = () => {
+    router.push("/translator/dashboard");
+  };
+
+  const handleNoAction = (modalId) => {
+    document.getElementById(modalId).close();
+  };
+
+  const handleUserMessageSend = () => {
+    if (userMessage.trim() !== "") {
+      setMessages([...messages, { sender: "user", text: userMessage }, { sender: "ai", text: "hello" }]);
+      setUserMessage("");
+    }
+  };
+
+  const handleToggleVisibility = () => {
+    setIsPopupVisible(!isPopupVisible);
+  };
+
+
+
+  return (
+    <div className="container mx-auto px-10">
+      <div className="grid grid-cols-12">
+        <div className="col-span-8">
+          <div className="flex h-full px-3 justify-between items-center">
+            <h1 className="gap-5 text-gray-800 text-xl font-semibold">Web Design</h1>
+            <button onClick={() => document.getElementById("modal_close").showModal()}>
+              <CloseOutlinedIcon />
+            </button>
+            <dialog id="modal_close" className="modal">
+              <div className="modal-box w-96">
+                <p className="py-4 text-xl text-center">Do you want to Save or Not?</p>
+                <div className="modal-action">
+                  <form method="dialog" className="flex m-auto gap-5">
+                    <button
+                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
+                      onClick={() => handleNoAction("modal_close")}
+                    >
+                      No
+                    </button>
+                    <button
+                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
+                      onClick={handleSave}
+                    >
+                      Yes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </div>
         </div>
-    );
+
+        <div className="col-span-4">
+          <HintPopupComponent />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-12 gap-10">
+        <div className="col-span-8">
+          <div className="rounded-xl bg-white border pb-3 overflow-hidden shadow-md">
+            <div className="flex bg-[#dbebfe] font-semibold text-gray-800 p-3 justify-evenly items-center">
+              <h3>English</h3>
+              <SwapHorizOutlinedIcon />
+              <h3>Korean</h3>
+            </div>
+            <div className="max-h-[460px] no-scrollbar overflow-auto">
+              <table className="min-w-full bg-white border-6">
+                <tbody>
+                  {translations.map((item, index) => (
+                    <tr key={item.id}>
+                      <td className="py-2 px-6 border-b border-r w-[50%]">{item.english}</td>
+                      <td className="border-b w-[50%]">
+                        <input
+                          type="text"
+                          ref={(el) => (inputRefs.current[index] = el)}
+                          className="border-0 focus:ring-1 placeholder:whitespace-tracking-wide transition ring-blue-600 h-full placeholder:text-gray-400 w-full px-2 placeholder:text-xs py-2"
+                          placeholder="translate here"
+                          value={koreanTranslations[item.id]}
+                          onChange={(e) => handleInputChange(item.id, e.target.value)}
+                          onFocus={(e) => (e.target.placeholder = "")}
+                          onBlur={(e) => (e.target.placeholder = "translate here")}
+                          onKeyDown={(e) => handleKeyDown(e, index)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="flex gap-4 mt-4 justify-end">
+            <button
+              className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
+              onClick={() => document.getElementById("modal_save").showModal()}
+            >
+              Save
+            </button>
+            <dialog id="modal_save" className="modal">
+              <div className="modal-box w-96">
+                <p className="py-4 text-xl text-center">Do you want to save this translation?</p>
+                <div className="modal-action">
+                  <form method="dialog" className="flex m-auto gap-5">
+                    <button
+                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
+                      onClick={() => handleNoAction("modal_save")}
+                    >
+                      No
+                    </button>
+                    <button
+                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
+                      onClick={handleSave}
+                    >
+                      Yes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+            <button
+              className="bg-green-600 hover:bg-green-800 shadow-sm focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-5 text-white"
+              onClick={() => document.getElementById("modal_submit").showModal()}
+            >
+              Submit
+            </button>
+            <dialog id="modal_submit" className="modal">
+              <div className="modal-box w-96">
+                <p className="py-4 text-xl text-center">Do you want to submit this translation?</p>
+                <div className="modal-action">
+                  <form method="dialog" className="flex m-auto gap-5">
+                    <button
+                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
+                      onClick={() => handleNoAction("modal_submit")}
+                    >
+                      No
+                    </button>
+                    <button
+                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
+                      onClick={handleSubmit}
+                    >
+                      Yes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </div>
+        </div>
+
+        <div className="col-span-4 flex flex-col items-end">
+          <FeedbackTranslatorComponent />
+
+{/* 
+          <div>
+            <Suspense fallback={<LoadingChatbotPage />}>
+
+              {isPopupVisible && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+                  <div className="bg-white rounded-lg shadow-lg p-4 w-96">
+
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-medium text-gray-900">Support Bot</h3>
+
+                      <button onClick={handleToggleVisibility}>
+                        <HorizontalRuleIcon />
+                      </button>
+                    </div>
+
+                    <div className={`p-5 ${secondary} flex-1 overflow-auto h-[410px]`}>
+                      {loading ? (
+                        <LoadingChatbotPage />
+                      ) : (
+                        messages.map((msg, index) => (
+                          <div
+                            key={index}
+                            className={`mb-4 flex ${msg.role === "user" ? "justify-end" : "justify-start"} items-start`}
+                          >
+                            {msg.role === "bot" && (
+                              <Image
+                                src={chatbot}
+                                width={30}
+                                height={30}
+                                alt="chat bot image"
+                                className="rounded-full bg-neutral"
+                              />
+                            )}
+
+                            <div className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+                              <span
+                                className={`inline-block p-2 rounded-lg ${msg.role === "user" ? `${accent} text-white` : `${primary} ${text} border border-gray-300`}`}
+                              >
+                                {msg.text}
+                              </span>
+                              <p className={`text-xs ${text} mt-1`}>
+                                {msg.role === "bot" ? "Bot" : "You"} - {msg.timestamp.toLocaleTimeString()}
+                              </p>
+                            </div>
+
+                            {msg.role === "user" && (
+                              <Image
+                                src={userImage}
+                                width={50}
+                                height={45}
+                                alt="user image"
+                                className="w-8 h-8 rounded-full ml-2"
+                              />
+                            )}
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    <div className="input-area flex items-center pb-2 p-1">
+                      <input
+                        type="text"
+                        placeholder="Type your message..."
+                        value={userInput}
+                        onChange={(e) => setUserInput(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        className={`flex-1 p-2 border text-gray-600 rounded-l-lg placeholder:text-gray-400 placeholder:text-sm focus:outline-none ${`border-${accent}`}`}
+                      />
+                      <button
+                        onClick={handleSendMessage}
+                        className={`bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-800 ${accent}`}
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <Image
+                src={"/assets/icons/chatboot.svg"}
+                alt="chatbot"
+                width={100}
+                height={100}
+                onClick={handleToggleVisibility}
+                className="cursor-pointer"
+              />
+            </Suspense>
+
+          </div> */}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default TranslatorPage;
+export default TranslatorWorkSpace;

@@ -58,7 +58,7 @@ export const projectsData = [
   {
     id: 6,
     name: "Web Designing",
-    owner: "Krem Vandy",
+    owner: "Kroem Vandy",
     role: "translator",
     daysLeft: 1,
     status: "Completed",
