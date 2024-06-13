@@ -61,6 +61,8 @@ const SettingPage = () => {
     return nameRegex.test(lastName);
   };
 
+ 
+
   // Handle First Name
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -86,6 +88,8 @@ const SettingPage = () => {
       setLastNameError("");
     }
   };
+
+  
 
   // Handle Email
   const handleEmailChange = (e) => {
@@ -277,8 +281,7 @@ const SettingPage = () => {
                     id="username"
                     type="text"
                     placeholder="Enter Username"
-                    value={username}
-                    onChange={handleLastNameChange}
+                    
                     className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
                       lastNameError ? "border-red-500" : ""
                     }`}
