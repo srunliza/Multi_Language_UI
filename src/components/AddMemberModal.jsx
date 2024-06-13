@@ -12,7 +12,7 @@ const AddMemberModal = () => {
         <div className="flex justify-center">
             <button
                 id="openContactForm"
-                className="flex bg-blue-800 text-sm hover:bg-blue-900 text-white shadow-md py-2.5 px-4 rounded-md"
+                className="flex bg-blue-700 text-sm hover:bg-blue-800 text-white shadow-md py-2.5 px-4 rounded-md"
                 onClick={handleOpenModal}
             >
                 <svg
@@ -110,7 +110,7 @@ const AddMemberModal = () => {
                                         Cancel
                                     </button>
                                     <button
-                                        className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                                        className="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
                                         type="submit"
                                     >
                                         Save
