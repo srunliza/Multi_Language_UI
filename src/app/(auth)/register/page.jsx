@@ -8,6 +8,7 @@ import Link from "next/link";
 import { registerService } from "@/service/auth.service";
 import { registerSchema } from "@/validationSchema";
 
+
 const RegisterPage = () => {
   const router = useRouter();
 
@@ -33,7 +34,6 @@ const RegisterPage = () => {
       console.log("failed");
     }
   }
-
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
       <div className="flex justify-center items-center">

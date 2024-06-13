@@ -8,24 +8,23 @@ import { useRouter } from "next/navigation";
 import { forgotPasswordService } from "@/service/auth.service";
 
 const ForgetPasswordPage = () => {
-
   // Initialize the router
   const router = useRouter();
 
   // Function to handle button click
   async function handleForgot(data) {
+    const email = data.get("email");
 
-    const email = data.get("email")
-  
+    const res = await forgotPasswordService(email);
 
-    const res = await forgotPasswordService(email)
-    
+    console.log("res: ", res);
 
-    console.log("res: ", res)
+    if (res.match("Your new verification code has already been resent")) {
+      router.push("/verify-otp");
+    }
 
-//  router.push("/forget-verify"); 
-   
-  };
+    //  router.push("/forget-verify");
+  }
 
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full h-screen flex justify-center">
@@ -71,7 +70,7 @@ const ForgetPasswordPage = () => {
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlined fontSize="small" />
                 </span>
-              </div>            
+              </div>
             </div>
 
             {/* button submit */}
