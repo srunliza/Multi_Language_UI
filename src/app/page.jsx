@@ -33,11 +33,11 @@ const LandingPageComponent = () => {
                             <a href="#contact-us" className="text-gray-700 active:text-blue-700 hover:text-purple-900 transition-all  underline-animation">Contact Us</a>
                         </div>
                         <div className="hidden md:flex">
-                            <Link href="/login"
+                            <Link href={"/login"}
                                 className=" text-purple-700 transition-all hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 lg:font-medium rounded-lg text:xs lg:text-base px-4 py-1 lg:px-5 lg:py-1.5 text-center me-4  dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
                             >Login
                             </Link>
-                            <Link href="/register"
+                            <Link href={"/register"}
                                 className="focus:outline-none transition-all text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300  lg:font-medium  rounded-lg  lg:text-base  px-4 py-1 lg:px-5 lg:py-1.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                             >Sign Up
                             </Link>
@@ -59,10 +59,10 @@ const LandingPageComponent = () => {
                     <div className="mobile-menu  md:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Home</a>
-                            <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">About us</a>
-                            <a href="#" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Contact Us</a>
-                            <a href="#" className="block text-purple-700 border hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</a>
-                            <a href="#" className="block bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-2">Sign Up</a>
+                            <a href="#about-us" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">About us</a>
+                            <a href="#contact-us" className="block text-gray-700 hover:bg-gray-200 rounded-md px-3 py-2">Contact Us</a>
+                            <Link href={"/login"} className="block text-purple-700 border hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-md px-3 py-2">Login</Link>
+                            <Link href={"/register"} className="block bg-purple-600 hover:bg-purple-700 text-white rounded-md px-3 py-2">Sign Up</Link>
                         </div>
                     </div>
                 )}
