@@ -1,14 +1,154 @@
-import React, { useState } from "react";
+'use client'
+
+import {
+  GoogleGenerativeAI,
+  HarmCategory,
+  HarmBlockThreshold,
+} from "@google/generative-ai";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import Popover from "@mui/material/Popover";
 import IconButton from "@mui/material/IconButton";
 import ChatIcon from "@mui/icons-material/Chat";
-import CloseIcon from "@mui/icons-material/Close";
+import user from '../../public/assets/icons/Vandy.png'
 import Avatar from "@mui/material/Avatar";
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
 const ChatbotPopover = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
+  const [userInput, setUserInput] = useState("");
+  const [chat, setChat] = useState(null);
+  const [theme, setTheme] = useState("light");
+  const [error, setError] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleNewMessage = async (message) => {
+    setLoading(true);
+    // Simulate sending message and waiting for AI response
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setLoading(false);
+  };
+
+
+  const API_KEY = "AIzaSyDjr_GaiM86TzUEty7Ey-HkghaHZjbLNHU";
+  const MODEL_NAME = "gemini-1.0-pro-001";
+
+  const genAI = new GoogleGenerativeAI(API_KEY);
+
+  const generationConfig = {
+    temperature: 0.9,
+    topK: 1,
+    topP: 1,
+    maxOutputTokens: 2048,
+  };
+
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
+
+  useEffect(() => {
+    const initChat = async () => {
+      try {
+        const newChat = await genAI
+          .getGenerativeModel({ model: MODEL_NAME })
+          .startChat({
+            generationConfig,
+            safetySettings,
+            history: messages.map((msg) => ({
+              text: msg.text,
+              role: msg.role,
+            })),
+          });
+        setChat(newChat);
+      } catch (err) {
+        setError("Failed to initialize chat. Please try again.");
+      }
+    };
+
+    initChat();
+  }, [messages]);
+
+  const handleSendMessage = async () => {
+    try {
+      const userMessage = {
+        text: userInput,
+        role: "user",
+        timestamp: new Date(),
+      };
+
+      setMessages((prevMessages) => [...prevMessages, userMessage]);
+      setUserInput("");
+
+      if (chat) {
+        const result = await chat.sendMessage(userInput);
+        const botMessage = {
+          text: await result.response.text(), // Ensure the method exists and works correctly
+          role: "bot",
+          timestamp: new Date(),
+        };
+
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
+        console.log("Response: ", result);
+      }
+    } catch (error) {
+      setError("Failed to send message. Please try again.");
+    }
+  };
+
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value);
+  };
+
+  const getThemeColors = () => {
+    switch (theme) {
+      case "light":
+        return {
+          primary: "bg-white",
+          secondary: "bg-gray-100",
+          accent: "bg-blue-700",
+          text: "text-gray-800",
+        };
+      case "dark":
+        return {
+          primary: "bg-gray-900",
+          secondary: "bg-gray-800",
+          accent: "bg-yellow-100",
+          text: "text-gray-100",
+        };
+      default:
+        return {
+          primary: "bg-white",
+          secondary: "bg-gray-100",
+          accent: "bg-blue-500",
+          text: "text-gray-800",
+        };
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const { primary, secondary, accent, text } = getThemeColors();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,22 +159,8 @@ const ChatbotPopover = () => {
   };
 
   const handleSend = () => {
-    if (input.trim()) {
-      setMessages([
-        ...messages,
-        { sender: "user", text: input, avatar: "/Images/Thean.png" },
-      ]);
-      setInput("");
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
-            sender: "bot",
-            text: "This is a response from the chatbot.",
-            avatar: "/assets/images/chatboot.svg",
-          },
-        ]);
-      }, 1000);
+    if (userInput.trim()) {
+      handleSendMessage();
     }
   };
 
@@ -68,8 +194,8 @@ const ChatbotPopover = () => {
           },
         }}
       >
-        <div className="w-[400px] rounded-2xl">
-          <div className="flex justify-between bg-[#2357F9] items-center p-4">
+        <div className="w-[420px] h-[540px] rounded-2xl">
+          <div className="flex justify-between bg-blue-700 items-center p-2">
             <div className="flex items-center">
               <Avatar
                 alt="Support Bot"
@@ -79,39 +205,80 @@ const ChatbotPopover = () => {
               <h2 className="text-lg font-semibold text-white">Support Bot</h2>
             </div>
             <IconButton onClick={handleClose}>
-              <CloseIcon style={{ color: "white" }} />
+              <HorizontalRuleIcon style={{ color: "white" }} fontSize="medium" />
             </IconButton>
           </div>
 
-          <div className="flex flex-col h-64 w-[400px] overflow-y-auto border">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`chat ${
-                  msg.sender === "user" ? "chat-end" : "chat-start"
-                } mb-2`}
-              >
-                <div className="chat-image avatar">
-                  <div className="w-10 rounded-full">
-                    <img alt="Avatar" src={msg.avatar} />
-                  </div>
-                </div>
-                <div className="chat-header">
-                  {msg.sender === "user" ? "You" : "Support Bot"}
-                </div>
-                <div className="chat-bubble h-auto w-[350px]">
-                  {msg.text}
-                </div>
-              </div>
-            ))}
+          {/* mapping ai chat */}
+         <div className="flex flex-col h-[425px] overflow-y-auto w-full p-2">
+      {messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`mb-4 flex ${msg.role === "user" ? "justify-end" : "justify-start"} items-start mt-3`}
+        >
+          {/* AI role */}
+          {msg.role === "bot" && (
+            <Image
+              src="/assets/images/chatboot.svg"
+              width={40}
+              height={40}
+              alt="chat bot image"
+              className="w-10 h-10 rounded-full mr-2"
+            />
+          )}
+
+          <div className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+            <span
+              className={`inline-block p-2 rounded-lg ${
+                msg.role === "user" ? `${accent} text-white text-sm` : `${primary} ${text} border text-sm border-gray-300`
+              }`}
+            >
+              {msg.text}
+            </span>
+            <p className={`text-xs ${text} mt-1`}>
+              {msg.role === "bot" ? "Bot" : "You"} - {msg.timestamp.toLocaleTimeString()}
+            </p>
           </div>
-          <div className="flex rounded-2xl">
+
+          {/* User role */}
+          {msg.role === "user" && (
+            <Image
+              src={user}
+              width={45}
+              height={45}
+              alt="user image"
+              className="w-8 h-8 rounded-full ml-2"
+            />
+          )}
+        </div>
+      ))}
+
+      {loading && (
+        <div className="mb-4 flex justify-start items-start mt-3">
+          <Image
+            src="/assets/images/chatboot.svg"
+            width={40}
+            height={40}
+            alt="chat bot image"
+            className="w-10 h-10 rounded-full mr-2"
+          />
+          <div className="flex flex-col items-start">
+            <div className="inline-block p-2 rounded-lg border border-gray-300 bg-gray-200 animate-pulse w-48 h-10"></div>
+            <p className="text-xs text-gray-400 mt-1">Bot is typing...</p>
+          </div>
+        </div>
+      )}
+    </div>
+
+
+          <div className="flex rounded-2xl p-1">
             <input
               type="text"
-              className="flex-1 p-2 border rounded-l-lg focus:outline-none"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSend()}
+              className="flex-1 p-2 border rounded-l-lg focus:outline-none placeholder:text-sm"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Your type here..."
             />
             <button
               onClick={handleSend}

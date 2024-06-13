@@ -1,146 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
 import { useRouter } from "next/navigation";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
-import { Popover } from "flowbite-react";
-import Image from "next/image";
 import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FeedbackTranslatorComponent from "../../../translator/_components/FeedbackTranslatorComponent";
-import LoadingChatbotPage from "@/app/LoadingChatbot";
+import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorCompoent";
 import ChatbotPopover from "@/components/ChatbotPopover";
 
 const TranslatorWorkSpace = () => {
-  const [messages, setMessages] = useState([]);
-  const [userInput, setUserInput] = useState("");
-  const [chat, setChat] = useState(null);
-  const [theme, setTheme] = useState("light");
-  const [error, setError] = useState(null);
-
-  const API_KEY = "AIzaSyDjr_GaiM86TzUEty7Ey-HkghaHZjbLNHU";
-  const MODEL_NAME = "gemini-1.0-pro-001";
-
-  const genAI = new GoogleGenerativeAI(API_KEY);
-
-  const generationConfig = {
-    temperature: 0.9,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
-  };
-
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-  ];
-
-  useEffect(() => {
-    const initChat = async () => {
-      try {
-        const newChat = await genAI
-          .getGenerativeModel({ model: MODEL_NAME })
-          .startChat({
-            generationConfig,
-            safetySettings,
-            history: messages.map((msg) => ({
-              text: msg.text,
-              role: msg.role,
-            })),
-          });
-        setChat(newChat);
-      } catch (err) {
-        setError("Failed to initialize chat. Please try again.");
-      }
-    };
-
-    initChat();
-  }, [messages]);
-
-  const handleSendMessage = async () => {
-    try {
-      const userMessage = {
-        text: userInput,
-        role: "user",
-        timestamp: new Date(),
-      };
-
-      setMessages((prevMessages) => [...prevMessages, userMessage]);
-      setUserInput("");
-
-      if (chat) {
-        const result = await chat.sendMessage(userInput);
-        const botMessage = {
-          text: await result.response.text(), // Ensure the method exists and works correctly
-          role: "bot",
-          timestamp: new Date(),
-        };
-
-        setMessages((prevMessages) => [...prevMessages, botMessage]);
-        console.log("Response: ", result);
-      }
-    } catch (error) {
-      setError("Failed to send message. Please try again.");
-    }
-  };
-
-  const handleThemeChange = (e) => {
-    setTheme(e.target.value);
-  };
-
-  const getThemeColors = () => {
-    switch (theme) {
-      case "light":
-        return {
-          primary: "bg-white",
-          secondary: "bg-gray-100",
-          accent: "bg-blue-700",
-          text: "text-gray-800",
-        };
-      case "dark":
-        return {
-          primary: "bg-gray-900",
-          secondary: "bg-gray-800",
-          accent: "bg-yellow-100",
-          text: "text-gray-100",
-        };
-      default:
-        return {
-          primary: "bg-white",
-          secondary: "bg-gray-100",
-          accent: "bg-blue-500",
-          text: "text-gray-800",
-        };
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  const { primary, secondary, accent, text } = getThemeColors();
+ 
 
   const translations = [
     { id: 1, english: "Home" },
@@ -219,6 +88,17 @@ const TranslatorWorkSpace = () => {
 
   const handleNoAction = (modalId) => {
     document.getElementById(modalId).close();
+  };
+
+  const handleUserMessageSend = () => {
+    if (userMessage.trim() !== "") {
+      setMessages([
+        ...messages,
+        { sender: "user", text: userMessage },
+        { sender: "ai", text: "hello" },
+      ]);
+      setUserMessage("");
+    }
   };
 
   return (
@@ -369,11 +249,12 @@ const TranslatorWorkSpace = () => {
           </div>
         </div>
 
+        {/* feedback component and popover ai chat*/}
         <div className="col-span-4 flex flex-col items-end">
           <FeedbackTranslatorComponent />
-          
-          <ChatbotPopover />
 
+          {/* popover ai chat bot */}
+          <ChatbotPopover/>
         </div>
       </div>
     </div>
