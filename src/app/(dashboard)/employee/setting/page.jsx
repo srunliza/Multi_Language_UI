@@ -277,7 +277,7 @@ const SettingPage = () => {
                     id="username"
                     type="text"
                     placeholder="Enter Username"
-                    value={lastName}
+                    value={username}
                     onChange={handleLastNameChange}
                     className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
                       lastNameError ? "border-red-500" : ""
@@ -321,53 +321,53 @@ const SettingPage = () => {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-
-              {/* Date of Birth */}
-              <div className="">
-                <label
-                  htmlFor="dob"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Date of Birth
-                </label>
-                <DatePicker
-                  id="calender"
-                  className="focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 rounded-md border bg-white"
-                />
-              </div>
-              {/* Email */}
-              <div>
+                {/* Date of Birth */}
+                <div className="">
+                  <label
+                    htmlFor="dob"
+                    className="block text-gray-700 dark:text-white "
+                  >
+                    Date of Birth
+                  </label>
+                  <DatePicker
+                    id="calender"
+                    className=" focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 border rounded-md "
+                  />
+                </div>
+                {/* Email */}
+                <div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
+                      className="block font-medium text-gray-700  sm:text-sm md:text-base lg:text-base"
                     >
                       Email
                     </label>
                   </div>
-                  <div className="relative text-gray-800">
+
+                  <div className="relative">
                     <input
                       type="email"
                       id="email"
-                      className={`text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full ${
+                      className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-10 focus:outline-none input-bordered w-full ${
                         emailError ? "border-red-500" : ""
                       }`}
                       placeholder="@gmail.com"
                       value={email}
                       onChange={handleEmailChange}
                     />
-                    <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        className="w-[20px]"
                         src="../assets/icons/mail.svg"
-                        alt="email icon"
+                        alt="email"
+                        className="w-5 h-5 text-gray-400"
                       />
-                    </span>
+                    </div>
                   </div>
-                  {emailError && (
-                    <p className="text-red-500 text-xs mt-1">{emailError}</p>
-                  )}
                 </div>
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1">{emailError}</p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
@@ -402,44 +402,44 @@ const SettingPage = () => {
                   </div>
                 </div>
                 {/* Social Contact */}
-              <div>
-                <label
-                  htmlFor="social_contact"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Social Contact
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <img
-                      className="w-[20px]"
-                      src="../assets/icons/socaicontact.svg"
-                      alt="social contact icon"
-                    />
-                  </div>
-                  <select
-                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-                    value={selectedSocialContact}
-                    onChange={handleSocialContactChange}
-                    defaultValue=""
+                <div>
+                  <label
+                    htmlFor="social_contact"
+                    className="block text-gray-700 dark:text-white mb-1"
                   >
-                    <option value="" disabled>
-                      Select social contact
-                    </option>
-                    <option value="gmail" disabled>
-                      Gmail
-                    </option>
-                    <option value="phone" disabled>
-                      Phone Number
-                    </option>
-                    <option value="facebook">Facebook</option>
-                    <option value="x">X</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="other">Other</option>
-                  </select>
+                    Social Contact
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <img
+                        className="w-[20px]"
+                        src="../assets/icons/socaicontact.svg"
+                        alt="social contact icon"
+                      />
+                    </div>
+                    <select
+                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                      value={selectedSocialContact}
+                      onChange={handleSocialContactChange}
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select social contact
+                      </option>
+                      <option value="gmail" disabled>
+                        Gmail
+                      </option>
+                      <option value="phone" disabled>
+                        Phone Number
+                      </option>
+                      <option value="facebook">Facebook</option>
+                      <option value="x">X</option>
+                      <option value="linkedin">LinkedIn</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
 
@@ -483,7 +483,7 @@ const SettingPage = () => {
                   </label>
                 </div>
               </div>
-              
+
               <div className="mt-4 flex justify-center gap-3 w-auto ">
                 <button
                   type="button"
@@ -523,9 +523,6 @@ const SettingPage = () => {
               <img
                 className="w-[20px]"
                 src={`../Images/${selectedSocialContact}.png`}
-                onError={(e) =>
-                  (e.target.src = `../Images/${selectedSocialContact}.webp`)
-                }
                 alt={`${selectedSocialContact} icon`}
               />
             </div>
