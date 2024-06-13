@@ -28,7 +28,7 @@ const SettingPage = () => {
   const [selectedSocialContact, setSelectedSocialContact] = useState("");
   const [socialContactUsername, setSocialContactUsername] = useState("");
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
@@ -36,7 +36,7 @@ const SettingPage = () => {
 
   const handleSocialContactChange = (event) => {
     setSelectedSocialContact(event.target.value);
-    onOpen();
+    document.getElementById("my_modal_3").showModal();
   };
 
   const handleSocialContactUsernameChange = (event) => {
@@ -60,6 +60,8 @@ const SettingPage = () => {
     const nameRegex = /[a-zA-Z]+/;
     return nameRegex.test(lastName);
   };
+
+ 
 
   // Handle First Name
   const handleFirstNameChange = (e) => {
@@ -86,6 +88,8 @@ const SettingPage = () => {
       setLastNameError("");
     }
   };
+
+  
 
   // Handle Email
   const handleEmailChange = (e) => {
@@ -218,7 +222,7 @@ const SettingPage = () => {
           <hr className="border-gray-300 mb-6" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                 <div>
                   <label
                     htmlFor="first_name"
@@ -265,144 +269,188 @@ const SettingPage = () => {
                 </div>
               </div>
               {/* gender */}
-              <div className="grid grid-cols-1 md:grid-cols-2 pt-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
                   <label
-                    htmlFor="gender_male"
+                    htmlFor="username"
                     className="block text-gray-700 dark:text-white mb-1"
                   >
-                    Gender
+                    Username
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <img
-                        src="../assets/icons/gender1.svg"
-                        alt="gender icon"
-                        className="w-4 h-4 md:w-6 md:h-6"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
-                        selectedGender === "male" ? "bg-gray-200" : "bg-white"
-                      }`}
-                      onClick={() => handleGenderSelect("male")}
-                    >
-                      Male
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="gender_female"
-                    className="block text-gray-700 dark:text-white mb-1"
-                  >
-                    Gender
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <img
-                        className="w-4 h-4 md:w-6 md:h-6"
-                        src="../assets/icons/gender2.svg"
-                        alt="gender icon"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className={`text-gray-700 pl-10 md:pl-12 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 focus:outline-none input-bordered focus:ring-gray-500 focus:border-gray-500 w-full ${
-                        selectedGender === "female" ? "bg-gray-200" : "bg-white"
-                      }`}
-                      onClick={() => handleGenderSelect("female")}
-                    >
-                      Female
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Date of Birth */}
-              <div className="mt-2">
-                <label
-                  htmlFor="dob"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Date of Birth
-                </label>
-                <DatePicker
-                  id="calender"
-                  className="focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 rounded-md border bg-white"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
-                >
-                  Email
-                </label>
-              </div>
-              <div className="relative text-gray-800">
-                <input
-                  type="email"
-                  id="email"
-                  className={`text-gray-700 focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full ${
-                    emailError ? "border-red-500" : ""
-                  }`}
-                  placeholder="example@gmail.com"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-                <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
-                  <img
-                    className="w-[20px]"
-                    src="../assets/icons/mail.svg"
-                    alt="email icon"
-                  />
-                </span>
-              </div>
-              {emailError && (
-                <p className="text-red-500 text-xs mt-1">{emailError}</p>
-              )}
-
-              {/* Contact */}
-              <div>
-                <label
-                  htmlFor="contact"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Contact
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 23 23"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.5 0C5.14855 0 0 5.14878 0 11.5C0 13.1491 0.367987 14.7915 1.07869 16.3156C0.135687 21.1859 0.0356567 21.6344 0.0356567 21.6344C-0.118443 22.432 0.566937 23.1151 1.36619 22.9641C1.36619 22.9641 1.80204 22.8887 6.72059 21.9579C8.20524 22.6635 9.8509 23 11.5 23C17.8514 23 23 17.8512 23 11.5C23 5.14878 17.8514 0 11.5 0ZM11.5 2.3C16.5807 2.3 20.7 6.41895 20.7 11.5C20.7 16.581 16.5807 20.7 11.5 20.7C10.0544 20.7 8.66639 20.3605 7.40369 19.7296C7.17829 19.6174 6.93106 19.5751 6.68381 19.6219C2.60131 20.3947 2.9256 20.3486 2.5875 20.4125C2.6542 20.0703 2.59669 20.4255 3.37869 16.3875C3.42699 16.1375 3.38444 15.8602 3.27059 15.6329C2.62889 14.3613 2.3 12.9577 2.3 11.5C2.3 6.41895 6.4193 2.3 11.5 2.3ZM8.26619 5.75C7.18749 5.75 5.75 7.1875 5.75 8.26562C5.75 9.65505 7.1875 12.2187 8.625 13.6562C8.78025 13.8109 9.1885 14.2203 9.34375 14.375C10.7812 15.8125 13.3446 17.25 14.7338 17.25C15.8125 17.25 17.25 15.8125 17.25 14.7344C17.25 13.6562 15.8125 12.2187 14.7338 12.2187C14.375 12.2187 13.0743 12.9622 12.9375 12.9375C11.7921 12.7307 10.3017 11.2042 10.0625 10.0625C10.0291 9.90311 10.7812 8.625 10.7812 8.26562C10.7812 7.1875 9.34374 5.75 8.26619 5.75Z"
-                        fill="#949494"
-                      />
-                    </svg>
-                  </div>
                   <input
+                    id="username"
                     type="text"
-                    className="text-gray-700 focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full"
-                    placeholder="Phone number"
+                    placeholder="Enter Username"
+                    
+                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
+                      lastNameError ? "border-red-500" : ""
+                    }`}
                   />
+                  {lastNameError && (
+                    <p className="text-red-500 text-xs mt-1">{lastNameError}</p>
+                  )}
+                </div>
+                <div className="">
+                  <label
+                    htmlFor="gender"
+                    className="block text-gray-700 dark:text-white mb-1"
+                  >
+                    Gender
+                  </label>
+                  <div className="relative">
+                    <select
+                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                      value={selectedGender}
+                      onChange={(e) => handleGenderSelect(e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Select Gender
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <img
+                        className="w-[20px]"
+                        src={
+                          selectedGender === "male"
+                            ? "../assets/icons/gender1.svg"
+                            : "../assets/icons/gender2.svg"
+                        }
+                        alt="gender icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {/* Date of Birth */}
+                <div className="">
+                  <label
+                    htmlFor="dob"
+                    className="block text-gray-700 dark:text-white "
+                  >
+                    Date of Birth
+                  </label>
+                  <DatePicker
+                    id="calender"
+                    className=" focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 border rounded-md "
+                  />
+                </div>
+                {/* Email */}
+                <div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block font-medium text-gray-700  sm:text-sm md:text-base lg:text-base"
+                    >
+                      Email
+                    </label>
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      type="email"
+                      id="email"
+                      className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-10 focus:outline-none input-bordered w-full ${
+                        emailError ? "border-red-500" : ""
+                      }`}
+                      placeholder="@gmail.com"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <img
+                        src="../assets/icons/mail.svg"
+                        alt="email"
+                        className="w-5 h-5 text-gray-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1">{emailError}</p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {/* Contact */}
+                <div>
+                  <label
+                    htmlFor="contact"
+                    className="block text-gray-700 dark:text-white mb-1"
+                  >
+                    Contact
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 23 23"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.5 0C5.14855 0 0 5.14878 0 11.5C0 13.1491 0.367987 14.7915 1.07869 16.3156C0.135687 21.1859 0.0356567 21.6344 0.0356567 21.6344C-0.118443 22.432 0.566937 23.1151 1.36619 22.9641C1.36619 22.9641 1.80204 22.8887 6.72059 21.9579C8.20524 22.6635 9.8509 23 11.5 23C17.8514 23 23 17.8512 23 11.5C23 5.14878 17.8514 0 11.5 0ZM11.5 2.3C16.5807 2.3 20.7 6.41895 20.7 11.5C20.7 16.581 16.5807 20.7 11.5 20.7C10.0544 20.7 8.66639 20.3605 7.40369 19.7296C7.17829 19.6174 6.93106 19.5751 6.68381 19.6219C2.60131 20.3947 2.9256 20.3486 2.5875 20.4125C2.6542 20.0703 2.59669 20.4255 3.37869 16.3875C3.42699 16.1375 3.38444 15.8602 3.27059 15.6329C2.62889 14.3613 2.3 12.9577 2.3 11.5C2.3 6.41895 6.4193 2.3 11.5 2.3ZM8.26619 5.75C7.18749 5.75 5.75 7.1875 5.75 8.26562C5.75 9.65505 7.1875 12.2187 8.625 13.6562C8.78025 13.8109 9.1885 14.2203 9.34375 14.375C10.7812 15.8125 13.3446 17.25 14.7338 17.25C15.8125 17.25 17.25 15.8125 17.25 14.7344C17.25 13.6562 15.8125 12.2187 14.7338 12.2187C14.375 12.2187 13.0743 12.9622 12.9375 12.9375C11.7921 12.7307 10.3017 11.2042 10.0625 10.0625C10.0291 9.90311 10.7812 8.625 10.7812 8.26562C10.7812 7.1875 9.34374 5.75 8.26619 5.75Z"
+                          fill="#949494"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      className="text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full"
+                      placeholder="Phone number"
+                    />
+                  </div>
+                </div>
+                {/* Social Contact */}
+                <div>
+                  <label
+                    htmlFor="social_contact"
+                    className="block text-gray-700 dark:text-white mb-1"
+                  >
+                    Social Contact
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <img
+                        className="w-[20px]"
+                        src="../assets/icons/socaicontact.svg"
+                        alt="social contact icon"
+                      />
+                    </div>
+                    <select
+                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                      value={selectedSocialContact}
+                      onChange={handleSocialContactChange}
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select social contact
+                      </option>
+                      <option value="gmail" disabled>
+                        Gmail
+                      </option>
+                      <option value="phone" disabled>
+                        Phone Number
+                      </option>
+                      <option value="facebook">Facebook</option>
+                      <option value="x">X</option>
+                      <option value="linkedin">LinkedIn</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* profile and password */}
-            <div className="">
-              <div className="m-auto w-[150px] h-[150px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+            <div className="flex flex-col justify-between">
+              <div className="m-auto w-[200px] h-[200px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
                 {/* icon edit profile */}
-                <div className="bg-white rounded-full w-6 h-6 text-center ml-28 mt-[117px] lg-ml-[35px]">
+                <div className="bg-white rounded-full w-10 h-10 text-center ml-28 mt-[180px] lg-ml-[35px]">
                   <input
                     type="file"
                     name="profile"
@@ -416,7 +464,7 @@ const SettingPage = () => {
                   >
                     <svg
                       data-slot="icon"
-                      className="w-5 h-5 text-blue-700"
+                      className="w-9 h-9 text-blue-700"
                       fill="none"
                       strokeWidth="1.5"
                       stroke="currentColor"
@@ -438,105 +486,17 @@ const SettingPage = () => {
                   </label>
                 </div>
               </div>
-              <div>
-                <label
-                  htmlFor="social_contact"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Social Contact
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <img
-                      className="w-[20px]"
-                      src="../assets/icons/socaicontact.svg"
-                      alt="social contact icon"
-                    />
-                  </div>
-                  <select
-                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-                    value={selectedSocialContact}
-                    onChange={handleSocialContactChange}
-                    defaultValue=""
-                  >
-                    <option value="" disabled>
-                      Select social contact
-                    </option>
-                    <option value="gmail" disabled>
-                      Gmail
-                    </option>
-                    <option value="phone" disabled>
-                      Phone Number
-                    </option>
-                    <option value="facebook">Facebook</option>
-                    <option value="twitter">Twitter</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-              {/* Modal */}
-              <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                placement="center"
-                isDismissable={false}
-                isKeyboardDismissDisabled={true}
-              >
-                <ModalContent>
-                  {(onClose) => (
-                    <>
-                      <ModalHeader className="flex  gap-1">
-                        <div>Enter your {selectedSocialContact} username</div>
-                      </ModalHeader>
-                      <ModalBody>
-                        <div className="relative mb-4">
-                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <img
-                              className="w-[20px]"
-                              // src={`../assets/icons/${selectedSocialContact}.svg`}
-                              src="../Images/phone.png"
-                              alt={`${selectedSocialContact} icon`}
-                            />
-                          </div>
-                          <input
-                            type="text"
-                            className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-                            placeholder={`Enter your ${selectedSocialContact} username`}
-                            value={socialContactUsername}
-                            onChange={handleSocialContactUsernameChange}
-                          />
-                        </div>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button
-                          color="danger"
-                          variant="light"
-                          onPress={onOpenChange}
-                          className="border border-rose-500 "
-                        >
-                          Close
-                        </Button>
-                        <Button color="primary" onPress={onOpenChange}>
-                          Save
-                        </Button>
-                      </ModalFooter>
-                    </>
-                  )}
-                </ModalContent>
-              </Modal>
-              {/* Button  */}
-              <div className="mt-4 flex gap-3 w-auto ml-[5rem] float-end">
+
+              <div className="mt-4 flex justify-center gap-3 w-auto ">
                 <button
                   type="button"
-                  className="btn btn-outline btn-error hover:bg-red-600 dark:bg-teal-600 dark:text-white dark:hover:bg-teal-900 w-[100px]"
+                  className="btn text-black bg-white px-4 py-2  w-[100px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 dark:bg-teal-600 dark:text-white dark:hover:bg-white w-[100px]"
+                  className="bg-blue-800 text-white px-4 py-2 rounded-lg   w-[100px]"
                 >
                   Save
                 </button>
@@ -545,6 +505,55 @@ const SettingPage = () => {
           </div>
         </div>
       </form>
+
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              ✕
+            </button>
+          </form>
+
+          <h3 className="font-bold text-lg">
+            Enter your {selectedSocialContact} username
+          </h3>
+
+          <div className="relative mb-4">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <img
+                className="w-[20px]"
+                src={`../Images/${selectedSocialContact}.png`}
+                alt={`${selectedSocialContact} icon`}
+              />
+            </div>
+            <input
+              type="text"
+              className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+              placeholder={`Enter your ${selectedSocialContact} username`}
+              value={socialContactUsername}
+              onChange={handleSocialContactUsernameChange}
+            />
+          </div>
+
+          <div className="modal-action">
+            <button
+              className="btn text-black bg-white   px-4 py-2  w-[100px]"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              Close
+            </button>
+            <button
+              className="bg-blue-800 text-white px-4 py-2 rounded-lg   w-[100px]"
+              onClick={() => document.getElementById("my_modal_3").close()}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
