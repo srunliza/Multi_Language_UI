@@ -372,6 +372,7 @@ const ViewMemberProjectLeader = ({ onClose }) => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };
