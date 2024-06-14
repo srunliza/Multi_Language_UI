@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import { Button, Modal, Checkbox } from "flowbite-react";
+import KeywordSelect from "./KeywordSelect";
 
 export default function InputKeywordComponent() {
   const [openModal, setOpenModal] = useState(false);
@@ -26,12 +27,9 @@ export default function InputKeywordComponent() {
     "Portfolio",
   ];
 
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    if (value !== "language") {
-      setSelectedKeyword(value);
-      setOpenModal(true);
-    }
+  const handleSelectChange = (keyword) => {
+    setSelectedKeyword(keyword);
+    setOpenModal(true);
   };
 
   const toggleSelectAll = () => {
@@ -53,16 +51,8 @@ export default function InputKeywordComponent() {
         <label htmlFor="select" className="text-xs">
           Or choose keyword as a page
         </label>
-        <select
-          className="block sm:w-full w-[220px] h-[37.6px] text-xs text-gray-500 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
-          onChange={handleSelectChange}
-        >
-          <option value="language">Choose type of keyword</option>
-          <option value="dashboard">Dashboard</option>
-          <option value="english">Home</option>
-          <option value="korea">Authenticate</option>
-          <option value="spain">Page</option>
-        </select>
+        <KeywordSelect onSelect={handleSelectChange} />
+        
       </div>
       <Modal
         show={openModal}

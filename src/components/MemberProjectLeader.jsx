@@ -1,6 +1,10 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import GroupIcon from "@mui/icons-material/Group";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,6 +12,61 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import AddMemberModal from "./AddMember";
 import ModalForSearch from "./ModalForSearch";
+// import { di } from "@fullcalendar/core/internal-common";
+
+const UserProfileComponent = ({ user, onClose }) => {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+    <dialog open className="modal">
+      <div className="modal-box relative p-0 ">
+        <form method="dialog">
+          <button
+            className="btn btn-sm btn-circle text-black font-bold hover:text-red-500 hover:bg-transparent btn-ghost absolute right-2 top-2"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+        </form>
+        <Image
+          src={user.image}
+          width={300}
+          height={500}
+          className="w-full h-[300px] object-cover"
+        />
+        <div className="p-4">
+          <h3 className="font-bold text-xl mb-2">{user.name}</h3>
+          <div className="text-gray-700 mt-3">
+            <div className="flex items-center gap-5 mb-6">
+              <AccessTimeIcon className="text-gray-500" />
+              <span className="flex-grow border-b border-gray-300">
+                09:22 AM local time
+              </span>
+            </div>
+            <div className="flex items-center gap-5 mb-6">
+              <MailOutlineIcon className="text-gray-500" />
+              <span className="flex-grow border-b border-gray-300">
+                {user.email || "No email provided"}
+              </span>
+            </div>
+            <div className="flex items-center gap-5 mb-6">
+              <PhoneAndroidIcon className="text-gray-500" />
+              <span className="flex-grow border-b border-gray-300">
+                {user.phone || "No phone number provided"}
+              </span>
+            </div>
+            <div className="flex items-center gap-5 mb-6">
+              <CalendarMonthIcon className="text-gray-500" />
+              <span className="flex-grow border-b border-gray-300">
+                01-02-2000
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+    </div>
+  );
+};
 
 const MemberProjectLeader = ({ onClose }) => {
   const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
@@ -18,84 +77,111 @@ const MemberProjectLeader = ({ onClose }) => {
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [roleToDelete, setRoleToDelete] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(null); // State for dropdown visibility
+  const [selectedUser, setSelectedUser] = useState(null); // State for selected user profile modal
   const [users, setUsers] = useState([
     {
       id: 1,
       name: "Robert Downey Jr",
       role: "Project Leader",
-      image: "/assets/images/vandy.png",
+      image: "/assets/images/sreyka.jpg",
+      email: "robert@example.com",
+      phone: "123456789",
     },
     {
       id: 2,
       name: "Lisa",
       role: "Translator",
       image: "/assets/images/lisa.png",
+      email: "lisa@example.com",
+      phone: "123456789",
     },
     {
       id: 3,
       name: "Thean",
       role: "Translator",
       image: "/assets/images/thean.png",
+      email: "thean@example.com",
+      phone: "123456789",
     },
     {
       id: 4,
       name: "Sokhim",
       role: "Translator",
       image: "/assets/images/sokhim.png",
+      email: "sokhim@example.com",
+      phone: "123456789",
     },
     {
       id: 5,
       name: "Sreyly",
       role: "Translator",
       image: "/assets/images/sreyly.png",
+      email: "sreyly@example.com",
+      phone: "123456789",
     },
     {
       id: 6,
       name: "Soklay",
       role: "Translator",
       image: "/assets/images/soklay.png",
+      email: "soklay@example.com",
+      phone: "123456789",
     },
     {
       id: 7,
       name: "Neath",
       role: "Developer",
       image: "/assets/images/neath.png",
+      email: "neath@example.com",
+      phone: "123456789",
     },
     {
       id: 8,
       name: "Sreyka",
       role: "Developer",
       image: "/assets/images/sreyka.png",
+      email: "sreyka@example.com",
+      phone: "123456789",
     },
     {
       id: 9,
       name: "Sokheng",
       role: "Developer",
       image: "/assets/images/sokheng.png",
+      email: "sokheng@example.com",
+      phone: "123456789",
     },
     {
       id: 10,
       name: "Panha",
       role: "Translator",
       image: "/assets/images/panha.png",
+      email: "panha@example.com",
+      phone: "123456789",
     },
     {
       id: 11,
       name: "Soklay",
       role: "Developer",
       image: "/assets/images/soklay.png",
+      email: "soklay@example.com",
+      phone: "123456789",
     },
     {
       id: 12,
       name: "Sokhim",
       role: "Developer",
       image: "/assets/images/sokhim.png",
+      email: "sokhim@example.com",
+      phone: "123456789",
     },
     {
       id: 13,
       name: "Sreyly",
       role: "Developer",
       image: "/assets/images/sreyly.png",
+      email: "sreyly@example.com",
+      phone: "123456789",
     },
   ]);
 
@@ -156,27 +242,47 @@ const MemberProjectLeader = ({ onClose }) => {
   };
 
   const toggleDropdown = (userId) => {
+    setSelectedUser(null); // Close the user profile popup
     setDropdownOpen((prevState) => (prevState === userId ? null : userId));
+  };
+
+  const handleUserClick = (user) => {
+    setDropdownOpen(null); // Close the dropdown when a user is clicked
+    setSelectedUser(user);
+  };
+
+  const handleCloseUserProfile = () => {
+    setSelectedUser(null);
   };
 
   const renderUserList = (role) => {
     return users
       .filter((user) => user.role === role)
       .map((user) => (
-        <div key={user.id} className="flex items-center p-2 hover:bg-blue-100">
+        <div
+          key={user.id}
+          className="flex items-center p-2 hover:bg-blue-100 "
+         
+        >
           <Image
             src={user.image}
             alt="User"
             width={35}
             height={35}
-            className="rounded-full"
+            className="rounded-full cursor-pointer" 
+            onClick={() => handleUserClick(user)}
           />
-          <div className="ml-2">
+          <div className="ml-2 cursor-pointer" onClick={() => handleUserClick(user)}>
             <div className="text-gray-800">{user.name}</div>
+
           </div>
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
-              <div className={`dropdown ${dropdownOpen === user.id ? 'dropdown-open' : ''} dropdown-end`}>
+              <div
+                className={`dropdown ${
+                  dropdownOpen === user.id ? "dropdown-open" : ""
+                } dropdown-end`}
+              >
                 <div
                   tabIndex={0}
                   onClick={() => toggleDropdown(user.id)} // Toggle dropdown visibility
@@ -316,7 +422,9 @@ const MemberProjectLeader = ({ onClose }) => {
       {isDeleteModalVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
           <div className="bg-white p-4 rounded-lg shadow-lg">
-            <p>Are you sure you want to delete this {roleToDelete.toLowerCase()}?</p>
+            <p>
+              Are you sure you want to delete this {roleToDelete.toLowerCase()}?
+            </p>
             <div className="mt-4 flex justify-end">
               <button
                 className="bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg mr-2"
@@ -336,7 +444,8 @@ const MemberProjectLeader = ({ onClose }) => {
       )}
 
       {isEditing && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+      
+           <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
           <div
             ref={modalRef}
             className="bg-white p-4 rounded-lg shadow-lg w-96"
@@ -381,6 +490,13 @@ const MemberProjectLeader = ({ onClose }) => {
             </div>
           </div>
         </div>
+      )}
+
+      {selectedUser && (
+        <UserProfileComponent
+          user={selectedUser}
+          onClose={handleCloseUserProfile}
+        />
       )}
     </div>
   );
