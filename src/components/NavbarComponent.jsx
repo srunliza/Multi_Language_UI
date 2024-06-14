@@ -132,7 +132,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
 
   return (
     <>
-      <nav className="bg-white sticky top-0 shadow-sm h-16 flex px-3 justify-between items-center z-50">
+      <nav className="bg-white sticky top-0 shadow-sm h-16 flex px-10 justify-between items-center z-50">
         <div className="flex items-center w-1/2">
           <button
             onClick={toggleSidebar}
@@ -140,7 +140,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
           >
             <MenuIcon className="text-black" />
           </button>
-          <div className="relative w-full max-w-[20rem]">
+          <div className="relative w-[25rem]">
             <input
               type="text"
               value={searchQuery}

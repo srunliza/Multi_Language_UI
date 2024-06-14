@@ -1,23 +1,43 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import AddMemberModal from "@/components/AddMemberModal";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
+import CloseIcon from "@mui/icons-material/Close";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
+import LanguageSelect from "@/components/LanguageSelect";
 
 const UploadFilePage = () => {
-  const tableData = [
-    { key: "Home", hint: "relating to the place where one lives" },
+  const [tableData, setTableData] = useState([
+    { key: "Home", hint: "relating to the start of page" },
     { key: "About", hint: "information about something or someone" },
+    { key: "Contact", hint: "a way of getting in touch with someone" },
+    { key: "More", hint: "a way of getting in touch with someone" },
+    { key: "Detail", hint: "information about something or someone" },
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
     { key: "About", hint: "information about something or someone" },
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
-    { key: "About", hint: "information about something or someone" },
-    { key: "Contact", hint: "a way of getting in touch with someone" },
-    { key: "More", hint: "a way of getting in touch with someone" },
-  ];
+  ]);
+
+  const [keyword, setKeyword] = useState("");
+  const [hint, setHint] = useState("");
+
+  const handleDelete = (keyToDelete) => {
+    const updatedData = tableData.filter((row) => row.key !== keyToDelete);
+    setTableData(updatedData);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (keyword.trim() !== "") {
+      setTableData([...tableData, { key: keyword, hint: hint }]);
+      setKeyword("");
+      setHint("");
+    }
+  };
 
   return (
     <div className="w-full h-screen flex flex-col">
@@ -30,10 +50,13 @@ const UploadFilePage = () => {
           <NavbarProjectLeaderComponent />
           {/* Container */}
           <div className="flex-grow overflow-y-auto no-scrollbar p-4">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <p className="text-color-text-black mb-3">Upload Your Files</p>
               <div className="border border-dashed border-color-text-grey bg-gray-50 p-2 rounded-xl shadow-md w-[100px] h-24 mb-5">
-                <label htmlFor="upload" className="flex flex-col items-center gap-2 cursor-pointer pt-1">
+                <label
+                  htmlFor="upload"
+                  className="flex flex-col items-center gap-2 cursor-pointer pt-1"
+                >
                   <svg
                     width="28"
                     height="26"
@@ -46,25 +69,24 @@ const UploadFilePage = () => {
                       fill="black"
                     />
                   </svg>
-                  <span className="text-gray-600 text-xs text-center">Upload your files here</span>
+                  <span className="text-gray-600 text-xs text-center">
+                    Upload your files here
+                  </span>
                 </label>
                 <input id="upload" type="file" className="hidden" />
               </div>
               <div className="w-full border-b-[1px] border-gray-400 mb-4"></div>
               <div className="w-full lg:w-[321px] py-4 text-xs">
-                <label htmlFor="select" className="text-xs">Translating from (base, source language)</label>
-                <select className="block w-full lg:w-[321px] h-[37.6px] text-xs text-gray-500 transition duration-75 border border-gray-300 rounded-lg shadow-sm focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-2 bg-none">
-                  <option value="language">Choose Language</option>
-                  <option value="khmer">Khmer</option>
-                  <option value="english">English</option>
-                  <option value="korea">Korea</option>
-                  <option value="spain">Spain</option>
-                </select>
+                <label htmlFor="select" className="text-xs ">Translating from (base, source language)</label>
+              
+                  <LanguageSelect/>
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
                 <div className="flex flex-col w-full lg:w-auto">
-                  <label htmlFor="start" className="text-xs text-gray-600 mb-2">Start Date</label>
+                  <label htmlFor="start" className="text-xs text-gray-600 mb-2">
+                    Start Date
+                  </label>
                   <input
                     type="date"
                     id="start"
@@ -73,7 +95,9 @@ const UploadFilePage = () => {
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="end" className="text-xs text-gray-600 mb-2">End Date</label>
+                  <label htmlFor="end" className="text-xs text-gray-600 mb-2">
+                    End Date
+                  </label>
                   <input
                     type="date"
                     id="end"
@@ -84,45 +108,70 @@ const UploadFilePage = () => {
               </div>
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-3">
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="key" className="text-xs text-gray-600 mb-2">Keyword</label>
+                  <label htmlFor="key" className="text-xs text-gray-600 mb-2">
+                    Keyword
+                  </label>
                   <input
                     type="text"
+                    id="key"
                     placeholder="Input your keyword"
                     name="keyName"
                     className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="hint" className="text-xs text-gray-600 mb-2">Add Hint</label>
+                  <label htmlFor="hint" className="text-xs text-gray-600 mb-2">
+                    Add Hint
+                  </label>
                   <input
                     type="text"
+                    id="hint"
                     placeholder="Hints for some keywords"
                     name="hint"
                     className="w-full lg:w-[220px] h-[37.6px] px-3 text-xs py-2 border border-gray-300 rounded-lg"
+                    value={hint}
+                    onChange={(e) => setHint(e.target.value)}
                   />
                 </div>
                 <div className="flex lg:mt-6 mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    className="px-3 py-2 text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${keyword.trim() === "" ? "bg-gray-100 text-gray-500 border-gray-300" : "bg-blue-600 text-white hover:bg-blue-700"}`}
                     type="submit"
                     value={"Add key"}
+                    disabled={keyword.trim() === ""}
                   />
                 </div>
               </div>
-              <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-200 mt-2">
+              {/* table */}
+              <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
                 <div className="rounded-lg w-full lg:w-[570px] overflow-hidden overflow-y-auto h-32 no-scrollbar">
                   <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
                     <thead>
                       <tr className="text-center text-md bg-gray-100 rounded-r-lg sticky top-0">
-                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-medium">Keyword</th>
-                        <th className="w-1/2 py-2 px-1 text-gray-600 font-medium">Hint</th>
+                        <th className="w-1/2 py-2 px-1 text-left text-gray-600 font-medium">
+                          Keyword
+                        </th>
+                        <th className="w-1/2 py-2 px-1 text-gray-600 font-medium">
+                          Hint
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="bg-none text-xs">
                       {tableData.map((row) => (
-                        <tr key={row.key} className="py-5 px-6 border-b border-gray-200 text-gray-700 truncate">
+                        <tr
+                          key={row.key}
+                          className="py-5 px-6 border-b border-gray-200 text-gray-700 truncate"
+                        >
                           <td className="py-1">{row.key}</td>
-                          <td>{row.hint}</td>
+                          <td>
+                            {row.hint}
+                            <CloseIcon
+                              className="float-end w-3 text-gray-500 h-3 cursor-pointer"
+                              onClick={() => handleDelete(row.key)}
+                            />
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -135,14 +184,17 @@ const UploadFilePage = () => {
                   type="reset"
                   value={"Reset"}
                 />
-                <Link href={"../employee/project-card"} className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer">
+                <Link
+                  href={"/employee/project-card"}
+                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                >
                   <button type="submit"> Submit</button>
                 </Link>
               </div>
             </form>
           </div>
         </div>
-        <MemberProjectLeader/>
+        <MemberProjectLeader />
       </div>
     </div>
   );

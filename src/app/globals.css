@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+  
 
 html,
 body,
@@ -137,26 +138,89 @@ body {
   }
 }
 
-
-
 /* make style for navbar in landing page */
 .underline-animation {
   position: relative;
   display: inline-block;
 }
+
 .underline-animation::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #6C2BD9;
+  background-color: #6c2bd9;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.2s ease-in-out;
 }
+
 .underline-animation:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* styles/globals.css */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.chat-window {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  max-height: 300px;
+}
+
+.message {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.user-message {
+  background-color: #e1ffc7;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.input-container button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0 4px 4px 0;
+  background-color: #0070f3;
+  color: white;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #005bb5;
+}
+
+.bg-custom-pattern {
+  background: linear-gradient(135deg, #93c5fd 0%, #bfdbfe 100%);
+  background-size: cover;
 }
