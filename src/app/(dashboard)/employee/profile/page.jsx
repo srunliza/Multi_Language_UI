@@ -15,7 +15,7 @@ const ProfilePage = async () => {
         <div className="flex gap-x-8 items-center mt-10">
           <div className="h-24 w-24 rounded-full overflow-hidden">
             <img
-              src="../../assets/images/sokheng.png"
+              src="https://lang-net.s3.ap-southeast-2.amazonaws.com/WIN_20240123_13_49_42_Pro.jpg"
               alt="User Profile"
             />{" "}
           </div>
