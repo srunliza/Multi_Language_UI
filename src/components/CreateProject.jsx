@@ -12,16 +12,16 @@ const CreateProject = ({ onClose }) => {
       setTimeout(() => {
         popup.style.display = "none";
         onClose();
-      }, 1000);
+      }, 2000);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50 fixed inset-0 p-4 z-50">
+    <div className="flex items-center justify-center bg-black  bg-opacity-50 fixed inset-0 z-50">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6 relative">
         <div
           id="successPopup"
-          className="hidden absolute top-0 left-1/2 transform -translate-x-1/2 p-6 bg-green-500 text-white rounded-md shadow-lg w-11/12 max-w-lg"
+          className="hidden absolute mt-[3rem] left-1/2 transform -translate-x-1/2 p-6 bg-green-500 text-white rounded-md shadow-lg w-11/12 max-w-lg z-60"
         >
           Project created successfully!
         </div>
@@ -54,20 +54,20 @@ const CreateProject = ({ onClose }) => {
             type="text"
             id="projectName"
             name="projectName"
-            className="block w-full px-4 py-2 mb-2 border border-purple-500 rounded-md focus:outline-none text-gray-700"
+            className="block w-full px-4 py-2 mb-2 border border-blue-800 rounded-md focus:outline-none text-gray-700"
             placeholder="Enter project name"
             required
           />
           <div className="flex justify-end space-x-4">
             <button
-              className="px-6 py-2 font-semibold text-purple-600 border border-purple-600 rounded-md hover:bg-purple-50 focus:outline-none"
+              className="px-6 py-2 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md hover:bg-purple-50 focus:outline-none"
               type="button"
               onClick={onClose}
             >
               No
             </button>
             <button
-              className="px-6 py-2 font-semibold text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none"
+              className="px-6 py-2 font-semibold text-white bg-blue-800 rounded-md hover:bg-blue-700 focus:outline-none"
               type="submit"
             >
               Create project

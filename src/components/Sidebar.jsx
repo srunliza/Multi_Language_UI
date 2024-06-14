@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
@@ -10,14 +10,16 @@ import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
-import langnet from "../../public/Images/langNet3.jpg";
+import langnet from "../../public/Images/logo-v4-white.png";
 import Image from "next/image";
 import LogoutComponent from "./LogoutComponent";
 
-const Sidebar = ({ isSidebarOpen }) => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
   const [isLogoutPopupVisible, setIsLogoutPopupVisible] = useState(false);
   const pathname = usePathname();
+  const sidebarRef = useRef(null);
+  const createProjectRef = useRef(null);
 
   const handleNewProjectClick = () => {
     setIsCreateProjectOpen(!isCreateProjectOpen);
@@ -27,16 +29,35 @@ const Sidebar = ({ isSidebarOpen }) => {
     setIsLogoutPopupVisible(true);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        createProjectRef.current &&
+        !createProjectRef.current.contains(event.target)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setIsSidebarOpen]);
+
   return (
     <>
       <div
-        className={`h-full md:items-center flex-col md:bg-white sm:bg-white w-[15rem] absolute${
+        ref={sidebarRef}
+        className={`h-full md:items-center flex-col md:bg-white sm:bg-white w-[15rem] absolute ${
           isSidebarOpen ? "block" : "hidden"
         } md:block`}
       >
         <div className="flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800">
-          <div className="sm:hidden md:block lg:block mx-auto ">
-            <Image src={langnet} className="shadow-md h-[4rem]" />
+          <div className="sm:hidden md:block lg:block mx-auto px-4 py-4">
+            <Image src={langnet} className="h-[3.5rem]" alt="Langnet Logo" />
           </div>
 
           <div className="flex flex-col items-center justify-between h-screen pb-5">
@@ -86,7 +107,7 @@ const Sidebar = ({ isSidebarOpen }) => {
                 href="/employee/project-card"
                 className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                   pathname === "/employee/project-card" ||
-                  pathname.startsWith("/project-leader/dashboard")
+                  pathname.startsWith("/project-leader/")
                     ? "text-gray-100 bg-gray-400 bg-opacity-25"
                     : "text-gray-100"
                 }`}
@@ -116,13 +137,16 @@ const Sidebar = ({ isSidebarOpen }) => {
               >
                 <ExitToAppOutlinedIcon />
                 <LogoutComponent />
-                {/* <p>Logout</p> */}
               </button>
             </div>
           </div>
         </div>
       </div>
-      {isCreateProjectOpen && <CreateProject onClose={handleNewProjectClick} />}
+      {isCreateProjectOpen && (
+        <div ref={createProjectRef}>
+          <CreateProject onClose={handleNewProjectClick} />
+        </div>
+      )}
     </>
   );
 };

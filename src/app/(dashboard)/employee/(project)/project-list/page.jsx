@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
-import { projectsData } from "@/obj/projects";
 import ProjectListComponent from "../../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
 import ViewMember from "@/components/ViewMember"; 
 import SortComponent from "@/components/SortComponent";
+import { projectsData } from "@/obj/projectData";
 
 const ProjectListPage = () => {
   const [projects, setProjects] = useState(projectsData);
@@ -113,9 +113,9 @@ const ProjectListPage = () => {
       </h2>
       <div className="flex flex-wrap items-center mb-4">
         <SortComponent
-          selectedStatus={selectedStatus}
-          handleStatusChange={handleStatusChange}
-          handleSortClick={handleSortClick}
+          // selectedStatus={selectedStatus}
+          // handleStatusChange={handleStatusChange}
+          // handleSortClick={handleSortClick}
         />
         <div className="flex z-30 flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
           <button

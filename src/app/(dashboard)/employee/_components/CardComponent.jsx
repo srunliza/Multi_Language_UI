@@ -1,15 +1,16 @@
+"use client";
+import React, { useRef, useState } from "react";
+import Link from "next/link";
 import DropdownMenu from "@/components/DropDownMenu";
 import MemberImages from "@/components/MemberComponent";
-import Link from "next/link";
-import React, { useRef, useState } from "react";
 
 const getStatusTextColor = (status) => {
   switch (status) {
-    case "Completed":
+    case "COMPLETED":
       return "text-green-500";
-    case "Progress":
+    case "PROGRESS":
       return "text-yellow-500";
-    case "Pending":
+    case "PENDING":
       return "text-red-500";
     default:
       return "text-gray-500";
@@ -18,35 +19,57 @@ const getStatusTextColor = (status) => {
 
 const getStatusBgColor = (status) => {
   switch (status) {
-    case "Completed":
+    case "COMPLETED":
       return "bg-green-500";
-    case "Progress":
+    case "PROGRESS":
       return "bg-yellow-500";
-    case "Pending":
+    case "PENDING":
       return "bg-red-500";
     default:
       return "bg-gray-200";
   }
 };
 
-const CardComponent = ({
-  project,
-  index,
-  handleEditClick,
-  handleDeleteClick,
-}) => {
+const CardComponent = ({ project, index }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [editProject, setEditProject] = useState(project);
   const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
   const [viewMemberRole, setViewMemberRole] = useState(null);
   const modalRef = useRef(null);
 
-  const handleSeeAll = () => {
-    setViewMemberRole(project.role.toLowerCase());
-    setIsViewMemberOpen(true);
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleEditChange = (e) => {
+    setEditProject({ ...editProject, name: e.target.value });
+  };
+
+  const handleEditSubmit = () => {
+    setIsEditing(false);
   };
 
   const handleModalClose = () => {
+    setIsEditing(false);
+    setIsDeleteModalOpen(false);
     setIsViewMemberOpen(false);
-    setViewMemberRole(null);
+  };
+
+  const handleDeleteConfirm = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleSeeAll = (role) => {
+    console.log("See All clicked, role:", role); // Debug log
+    setViewMemberRole(role);
+    setIsViewMemberOpen(true);
+    console.log("viewMemberRole:", role); // Debug log
+    console.log("isViewMemberOpen:", true); // Debug log
   };
 
   return (
@@ -56,25 +79,29 @@ const CardComponent = ({
     >
       <div className="flex justify-between items-center text-sm mt-2 text-gray-700">
         <h3 className="text-base font-semibold mb-1">
-          {project.name.length > 15
-            ? `${project.name.substring(0, 15)}...`
-            : project.name}
+          {project?.projectName.length > 15
+            ? `${project?.projectName.substring(0, 15)}...`
+            : project?.projectName}
         </h3>
         <DropdownMenu
           project={project}
-          handleEditClick={handleEditClick}
-          handleDeleteClick={handleDeleteClick}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
         />
       </div>
 
       <div className="mb-5">
-        <span className="text-green-500 text-xs">{project.role}</span>
+        <span className="text-green-500 text-xs">
+          {project.members[0].role}
+        </span>
       </div>
 
       <div className="text-black text-md flex items-center mb-4 justify-between">
         <Link
           key={index}
-          href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
+          href={`/${project?.members[0].role
+            .replace(" ", "-")
+            .toLowerCase()}/dashboard`}
           passHref
         >
           <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-xs">
@@ -97,7 +124,9 @@ const CardComponent = ({
 
         <Link
           key={index}
-          href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
+          href={`/${project?.members[0].role
+            .replace(" ", "-")
+            .toLowerCase()}/calendar`}
           passHref
         >
           <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-xs">
@@ -114,10 +143,7 @@ const CardComponent = ({
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            {project.daysLeft > 7
-              ? project.daysLeft + " days..."
-              : project.daysLeft +
-                (project.daysLeft > 1 ? " days left" : " day left")}
+            1 day left
           </div>
         </Link>
       </div>
@@ -135,9 +161,9 @@ const CardComponent = ({
           className={`h-full ${getStatusBgColor(project.status)} rounded-full`}
           style={{
             width:
-              project.status === "Completed"
+              project.status === "COMPLETED"
                 ? "100%"
-                : project.status === "Progress"
+                : project.status === "PROGRESS"
                 ? "50%"
                 : "20%",
           }}

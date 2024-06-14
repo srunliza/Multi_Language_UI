@@ -496,7 +496,7 @@ const SettingPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-800 text-white px-4 py-2 rounded-lg   w-[100px]"
+                  className="bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-lg   w-[100px]"
                 >
                   Save
                 </button>
@@ -546,7 +546,7 @@ const SettingPage = () => {
               Close
             </button>
             <button
-              className="bg-blue-800 text-white px-4 py-2 rounded-lg   w-[100px]"
+              className="bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-[100px]"
               onClick={() => document.getElementById("my_modal_3").close()}
             >
               Save

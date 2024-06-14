@@ -8,11 +8,11 @@ import ViewMemberModal from "./ViewMemberModal";
 
 const getStatusTextColor = (status) => {
   switch (status) {
-    case "Completed":
+    case "COMPLETED":
       return "text-green-500";
-    case "Progress":
+    case "PROGRESS":
       return "text-yellow-500";
-    case "Pending":
+    case "PENDING":
       return "text-red-500";
     default:
       return "text-gray-500";
@@ -21,14 +21,14 @@ const getStatusTextColor = (status) => {
 
 const getStatusBgColor = (status) => {
   switch (status) {
-    case "Completed":
+    case "COMPLETED":
       return "bg-green-500";
-    case "Progress":
+    case "PROGRESS":
       return "bg-yellow-500";
-    case "Pending":
+    case "PENDING":
       return "bg-red-500";
     default:
-      return "bg-gray-200";
+      return "bg-gray-500";
   }
 };
 
@@ -107,10 +107,11 @@ const ProjectListComponent = ({
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                {project.daysLeft > 6
+                {/* {project.daysLeft > 6
                   ? project.daysLeft + " days..."
                   : project.daysLeft +
-                    (project.daysLeft > 1 ? " days left" : " day left")}
+                    (project.daysLeft > 1 ? " days left" : " day left")} */}
+                1 day left
               </div>
             </Link>
 
@@ -132,9 +133,9 @@ const ProjectListComponent = ({
                   )} rounded-full`}
                   style={{
                     width:
-                      project.status === "Completed"
+                      project.status === "COMPLETED"
                         ? "100%"
-                        : project.status === "Progress"
+                        : project.status === "PROGRESS"
                         ? "50%"
                         : "20%",
                   }}

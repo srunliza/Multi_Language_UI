@@ -11,8 +11,9 @@ const MemberImages = ({
   modalRef,
   handleModalClose,
 }) => {
+  console.log("MemberImages props:", { isViewMemberOpen, viewMemberRole }); // Debug log
   return (
-    <div className="flex -space-x-2 mb-4">
+    <div className="flex -space-x-2 mb-1">
       {[...Array(4)].map((_, idx) => (
         <Image
           key={idx}
@@ -27,7 +28,7 @@ const MemberImages = ({
         +2
       </div>
       <button
-        onClick={handleSeeAll}
+        onClick={() => handleSeeAll(project.members[0].role)}
         className="text-gray-600 text-right ml-auto self-end grow"
       >
         See All

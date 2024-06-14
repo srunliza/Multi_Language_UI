@@ -1,8 +1,30 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import Modal from "./ModalComponent";
 
-const DropdownMenu = ({ project, handleEditClick, handleDeleteClick }) => {
+const DropdownMenu = ({ project, onDeleteClick }) => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [popupStyle, setPopupStyle] = useState({
+    message: "",
+    backgroundColor: "",
+  });
+
+  useEffect(() => {
+    if (popupStyle.message) {
+      const timer = setTimeout(() => {
+        setPopupStyle({
+          message: "",
+          backgroundColor: "",
+        });
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [popupStyle]);
+
   return (
-    <div className="flex space-x-1">
+    <div className="relative flex space-x-1">
       <div className="dropdown dropdown-end">
         <div tabIndex={0}>
           <svg
@@ -23,7 +45,7 @@ const DropdownMenu = ({ project, handleEditClick, handleDeleteClick }) => {
           <li>
             <button
               className="text-black hover:text-blue-600"
-              onClick={() => handleEditClick(project)}
+              onClick={() => setIsEditModalOpen(true)}
             >
               <span>
                 <svg
@@ -47,7 +69,7 @@ const DropdownMenu = ({ project, handleEditClick, handleDeleteClick }) => {
           <li>
             <button
               className="text-black hover:text-red-600"
-              onClick={() => handleDeleteClick(project)}
+              onClick={() => setIsDeleteModalOpen(true)}
             >
               <span>
                 <svg
@@ -71,6 +93,48 @@ const DropdownMenu = ({ project, handleEditClick, handleDeleteClick }) => {
             </button>
           </li>
         </ul>
+      </div>
+
+      <Modal
+        isVisible={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        title="Do you want to delete this project?"
+        confirmText="Delete"
+        project={project}
+        onDeleteClick={onDeleteClick}
+        setPopupStyle={setPopupStyle}
+      >
+        <div className=""></div>
+      </Modal>
+
+      <Modal
+        isVisible={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        title="Edit Project"
+        confirmText="Save"
+        project={project}
+        setPopupStyle={setPopupStyle}
+      >
+        <form id="editForm">
+          <input
+            type="text"
+            name="name"
+            defaultValue={project.name}
+            className="w-full p-2 border border-gray-300 rounded-md mb-4"
+            placeholder="Enter your project name"
+          />
+        </form>
+      </Modal>
+
+      <div
+        id="successPopup"
+        className={`${
+          popupStyle.message ? "block" : "hidden"
+        } text-center fixed left-1/2 transform -translate-x-1/2 p-6 text-white rounded-md shadow-lg max-w-lg z-60 ${
+          popupStyle.backgroundColor
+        }`}
+      >
+        {popupStyle.message}
       </div>
     </div>
   );

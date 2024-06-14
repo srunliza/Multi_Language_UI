@@ -46,9 +46,9 @@ const NavbarProjectLeaderComponent = () => {
         </li>
         <li className="mx-2">
           <Link
-            href="/project-leader/dashboard/calendar"
+            href="/project-leader/calendar"
             className={`block ${
-              isActive("/project-leader/dashboard/calendar")
+              isActive("/project-leader/calendar")
                 ? "text-blue-700 font-medium"
                 : "text-gray-700"
             }`}

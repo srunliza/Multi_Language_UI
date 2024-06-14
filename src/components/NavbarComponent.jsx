@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import notifications from "@/obj/notifications";
 import styles from "./style/styles.css";
-import PopUpProfileComponent from "./PopUpProfileComponent"; 
+import PopUpProfileComponent from "./PopUpProfileComponent";
 
 const projects = [
   { name: "Spring translate", icon: "/Images/search1.png" },
@@ -55,7 +55,11 @@ const NotificationItem = ({ notification, onClick }) => (
   </div>
 );
 
-const NavbarComponent = ({ toggleSidebar }) => {
+const NavbarComponent = ({
+  toggleSidebar,
+  isSidebarOpen,
+  setIsSidebarOpen,
+}) => {
   const [showAll, setShowAll] = useState(true);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
@@ -155,7 +159,7 @@ const NavbarComponent = ({ toggleSidebar }) => {
                 {searchResults.map((project, index) => (
                   <div
                     key={index}
-                    className="flex items-center p-2 hover:bg-gray-200 rounded-lg]  cursor-pointer"
+                    className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer"
                   >
                     <img
                       src={project.icon}
@@ -212,7 +216,6 @@ const NavbarComponent = ({ toggleSidebar }) => {
           <PopUpProfileComponent />
         </div>
       </nav>
-    
     </>
   );
 };

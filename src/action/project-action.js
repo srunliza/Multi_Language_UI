@@ -1,5 +1,8 @@
-"use server"
-import { createProjectService } from "@/service/project.service";
+"use server";
+import {
+  createProjectService,
+  deleteProjectService,
+} from "@/service/project.service";
 import { revalidateTag } from "next/cache";
 
 export const createProjectAction = async (formData) => {
@@ -7,6 +10,12 @@ export const createProjectAction = async (formData) => {
     projectName: formData?.get("projectName"),
   };
   await createProjectService(project);
-  revalidateTag('projects');
+  revalidateTag("projects");
+  return { success: true };
+};
+
+export const deleteProjectAction = async (id) => {
+  const project = await deleteProjectService(id);
+  revalidateTag("projects");
   return { success: true };
 };

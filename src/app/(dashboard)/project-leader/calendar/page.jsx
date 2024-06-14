@@ -1,8 +1,8 @@
 import React from "react";
 import AddMemberModal from "@/components/AddMemberModal";
-import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import CalendarComponent from "@/components/CalendarComponent";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
+import NavbarProjectLeaderComponent from "../_components/NavbarProjectLeaderComponent";
 
 const CalendarPage = () => {
   return (
