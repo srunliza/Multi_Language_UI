@@ -13,7 +13,7 @@ const MemberImages = ({
 }) => {
   console.log("MemberImages props:", { isViewMemberOpen, viewMemberRole }); // Debug log
   return (
-    <div className="flex -space-x-2 mb-1">
+    <div className="flex -space-x-2 -mt-2">
       {[...Array(4)].map((_, idx) => (
         <Image
           key={idx}

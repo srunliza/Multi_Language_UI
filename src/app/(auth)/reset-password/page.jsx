@@ -9,8 +9,8 @@ import { useState } from "react";
 const ResetPasswordPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get('email');
-  
+  const email = searchParams.get("email");
+
   const [error, setError] = useState(null);
   async function handleResetPassword(data) {
     const passwords = {

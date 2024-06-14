@@ -67,7 +67,9 @@ const Modal = ({
           </button>
           <button
             onClick={onConfirm}
-            className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className={`bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
+              confirmText === "Delete" && "hover:bg-red-500"
+            }`}
           >
             {confirmText}
           </button>

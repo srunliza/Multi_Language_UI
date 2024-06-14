@@ -1,4 +1,4 @@
-'use server'
+"use server";
 import { baseUrl } from "@/utils/constants";
 
 export const loginService = async (userInfo) => {
@@ -25,8 +25,6 @@ export const registerService = async (userDetail) => {
   return data;
 };
 
-
-
 export const otpVerifyService = async (otp) => {
   const res = await fetch(`${baseUrl}/api/v1/auth/verify?otp=${otp}`, {
     method: "PUT",
@@ -39,32 +37,25 @@ export const otpVerifyService = async (otp) => {
   return data;
 };
 
-
 export const forgotPasswordService = async (email) => {
-
   const res = await fetch(`${baseUrl}/api/v1/auth/send-otp?email=${email}`, {
-    method: 'POST',
-  })
-  
+    method: "POST",
+  });
 
-  const data = await res.json()
+  const data = await res.json();
   const code = data.code;
-  return { code, email};
-
+  return { code, email };
 };
 
-
 export const resetPasswordService = async (email, passowrds) => {
-
   const res = await fetch(`${baseUrl}/api/v1/auth/forgot-password/${email}`, {
-    method: 'PUT',
+    method: "PUT",
     body: JSON.stringify(passowrds),
     headers: {
-      'Content-Type': 'application/json',
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 
-  const data = res.json()
+  const data = res.json();
   return data;
-}
-
+};

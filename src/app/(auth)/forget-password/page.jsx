@@ -15,7 +15,7 @@ const ForgetPasswordPage = () => {
   // Function to handle button click
   async function handleForgot(data) {
     const email = data.get("email");
-    
+
     const res = await forgotPasswordService(email);
     console.log(res.code);
 

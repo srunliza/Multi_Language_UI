@@ -9,6 +9,8 @@ import {
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
   const totalProject = await getAllProjectWithStatusService();
+  console.log("Project Data: ", projectData);
+  console.log("Total Data: ", totalProject);
 
   const getRoleRoute = (role) => {
     switch (role) {
@@ -72,7 +74,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-blue-500">
-                {totalProject?.payload?.total}
+                {totalProject?.payload.total}
               </h3>
             </div>
           </div>
@@ -90,7 +92,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-green-500">
-                {totalProject?.payload?.countsByStatus?.COMPLETED}
+                {totalProject?.payload.countsByStatus.COMPLETED}
               </h3>
             </div>
           </div>
@@ -108,7 +110,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-yellow-500">
-                {totalProject?.payload?.countsByStatus?.PROGRESS}
+                {totalProject?.payload.countsByStatus.PROGRESS}
               </h3>
             </div>
           </div>
@@ -126,7 +128,7 @@ const EmployeeDashboardPage = async () => {
                 />
               </div>
               <h3 className="font-semibold sm:text-xl md:text-[18px] lg:text-[22px] text-red-500">
-                {totalProject?.payload?.countsByStatus?.PENDING}
+                {totalProject?.payload.countsByStatus.PENDING}
               </h3>
             </div>
           </div>
@@ -156,7 +158,7 @@ const EmployeeDashboardPage = async () => {
           </thead>
           <tbody>
             {projectData?.payload
-              ?.filter((project) => project?.active)
+              ?.filter((project) => project.active)
               .map((project, index) => (
                 <tr
                   key={index}
@@ -168,60 +170,60 @@ const EmployeeDashboardPage = async () => {
                   >
                     <Link
                       href={`/${getRoleRoute(
-                        project?.members[0].role
+                        project.members[0].role
                       )}/dashboard`}
                     >
-                      {project?.projectName}
+                      {project.projectName}
                     </Link>
                   </th>
                   <td className="px-6 py-4">
                     <Link
                       href={`/${getRoleRoute(
-                        project?.members[0].role
+                        project.members[0].role
                       )}/dashboard`}
                     >
-                      {project?.members[0].role}
+                      {project.members[0].role}
                     </Link>
                   </td>
                   <td className="px-6 py-4">
                     <Link
                       href={`/${getRoleRoute(
-                        project?.members[0].role
+                        project.members[0].role
                       )}/dashboard`}
                     >
-                      {new Date(project?.createDate).toLocaleDateString()}
+                      {new Date(project.createDate).toLocaleDateString()}
                     </Link>
                   </td>
                   <td className="px-6 py-4">
                     <Link
                       href={`/${getRoleRoute(
-                        project?.members[0].role
+                        project.members[0].role
                       )}/dashboard`}
                       className={
-                        project?.updatedDate ? "text-gray-800" : "text-red-600"
+                        project.updatedDate ? "text-gray-800" : "text-red-600"
                       }
                     >
-                      {project?.updatedDate
-                        ? new Date(project?.updatedDate).toLocaleDateString()
+                      {project.updatedDate
+                        ? new Date(project.updatedDate).toLocaleDateString()
                         : "N/A"}
                     </Link>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <Link
                       href={`/${getRoleRoute(
-                        project?.members[0].role
+                        project.members[0].role
                       )}/dashboard`}
                     >
                       <span
                         className={`status-label ${
-                          project?.status === "PROGRESS"
+                          project.status === "PROGRESS"
                             ? "bg-yellow-500"
-                            : project?.status === "COMPLETED"
+                            : project.status === "COMPLETED"
                             ? "bg-green-500"
                             : "bg-red-500"
                         } text-xs text-white font-semibold py-1 px-4 rounded-xl`}
                       >
-                        {project?.status}
+                        {project.status}
                       </span>
                     </Link>
                   </td>

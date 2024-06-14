@@ -17,7 +17,7 @@ const VerifyOtpPage = () => {
   const [isOtpExpired, setIsOtpExpired] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get('email');
+  const email = searchParams.get("email");
 
   useEffect(() => {
     if (timeRemaining <= 0) {
@@ -33,9 +33,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes
+    return `${minutes.toString().padStart(2, "0")}:${seconds
       .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} Sec`;
+      .padStart(2, "0")} Sec`;
   };
 
   const handleOtpChange = (element, index) => {

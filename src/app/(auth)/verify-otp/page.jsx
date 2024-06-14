@@ -31,9 +31,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes
+    return `${minutes.toString().padStart(2, "0")}:${seconds
       .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} Sec`;
+      .padStart(2, "0")} Sec`;
   };
 
   const handleOtpChange = (element, index) => {
@@ -63,25 +63,14 @@ const VerifyOtpPage = () => {
       setOtpError("Please enter a valid 6-digit OTP.");
       return;
     }
-    try {
-      const response = await otpVerifyService(enteredOtp);
-      console.log("response: ", response);
 
-      // Check if response contains a success message or JSON object
-      if (
-        typeof response === "string" &&
-        response.includes("successfully verified")
-      ) {
-        router.push("/login");
-      } else if (response.success) {
-        // Assuming response is an object with a 'success' property
-        router.push("/login");
-      } else {
-        setOtpError("Failed to verify OTP. Please try again.");
-      }
-    } catch (error) {
-      setOtpError("Failed to verify OTP. Please try again.");
-      console.error("Error verifying OTP: ", error);
+    const res = await otpVerifyService(enteredOtp);
+    console.log("response: ", res);
+
+    if (res.status === "OK") {
+      router.push("/login");
+    } else {
+      console.error("Failed to verify OTP. Please try again.");
     }
   };
   return (
