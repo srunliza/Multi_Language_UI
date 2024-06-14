@@ -1,7 +1,7 @@
 "use client";
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   InputOTP,
@@ -16,6 +16,8 @@ const VerifyOtpPage = () => {
   const [otpError, setOtpError] = useState("");
   const [isOtpExpired, setIsOtpExpired] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
 
   useEffect(() => {
     if (timeRemaining <= 0) {
@@ -31,9 +33,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
+    return `${minutes
       .toString()
-      .padStart(2, "0")} Sec`;
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} Sec`;
   };
 
   const handleOtpChange = (element, index) => {
@@ -63,25 +65,12 @@ const VerifyOtpPage = () => {
       setOtpError("Please enter a valid 6-digit OTP.");
       return;
     }
-    try {
-      const response = await otpVerifyService(enteredOtp);
-      console.log("response: ", response);
+    const res = await otpVerifyService(enteredOtp);
 
-      // Check if response contains a success message or JSON object
-      if (
-        typeof response === "string" &&
-        response.includes("successfully verified")
-      ) {
-        router.push("/login");
-      } else if (response.success) {
-        // Assuming response is an object with a 'success' property
-        router.push("/login");
-      } else {
-        setOtpError("Failed to verify OTP. Please try again.");
-      }
-    } catch (error) {
-      setOtpError("Failed to verify OTP. Please try again.");
-      console.error("Error verifying OTP: ", error);
+    if (res.code === 200) {
+      router.push(`/reset-password?email=${email}`);
+    } else {
+      console.log("failed at otp page");
     }
   };
 

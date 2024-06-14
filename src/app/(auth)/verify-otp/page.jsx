@@ -31,9 +31,9 @@ const VerifyOtpPage = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
+    return `${minutes
       .toString()
-      .padStart(2, "0")} Sec`;
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} Sec`;
   };
 
   const handleOtpChange = (element, index) => {
@@ -84,7 +84,6 @@ const VerifyOtpPage = () => {
       console.error("Error verifying OTP: ", error);
     }
   };
-
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">

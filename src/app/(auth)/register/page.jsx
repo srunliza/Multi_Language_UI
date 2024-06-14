@@ -22,13 +22,12 @@ const RegisterPage = () => {
 
     const register = await registerService(newUserDetail);
 
-    if (register.code === 201) {
+    if (res.code === 201) {
       router.push("/verify-otp");
     } else {
       console.log("failed");
     }
   }
-
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
       <div className="flex justify-center items-center">
