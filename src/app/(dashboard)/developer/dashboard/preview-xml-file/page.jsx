@@ -34,12 +34,12 @@ const PreviewXmlFilePage = () => {
     };
 
     return (
-        <main className="bg-white p-8">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                <div className="sm:col-span-12 md:col-span-8 lg:col-span-8">
-                    <div className="bg-white shadow-md p-6 rounded-lg min-h-[560px] border">
+        <main className=" px-6 py-4">
+            <div className="flex flex-col sticky w-full lg:flex-row gap-6">
+                <div className="bg-white p-5 rounded-lg shadow-lg flex-1">
+                    <div className="bg-white rounded-lg min-h-[560px] border">
                         {/* title */}
-                        <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
+                        <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">Preview Page</h1>
                         <hr />
                        
                         <div className="overflow-auto max-h-[440px] mt-4 mb-4 no-scrollbar">
@@ -56,18 +56,18 @@ const PreviewXmlFilePage = () => {
                     </div>
 
                     {/* button download and go back */}
-                    <div className="flex gap-4 mt-4 justify-end">
-                        <button onClick={() => router.push('/developer/dashboard')} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
+                    <div className="flex justify-end gap-2 mt-4">
+                        <button onClick={() => router.push('/developer/dashboard')} className="text-white hover:bg-blue-800 bg-blue-700 shadow-sm rounded-md text-sm py-2 px-4">
                             Go Back
                         </button>
-                        <button onClick={handleDownload} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
+                        <button onClick={handleDownload} className="text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm rounded-md text-sm py-2 px-4">
                             Download
                         </button>
                     </div>
                 </div>
         
                 {/* feedback component */}
-                <div className="sm:col-span-12 md:col-span-4 lg:col-span-4">
+                <div className="w-full lg:w-1/3">
                     <FeedbackComponent />
                 </div>
             </div>
