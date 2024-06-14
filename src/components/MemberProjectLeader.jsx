@@ -361,9 +361,9 @@ const MemberProjectLeader = ({ onClose }) => {
     <div className="text-sm">
       <main className="flex flex-1 w-[20rem]">
         <div className="bg-white overflow-hidden border rounded-xl shadow-lg sm:rounded-xl p-2 w-full">
-          <div className="flex items-center p-2 border-b">
+          <div className="flex items-center p-2 border-b ">
             <GroupIcon className="text-gray-500" />
-            <span className="pl-2 text-base text-gray-800">40 MEMBERS</span>
+            <span className="pl-2 text-gray-800 text-md font-semibold">40 MEMBERS</span>
             <div className=" justify-between">
               <button
                 className=" text-gray-500  rounded ml-[8.3rem]"

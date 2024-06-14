@@ -1,21 +1,25 @@
 "use client";
-import {DatePicker} from "@nextui-org/react";
+import { DatePicker } from "@nextui-org/react";
 
-const SortComponent = ({ selectedStatus, handleStatusChange, handleSortClick }) => {
+const SortComponent = ({
+  selectedStatus,
+  handleStatusChange,
+  handleSortClick,
+}) => {
   return (
     <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
       <div className="flex w-full sm:w-auto">
         <span className="w-[6rem] px-5 py-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-r-0 rounded-l-md">
           <p>Start</p>
         </span>
-     
+
         <div className="border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
-        <DatePicker 
-          id="start-date"
-          className="max-w-[284px]"
-          onChange={() => handleSortClick("startDate")}
-        />
-    </div>
+          <DatePicker
+            id="start-date"
+            className="max-w-[284px]"
+            onChange={() => handleSortClick("startDate")}
+          />
+        </div>
       </div>
       <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
         <span className="w-[6rem] px-5 py-3 inline-flex items-center text-sm text-gray-900 bg-gray-100 border border-gray-300 border-r-0 rounded-l-md">
@@ -23,12 +27,12 @@ const SortComponent = ({ selectedStatus, handleStatusChange, handleSortClick }) 
         </span>
 
         <div className="w-[13.5rem] border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block bg-white">
-        <DatePicker 
-          id="end-date"
-          className="max-w-[284px]"
-          onChange={() => handleSortClick("endDate")}
-        />
-    </div>
+          <DatePicker
+            id="end-date"
+            className="max-w-[284px]"
+            onChange={() => handleSortClick("endDate")}
+          />
+        </div>
       </div>
       <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
         <span className="inline-flex items-center w-[6rem] px-4 py-3 text-sm text-gray-900 bg-gray-100 border border-gray-300 border-r-0 rounded-l-md">

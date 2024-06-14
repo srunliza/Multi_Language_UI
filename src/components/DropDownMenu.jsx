@@ -103,6 +103,7 @@ const DropdownMenu = ({ project, onDeleteClick }) => {
         project={project}
         onDeleteClick={onDeleteClick}
         setPopupStyle={setPopupStyle}
+        popupStyle={popupStyle}
       >
         <div className=""></div>
       </Modal>
@@ -114,6 +115,7 @@ const DropdownMenu = ({ project, onDeleteClick }) => {
         confirmText="Save"
         project={project}
         setPopupStyle={setPopupStyle}
+        popupStyle={popupStyle}
       >
         <form id="editForm">
           <input
@@ -125,17 +127,6 @@ const DropdownMenu = ({ project, onDeleteClick }) => {
           />
         </form>
       </Modal>
-
-      <div
-        id="successPopup"
-        className={`${
-          popupStyle.message ? "block" : "hidden"
-        } text-center fixed left-1/2 transform -translate-x-1/2 p-6 text-white rounded-md shadow-lg max-w-lg z-60 ${
-          popupStyle.backgroundColor
-        }`}
-      >
-        {popupStyle.message}
-      </div>
     </div>
   );
 };

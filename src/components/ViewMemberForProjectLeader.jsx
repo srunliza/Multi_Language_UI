@@ -147,7 +147,9 @@ const ViewMemberProjectLeader = ({ onClose }) => {
   };
 
   const handleEditSubmit = () => {
-    setUsers(users.map((user) => (user.id === editProject.id ? editProject : user)));
+    setUsers(
+      users.map((user) => (user.id === editProject.id ? editProject : user))
+    );
     setIsEditing(false);
     setEditProject(null);
   };
@@ -173,7 +175,11 @@ const ViewMemberProjectLeader = ({ onClose }) => {
           </div>
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
-              <div className={`dropdown ${dropdownOpen === user.id ? 'dropdown-open' : ''} dropdown-end`}>
+              <div
+                className={`dropdown ${
+                  dropdownOpen === user.id ? "dropdown-open" : ""
+                } dropdown-end`}
+              >
                 <div
                   tabIndex={0}
                   onClick={() => toggleDropdown(user.id)} // Toggle dropdown visibility
@@ -251,10 +257,12 @@ const ViewMemberProjectLeader = ({ onClose }) => {
   return (
     <div className="text-sm">
       <main className="flex flex-1 w-[20rem]">
-        <div className="bg-white overflow-hidden border rounded-xl shadow-md sm:rounded-xl ml-4 p-2 border-blue-300 w-full">
+        <div className="bg-white overflow-hidden border rounded-xl shadow-md sm:rounded-xl ml-4 p-2 border-blue-800 w-full">
           <div className="flex items-center p-2 border-b">
             <GroupIcon className="text-gray-500" />
-            <span className="pl-2 text-base text-gray-800">40 MEMBERS</span>
+            <span className="pl-2 text-base text-gray-800 text-md font-semibold">
+              40 MEMBERS
+            </span>
             <button onClick={onClose} className="ml-auto">
               <CloseIcon className="text-gray-500" />
             </button>
@@ -306,7 +314,9 @@ const ViewMemberProjectLeader = ({ onClose }) => {
       {isDeleteModalVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <p>Are you sure you want to delete this {roleToDelete.toLowerCase()}?</p>
+            <p>
+              Are you sure you want to delete this {roleToDelete.toLowerCase()}?
+            </p>
             <div className="mt-4 flex justify-end">
               <button
                 className="bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg mr-2"
@@ -372,7 +382,6 @@ const ViewMemberProjectLeader = ({ onClose }) => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };

@@ -9,8 +9,6 @@ import {
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
   const totalProject = await getAllProjectWithStatusService();
-  console.log("Project Data: ", projectData);
-  console.log("Total Data: ", totalProject);
 
   const getRoleRoute = (role) => {
     switch (role) {

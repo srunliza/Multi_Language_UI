@@ -65,11 +65,8 @@ const CardComponent = ({ project, index }) => {
   };
 
   const handleSeeAll = (role) => {
-    console.log("See All clicked, role:", role); // Debug log
     setViewMemberRole(role);
     setIsViewMemberOpen(true);
-    console.log("viewMemberRole:", role); // Debug log
-    console.log("isViewMemberOpen:", true); // Debug log
   };
 
   return (
@@ -83,11 +80,14 @@ const CardComponent = ({ project, index }) => {
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}
         </h3>
-        <DropdownMenu
-          project={project}
-          onEditClick={handleEditClick}
-          onDeleteClick={handleDeleteClick}
-        />
+        {project?.members[0]?.role !== "Translator" &&
+          project?.members[0]?.role !== "Developer" && (
+            <DropdownMenu
+              project={project}
+              onEditClick={handleEditClick}
+              onDeleteClick={handleDeleteClick}
+            />
+          )}
       </div>
 
       <div className="mb-5">

@@ -107,7 +107,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 href="/employee/project-card"
                 className={`hover:bg-gray-400 hover:bg-opacity-25 rounded-xl flex items-center px-6 py-4 gap-2 font-light-[16px] transition-all duration-300 ${
                   pathname === "/employee/project-card" ||
-                  pathname.startsWith("/project-leader/")
+                  pathname.startsWith("/project-leader/") ||
+                  pathname.startsWith("/developer/") ||
+                  pathname.startsWith("/translator/")
                     ? "text-gray-100 bg-gray-400 bg-opacity-25"
                     : "text-gray-100"
                 }`}

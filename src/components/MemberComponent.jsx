@@ -11,7 +11,6 @@ const MemberImages = ({
   modalRef,
   handleModalClose,
 }) => {
-  console.log("MemberImages props:", { isViewMemberOpen, viewMemberRole }); // Debug log
   return (
     <div className="flex -space-x-2 -mt-2">
       {[...Array(4)].map((_, idx) => (
@@ -34,18 +33,18 @@ const MemberImages = ({
         See All
       </button>
 
-      {isViewMemberOpen && viewMemberRole === "project-leader" && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
-          <div ref={modalRef}>
+      {isViewMemberOpen && viewMemberRole === "Project Leader" && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+          <div ref={modalRef} className="p-4 rounded-lg">
             <ViewMemberProjectLeader onClose={handleModalClose} />
           </div>
         </div>
       )}
 
       {isViewMemberOpen &&
-        (viewMemberRole === "translator" || viewMemberRole === "developer") && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex items-center justify-center z-50">
-            <div ref={modalRef}>
+        (viewMemberRole === "Translator" || viewMemberRole === "Developer") && (
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+            <div ref={modalRef} className="p-4 rounded-lg">
               <ViewMember onClose={handleModalClose} />
             </div>
           </div>

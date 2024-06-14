@@ -5,6 +5,9 @@ export const config = {
   matcher: [
     "/employee/dashboard",
     "/employee/profile",
+    "/employee/calendar",
     "/employee/project-card",
+    "/employee/project-list",
+    "/employee/setting",
   ],
 };

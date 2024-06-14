@@ -1,30 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { createProjectAction } from "@/action/project-action";
 
 const CreateProject = ({ onClose }) => {
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
+  const [isError, setIsError] = useState(false); // New state to track if the toast is an error
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const result = await createProjectAction(formData);
-    if (result.success) {
-      const popup = document.getElementById("successPopup");
-      popup.style.display = "block";
+    try {
+      const result = await createProjectAction(formData);
+      if (result.success) {
+        setToastMessage("Project created successfully!");
+        setIsError(false);
+        setToastVisible(true);
+        setTimeout(() => {
+          setToastVisible(false);
+          onClose();
+        }, 2000);
+      } else {
+        setToastMessage("Failed to create project!");
+        setIsError(true);
+        setToastVisible(true);
+        setTimeout(() => {
+          setToastVisible(false);
+        }, 2000);
+      }
+    } catch (error) {
+      setToastMessage("Failed to create project!");
+      setIsError(true);
+      setToastVisible(true);
       setTimeout(() => {
-        popup.style.display = "none";
-        onClose();
+        setToastVisible(false);
       }, 2000);
     }
   };
 
   return (
-    <div className="flex items-center justify-center bg-black  bg-opacity-50 fixed inset-0 z-50">
+    <div className="flex items-center justify-center bg-black bg-opacity-25 fixed inset-0 z-50 w-full">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6 relative">
-        <div
-          id="successPopup"
-          className="hidden absolute mt-[3rem] left-1/2 transform -translate-x-1/2 p-6 bg-green-500 text-white rounded-md shadow-lg w-11/12 max-w-lg z-60"
-        >
-          Project created successfully!
-        </div>
+        {toastVisible && (
+          <div className="fixed top-24 right-4 m-4 z-50">
+            <div
+              className={`alert text-white ${
+                isError ? "alert-error" : "alert-success"
+              }`}
+            >
+              <span>{toastMessage}</span>
+            </div>
+          </div>
+        )}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-600">Create Project</h2>
           <button

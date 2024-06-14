@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { signOut } from "next-auth/react";
 import { TbLogout } from "react-icons/tb";
 
 const LogoutComponent = () => {
@@ -17,8 +18,8 @@ const LogoutComponent = () => {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleLogout = () => {
-    window.location.href = "/";
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
   };
 
   return (

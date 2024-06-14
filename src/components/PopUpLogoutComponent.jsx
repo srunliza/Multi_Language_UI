@@ -11,24 +11,13 @@ const PopUpLogoutComponent = ({ onConfirm, onCancel }) => {
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
           <div className="flex justify-end -mt-3 -mr-3">
-            <button
+            <div
               type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-              onClick={onCancel}
+              onClick={handleCloseModal}
+              className="btn btn-sm btn-ghost text-gray-500 absolute right-2 top-2 focus:outline-none"
             >
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 111.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
+              ✕
+            </div>
           </div>
           <div className="sm:flex sm:items-start">
             <div className="mx-auto flex-shrink-0 flex items-center justify-center h-16 w-16 p-5 rounded-full bg-red-100 sm:mx-0 sm:h-20 sm:w-20 -mt-5 ">
@@ -47,24 +36,24 @@ const PopUpLogoutComponent = ({ onConfirm, onCancel }) => {
               </div>
             </div>
           </div>
-          <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+          <div className="sm:mt-4 sm:flex sm:flex-row-reverse">
             <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-              <button
+              <div
                 type="button"
-                className="inline-flex justify-center w-full sm:w-auto rounded-md border border-transparent px-4 py-2 bg-red-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                onClick={onConfirm}
+                className="inline-flex justify-center w-full sm:w-auto rounded-md border border-transparent px-4 py-2 bg-blue-800 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                onClick={handleLogout}
               >
                 Logout
-              </button>
+              </div>
             </span>
             <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-              <button
+              <div
                 type="button"
-                className="inline-flex justify-center w-full sm:w-auto rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-                onClick={onCancel}
+                onClick={handleCloseModal}
+                className="inline-flex btn-ghost justify-center w-full sm:w-auto px-4 py-2 bg-white text-base leading-6 font-medium text-blue-800 border border-blue-800 rounded-md hover:border-blue-300 active:bg-transparent hover:bg-transparent focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
               >
                 No
-              </button>
+              </div>
             </span>
           </div>
         </div>
