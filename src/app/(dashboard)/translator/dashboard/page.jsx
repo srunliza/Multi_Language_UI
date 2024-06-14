@@ -96,6 +96,7 @@ const TranslatorPage = () => {
                 }}
             />
 
+
             {/* Table */}
             <div className="shadow-lg h-screen  no-scrollbar overflow-y-scroll rounded-lg ">
                 <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -169,6 +170,7 @@ const TranslatorPage = () => {
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
+
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path

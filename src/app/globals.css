@@ -87,6 +87,16 @@ body {
   border-bottom-right-radius: 10px;
 }
 
+#start-date{
+  background-color: white;
+  box-shadow: none;
+}
+
+#end-date{
+  background-color: white;
+  box-shadow: none;
+}
+
 #calender {
   background-color: white;
   padding: 8px;
