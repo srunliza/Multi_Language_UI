@@ -11,23 +11,23 @@ const ViewAttachmentPage = () => {
   const projectName = searchParams.get("projectName");
 
   return (
-    <div className="w-full flex flex-col">
-      <div className="flex justify-between mb-2 p-4">
-        <h2 className="text-lg text-color-text-black">
+    <div className="w-full px-6 py-4 flex flex-col">
+      <div className="flex justify-between  items-center mb-3">
+        <h2 className="text-lg font-semibold">
           {projectName || "Project Name"}
         </h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-wrap justify-between gap-4">
-        <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
+      <div className="flex flex-col  xl:flex-row    gap-10">
+        <div className="flex flex-col flex-1 bg-white shadow-md border rounded-xl">
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* Container */}
-          <div className="flex-grow overflow-y-auto no-scrollbar mt-1 mb-5 flex justify-center items-center">
+          <div className=" overflow-y-auto  no-scrollbar  mb-5  ">
             <AttachmentComponent />
           </div>
         </div>
-        <div className="">
+        <div className="w-full  xl:w-[24%]">
           <MemberProjectLeader />
         </div>
       </div>

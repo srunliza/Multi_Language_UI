@@ -40,16 +40,16 @@ const UploadFilePage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col">
-      <div className="flex justify-between mb-2 p-4">
-        <h2 className="text-lg text-color-text-black">Project Name</h2>
+    <div className="w-full h-screen px-6 py-4  ">
+      <div className="flex justify-between mb-3 items-center ">
+        <h2 className="text-lg font-semibold">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="h-[42.7rem] flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex flex-col xl:flex-row  gap-10">
+        <div className=" flex flex-1 flex-col bg-white border  overflow-hidden  rounded-lg   shadow-lg ">
           <NavbarProjectLeaderComponent />
           {/* Container */}
-          <div className="flex-grow overflow-y-auto no-scrollbar p-4">
+          <div className="flex-grow overflow-y-auto px-8 py-4 no-scrollbar">
             <form onSubmit={handleSubmit}>
               <p className="text-color-text-black mb-3">Upload Your Files</p>
               <div className="border border-dashed border-color-text-grey bg-gray-50 p-2 rounded-xl shadow-md w-[100px] h-24 mb-5">
@@ -75,11 +75,11 @@ const UploadFilePage = () => {
                 </label>
                 <input id="upload" type="file" className="hidden" />
               </div>
-              <div className="w-full border-b-[1px] border-gray-400 mb-4"></div>
+              <div className="w-full border-b border-gray-300 mb-4"></div>
               <div className="w-full lg:w-[321px] py-4 text-xs">
                 <label htmlFor="select" className="text-xs ">Translating from (base, source language)</label>
-              
-                  <LanguageSelect/>
+
+                <LanguageSelect />
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
@@ -178,23 +178,27 @@ const UploadFilePage = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
+              <div className="flex pt-6">
                 <input
-                  className="px-3 py-1 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                  className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition duration-150 ease-in-out mr-2 cursor-pointer
+                  "
                   type="reset"
                   value={"Reset"}
                 />
                 <Link
                   href={"/employee/project-card"}
-                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                  className="px-4 py-2 bg-blue-700 text-white rounded-lg  hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out cursor-pointer"
                 >
-                  <button type="submit"> Submit</button>
+                  <button type="submit">Submit</button>
                 </Link>
               </div>
             </form>
           </div>
         </div>
-        <MemberProjectLeader />
+        <div className="w-full xl:w-[24%]">
+          <MemberProjectLeader />
+
+        </div>
       </div>
     </div>
   );

@@ -4,29 +4,22 @@ import FeedbackComponent from "@/components/FeedbackComponent";
 import ProjectLeaderPreviewTranslateComponent from "../../_components/ProjectLeaderPreviewComponent";
 
 const PreviewPage = () => {
- 
 
-  return (
-    <div className="w-[93%] mx-auto mt-5">
-      <h2 className="font-semibold text-gray-800 text-xl">Web Designing</h2>
-      <div className="grid grid-cols-12 gap-x-10 shadow-sm justify-between mt-5">
-        <div className="col-span-8">
-          <ProjectLeaderPreviewTranslateComponent />
-          {/* <div className="flex justify-end mt-4">
-            <a
-              className="cursor-pointer shadow-lg bg-[#7C40FF] rounded-xl py-2 px-3 text-sm text-white"
-              onClick={handleGoBack}
-            >
-              Go Back
-            </a>
-          </div> */}
+    return (
+        <div className="px-6 py-4">
+            <div className="flex flex-col sticky w-full lg:flex-row gap-6">
+                {/* Translation Table Section*/}
+                <ProjectLeaderPreviewTranslateComponent />
+                {/*End Translation Table Section*/}
+
+                {/* Feedback Section */}
+                <section class=" w-full lg:w-1/3">
+                    <FeedbackComponent />
+                </section>
+                {/*End Feedback Section */}
+            </div>
         </div>
-        <div className="col-span-4">
-          <FeedbackComponent />
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default PreviewPage;

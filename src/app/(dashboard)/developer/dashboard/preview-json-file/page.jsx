@@ -36,7 +36,7 @@ const PreviewJsonFilePage = () => {
                         {/* title */}
                         <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">Preview Page</h1>
                         <hr />
-                        <div className='overflow-auto max-h-[440px] mt-4 mb-4 no-scrollbar'>
+                        <div className='overflow-auto max-h-[65vh] mt-4 mb-4 no-scrollbar'>
                             {/* data map as json data */}
                             {previewJsonData.map((jsonData, index) => (
                                 <div key={index} className="text-black pl-8 mt-4">

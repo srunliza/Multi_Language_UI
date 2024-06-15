@@ -35,15 +35,15 @@ const PreviewStringFilePage = () => {
     };
 
     return (
-        <main className="bg-white p-8">
-            <div className="grid grid-cols-12 gap-6">
-                <div className="sm:col-span-12 md:col-span-8 lg:col-span-9">
-                    <div className="bg-white shadow-md p-6 rounded-lg min-h-[560px] border">
+        <main className="px-6 py-4">
+            <div className="flex flex-col sticky w-full lg:flex-row gap-6">
+                <div className="bg-white p-5 rounded-lg shadow-lg flex-1">
+                    <div className="bg-white rounded-lg  min-h-[560px]   border">
                         {/* title */}
-                        <h1 className="text-gray-800 text-xl font-semibold mb-3">Preview Page</h1>
+                        <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">Preview Page</h1>
                         <hr />
 
-                        <div className='overflow-auto max-h-[455px] mb-4 no-scrollbar'>
+                        <div className='overflow-auto max-h-[67vh] my-4  no-scrollbar'>
                             {/* data map as string data */}
                             {previewStringData.map((stringData, index) => (
                                 <div key={index} className="text-black pl-8 mt-3">
@@ -54,18 +54,18 @@ const PreviewStringFilePage = () => {
                     </div>
 
                     {/* button go back and download */}
-                    <div className="flex gap-4 mt-4 justify-end">
-                        <button onClick={() => router.push('./view-attachment')} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
+                    <div className="flex gap-2 mt-4 justify-end">
+                        <button onClick={() => router.push('./view-attachment')} className="text-white bg-blue-700 hover:bg-blue-800 shadow-sm rounded-md text-sm py-2 px-3">
                             Go Back
                         </button>
-                        <button onClick={handleDownload} className="text-white bg-[#7c40ff] rounded-lg text-sm py-2 px-3">
+                        <button onClick={handleDownload} className="text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm rounded-md text-sm py-2 px-3">
                             Download
                         </button>
                     </div>
                 </div>
 
                 {/* feedback  */}
-                <div className="sm:col-span-12 md:col-span-4 lg:col-span-3">
+                <div className="w-full lg:w-1/3">
                     <FeedbackComponent />
                 </div>
             </div>
