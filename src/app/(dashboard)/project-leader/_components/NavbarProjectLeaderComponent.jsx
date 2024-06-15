@@ -18,15 +18,15 @@ const NavbarProjectLeaderComponent = () => {
   };
 
   return (
-    <nav className="w-full bg-white border-b rounded-t-xl flex justify-start shadow-md flex-wrap">
-      <ul className="flex px-6 py-3 gap-5 items-center justify-center text-gray-700 text-sm md:text-base">
-        <li className="mx-2">
+    <nav className="w-full bg-white border-b-1 border-b-gray-300 rounded-t-xl flex justify-start flex-wrap">
+      <ul className="flex px-6 py-4 gap-5 items-center justify-center text-gray-700 text-sm md:text-base">
+        <li className="mx-2  ">
           <Link
             href="/project-leader/dashboard"
             className={`block ${
               isActive("/project-leader/dashboard")
                 ? "text-blue-700 font-medium"
-                : "text-gray-700"
+                : "text-gray-600"
             }`}
           >
             Upload

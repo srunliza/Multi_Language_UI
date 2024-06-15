@@ -11,36 +11,36 @@ const CreateProjectPage = () => {
   const projectName = searchParams.get("projectName");
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="flex justify-between mb-2 p-4">
-        <h2 className="text-lg text-color-text-black">
+    <div className="w-full px-6 py-4 h-screen flex flex-col">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-lg font-semibold">
           {projectName || "Project Name"}
         </h2>
         <AddMemberModal />
       </div>
 
-      <div className="flex flex-wrap justify-between gap-4">
-        <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
+      <div className="flex flex-col xl:flex-row   gap-10">
+        <div className="flex flex-col flex-1 bg-white shadow-lg border rounded-xl">
           {/* Header */}
           <NavbarProjectLeaderComponent />
           {/* Container */}
-          <div className="flex-grow overflow-y-auto no-scrollbar p-4">
-            <div className="mt-10">
-              <p className="text-xl text-color-text-black text-center">
+          <div className="py-10">
+            <div>
+              <p className="text-3xl text-gray-700 font-semibold  text-center">
                 Ready to add content?
               </p>
-              <p className="text-sm text-center text-color-text-black py-10">
+              <p className=" text-center  py-10">
                 There are two ways to add content to your project - choose the
                 most suitable option for you.
               </p>
             </div>
             {/* File upload */}
-            <div className="flex flex-wrap justify-center ml-10">
-              <div className="pt-10 px-10 w-full lg:w-1/2 sm:w max-w-md">
-                <div className="rounded-lg overflow-hidden">
-                  <div className="flex justify-center">
+            <div className="flex flex-col items-center md:flex-row justify-center">
+              <div className="pt-10 w-full  lg:w-1/2 max-w-md">
+                <div className="rounded-lg  overflow-hidden">
+                  <div className="flex   justify-center ">
                     <Link href={"/project-leader/dashboard/upload-file"}>
-                      <div className="relative w-[90%] h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
+                      <div className="relative  h-[250px]   rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
                             File Upload
@@ -85,11 +85,11 @@ const CreateProjectPage = () => {
                 </div>
               </div>
               {/* File upload add manually */}
-              <div className="pt-10 px-10 w-full lg:w-1/2 max-w-md">
+              <div className="pt-10 w-full lg:w-1/2 max-w-md">
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
                     <Link href={"/project-leader/dashboard/add-key-value"}>
-                      <div className="relative w-[90%] h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
+                      <div className="relative  h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
                             Add keys manually
@@ -136,7 +136,7 @@ const CreateProjectPage = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="w-full xl:w-[24%]">
           <MemberProjectLeader />
         </div>
       </div>

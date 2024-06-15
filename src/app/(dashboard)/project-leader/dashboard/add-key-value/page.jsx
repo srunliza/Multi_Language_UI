@@ -41,16 +41,16 @@ const AddKeyValuePage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col">
-      <div className="flex justify-between mb-2 p-4">
-        <h2 className="text-lg text-color-text-black">Project Name</h2>
+    <div className="w-full px-6 py-4 h-screen  flex flex-col">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-lg font-semibold">Project Name</h2>
         <AddMemberModal />
       </div>
       <div className="flex flex-wrap justify-between gap-4">
         <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
           <NavbarProjectLeaderComponent />
           {/* Container */}
-          <div className="flex-grow overflow-y-auto no-scrollbar p-4">
+          <div className="flex-grow overflow-y-auto no-scrollbar px-8 py-4">
             <form onSubmit={handleSubmit}>
               <div className="w-full lg:w-[321px] py-2 text-xs">
                 <label htmlFor="select" className="text-xs">
@@ -160,15 +160,15 @@ const AddKeyValuePage = () => {
                   </table>
                 </div>
               </div>
-              <div className="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
+              <div className="flex pt-6">
                 <input
-                  className="px-3 py-1 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                  className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition duration-150 ease-in-out mr-2 cursor-pointer"
                   type="reset"
                   value={"Reset"}
                 />
                 <Link
                   href={"/employee/project-card"}
-                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                  className="px-4 py-2 bg-blue-700 text-white rounded-lg  hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out cursor-pointer"
                 >
                   <button type="submit"> Submit</button>
                 </Link>
@@ -176,7 +176,9 @@ const AddKeyValuePage = () => {
             </form>
           </div>
         </div>
-        <MemberProjectLeader />
+        <div className="w-full xl:w-[24%]">
+          <MemberProjectLeader />
+        </div>
       </div>
     </div>
   );
