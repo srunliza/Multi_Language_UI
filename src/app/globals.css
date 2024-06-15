@@ -277,8 +277,3 @@ input {
 .input-container button:hover {
   background-color: #005bb5;
 }
-
-.bg-custom-pattern {
-  background: linear-gradient(135deg, #93c5fd 0%, #bfdbfe 100%);
-  background-size: cover;
-}

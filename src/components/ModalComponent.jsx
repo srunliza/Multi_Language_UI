@@ -37,7 +37,7 @@ const Modal = ({
 
   return (
     <>
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-gray-600 bg-opacity-25 flex items-center justify-center z-50">
         <div className="bg-white p-4 rounded-lg shadow-lg w-96">
           <div className="flex justify-between">
             <h3 className="text-lg font-semibold mb-4">{title}</h3>

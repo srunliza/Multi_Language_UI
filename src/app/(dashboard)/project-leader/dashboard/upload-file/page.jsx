@@ -45,8 +45,8 @@ const UploadFilePage = () => {
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="h-[42.7rem] flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex flex-wrap justify-between gap-4">
+        <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
           <NavbarProjectLeaderComponent />
           {/* Container */}
           <div className="flex-grow overflow-y-auto no-scrollbar p-4">
@@ -77,9 +77,11 @@ const UploadFilePage = () => {
               </div>
               <div className="w-full border-b-[1px] border-gray-400 mb-4"></div>
               <div className="w-full lg:w-[321px] py-4 text-xs">
-                <label htmlFor="select" className="text-xs ">Translating from (base, source language)</label>
-              
-                  <LanguageSelect/>
+                <label htmlFor="select" className="text-xs ">
+                  Translating from (base, source language)
+                </label>
+
+                <LanguageSelect />
               </div>
               <SelectComponent />
               <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
@@ -137,7 +139,11 @@ const UploadFilePage = () => {
                 </div>
                 <div className="flex lg:mt-6 mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${keyword.trim() === "" ? "bg-gray-100 text-gray-500 border-gray-300" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${
+                      keyword.trim() === ""
+                        ? "bg-gray-100 text-gray-500 border-gray-300"
+                        : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
                     type="submit"
                     value={"Add key"}
                     disabled={keyword.trim() === ""}
@@ -180,13 +186,13 @@ const UploadFilePage = () => {
               </div>
               <div className="flex gap-4 py-5 min-w-[40px] h-[75px] text-sm">
                 <input
-                  className="px-3 py-1 text-center text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                  className="px-3 py-1 text-center text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-700 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                   type="reset"
                   value={"Reset"}
                 />
                 <Link
                   href={"/employee/project-card"}
-                  className="px-4 py-[7px] text-center text-white bg-blue-600 border border-blue-600 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                  className="px-4 py-[7px] text-center text-white bg-blue-800 border border-blue-800 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                 >
                   <button type="submit"> Submit</button>
                 </Link>

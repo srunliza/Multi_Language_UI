@@ -273,7 +273,7 @@ const ViewMemberProjectLeader = ({ onClose }) => {
               <span className="text-gray-800">Project Leader</span>
             </div>
             <button
-              className="bg-blue-500 text-white p-1 rounded"
+              className="bg-blue-800 hover:bg-blue-700 text-white p-1 rounded"
               onClick={handleAddMemberClick}
             >
               <PersonAddOutlinedIcon />

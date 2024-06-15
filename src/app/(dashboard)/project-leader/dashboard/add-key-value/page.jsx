@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import AddMemberModal from "@/components/AddMemberModal";
 import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
@@ -22,15 +22,15 @@ const AddKeyValuePage = () => {
     { key: "Contact", hint: "a way of getting in touch with someone" },
     { key: "More", hint: "a way of getting in touch with someone" },
   ]);
-  
+
   const [keyword, setKeyword] = useState("");
   const [hint, setHint] = useState("");
-  
+
   const handleDelete = (keyToDelete) => {
     const updatedData = tableData.filter((row) => row.key !== keyToDelete);
     setTableData(updatedData);
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (keyword.trim() !== "") {
@@ -39,15 +39,15 @@ const AddKeyValuePage = () => {
       setHint("");
     }
   };
-  
+
   return (
     <div className="w-full h-screen flex flex-col">
       <div className="flex justify-between mb-2 p-4">
         <h2 className="text-lg text-color-text-black">Project Name</h2>
         <AddMemberModal />
       </div>
-      <div className="flex flex-grow gap-3 overflow-hidden">
-        <div className="h-[42.7rem] flex flex-col bg-white shadow-lg shadow-orange-50 rounded-xl border border-blue-300 flex-grow">
+      <div className="flex flex-wrap justify-between gap-4">
+        <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
           <NavbarProjectLeaderComponent />
           {/* Container */}
           <div className="flex-grow overflow-y-auto no-scrollbar p-4">
@@ -114,7 +114,11 @@ const AddKeyValuePage = () => {
                 </div>
                 <div className="flex lg:mt-5 mt-4 h-[35px] w-full lg:w-auto">
                   <input
-                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${keyword.trim() === "" ? "bg-gray-100 text-gray-500 border-gray-300" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+                    className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${
+                      keyword.trim() === ""
+                        ? "bg-gray-100 text-gray-500 border-gray-300"
+                        : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
                     type="submit"
                     value={"Add key"}
                     disabled={keyword.trim() === ""}

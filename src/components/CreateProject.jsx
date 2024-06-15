@@ -38,10 +38,10 @@ const CreateProject = ({ onClose }) => {
   };
 
   return (
-    <div className="flex items-center justify-center fixed inset-0 z-50 w-full">
-      <div className="w-full max-w-md p-6 bg-gray-100 border-blue-400 border rounded-lg shadow-xl space-y-6 relative">
+    <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
+      <div className="w-full max-w-md p-6 border bg-white rounded-lg shadow-xl space-y-6 relative">
         {toastVisible && (
-          <div className="fixed top-24 right-4 m-4 z-50">
+          <div className="fixed top-24 right-4 z-50">
             <div
               className={`alert text-white ${
                 isError ? "alert-error" : "alert-success"

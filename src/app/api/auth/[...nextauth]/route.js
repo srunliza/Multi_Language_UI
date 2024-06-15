@@ -17,16 +17,17 @@ export const authOption = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      if (user) {
+        token.newToken = user.newToken;
+      }
+      return token;
     },
     async session({ session, token }) {
-      session.user = token;
+      session.user.token = token.newToken;
       return session;
     },
   },
-  // calling secret key
   secret: process.env.NEXTAUTH_SECRET,
-  // tell protected to used this segment for login
   pages: {
     signIn: "/login",
   },
