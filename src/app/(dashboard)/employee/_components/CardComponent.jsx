@@ -74,8 +74,8 @@ const CardComponent = ({ project, index }) => {
       key={index}
       className="bg-white p-4 rounded-2xl shadow-md border border-gray-200"
     >
-      <div className="flex justify-between items-center text-sm mt-2 text-gray-700">
-        <h3 className="text-base font-semibold mb-1">
+      <div className="flex justify-between items-center text-sm text-gray-700">
+        <h3 className="text-base font-semibold">
           {project?.projectName.length > 15
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}

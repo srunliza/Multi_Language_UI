@@ -4,7 +4,7 @@ import { createProjectAction } from "@/action/project-action";
 const CreateProject = ({ onClose }) => {
   const [toastMessage, setToastMessage] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
-  const [isError, setIsError] = useState(false); // New state to track if the toast is an error
+  const [isError, setIsError] = useState(false); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,8 +38,8 @@ const CreateProject = ({ onClose }) => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-black bg-opacity-25 fixed inset-0 z-50 w-full">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-6 relative">
+    <div className="flex items-center justify-center fixed inset-0 z-50 w-full">
+      <div className="w-full max-w-md p-6 bg-gray-100 border-blue-400 border rounded-lg shadow-xl space-y-6 relative">
         {toastVisible && (
           <div className="fixed top-24 right-4 m-4 z-50">
             <div

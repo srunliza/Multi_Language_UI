@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import ProjectListComponent from "../../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
-import ViewMember from "@/components/ViewMember"; 
+import ViewMember from "@/components/ViewMember";
 import SortComponent from "@/components/SortComponent";
 import { projectsData } from "@/obj/projectData";
 
@@ -113,18 +113,20 @@ const ProjectListPage = () => {
       </h2>
       <div className="flex flex-wrap items-center mb-4">
         <SortComponent
-          // selectedStatus={selectedStatus}
-          // handleStatusChange={handleStatusChange}
-          // handleSortClick={handleSortClick}
+        // selectedStatus={selectedStatus}
+        // handleStatusChange={handleStatusChange}
+        // handleSortClick={handleSortClick}
         />
-        <div className="flex z-30 flex-row justify-center sm:justify-end mt-4 sm:mt-0 sm:ml-auto ">
-          <button
-            className="focus:outline-none mr-2"
-            name="sort"
-            onClick={() => handleSortClick("name")}
+        
+        <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">
+          <Link
+            className="focus:outline-none mr-1 rounded-md hover:bg-gray-200 "
+            href={`/employee/project-card?sortOrder=${
+              sortOrder === "asc" ? "desc" : "asc"
+            }`}
           >
             <svg
-              className="h-7 w-7 text-gray-500"
+              className="h-8 w-8 text-gray-500 p-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -133,17 +135,21 @@ const ProjectListPage = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="1.5"
-                d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
+                d={
+                  sortOrder === "asc"
+                    ? "M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
+                    : "M3 20h13M3 16h9m-9 4h9m5-16v12m0 0l-4-4m-4 4"
+                }
               />
             </svg>
-          </button>
+          </Link>
+
           <Link
-            className="focus:outline-none mr-2 hover:bg-gray-200 rounded-md transition-colors duration-200"
-            name="sortStartDate"
+            className="focus:outline-none mr-1 hover:bg-gray-200 rounded-md transition-colors duration-200"
             href="/employee/project-card"
           >
             <svg
-              className="h-7 w-7 text-gray-500"
+              className="h-8 w-8 text-gray-500 p-1"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -157,13 +163,14 @@ const ProjectListPage = () => {
               <rect x="3" y="14" width="7" height="7" />
             </svg>
           </Link>
+
           <Link
             className="focus:outline-none hover:bg-gray-200 rounded-md transition-colors duration-200"
             href="/employee/project-list"
             name="list"
           >
             <svg
-              className="h-7 w-7 text-black"
+              className="h-8 w-8 text-gray-800 p-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
