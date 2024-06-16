@@ -52,13 +52,11 @@ export const deleteProjectService = async (id) => {
     method: "DELETE",
     headers: header,
   });
-
   const result = await res.json();
   return result;
 };
 
 export const updateProjectService = async (projectId, updatedProjectName) => {
-  console.log("In service Id: ",projectId, updatedProjectName);
   const header = await headerToken();
   const res = await fetch(
     `${baseUrl}/api/v1/project/update-project-name/${projectId}`,
