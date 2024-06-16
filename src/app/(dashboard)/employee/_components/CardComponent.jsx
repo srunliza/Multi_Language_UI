@@ -33,7 +33,6 @@ const getStatusBgColor = (status) => {
 const CardComponent = ({ project, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [editProject, setEditProject] = useState(project);
   const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
   const [viewMemberRole, setViewMemberRole] = useState(null);
   const modalRef = useRef(null);
@@ -46,22 +45,10 @@ const CardComponent = ({ project, index }) => {
     setIsDeleteModalOpen(true);
   };
 
-  const handleEditChange = (e) => {
-    setEditProject({ ...editProject, name: e.target.value });
-  };
-
-  const handleEditSubmit = () => {
-    setIsEditing(false);
-  };
-
   const handleModalClose = () => {
     setIsEditing(false);
     setIsDeleteModalOpen(false);
     setIsViewMemberOpen(false);
-  };
-
-  const handleDeleteConfirm = () => {
-    setIsDeleteModalOpen(false);
   };
 
   const handleSeeAll = (role) => {
@@ -75,11 +62,18 @@ const CardComponent = ({ project, index }) => {
       className="bg-white p-4 rounded-2xl shadow-md border border-gray-200"
     >
       <div className="flex justify-between items-center text-sm text-gray-700">
-        <h3 className="text-base font-semibold">
+        <Link
+          key={index}
+          href={`/${project?.members[0].role
+            .replace(" ", "-")
+            .toLowerCase()}/dashboard`}
+          passHref
+          className="text-base font-semibold"
+        >
           {project?.projectName.length > 15
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}
-        </h3>
+        </Link>
         {project?.members[0]?.role !== "Translator" &&
           project?.members[0]?.role !== "Developer" && (
             <DropdownMenu
@@ -172,7 +166,7 @@ const CardComponent = ({ project, index }) => {
 
       <MemberImages
         project={project}
-        handleSeeAll={handleSeeAll}
+        handleSeeAll={() => handleSeeAll(project.members[0].role)}
         isViewMemberOpen={isViewMemberOpen}
         viewMemberRole={viewMemberRole}
         modalRef={modalRef}

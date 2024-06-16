@@ -6,16 +6,19 @@ import { getAllProjectService } from "@/service/project.service";
 const ProjectCardPage = async ({ searchParams }) => {
   const sortOrder = searchParams.sortOrder || "asc";
   const projectData = await getAllProjectService();
-  let projects = projectData.payload;
+  let projects = projectData.payload || [];
 
-  // Sort the projects by projectName
-  projects.sort((a, b) => {
-    if (sortOrder === "asc") {
-      return a.projectName.localeCompare(b.projectName);
-    } else {
-      return b.projectName.localeCompare(a.projectName);
-    }
-  });
+  // Check if projects array is not empty before sorting
+  if (projects.length > 0) {
+    // Sort the projects by projectName
+    projects.sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.projectName.localeCompare(b.projectName);
+      } else {
+        return b.projectName.localeCompare(a.projectName);
+      }
+    });
+  }
 
   return (
     <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl shadow-md h-screen overflow-hidden">
@@ -94,14 +97,21 @@ const ProjectCardPage = async ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] overflow-y-auto no-scrollbar">
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-lg overflow-y-auto no-scrollbar">
         <div className="overflow-auto h-full no-scrollbar">
           <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6">
-            {projects
-              ?.filter((project) => project.active)
-              .map((project, index) => (
-                <CardComponent key={index} project={project} index={index} />
-              ))}
+            {projects && projects.length > 0 ? (
+              projects
+                ?.filter((project) => project.active)
+                .map((project, index) => (
+                  <CardComponent key={index} project={project} index={index} />
+                ))
+            ) : (
+              <div className="text-center text-gray-500 font-semibold w-[40rem] p-10">
+                No projects available. Please check back later or start a new
+                project.
+              </div>
+            )}
           </div>
         </div>
       </div>

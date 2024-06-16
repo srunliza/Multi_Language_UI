@@ -17,7 +17,6 @@ const ForgetPasswordPage = () => {
     const email = data.get("email");
 
     const res = await forgotPasswordService(email);
-    console.log(res.code);
 
     if (res.code === 200) {
       router.push(`/forget-verify?email=${email}`);

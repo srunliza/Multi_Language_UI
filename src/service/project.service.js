@@ -25,6 +25,16 @@ export const getAllProjectWithStatusService = async () => {
   return data;
 };
 
+export const getAllMemberService = async (id) => {
+  const header = await headerToken();
+  const res = await fetch(`${baseUrl}/api/v1/project/member-detail/${id}`,{
+    headers: header,
+    next: { tags: ["project"] },
+  })
+  const data = await res.json();
+  return data;
+}
+
 export const createProjectService = async (projectDetails) => {
   const header = await headerToken();
   const res = await fetch(`${baseUrl}/api/v1/project/create-new-project`, {

@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfilePage = async () => {
   const userData = await getAllUserProfileService();
-  const defaultImage = "/images/User-profile.png";
+  const defaultImage = "../Images/user-profile.png";
 
   return (
     <main className="sm:px-8 md:px-[5rem] lg:px-[8rem] xl:px-[13rem]">
@@ -78,13 +78,14 @@ const ProfilePage = async () => {
               "N/A"
             )}
           </p>
-          <p
+          <a
+            href={`mailto:${userData?.payload?.email || ""}`}
             className={`${
               userData?.payload?.email ? "text-gray-600" : "text-red-600"
             }`}
           >
             {userData?.payload?.email || "N/A"}
-          </p>
+          </a>
         </div>
         <div className="w-full md:w-[85%] lg:w-[70%] grid grid-cols-2 mt-9 gap-2">
           <h2 className="text-sm font-semibold text-gray-600">Telegram</h2>

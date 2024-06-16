@@ -18,7 +18,7 @@ const LoginPage = () => {
       redirect: false,
       ...newUserInfo,
     });
-    console.log(res)
+    
     if ((await res).ok) {
       router.push("/employee/dashboard");
     } else {

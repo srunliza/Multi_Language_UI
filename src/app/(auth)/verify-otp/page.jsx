@@ -65,12 +65,10 @@ const VerifyOtpPage = () => {
     }
 
     const res = await otpVerifyService(enteredOtp);
-    console.log("response: ", res);
-
-    if (res.status === "OK") {
+    if (res && res.code === 200 && res.status === "OK") {
       router.push("/login");
     } else {
-      console.error("Failed to verify OTP. Please try again.");
+      console.log("login failed!");
     }
   };
   return (

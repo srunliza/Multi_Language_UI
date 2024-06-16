@@ -66,11 +66,11 @@ const VerifyOtpPage = () => {
       return;
     }
     const res = await otpVerifyService(enteredOtp);
-
-    if (res.code === 200) {
+    if (res && res.code === 200 && res.status === "OK") {
       router.push(`/reset-password?email=${email}`);
     } else {
-      console.log("failed at otp page");
+      console.log("Login failed!");
+      setOtpError(res.message || "OTP verification failed. Please try again.");
     }
   };
 

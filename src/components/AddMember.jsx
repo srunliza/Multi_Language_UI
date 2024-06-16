@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { ListMember } from "./ListMember";
 
-const AddMemberModal = ({ isOpen, onClose }) => {
+const AddMemberModal = ({ isOpen, onClose, project }) => {
   return (
     <>
       {isOpen && (
