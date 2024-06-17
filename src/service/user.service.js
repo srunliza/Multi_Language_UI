@@ -19,7 +19,6 @@ export const resetPasswordService = async (updatedPassword) => {
     body: JSON.stringify(updatedPassword),
   });
   const result = await res.json();
-  console.log(result);
   return result;
 };
 
