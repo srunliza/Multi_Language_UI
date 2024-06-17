@@ -22,3 +22,7 @@ export const resetPasswordService = async (updatedPassword) => {
   console.log(result);
   return result;
 };
+
+// export const updateUserRoleService = async () => {
+  
+// }

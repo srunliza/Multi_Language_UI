@@ -169,7 +169,7 @@ const EmployeeDashboardPage = async () => {
                     >
                       <Link
                         href={`/${getRoleRoute(
-                          project.members[0].role
+                          project.members[0].role.roleName
                         )}/dashboard`}
                       >
                         {project.projectName}
@@ -178,16 +178,16 @@ const EmployeeDashboardPage = async () => {
                     <td className="px-6 py-4">
                       <Link
                         href={`/${getRoleRoute(
-                          project.members[0].role
+                          project.members[0].role.roleName
                         )}/dashboard`}
                       >
-                        {project.members[0].role}
+                        {project.members[0].role.roleName}
                       </Link>
                     </td>
                     <td className="px-6 py-4">
                       <Link
                         href={`/${getRoleRoute(
-                          project.members[0].role
+                          project.members[0].role.roleName
                         )}/dashboard`}
                       >
                         {new Date(project.createDate).toLocaleDateString()}
@@ -196,7 +196,7 @@ const EmployeeDashboardPage = async () => {
                     <td className="px-6 py-4">
                       <Link
                         href={`/${getRoleRoute(
-                          project.members[0].role
+                          project.members[0].role.roleName
                         )}/dashboard`}
                         className={
                           project.updatedDate ? "text-gray-800" : "text-red-600"
@@ -210,7 +210,7 @@ const EmployeeDashboardPage = async () => {
                     <td className="px-6 py-4 text-right">
                       <Link
                         href={`/${getRoleRoute(
-                          project.members[0].role
+                          project.members[0].role.roleName
                         )}/dashboard`}
                       >
                         <span

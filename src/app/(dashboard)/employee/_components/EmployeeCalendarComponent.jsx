@@ -1,37 +1,79 @@
+"use client";
+import { useState } from "react";
+import dayjs from "dayjs";
+
 const EmployeeCalendarComponent = () => {
+  const [currentDate, setCurrentDate] = useState(dayjs());
+  const today = dayjs();
+
+  const startOfMonth = currentDate.startOf("month");
+  const endOfMonth = currentDate.endOf("month");
+  const startOfWeek = startOfMonth.startOf("week");
+  const endOfWeek = endOfMonth.endOf("week");
+
+  const days = [];
+  let date = startOfWeek;
+
+  while (date.isBefore(endOfWeek)) {
+    days.push(date);
+    date = date.add(1, "day");
+  }
+
+  const handlePrevMonth = () => {
+    setCurrentDate(currentDate.subtract(1, "month"));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(currentDate.add(1, "month"));
+  };
+
+  const handleToday = () => {
+    setCurrentDate(today);
+  };
+
   return (
     <main>
       <div className="lg:mr-0 xl:mr-0 bg-white shadow-lg rounded-xl text-gray-900 font-semibold text-center">
         <div className="flex items-center justify-between px-5 py-5">
-          <h3 className="text-base">May, 2024</h3>
-
+          <h3 className="text-base">{currentDate.format("MMMM, YYYY")}</h3>
           <div className="gap-2 flex">
-            <button className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600">
+            <button
+              onClick={handlePrevMonth}
+              className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
+            >
               <svg
                 className="w-4 h-4 stroke-current"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="4"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M15 19l-7-7 7-7"></path>
               </svg>
             </button>
-
-            <button className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600">
+            <button
+              onClick={handleNextMonth}
+              className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
+            >
               <svg
                 className="w-4 h-4 stroke-current"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="4"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M9 5l7 7-7 7"></path>
               </svg>
+            </button>
+            <button
+              onClick={handleToday}
+              className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-gray-600"
+            >
+              Today
             </button>
           </div>
         </div>
@@ -48,126 +90,26 @@ const EmployeeCalendarComponent = () => {
           <div className="text-gray-700 text-sm">Sun</div>
 
           {/* days */}
-          <a
-            href="#"
-            className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500"
-          >
-            27
-          </a>
-          <a
-            href="#"
-            className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500"
-          >
-            28
-          </a>
-          <a
-            href="#"
-            className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500"
-          >
-            29
-          </a>
-          <a
-            href="#"
-            className="hover:bg-indigo-100 text-xs rounded-md p-2 text-gray-500"
-          >
-            30
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            1
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            2
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            3
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            4
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            5
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            6
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            7
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            8
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            9
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            10
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            11
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            12
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            13
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            14
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            15
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            16
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            17
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            18
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            19
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            20
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            21
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            22
-          </a>
-          <a
-            href="#"
-            className="hover:bg-indigo-600 text-xs rounded-lg p-2 bg-indigo-500 text-white"
-          >
-            23
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            24
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            25
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            26
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            27
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            28
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            29
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            30
-          </a>
-          <a href="#" className="hover:bg-indigo-100 text-xs rounded-md p-2">
-            31
-          </a>
+          {days.map((day, index) => {
+            const isCurrentMonth = day.month() === currentDate.month();
+            const isToday = day.isSame(today, "day");
+
+            return (
+              <a
+                href="#"
+                key={index}
+                className={`hover:bg-indigo-100 text-xs rounded-md p-2 ${
+                  isCurrentMonth
+                    ? "text-gray-900"
+                    : "text-gray-500 bg-custom-pattern"
+                } ${
+                  isToday ? "bg-indigo-500 text-white hover:bg-indigo-600" : ""
+                }`}
+              >
+                {day.date()}
+              </a>
+            );
+          })}
         </div>
       </div>
     </main>

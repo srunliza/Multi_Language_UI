@@ -64,7 +64,7 @@ const CardComponent = ({ project, index }) => {
       <div className="flex justify-between items-center text-sm text-gray-700">
         <Link
           key={index}
-          href={`/${project?.members[0].role
+          href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
             .toLowerCase()}/dashboard`}
           passHref
@@ -74,8 +74,8 @@ const CardComponent = ({ project, index }) => {
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}
         </Link>
-        {project?.members[0]?.role !== "Translator" &&
-          project?.members[0]?.role !== "Developer" && (
+        {project?.members[0]?.role.roleName !== "Translator" &&
+          project?.members[0]?.role.roleName !== "Developer" && (
             <DropdownMenu
               project={project}
               onEditClick={handleEditClick}
@@ -86,14 +86,14 @@ const CardComponent = ({ project, index }) => {
 
       <div className="mb-5">
         <span className="text-green-500 text-xs">
-          {project.members[0].role}
+          {project.members[0].role.roleName}
         </span>
       </div>
 
       <div className="text-black text-md flex items-center mb-4 justify-between">
         <Link
           key={index}
-          href={`/${project?.members[0].role
+          href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
             .toLowerCase()}/dashboard`}
           passHref
@@ -118,7 +118,7 @@ const CardComponent = ({ project, index }) => {
 
         <Link
           key={index}
-          href={`/${project?.members[0].role
+          href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
             .toLowerCase()}/calendar`}
           passHref
@@ -166,7 +166,7 @@ const CardComponent = ({ project, index }) => {
 
       <MemberImages
         project={project}
-        handleSeeAll={() => handleSeeAll(project.members[0].role)}
+        handleSeeAll={() => handleSeeAll(project.members[0].role.roleName)}
         isViewMemberOpen={isViewMemberOpen}
         viewMemberRole={viewMemberRole}
         modalRef={modalRef}

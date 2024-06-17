@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const ViewMember = ({ onClose, project }) => {
   const renderUserList = (role) => {
     return project.members
-      .filter((member) => member.role === role)
+      .filter((member) => member.role.roleName === role)
       .map((member) => (
         <div
           key={member.userId}
