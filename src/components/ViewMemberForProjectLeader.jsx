@@ -314,7 +314,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
       )}
 
       {toastVisible && (
-        <div className="fixed top-24 right-4 z-50">
+        <div className="fixed top-0 right-4 m-4 z-50">
           <div
             className={`alert text-white ${
               isError ? "alert-error" : "alert-success"

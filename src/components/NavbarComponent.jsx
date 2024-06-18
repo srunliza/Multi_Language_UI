@@ -57,8 +57,6 @@ const NotificationItem = ({ notification, onClick }) => (
 
 const NavbarComponent = ({
   toggleSidebar,
-  isSidebarOpen,
-  setIsSidebarOpen,
 }) => {
   const [showAll, setShowAll] = useState(true);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -67,7 +65,6 @@ const NavbarComponent = ({
   const [searchResults, setSearchResults] = useState([]);
   const [animateNotification, setAnimateNotification] = useState(false);
   const [animateSearch, setAnimateSearch] = useState(false);
-  const router = useRouter();
   const notificationRef = useRef();
 
   const handleShowAll = () => {

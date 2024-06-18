@@ -358,7 +358,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="/images/tele.png"
+                        src="./images/telegram.png"
                       />
                     </a>
                     <a
@@ -373,7 +373,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="/images/facebook.png"
+                        src="./images/facebook.png"
                       />
                     </a>
                     <a
@@ -388,7 +388,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="/images/google.png"
+                        src="./images/google.png"
                       />
                     </a>
                   </div>
@@ -481,7 +481,7 @@ const LandingPageComponent = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="./Images/tele.png"
+                    src="./Images/telegram.png"
                     alt="Telegram"
                     className="h-6 hover:scale-125 w-6  transition-all"
                   />

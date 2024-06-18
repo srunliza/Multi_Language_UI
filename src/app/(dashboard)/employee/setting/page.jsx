@@ -1,183 +1,84 @@
 "use client";
 import React, { useState } from "react";
-import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-} from "@nextui-org/react";
+import { updateUserDetailAction } from "@/action/user-action";
 
 const SettingPage = () => {
   const [firstName, setFirstName] = useState("");
-  const [firstNameError, setFirstNameError] = useState("");
   const [lastName, setLastName] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const [selectedGender, setSelectedGender] = useState("");
-  const [selectedSocialContact, setSelectedSocialContact] = useState("");
   const [socialContactUsername, setSocialContactUsername] = useState("");
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [birthDate, setBirthDate] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [telegram, setTelegram] = useState("");
+  const [profile, setProfile] = useState(null);
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
-  };
-
-  const handleSocialContactChange = (event) => {
-    setSelectedSocialContact(event.target.value);
-    document.getElementById("my_modal_3").showModal();
   };
 
   const handleSocialContactUsernameChange = (event) => {
     setSocialContactUsername(event.target.value);
   };
 
-  // Validate on Email
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  // Validate on First Name
-  const validateFirstName = (firstName) => {
-    const nameRegex = /[a-zA-Z]+/;
-    return nameRegex.test(firstName);
-  };
-
-  // Validate on Last Name
-  const validateLastName = (lastName) => {
-    const nameRegex = /[a-zA-Z]+/;
-    return nameRegex.test(lastName);
-  };
-
- 
-
-  // Handle First Name
   const handleFirstNameChange = (e) => {
-    const value = e.target.value;
-    setFirstName(value);
-    if (!value) {
-      setFirstNameError("First name is required.");
-    } else if (!validateFirstName(value)) {
-      setFirstNameError("First name can't not input number.");
-    } else {
-      setFirstNameError("");
-    }
+    setFirstName(e.target.value);
   };
 
-  // Handle Last Name
   const handleLastNameChange = (e) => {
-    const value = e.target.value;
-    setLastName(value);
-    if (!value) {
-      setLastNameError("Last name is required.");
-    } else if (!validateLastName(value)) {
-      setLastNameError("Last name can't not input number.");
-    } else {
-      setLastNameError("");
-    }
+    setLastName(e.target.value);
   };
 
-  
-
-  // Handle Email
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    if (!value) {
-      setEmailError("Email is required.");
-    } else if (!validateEmail(value)) {
-      setEmailError("Invalid email format.");
-    } else {
-      setEmailError("");
-    }
+  const handleFacebookChange = (e) => {
+    setFacebook(e.target.value);
   };
 
-  // Handle Password
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-
-    if (!value) {
-      setPasswordError("Password is required.");
-    } else if (value.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
-    } else {
-      setPasswordError("");
-    }
+  const handleTelegramChange = (e) => {
+    setTelegram(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleBirthDateChange = (date) => {
+    setBirthDate(date);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handleProfileChange = (e) => {
+    setProfile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let valid = true;
+    const formData = new FormData(e.target);
 
-    // Condition on First Name
-    if (!firstName) {
-      setFirstNameError("First name is required.");
-      valid = false;
-    } else if (!validateFirstName(firstName)) {
-      setFirstNameError("First name can't not input number.");
-      valid = false;
+    const updatedUserDetail = {
+      username: formData.get("username"),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      gender: selectedGender,
+      birthDate: formData.get("birthDate"),
+      facebook: formData.get("facebook"),
+      phoneNumber: formData.get("phoneNumber"),
+      telegram: formData.get("telegram"),
+    };
+
+    // Handle profile picture if provided
+    if (profile) {
+      formData.append("profile", profile);
+      for (const key in updatedUserDetail) {
+        formData.append(key, updatedUserDetail[key]);
+      }
+      await updateUserDetailAction(formData);
     } else {
-      setFirstNameError("");
-    }
-
-    // Condition on Last Name
-    if (!lastName) {
-      setLastNameError("Last name is required.");
-      valid = false;
-    } else if (!validateLastName(lastName)) {
-      setLastNameError("Last name can't not input number.");
-      valid = false;
-    } else {
-      setLastNameError("");
-    }
-
-    // Condition on Email
-    if (!email) {
-      setEmailError("Email is required.");
-      valid = false;
-    } else if (!validateEmail(email)) {
-      setEmailError("Invalid email format.");
-      valid = false;
-    } else {
-      setEmailError("");
-    }
-
-    // Condition on Password
-    if (!password) {
-      setPasswordError("Password is required.");
-      valid = false;
-    } else if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters.");
-      valid = false;
-    } else {
-      setPasswordError("");
-    }
-
-    if (valid) {
-      // Proceed with form submission
-      console.log("Form submitted successfully!");
+      await updateUserDetailAction(updatedUserDetail);
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  // route to change password
   const router = useRouter();
   const [activeLink, setActiveLink] = useState(router.pathname);
 
@@ -224,47 +125,37 @@ const SettingPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                 <div>
                   <label
-                    htmlFor="first_name"
+                    htmlFor="firstName"
                     className="block text-gray-700 dark:text-white mb-1"
                   >
                     First Name
                   </label>
                   <input
                     id="firstName"
+                    name="firstName"
                     type="text"
                     placeholder="Enter first name"
                     value={firstName}
                     onChange={handleFirstNameChange}
-                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 md:pr-[10px] sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none input-bordered w-full max-w-xs ${
-                      firstNameError ? "border-red-500" : ""
-                    }`}
+                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 md:pr-[10px] sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none input-bordered w-full max-w-xs"
                   />
-                  {firstNameError && (
-                    <p className="text-red-500 text-xs mt-1">
-                      {firstNameError}
-                    </p>
-                  )}
                 </div>
                 <div>
                   <label
-                    htmlFor="last_name"
+                    htmlFor="lastName"
                     className="block text-gray-700 dark:text-white mb-1"
                   >
                     Last Name
                   </label>
                   <input
                     id="lastName"
+                    name="lastName"
                     type="text"
                     placeholder="Enter last name"
                     value={lastName}
                     onChange={handleLastNameChange}
-                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
-                      lastNameError ? "border-red-500" : ""
-                    }`}
+                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full"
                   />
-                  {lastNameError && (
-                    <p className="text-red-500 text-xs mt-1">{lastNameError}</p>
-                  )}
                 </div>
               </div>
               {/* gender */}
@@ -278,16 +169,13 @@ const SettingPage = () => {
                   </label>
                   <input
                     id="username"
+                    name="username"
                     type="text"
                     placeholder="Enter Username"
-                    
-                    className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full ${
-                      lastNameError ? "border-red-500" : ""
-                    }`}
+                    value={socialContactUsername}
+                    onChange={handleSocialContactUsernameChange}
+                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full"
                   />
-                  {lastNameError && (
-                    <p className="text-red-500 text-xs mt-1">{lastNameError}</p>
-                  )}
                 </div>
                 <div className="">
                   <label
@@ -298,21 +186,21 @@ const SettingPage = () => {
                   </label>
                   <div className="relative">
                     <select
-                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
+                      className="text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-2 pl-10 w-full"
                       value={selectedGender}
                       onChange={(e) => handleGenderSelect(e.target.value)}
                     >
                       <option value="" disabled>
                         Select Gender
                       </option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
                     </select>
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
                         className="w-[20px]"
                         src={
-                          selectedGender === "male"
+                          selectedGender === "Male"
                             ? "../assets/icons/gender1.svg"
                             : "../assets/icons/gender2.svg"
                         }
@@ -326,60 +214,62 @@ const SettingPage = () => {
                 {/* Date of Birth */}
                 <div className="">
                   <label
-                    htmlFor="dob"
-                    className="block text-gray-700 dark:text-white "
+                    htmlFor="date-register"
+                    className="block text-gray-700 dark:text-white mb-1"
                   >
                     Date of Birth
                   </label>
                   <DatePicker
-                    id="calender"
-                    className=" focus:outline-none input-bordered focus:border-gray-500 text-gray-700 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 border rounded-md "
+                    id="date-register"
+                    aria-label="Date of Birth"
+                    name="birthDate"
+                    className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border pl-4 focus:outline-none input-bordered w-full"
+                    isRequired
+                    value={birthDate}
+                    onChange={handleBirthDateChange}
                   />
                 </div>
-                {/* Email */}
+
+                {/* Facebook */}
                 <div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block font-medium text-gray-700  sm:text-sm md:text-base lg:text-base"
+                      className="block text-gray-700 dark:text-white mb-1"
                     >
-                      Email
+                      Facebook
                     </label>
                   </div>
 
                   <div className="relative">
                     <input
-                      type="email"
-                      id="email"
-                      className={`text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-10 focus:outline-none input-bordered w-full ${
-                        emailError ? "border-red-500" : ""
-                      }`}
-                      placeholder="@gmail.com"
-                      value={email}
-                      onChange={handleEmailChange}
+                      type="text"
+                      id="facebook"
+                      name="facebook"
+                      className="text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-2 pl-10 w-full"
+                      placeholder="facebook username"
+                      value={facebook}
+                      onChange={handleFacebookChange}
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        src="../assets/icons/mail.svg"
-                        alt="email"
+                        src="../Images/facebook.png"
+                        alt="facebook"
                         className="w-5 h-5 text-gray-400"
                       />
                     </div>
                   </div>
                 </div>
-                {emailError && (
-                  <p className="text-red-500 text-xs mt-1">{emailError}</p>
-                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 {/* Contact */}
                 <div>
                   <label
-                    htmlFor="contact"
+                    htmlFor="phoneNumber"
                     className="block text-gray-700 dark:text-white mb-1"
                   >
-                    Contact
+                    Phone Number
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -398,48 +288,44 @@ const SettingPage = () => {
                     </div>
                     <input
                       type="text"
-                      className="text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-10 w-full"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      className="text-gray-700  focus:outline-none input-bordered focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-2 pl-10 w-full"
                       placeholder="Phone number"
+                      value={phoneNumber}
+                      onChange={handlePhoneNumberChange}
                     />
                   </div>
                 </div>
-                {/* Social Contact */}
+
+                {/* Telegram */}
                 <div>
-                  <label
-                    htmlFor="social_contact"
-                    className="block text-gray-700 dark:text-white mb-1"
-                  >
-                    Social Contact
-                  </label>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-700 dark:text-white mb-1"
+                    >
+                      Telegram
+                    </label>
+                  </div>
+
                   <div className="relative">
+                    <input
+                      type="text"
+                      id="telegram"
+                      name="telegram"
+                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-2 pl-10 focus:outline-none input-bordered w-full"
+                      placeholder="telegram username"
+                      value={telegram}
+                      onChange={handleTelegramChange}
+                    />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        className="w-[20px]"
-                        src="../assets/icons/socaicontact.svg"
-                        alt="social contact icon"
+                        src="../Images/telegram.png"
+                        alt="telegram"
+                        className="w-5 h-5 text-gray-400"
                       />
                     </div>
-                    <select
-                      className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-                      value={selectedSocialContact}
-                      onChange={handleSocialContactChange}
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        Select social contact
-                      </option>
-                      <option value="gmail" disabled>
-                        Gmail
-                      </option>
-                      <option value="phone" disabled>
-                        Phone Number
-                      </option>
-                      <option value="facebook">Facebook</option>
-                      <option value="x">X</option>
-                      <option value="linkedin">LinkedIn</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="other">Other</option>
-                    </select>
                   </div>
                 </div>
               </div>
@@ -448,14 +334,13 @@ const SettingPage = () => {
             {/* profile and password */}
             <div className="flex flex-col justify-between">
               <div className="m-auto w-[200px] h-[200px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
-                {/* icon edit profile */}
                 <div className="bg-white rounded-full w-10 h-10 text-center ml-28 mt-[180px] lg-ml-[35px]">
                   <input
                     type="file"
                     name="profile"
                     id="upload_profile"
                     hidden
-                    required
+                    onChange={handleProfileChange}
                   />
                   <label
                     htmlFor="upload_profile"
@@ -504,55 +389,6 @@ const SettingPage = () => {
           </div>
         </div>
       </form>
-
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => document.getElementById("my_modal_3").close()}
-            >
-              ✕
-            </button>
-          </form>
-
-          <h3 className="font-bold text-lg">
-            Enter your {selectedSocialContact} username
-          </h3>
-
-          <div className="relative mb-4">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <img
-                className="w-[20px]"
-                src={`../Images/${selectedSocialContact}.png`}
-                alt={`${selectedSocialContact} icon`}
-              />
-            </div>
-            <input
-              type="text"
-              className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-10 pl-10 focus:outline-none input-bordered w-full"
-              placeholder={`Enter your ${selectedSocialContact} username`}
-              value={socialContactUsername}
-              onChange={handleSocialContactUsernameChange}
-            />
-          </div>
-
-          <div className="modal-action">
-            <button
-              className="btn text-black bg-white   px-4 py-2  w-[100px]"
-              onClick={() => document.getElementById("my_modal_3").close()}
-            >
-              Close
-            </button>
-            <button
-              className="bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-[100px]"
-              onClick={() => document.getElementById("my_modal_3").close()}
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      </dialog>
     </div>
   );
 };
