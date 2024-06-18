@@ -16,6 +16,7 @@ const Modal = ({
   const [toastMessage, setToastMessage] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   if (!isVisible) return null;
 
@@ -24,11 +25,19 @@ const Modal = ({
     if (result.success) {
       setToastMessage("Project deleted successfully!");
       setIsEdit(false);
+      setIsSuccess(true);
       setToastVisible(true);
       setTimeout(() => {
         setToastVisible(false);
         onClose();
         onDeleteClick();
+      }, 2000);
+    } else {
+      setToastMessage("Failed to delete project.");
+      setIsSuccess(false);
+      setToastVisible(true);
+      setTimeout(() => {
+        setToastVisible(false);
       }, 2000);
     }
   };
@@ -85,7 +94,7 @@ const Modal = ({
         <div className="fixed top-0 right-4 m-4 z-50">
           <div
             className={`alert text-white ${
-              isEdit ? "alert-success" : "alert-error"
+              isSuccess ? "bg-green-500" : "bg-red-500"
             }`}
           >
             <span>{toastMessage}</span>

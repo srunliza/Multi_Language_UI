@@ -83,3 +83,16 @@ export const updateUserRoleService = async (projectId, userId, roleId) => {
   const result = await res.json();
   return result;
 };
+
+export const removeMemberService = async (projectId,userId) => {
+  console.log("userId and projectId:", userId, projectId);
+  const header = await headerToken();
+  const res = await fetch(`${baseUrl}/api/v1/project/remove-member/${userId}?projectId=${projectId}`, {
+    method: "DELETE",
+    headers: header,
+  });
+  console.log(res);
+  const result = await res.json();
+  console.log(result);
+  return result;
+};

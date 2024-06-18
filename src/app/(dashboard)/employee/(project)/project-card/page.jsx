@@ -97,9 +97,9 @@ const ProjectCardPage = async ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-lg overflow-y-auto no-scrollbar">
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
         <div className="overflow-auto h-full no-scrollbar">
-          <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6 px-3 py-3">
             {projects && projects.length > 0 ? (
               projects
                 ?.filter((project) => project.active)

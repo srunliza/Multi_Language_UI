@@ -75,13 +75,13 @@ const EditModal = ({
           <div className="flex justify-end">
             <button
               onClick={onClose}
-              className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500"
+              className="inline-flex btn-ghost justify-center w-full sm:w-auto px-4 py-2 bg-white text-base leading-6 font-medium text-blue-800 mr-2 border border-blue-800 rounded-md hover:border-blue-300 active:bg-transparent hover:bg-transparent focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
             >
               No
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              className="bg-blue-800 text-white px-4 py-2 rounded-md hover:bg-blue-700"
             >
               Edit
             </button>

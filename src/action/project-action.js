@@ -2,6 +2,7 @@
 import {
   createProjectService,
   deleteProjectService,
+  removeMemberService,
   updateProjectService,
   updateUserRoleService,
 } from "@/service/project.service";
@@ -37,4 +38,10 @@ export const editUserRoleAction = async (formData) => {
   await updateUserRoleService(projectId, userId, roleId);
   revalidateTag("project");
   return { success: true };
+};
+
+export const removeMemberAction = async (projectId, userId) => {
+  const result = await removeMemberService(projectId, userId);
+  revalidateTag("project");
+  return result;
 };

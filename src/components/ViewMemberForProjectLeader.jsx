@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useRef } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import GroupIcon from "@mui/icons-material/Group";
@@ -7,7 +6,10 @@ import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import AddMemberModal from "./AddMember";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
-import { editUserRoleAction } from "@/action/project-action";
+import {
+  editUserRoleAction,
+  removeMemberAction,
+} from "@/action/project-action";
 
 const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
@@ -16,7 +18,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [editProject, setEditProject] = useState(null);
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [roleToDelete, setRoleToDelete] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(null); // State for dropdown visibility
+  const [dropdownOpen, setDropdownOpen] = useState(null);
 
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -33,23 +35,36 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   };
 
   const handleAddMember = (newMember) => {
-    project.members.push(newMember); // Add new member to project members
+    project.members.push(newMember);
     handleCloseAddMemberModal();
   };
 
-  const handleDelete = (id, role) => {
+  const handleDelete = (id, roleName) => {
     setMemberToDelete(id);
-    setRoleToDelete(role);
+    setRoleToDelete(roleName);
     setDeleteModalVisible(true);
     setDropdownOpen(null); // Close dropdown when delete is clicked
   };
 
-  const confirmDelete = () => {
-    const index = project.members.findIndex(
-      (member) => member.userId === memberToDelete
-    );
-    if (index > -1) {
-      project.members.splice(index, 1); // Remove member from project members
+  const confirmDelete = async () => {
+    try {
+      const result = await removeMemberAction(
+        project.projectId,
+        memberToDelete
+      );
+      if (result.status === "OK") {
+        const index = project.members.findIndex(
+          (member) => member.userId === memberToDelete
+        );
+        if (index > -1) {
+          project.members.splice(index, 1); // Remove member from project members
+        }
+        showToast(result.message, false);
+      } else {
+        showToast("Failed to remove member.", true);
+      }
+    } catch (error) {
+      showToast("An error occurred.", true);
     }
     setDeleteModalVisible(false);
     setMemberToDelete(null);
@@ -189,7 +204,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
                       <button
                         className="text-black hover:text-red-600 w-full text-left flex items-center"
                         onClick={() =>
-                          handleDelete(member.userId, member.role.roleId)
+                          handleDelete(member.userId, member.role.roleName)
                         }
                       >
                         <svg

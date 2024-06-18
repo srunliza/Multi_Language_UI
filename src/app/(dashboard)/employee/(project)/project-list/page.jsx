@@ -117,7 +117,7 @@ const ProjectListPage = () => {
         // handleStatusChange={handleStatusChange}
         // handleSortClick={handleSortClick}
         />
-        
+
         <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">
           <Link
             className="focus:outline-none mr-1 rounded-md hover:bg-gray-200 "
@@ -186,12 +186,16 @@ const ProjectListPage = () => {
         </div>
       </div>
 
-      <ProjectListComponent
-        projects={filteredProjects}
-        handleSeeAll={handleSeeAll}
-        handleEditClick={handleEditClick}
-        handleDeleteClick={handleDeleteClick}
-      />
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
+        <div className="overflow-auto h-full no-scrollbar px-2 py-2">
+          <ProjectListComponent
+            projects={filteredProjects}
+            handleSeeAll={handleSeeAll}
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+          />
+        </div>
+      </div>
 
       {isEditing && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
