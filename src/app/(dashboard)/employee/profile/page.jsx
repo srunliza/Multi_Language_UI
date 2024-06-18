@@ -1,8 +1,8 @@
-import { getAllUserProfileService } from "@/service/user.service";
+import { getCurrentUserProfileService } from "@/service/user.service";
 import React from "react";
 
 const ProfilePage = async () => {
-  const userData = await getAllUserProfileService();
+  const userData = await getCurrentUserProfileService();
   const defaultImage = "../Images/user-profile.png";
 
   return (

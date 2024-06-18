@@ -7,6 +7,7 @@ import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import AddMemberModal from "./AddMember";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import { editUserRoleAction } from "@/action/project-action";
 
 const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
@@ -16,6 +17,10 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [roleToDelete, setRoleToDelete] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(null); // State for dropdown visibility
+
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const modalRef = useRef(null);
 
@@ -72,15 +77,40 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
     setEditProject({ ...editProject, role: e.target.value });
   };
 
-  const handleEditSubmit = () => {
-    const index = project.members.findIndex(
-      (member) => member.userId === editProject.userId
-    );
-    if (index > -1) {
-      project.members[index] = editProject; // Update member role
+  const handleEditSubmit = async (formData) => {
+    try {
+      const result = await editUserRoleAction(formData);
+      if (result.success) {
+        const index = project.members.findIndex(
+          (member) => member.userId === formData.get("userId")
+        );
+        if (index > -1) {
+          project.members[index] = {
+            ...project.members[index],
+            role: {
+              ...project.members[index].role,
+              roleId: formData.get("roleId"),
+            },
+          }; // Update member role
+        }
+        showToast("Role updated successfully!", false);
+      } else {
+        showToast("Failed to update role.", true);
+      }
+    } catch (error) {
+      showToast("An error occurred.", true);
     }
     setIsEditing(false);
     setEditProject(null);
+  };
+
+  const showToast = (message, error) => {
+    setToastMessage(message);
+    setIsError(error);
+    setToastVisible(true);
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 3000); // Hide toast after 3 seconds
   };
 
   const toggleDropdown = (userId) => {
@@ -158,7 +188,9 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
                     <li>
                       <button
                         className="text-black hover:text-red-600 w-full text-left flex items-center"
-                        onClick={() => handleDelete(member.userId, member.role)}
+                        onClick={() =>
+                          handleDelete(member.userId, member.role.roleId)
+                        }
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -258,11 +290,24 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
         <EditModal
           isOpen={isEditing}
           onClose={handleModalClose}
-          project={editProject}
+          project={project}
+          userId={editProject.userId}
           onChange={handleEditChange}
           onSubmit={handleEditSubmit}
           modalRef={modalRef}
         />
+      )}
+
+      {toastVisible && (
+        <div className="fixed top-24 right-4 z-50">
+          <div
+            className={`alert text-white ${
+              isError ? "alert-error" : "alert-success"
+            }`}
+          >
+            <span>{toastMessage}</span>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -2,7 +2,7 @@
 import { headerToken } from "@/app/api/headerToken";
 import { baseUrl } from "@/utils/constants";
 
-export const getAllUserProfileService = async () => {
+export const getCurrentUserProfileService = async () => {
   const header = await headerToken();
   const res = await fetch(`${baseUrl}/api/v1/user/get-user-profile`, {
     headers: header,
@@ -21,7 +21,3 @@ export const resetPasswordService = async (updatedPassword) => {
   const result = await res.json();
   return result;
 };
-
-// export const updateUserRoleService = async () => {
-  
-// }

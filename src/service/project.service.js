@@ -27,13 +27,13 @@ export const getAllProjectWithStatusService = async () => {
 
 export const getAllMemberService = async (id) => {
   const header = await headerToken();
-  const res = await fetch(`${baseUrl}/api/v1/project/member-detail/${id}`,{
+  const res = await fetch(`${baseUrl}/api/v1/project/member-detail/${id}`, {
     headers: header,
     next: { tags: ["project"] },
-  })
+  });
   const data = await res.json();
   return data;
-}
+};
 
 export const createProjectService = async (projectDetails) => {
   const header = await headerToken();
@@ -64,6 +64,20 @@ export const updateProjectService = async (projectId, updatedProjectName) => {
       method: "PUT",
       headers: header,
       body: JSON.stringify(updatedProjectName),
+    }
+  );
+  const result = await res.json();
+  return result;
+};
+
+export const updateUserRoleService = async (projectId, userId, roleId) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/project/update-role-member?projectId=${projectId}&userId=${userId}`,
+    {
+      method: "PUT",
+      headers: header,
+      body: JSON.stringify({ roleId }),
     }
   );
   const result = await res.json();
