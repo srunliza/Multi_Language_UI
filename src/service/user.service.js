@@ -25,13 +25,11 @@ export const resetPasswordService = async (updatedPassword) => {
 
 export const updateUserDetailService = async (updatedUserDetail) => {
   const header = await headerToken();
-  console.log("In service: ", updatedUserDetail);
   const res = await fetch(`${baseUrl}/api/v1/user/update-user-profile`, {
     method: "PUT",
     headers: header,
     body: JSON.stringify(updatedUserDetail),
   });
   const result = await res.json();
-  console.log(result);
   return result;
 };

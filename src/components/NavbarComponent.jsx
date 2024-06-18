@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";

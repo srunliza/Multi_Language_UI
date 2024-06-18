@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { updateUserDetailAction } from "@/action/user-action";
+import Toast from "../_components/ToastComponent";
 
 const SettingPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +15,8 @@ const SettingPage = () => {
   const [facebook, setFacebook] = useState("");
   const [telegram, setTelegram] = useState("");
   const [profile, setProfile] = useState(null);
+
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
@@ -67,15 +70,44 @@ const SettingPage = () => {
       telegram: formData.get("telegram"),
     };
 
-    // Handle profile picture if provided
-    if (profile) {
-      formData.append("profile", profile);
-      for (const key in updatedUserDetail) {
-        formData.append(key, updatedUserDetail[key]);
+    try {
+      if (profile) {
+        formData.append("profile", profile);
+        for (const key in updatedUserDetail) {
+          formData.append(key, updatedUserDetail[key]);
+        }
+        const result = await updateUserDetailAction(formData);
+        if (result.success) {
+          setToast({
+            message: "Profile updated successfully!",
+            type: "success",
+            show: true,
+          });
+        } else {
+          setToast({
+            message: "Failed to update profile.",
+            type: "error",
+            show: true,
+          });
+        }
+      } else {
+        const result = await updateUserDetailAction(updatedUserDetail);
+        if (result.success) {
+          setToast({
+            message: "Profile updated successfully!",
+            type: "success",
+            show: true,
+          });
+        } else {
+          setToast({
+            message: "Failed to update profile.",
+            type: "error",
+            show: true,
+          });
+        }
       }
-      await updateUserDetailAction(formData);
-    } else {
-      await updateUserDetailAction(updatedUserDetail);
+    } catch (error) {
+      setToast({ message: "An error occurred.", type: "error", show: true });
     }
   };
 
@@ -89,6 +121,12 @@ const SettingPage = () => {
 
   return (
     <div>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
       <form className="w-full p-4 sm:p-10" onSubmit={handleSubmit}>
         <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">

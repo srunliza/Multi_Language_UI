@@ -43,6 +43,7 @@ export const createProjectService = async (projectDetails) => {
     body: JSON.stringify(projectDetails),
   });
   const data = await res.json();
+  console.log(data)
   return data;
 };
 
