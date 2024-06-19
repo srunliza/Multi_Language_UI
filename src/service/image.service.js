@@ -7,13 +7,17 @@ export const postImageService = async (imageFile) => {
   const formData = new FormData();
   formData.append("file", imageFile);
 
-  const res = await fetch(`${baseUrl}/api/v1/image/upload-image-profile`, {
-    method: "POST",
-    headers: header,
-    body: formData,
-  });
+  try {
+    const res = await fetch(`${baseUrl}/api/v1/image/upload-image-profile`, {
+      method: "POST",
+      headers: header,
+      body: formData,
+    });
 
-  const data = await res.json();
-  console.log(data);
-  return data;
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in postImageService:", error);
+    throw error;
+  }
 };

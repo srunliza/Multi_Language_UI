@@ -7,6 +7,7 @@ import Toast from "../_components/ToastComponent";
 import { postImageAction } from "@/action/image-action";
 
 const SettingPage = () => {
+  // State declarations
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -17,9 +18,17 @@ const SettingPage = () => {
   const [telegram, setTelegram] = useState("");
   const [profileImage, setProfileImage] = useState("/Images/user-profile.png");
   const [profile, setProfile] = useState(null);
-
   const [toast, setToast] = useState({ message: "", type: "", show: false });
 
+  const router = useRouter();
+  const [activeLink, setActiveLink] = useState(router.pathname);
+
+  const handleLinkClick = (href) => {
+    setActiveLink(href);
+    router.push(href);
+  };
+
+  // Handlers for input changes
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
   };
@@ -64,6 +73,7 @@ const SettingPage = () => {
     }
   };
 
+  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,7 +94,7 @@ const SettingPage = () => {
       if (profile) {
         const imageResult = await postImageAction(profile);
         if (imageResult.success) {
-          updatedUserDetail.profileImageUrl = imageResult.payload; // Use the payload as the profile image URL
+          updatedUserDetail.profileImageUrl = imageResult.payload;
           setToast({
             message: "Profile image uploaded successfully!",
             type: "success",
@@ -115,16 +125,9 @@ const SettingPage = () => {
         });
       }
     } catch (error) {
+      console.error("Error updating profile:", error);
       setToast({ message: "An error occurred.", type: "error", show: true });
     }
-  };
-
-  const router = useRouter();
-  const [activeLink, setActiveLink] = useState(router.pathname);
-
-  const handleLinkClick = (href) => {
-    setActiveLink(href);
-    router.push(href);
   };
 
   return (
@@ -280,7 +283,7 @@ const SettingPage = () => {
                 <div>
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="facebook"
                       className="block text-gray-700 dark:text-white mb-1"
                     >
                       Facebook
@@ -348,7 +351,7 @@ const SettingPage = () => {
                 <div>
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="telegram"
                       className="block text-gray-700 dark:text-white mb-1"
                     >
                       Telegram
@@ -379,7 +382,7 @@ const SettingPage = () => {
 
             {/* profile*/}
             <div className="flex flex-col justify-between">
-              {/* <div
+              <div
                 className="m-auto w-[200px] h-[200px] mt-5 flex rounded-full bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${profileImage})` }}
               >
@@ -418,7 +421,7 @@ const SettingPage = () => {
                     </svg>
                   </label>
                 </div>
-              </div> */}
+              </div>
 
               <div className="mt-4 flex justify-center gap-3 w-auto ">
                 <button
