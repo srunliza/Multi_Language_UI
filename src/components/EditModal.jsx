@@ -62,11 +62,11 @@ const EditModal = ({
             value={roleId}
             className="block w-[319px] text-sm text-gray-500 transition duration-75 border py-1 mb-3 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
           >
-            <option value="">Choose role for user</option>
-            <option value="82ba4f84-734c-4412-a595-2ad91419eee7">
+            <option disabled value="">Choose role for user</option>
+            <option value="da9b9088-cbe7-47ae-8a9d-e296551f1458">
               Developer
             </option>
-            <option value="8cf765b0-9433-4763-8e58-057d07c154a7">
+            <option value="fa06498a-0207-4638-8c37-eb60947c7b22">
               Translator
             </option>
           </select>

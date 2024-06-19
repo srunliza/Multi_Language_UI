@@ -289,6 +289,8 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           isOpen={isAddMemberModalVisible}
           onClose={handleCloseAddMemberModal}
           onAddMember={handleAddMember}
+          project={project}
+          showToast={showToast}
         />
       )}
 

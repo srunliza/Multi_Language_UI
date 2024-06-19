@@ -84,12 +84,26 @@ export const updateUserRoleService = async (projectId, userId, roleId) => {
   return result;
 };
 
-export const removeMemberService = async (projectId,userId) => {
+export const removeMemberService = async (projectId, userId) => {
   const header = await headerToken();
-  const res = await fetch(`${baseUrl}/api/v1/project/remove-member/${userId}?projectId=${projectId}`, {
-    method: "DELETE",
-    headers: header,
-  });
+  const res = await fetch(
+    `${baseUrl}/api/v1/project/remove-member/${userId}?projectId=${projectId}`,
+    {
+      method: "DELETE",
+      headers: header,
+    }
+  );
   const result = await res.json();
   return result;
+};
+
+export const addMemberService = async (member) => {
+  const header = await headerToken();
+  const res = await fetch(`${baseUrl}/api/v1/project/add-member`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(member),
+  });
+  const data = await res.json();
+  return data;
 };

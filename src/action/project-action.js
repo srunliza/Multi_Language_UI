@@ -1,5 +1,6 @@
 "use server";
 import {
+  addMemberService,
   createProjectService,
   deleteProjectService,
   removeMemberService,
@@ -44,4 +45,25 @@ export const removeMemberAction = async (projectId, userId) => {
   const result = await removeMemberService(projectId, userId);
   revalidateTag("project");
   return result;
+};
+
+export const addMemberAction = async (formData) => {
+  const projectId = formData.get("projectId");
+  const userIds = JSON.parse(formData.get("userIds"));
+  const roleId = formData.get("roleId");
+
+  const member = {
+    projectId: projectId,
+    userId: userIds,
+    roleId: roleId,
+  };
+
+  try {
+    await addMemberService(member);
+    revalidateTag("project");
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding member:", error);
+    return { success: false };
+  }
 };

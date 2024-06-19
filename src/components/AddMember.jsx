@@ -1,8 +1,28 @@
-"use client";
 import React, { useState } from "react";
-import { ListMember } from "./ListMember";
+import ListMember from "./ListMember";
+import { addMemberAction } from "@/action/project-action";
+import SearchIcon from "@mui/icons-material/Search";
 
-const AddMemberModal = ({ isOpen, onClose, project }) => {
+const AddMemberModal = ({ isOpen, onClose, project, showToast }) => {
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedRole, setSelectedRole] = useState("");
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append("projectId", project.projectId);
+    formData.append("userIds", JSON.stringify(selectedUsers));
+    formData.append("roleId", selectedRole);
+
+    const result = await addMemberAction(formData);
+    if (result.success) {
+      showToast("Member added successfully!", false);
+    } else {
+      showToast("Failed to add member.", true);
+    }
+    onClose();
+  };
+
   return (
     <>
       {isOpen && (
@@ -14,7 +34,7 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
             ></div>
             <div className="relative z-20 bg-white w-[367px] p-6 rounded-lg shadow-md">
               <div className="flex justify-between mb-5">
-                <h2 className="text-base font-bold ">Add Member</h2>
+                <h2 className="text-base font-bold">Add Member</h2>
                 <button
                   id="closeContactForm"
                   className="text-gray-700 hover:text-red-500"
@@ -28,65 +48,48 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                     ></path>
                   </svg>
                 </button>
               </div>
 
-              <form action="" method="post">
-                <div className="relative mb-4">
-                  <input
-                    className="appearance-none border-2 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-blue-800 focus:border-blue-800 focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Search..."
-                  />
-                  <div className="absolute left-0 inset-y-0 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 ml-3 text-gray-400 hover:text-gray-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                {/* list member */}
-                <ListMember />
-                {/* select */}
+              <form onSubmit={handleFormSubmit}>
+                <ListMember onSelectUsers={setSelectedUsers} />
                 <div className="py-3">
-                  <label htmlFor="select" className="text-md font-medium ">
+                  <label htmlFor="select" className="text-md font-medium">
                     Assign role
                   </label>
-                  <select class="block w-[319px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-800 focus:ring-1 focus:ring-inset focus:ring-blue-800 mt-1 bg-none">
-                    <option value="language">choose role for user</option>
-                    <option value="language">Developer</option>
-                    <option value="khmer">Translator</option>
+                  <select
+                    className="block w-[319px] text-sm text-gray-50000 transition duration-75 border py-1 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-800 focus:ring-1 focus:ring-inset focus:ring-blue-800 mt-1 bg-none"
+                    value={selectedRole}
+                    onChange={(e) => setSelectedRole(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Choose role for user
+                    </option>
+                    <option value="da9b9088-cbe7-47ae-8a9d-e296551f1458">
+                      Developer
+                    </option>
+                    <option value="fa06498a-0207-4638-8c37-eb60947c7b22">
+                      Translator
+                    </option>
                   </select>
                 </div>
-                {/* button */}
-                <div class="flex gap-4 py-5 min-w-[50px] h-[75px] text-sm">
+                <div className="flex gap-4 py-5 min-w-[50px] h-[75px] text-sm">
                   <input
-                    class="px-2 py-2  text-center text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-700 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
+                    className="px-2 py-2 text-center text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-700 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring cursor-pointer"
                     type="reset"
-                    value={"Cancel"}
+                    value="Cancel"
+                    onClick={onClose}
                   />
-
                   <input
-                    class="px-3 py-2 text-center text-white bg-blue-800 border border-blue-800 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
+                    className="px-3 py-2 text-center text-white bg-blue-800 border border-blue-800 rounded-lg active:text-white hover:bg-blue-700 hover:text-white focus:outline-none focus:ring cursor-pointer"
                     type="submit"
-                    value={"Save"}
+                    value="Save"
                   />
                 </div>
               </form>

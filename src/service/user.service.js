@@ -11,6 +11,15 @@ export const getCurrentUserProfileService = async () => {
   return data;
 };
 
+export const getAllUserService = async () => {
+  const header = await headerToken();
+  const res = await fetch(`${baseUrl}/api/v1/user/get-all-users`, {
+    headers: header,
+  });
+  const data = await res.json();
+  return data;
+};
+
 export const resetPasswordService = async (updatedPassword) => {
   const header = await headerToken();
   const res = await fetch(`${baseUrl}/api/v1/user/reset-password`, {
