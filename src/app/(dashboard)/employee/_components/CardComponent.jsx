@@ -66,7 +66,7 @@ const CardComponent = ({ project, index }) => {
           key={index}
           href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
-            .toLowerCase()}/dashboard`}
+            .toLowerCase()}/dashboard/${project.projectId}`}
           passHref
           className="text-base font-semibold"
         >
@@ -74,20 +74,30 @@ const CardComponent = ({ project, index }) => {
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}
         </Link>
-        {project?.members[0]?.role.roleName !== "Translator" &&
-          project?.members[0]?.role.roleName !== "Developer" && (
-            <DropdownMenu
-              project={project}
-              onEditClick={handleEditClick}
-              onDeleteClick={handleDeleteClick}
-            />
-          )}
+        <div className="cursor-pointer">
+          {project?.members[0]?.role.roleName !== "Translator" &&
+            project?.members[0]?.role.roleName !== "Developer" && (
+              <DropdownMenu
+                project={project}
+                onEditClick={handleEditClick}
+                onDeleteClick={handleDeleteClick}
+              />
+            )}
+        </div>
       </div>
 
       <div className="mb-5">
-        <span className="text-green-500 text-xs">
+        <Link
+          key={index}
+          href={`/${project?.members[0].role.roleName
+            .replace(" ", "-")
+            .toLowerCase()}/dashboard/${project.projectId}`}
+          passHref
+          className="text-green-500 text-xs"
+          ធ
+        >
           {project.members[0].role.roleName}
-        </span>
+        </Link>
       </div>
 
       <div className="text-black text-md flex items-center mb-4 justify-between">
@@ -95,8 +105,9 @@ const CardComponent = ({ project, index }) => {
           key={index}
           href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
-            .toLowerCase()}/dashboard`}
+            .toLowerCase()}/dashboard/${project.projectId}`}
           passHref
+          className="text-base font-semibold"
         >
           <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-xs">
             <svg
@@ -120,7 +131,7 @@ const CardComponent = ({ project, index }) => {
           key={index}
           href={`/${project?.members[0].role.roleName
             .replace(" ", "-")
-            .toLowerCase()}/calendar`}
+            .toLowerCase()}/calendar/${project.projectId}`}
           passHref
         >
           <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-xs">

@@ -4,6 +4,7 @@ import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { updateUserDetailAction } from "@/action/user-action";
 import Toast from "../_components/ToastComponent";
+import { postImageAction } from "@/action/image-action";
 
 const SettingPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +15,7 @@ const SettingPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [facebook, setFacebook] = useState("");
   const [telegram, setTelegram] = useState("");
+  const [profileImage, setProfileImage] = useState("/Images/user-profile.png");
   const [profile, setProfile] = useState(null);
 
   const [toast, setToast] = useState({ message: "", type: "", show: false });
@@ -50,8 +52,16 @@ const SettingPage = () => {
     setPhoneNumber(e.target.value);
   };
 
-  const handleProfileChange = (e) => {
-    setProfile(e.target.files[0]);
+  const handleProfileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setProfile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -72,39 +82,37 @@ const SettingPage = () => {
 
     try {
       if (profile) {
-        formData.append("profile", profile);
-        for (const key in updatedUserDetail) {
-          formData.append(key, updatedUserDetail[key]);
-        }
-        const result = await updateUserDetailAction(formData);
-        if (result.success) {
+        const imageResult = await postImageAction(profile);
+        if (imageResult.success) {
+          updatedUserDetail.profileImageUrl = imageResult.payload; // Use the payload as the profile image URL
           setToast({
-            message: "Profile updated successfully!",
+            message: "Profile image uploaded successfully!",
             type: "success",
             show: true,
           });
         } else {
           setToast({
-            message: "Failed to update profile.",
+            message: "Failed to upload profile image.",
             type: "error",
             show: true,
           });
+          return;
         }
+      }
+
+      const result = await updateUserDetailAction(updatedUserDetail);
+      if (result.success) {
+        setToast({
+          message: "Profile updated successfully!",
+          type: "success",
+          show: true,
+        });
       } else {
-        const result = await updateUserDetailAction(updatedUserDetail);
-        if (result.success) {
-          setToast({
-            message: "Profile updated successfully!",
-            type: "success",
-            show: true,
-          });
-        } else {
-          setToast({
-            message: "Failed to update profile.",
-            type: "error",
-            show: true,
-          });
-        }
+        setToast({
+          message: "Failed to update profile.",
+          type: "error",
+          show: true,
+        });
       }
     } catch (error) {
       setToast({ message: "An error occurred.", type: "error", show: true });
@@ -369,9 +377,12 @@ const SettingPage = () => {
               </div>
             </div>
 
-            {/* profile and password */}
+            {/* profile*/}
             <div className="flex flex-col justify-between">
-              <div className="m-auto w-[200px] h-[200px] mt-5 flex bg-[url('/assets/images/profileneth.svg')] rounded-full bg-cover bg-center bg-no-repeat">
+              {/* <div
+                className="m-auto w-[200px] h-[200px] mt-5 flex rounded-full bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${profileImage})` }}
+              >
                 <div className="bg-white rounded-full w-10 h-10 text-center ml-28 mt-[180px] lg-ml-[35px]">
                   <input
                     type="file"
@@ -382,7 +393,7 @@ const SettingPage = () => {
                   />
                   <label
                     htmlFor="upload_profile"
-                    className="inline-flex items-center"
+                    className="inline-flex items-center cursor-pointer"
                   >
                     <svg
                       data-slot="icon"
@@ -407,7 +418,7 @@ const SettingPage = () => {
                     </svg>
                   </label>
                 </div>
-              </div>
+              </div> */}
 
               <div className="mt-4 flex justify-center gap-3 w-auto ">
                 <button
