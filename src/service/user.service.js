@@ -6,7 +6,6 @@ export const getCurrentUserProfileService = async () => {
   const header = await headerToken();
   const res = await fetch(`${baseUrl}/api/v1/user/get-user-profile`, {
     headers: header,
-    next: { tags: ["user"] },
   });
   const data = await res.json();
   return data;
