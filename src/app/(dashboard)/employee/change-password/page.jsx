@@ -1,14 +1,15 @@
 "use client";
 import { resetPasswordAction } from "@/action/user-action";
 import { useState } from "react";
+import Toast from "../../../../components/ToastComponent";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 const ChangePassword = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastType, setToastType] = useState("success");
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const handleCurrentPasswordVisibilityToggle = () => {
     setCurrentPasswordVisible(!currentPasswordVisible);
@@ -32,21 +33,46 @@ const ChangePassword = () => {
     };
 
     try {
-      await resetPasswordAction(updatedPassword);
-      setToastMessage("Password reset successfully!");
-      setToastType("success");
-      setToastVisible(true);
-      setTimeout(() => setToastVisible(false), 3000); // Hide toast after 3 seconds
+      const result = await resetPasswordAction(updatedPassword);
+
+      if (result.code === 200) {
+        setToast({
+          message: result.message || "Password reset successfully!",
+          type: "success",
+          show: true,
+        });
+      } else if (result.status === 401) {
+        setToast({
+          message: result.detail || "Your old password is incorrect",
+          type: "error",
+          show: true,
+        });
+      } else {
+        setToast({
+          message: "Failed to reset password.",
+          type: "error",
+          show: true,
+        });
+      }
     } catch (error) {
-      setToastMessage("Failed to reset password.");
-      setToastType("error");
-      setToastVisible(true);
-      setTimeout(() => setToastVisible(false), 3000); // Hide toast after 3 seconds
+      setToast({
+        message: "Failed to reset password.",
+        type: "error",
+        show: true,
+      });
+    } finally {
+      setTimeout(() => setToast({ ...toast, show: false }), 3000); // Hide toast after 3 seconds
     }
   };
 
   return (
     <div>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
       <form className="w-full p-10" onSubmit={handleSubmit}>
         <div className="bg-white p-8 h-auto rounded-lg shadow-md border dark:border-gray-700 max-w-screen-lg mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
@@ -89,7 +115,11 @@ const ChangePassword = () => {
                       type="button"
                       onClick={handleCurrentPasswordVisibilityToggle}
                     >
-                      {currentPasswordVisible ? "Hide" : "Show"}
+                      {currentPasswordVisible ? (
+                        <VisibilityOffOutlinedIcon />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -112,7 +142,11 @@ const ChangePassword = () => {
                       type="button"
                       onClick={handleNewPasswordVisibilityToggle}
                     >
-                      {newPasswordVisible ? "Hide" : "Show"}
+                      {newPasswordVisible ? (
+                        <VisibilityOffOutlinedIcon />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -135,7 +169,11 @@ const ChangePassword = () => {
                       type="button"
                       onClick={handlePasswordVisibilityToggle}
                     >
-                      {passwordVisible ? "Hide" : "Show"}
+                      {passwordVisible ? (
+                        <VisibilityOffOutlinedIcon />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -150,17 +188,6 @@ const ChangePassword = () => {
           </div>
         </div>
       </form>
-      {toastVisible && (
-        <div className="fixed top-0 right-4 m-4 z-50">
-          <div
-            className={`alert ${
-              toastType === "success" ? "alert-success" : "alert-error"
-            } text-white`}
-          >
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

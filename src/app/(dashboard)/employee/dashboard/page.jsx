@@ -6,9 +6,29 @@ import {
   getAllProjectWithStatusService,
 } from "@/service/project.service";
 
+const formatDate = (dateString) => {
+  const options = { month: "numeric", day: "numeric", year: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
   const totalProject = await getAllProjectWithStatusService();
+
+  // Process the project data to update the updatedDate with the longest expireDate
+  const processedProjectData = projectData.payload.map((project) => {
+    if (project.attachment && project.attachment.length > 0) {
+      const longestExpireDate = project.attachment.reduce((max, attachment) =>
+        new Date(attachment.expireDate) > new Date(max.expireDate)
+          ? attachment
+          : max
+      ).expireDate;
+      project.updatedDate = formatDate(longestExpireDate);
+    } else {
+      project.updatedDate = "N/A";
+    }
+    return project;
+  });
 
   const getRoleRoute = (role) => {
     switch (role) {
@@ -155,8 +175,8 @@ const EmployeeDashboardPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {projectData?.payload && projectData.payload.length > 0 ? (
-              projectData.payload
+            {processedProjectData && processedProjectData.length > 0 ? (
+              processedProjectData
                 .filter((project) => project.active)
                 .map((project, index) => (
                   <tr
@@ -170,7 +190,7 @@ const EmployeeDashboardPage = async () => {
                       <Link
                         href={`/${getRoleRoute(
                           project.members[0].role.roleName
-                        )}/dashboard`}
+                        )}/dashboard/${project.projectId}`}
                       >
                         {project.projectName}
                       </Link>
@@ -179,7 +199,7 @@ const EmployeeDashboardPage = async () => {
                       <Link
                         href={`/${getRoleRoute(
                           project.members[0].role.roleName
-                        )}/dashboard`}
+                        )}/dashboard/${project.projectId}`}
                       >
                         {project.members[0].role.roleName}
                       </Link>
@@ -188,7 +208,7 @@ const EmployeeDashboardPage = async () => {
                       <Link
                         href={`/${getRoleRoute(
                           project.members[0].role.roleName
-                        )}/dashboard`}
+                        )}/dashboard/${project.projectId}`}
                       >
                         {new Date(project.createDate).toLocaleDateString()}
                       </Link>
@@ -197,21 +217,21 @@ const EmployeeDashboardPage = async () => {
                       <Link
                         href={`/${getRoleRoute(
                           project.members[0].role.roleName
-                        )}/dashboard`}
+                        )}/dashboard/${project.projectId}`}
                         className={
-                          project.updatedDate ? "text-gray-800" : "text-red-600"
+                          project.updatedDate !== "N/A"
+                            ? "text-gray-800"
+                            : "text-red-600"
                         }
                       >
-                        {project.updatedDate
-                          ? new Date(project.updatedDate).toLocaleDateString()
-                          : "N/A"}
+                        {project.updatedDate}
                       </Link>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <Link
                         href={`/${getRoleRoute(
                           project.members[0].role.roleName
-                        )}/dashboard`}
+                        )}/dashboard/${project.projectId}`}
                       >
                         <span
                           className={`status-label ${

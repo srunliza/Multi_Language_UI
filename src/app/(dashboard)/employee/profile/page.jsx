@@ -11,7 +11,7 @@ const ProfilePage = async () => {
         <h1 className="text-xl text-gray-800 font-semibold">
           Personal Details
         </h1>
-        <div className="flex gap-x-8 items-center mt-10">
+        <div className="flex gap-x-8 items-center mt-8">
           <div className="h-24 w-24 rounded-full overflow-hidden">
             <img
               src={userData?.payload?.image || defaultImage}
@@ -31,7 +31,7 @@ const ProfilePage = async () => {
             </p>
           </div>
         </div>
-        <div className="w-full md:w-[85%] lg:w-[70%] grid grid-cols-2 mt-10 gap-y-2">
+        <div className="w-full md:w-[85%] lg:w-[70%] grid grid-cols-2 mt-8 gap-y-2">
           <h2 className="uppercase text-sm font-semibold text-gray-600">
             First Name
           </h2>

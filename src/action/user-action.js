@@ -3,13 +3,15 @@ import {
   resetPasswordService,
   updateUserDetailService,
 } from "@/service/user.service";
+import { revalidateTag } from "next/cache";
 
 export const resetPasswordAction = async (updatedPassword) => {
-  await resetPasswordService(updatedPassword);
-  return { success: true };
+  const result = await resetPasswordService(updatedPassword);
+  return result;
 };
 
 export const updateUserDetailAction = async (updatedUserDetail) => {
-  await updateUserDetailService(updatedUserDetail);
-  return { success: true };
+  const result = await updateUserDetailService(updatedUserDetail);
+  revalidateTag("user");
+  return result;
 };

@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { updateUserDetailAction } from "@/action/user-action";
-import Toast from "../_components/ToastComponent";
+import Toast from "../../../../components/ToastComponent";
 import { postImageAction } from "@/action/image-action";
 
 const SettingPage = () => {
-  // State declarations
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -75,8 +74,26 @@ const SettingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    let imageFileName = null;
+    // Upload image if a file is selected
+    if (profile) {
+      const formData = new FormData();
+      formData.append("file", profile);
+      const res = await postImageAction(formData);
 
+      if (res?.status === "CREATED") {
+        imageFileName = res.payload;
+      } else {
+        setToast({
+          message: "Failed to upload profile image.",
+          type: "error",
+          show: true,
+        });
+        return;
+      }
+    }
+
+    const formData = new FormData(e.target);
     const updatedUserDetail = {
       username: formData.get("username"),
       firstName: formData.get("firstName"),
@@ -88,28 +105,32 @@ const SettingPage = () => {
       telegram: formData.get("telegram"),
     };
 
-    try {
-      if (profile) {
-        await postImageAction(profile);
-      }
+    const result = await updateUserDetailAction(updatedUserDetail);
 
-      const result = await updateUserDetailAction(updatedUserDetail);
-      if (result.success) {
-        setToast({
-          message: "Profile updated successfully!",
-          type: "success",
-          show: true,
-        });
-      } else {
-        setToast({
-          message: "Failed to update profile.",
-          type: "error",
-          show: true,
-        });
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      setToast({ message: "An error occurred.", type: "error", show: true });
+    if (result.status === "OK") {
+      setToast({
+        message: "Profile updated successfully!",
+        type: "success",
+        show: true,
+      });
+    } else if (result.status === 403) {
+      setToast({
+        message: result.detail,
+        type: "error",
+        show: true,
+      });
+    } else if (result.status === 400) {
+      setToast({
+        message: "Bad request. Please check your input.",
+        type: "error",
+        show: true,
+      });
+    } else {
+      setToast({
+        message: "Failed to update profile.",
+        type: "error",
+        show: true,
+      });
     }
   };
 
@@ -152,7 +173,7 @@ const SettingPage = () => {
           </div>
 
           <hr className="border-gray-300 mb-6" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-[3rem]">
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
                 <div>
@@ -406,7 +427,7 @@ const SettingPage = () => {
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-center gap-3 w-auto ">
+              <div className="mt-4 flex justify-center gap-3 w-auto]">
                 <button
                   type="button"
                   className="btn text-black bg-white px-4 py-2  w-[100px]"

@@ -1,31 +1,36 @@
+"use client";
 import React, { useState } from "react";
 import { createProjectAction } from "@/action/project-action";
+import { useRouter } from "next/navigation";
+import Toast from "./ToastComponent";
 
 const CreateProject = ({ onClose }) => {
   const [toastMessage, setToastMessage] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
-  const [isError, setIsError] = useState(false); 
+  const [isError, setIsError] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
       const result = await createProjectAction(formData);
-      if (result.success) {
-        setToastMessage("Project created successfully!");
+      if (result.status === "CREATED") {
+        setToastMessage(result.message || "Project created successfully!");
         setIsError(false);
         setToastVisible(true);
         setTimeout(() => {
           setToastVisible(false);
           onClose();
-        }, 2000);
+          router.push(`/project-leader/dashboard/${result.payload.projectId}`);
+        }, 3000);
       } else {
-        setToastMessage("Failed to create project!");
+        setToastMessage(result.detail || "Failed to create project!");
         setIsError(true);
         setToastVisible(true);
         setTimeout(() => {
           setToastVisible(false);
-        }, 2000);
+        }, 3000);
       }
     } catch (error) {
       setToastMessage("Failed to create project!");
@@ -33,24 +38,19 @@ const CreateProject = ({ onClose }) => {
       setToastVisible(true);
       setTimeout(() => {
         setToastVisible(false);
-      }, 2000);
+      }, 3000);
     }
   };
 
   return (
     <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
       <div className="w-full max-w-md p-6 border bg-white rounded-lg shadow-xl space-y-6 relative">
-        {toastVisible && (
-          <div className="fixed top-24 right-4 z-50">
-            <div
-              className={`alert text-white ${
-                isError ? "alert-error" : "alert-success"
-              }`}
-            >
-              <span>{toastMessage}</span>
-            </div>
-          </div>
-        )}
+        <Toast
+          message={toastMessage}
+          type={isError ? "error" : "success"}
+          show={toastVisible}
+          onClose={() => setToastVisible(false)}
+        />
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-600">Create Project</h2>
           <button

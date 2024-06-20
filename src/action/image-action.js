@@ -2,6 +2,8 @@
 import { postImageService } from "@/service/image.service";
 
 export const postImageAction = async (imageFile) => {
-    await postImageService(imageFile);
-    return { success: true};
+  console.log("In action..........", imageFile);
+  const result = await postImageService(imageFile);
+  console.log(result);
+  return result;
 };
