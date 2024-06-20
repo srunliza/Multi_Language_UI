@@ -48,9 +48,16 @@ export const removeMemberAction = async (projectId, userId) => {
 };
 
 export const addMemberAction = async (formData) => {
+  console.log("In action ............", formData);
+
   const projectId = formData.get("projectId");
+  console.log("Project ID:", projectId);
+
   const userIds = JSON.parse(formData.get("userIds"));
+  console.log("User IDs:", userIds);
+
   const roleId = formData.get("roleId");
+  console.log("Role ID:", roleId);
 
   const member = {
     projectId: projectId,
@@ -58,12 +65,8 @@ export const addMemberAction = async (formData) => {
     roleId: roleId,
   };
 
-  try {
-    await addMemberService(member);
-    revalidateTag("project");
-    return { success: true };
-  } catch (error) {
-    console.error("Error adding member:", error);
-    return { success: false };
-  }
+  console.log("Member object:", member);
+
+  await addMemberService(member);
+  revalidateTag("project");
 };

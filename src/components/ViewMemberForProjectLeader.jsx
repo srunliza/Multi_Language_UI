@@ -47,24 +47,19 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   };
 
   const confirmDelete = async () => {
-    try {
-      const result = await removeMemberAction(
-        project.projectId,
-        memberToDelete
+    console.log("Deleting member:", memberToDelete);
+    const result = await removeMemberAction(project.projectId, memberToDelete);
+    console.log("Delete result:", result);
+    if (result.status === "OK") {
+      const index = project.members.findIndex(
+        (member) => member.userId === memberToDelete
       );
-      if (result.status === "OK") {
-        const index = project.members.findIndex(
-          (member) => member.userId === memberToDelete
-        );
-        if (index > -1) {
-          project.members.splice(index, 1); // Remove member from project members
-        }
-        showToast(result.message, false);
-      } else {
-        showToast("Failed to remove member.", true);
+      if (index > -1) {
+        project.members.splice(index, 1); // Remove member from project members
       }
-    } catch (error) {
-      showToast("An error occurred.", true);
+      showToast(result.message, false);
+    } else {
+      showToast("Failed to remove member.", true);
     }
     setDeleteModalVisible(false);
     setMemberToDelete(null);
@@ -93,27 +88,25 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   };
 
   const handleEditSubmit = async (formData) => {
-    try {
-      const result = await editUserRoleAction(formData);
-      if (result.success) {
-        const index = project.members.findIndex(
-          (member) => member.userId === formData.get("userId")
-        );
-        if (index > -1) {
-          project.members[index] = {
-            ...project.members[index],
-            role: {
-              ...project.members[index].role,
-              roleId: formData.get("roleId"),
-            },
-          }; // Update member role
-        }
-        showToast("Role updated successfully!", false);
-      } else {
-        showToast("Failed to update role.", true);
+    console.log("Editing role for user:", formData.get("userId"));
+    const result = await editUserRoleAction(formData);
+    console.log("Edit result:", result);
+    if (result.success) {
+      const index = project.members.findIndex(
+        (member) => member.userId === formData.get("userId")
+      );
+      if (index > -1) {
+        project.members[index] = {
+          ...project.members[index],
+          role: {
+            ...project.members[index].role,
+            roleId: formData.get("roleId"),
+          },
+        }; // Update member role
       }
-    } catch (error) {
-      showToast("An error occurred.", true);
+      showToast("Role updated successfully!", false);
+    } else {
+      showToast("Failed to update role.", true);
     }
     setIsEditing(false);
     setEditProject(null);
@@ -153,9 +146,8 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
               <div
-                className={`dropdown ${
-                  dropdownOpen === member.userId ? "dropdown-open" : ""
-                } dropdown-end`}
+                className={`dropdown ${dropdownOpen === member.userId ? "dropdown-open" : ""
+                  } dropdown-end`}
               >
                 <div
                   tabIndex={0}
@@ -290,7 +282,6 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           onClose={handleCloseAddMemberModal}
           onAddMember={handleAddMember}
           project={project}
-          showToast={showToast}
         />
       )}
 
@@ -318,9 +309,8 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
       {toastVisible && (
         <div className="fixed top-0 right-4 m-4 z-50">
           <div
-            className={`alert text-white ${
-              isError ? "alert-error" : "alert-success"
-            }`}
+            className={`alert text-white ${isError ? "alert-error" : "alert-success"
+              }`}
           >
             <span>{toastMessage}</span>
           </div>

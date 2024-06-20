@@ -9,17 +9,11 @@ export const ListMember = ({ onSelectUsers }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        const response = await getAllUserService();
-        const data = response.payload;
-        if (Array.isArray(data)) {
-          setUsers(data);
-        } else {
-          console.error("API response is not an array:", data);
-          setUsers([]);
-        }
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
+      const response = await getAllUserService();
+      const data = response.payload;
+      if (Array.isArray(data)) {
+        setUsers(data);
+      } else {
         setUsers([]);
       }
     };

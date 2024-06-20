@@ -169,8 +169,8 @@ const CardComponent = ({ project, index }) => {
               project.status === "COMPLETED"
                 ? "100%"
                 : project.status === "PROGRESS"
-                ? "50%"
-                : "20%",
+                  ? "50%"
+                  : "20%",
           }}
         ></div>
       </div>

@@ -28,7 +28,6 @@ const SettingPage = () => {
     router.push(href);
   };
 
-  // Handlers for input changes
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
   };
@@ -73,7 +72,6 @@ const SettingPage = () => {
     }
   };
 
-  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,22 +90,7 @@ const SettingPage = () => {
 
     try {
       if (profile) {
-        const imageResult = await postImageAction(profile);
-        if (imageResult.success) {
-          updatedUserDetail.profileImageUrl = imageResult.payload;
-          setToast({
-            message: "Profile image uploaded successfully!",
-            type: "success",
-            show: true,
-          });
-        } else {
-          setToast({
-            message: "Failed to upload profile image.",
-            type: "error",
-            show: true,
-          });
-          return;
-        }
+        await postImageAction(profile);
       }
 
       const result = await updateUserDetailAction(updatedUserDetail);

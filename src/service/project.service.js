@@ -71,6 +71,7 @@ export const updateProjectService = async (projectId, updatedProjectName) => {
 };
 
 export const updateUserRoleService = async (projectId, userId, roleId) => {
+  
   const header = await headerToken();
   const res = await fetch(
     `${baseUrl}/api/v1/project/update-role-member?projectId=${projectId}&userId=${userId}`,
@@ -81,6 +82,7 @@ export const updateUserRoleService = async (projectId, userId, roleId) => {
     }
   );
   const result = await res.json();
+  console.log(result)
   return result;
 };
 
@@ -98,12 +100,21 @@ export const removeMemberService = async (projectId, userId) => {
 };
 
 export const addMemberService = async (member) => {
+  console.log("In service ..........", member);
+  
   const header = await headerToken();
+  console.log("Header:", header);
+  
   const res = await fetch(`${baseUrl}/api/v1/project/add-member`, {
     method: "POST",
     headers: header,
     body: JSON.stringify(member),
   });
+  
+  console.log("Fetch response:", res);
+  
   const data = await res.json();
+  console.log("Response data:", data);
+  
   return data;
 };

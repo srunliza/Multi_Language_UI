@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import ListMember from "./ListMember";
 import { addMemberAction } from "@/action/project-action";
-import SearchIcon from "@mui/icons-material/Search";
 
-const AddMemberModal = ({ isOpen, onClose, project, showToast }) => {
+const AddMemberModal = ({ isOpen, onClose, project }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
 
@@ -14,12 +13,11 @@ const AddMemberModal = ({ isOpen, onClose, project, showToast }) => {
     formData.append("userIds", JSON.stringify(selectedUsers));
     formData.append("roleId", selectedRole);
 
+    console.log("Form data before action:", formData);
+
     const result = await addMemberAction(formData);
-    if (result.success) {
-      showToast("Member added successfully!", false);
-    } else {
-      showToast("Failed to add member.", true);
-    }
+    console.log("Action result:", result);
+
     onClose();
   };
 
@@ -71,10 +69,10 @@ const AddMemberModal = ({ isOpen, onClose, project, showToast }) => {
                     <option value="" disabled>
                       Choose role for user
                     </option>
-                    <option value="da9b9088-cbe7-47ae-8a9d-e296551f1458">
+                    <option value="c1fabd3c-639b-4bc1-b33c-7546a21c20ba">
                       Developer
                     </option>
-                    <option value="fa06498a-0207-4638-8c37-eb60947c7b22">
+                    <option value="907b64ed-384c-4392-be35-59f6b77c3e1f">
                       Translator
                     </option>
                   </select>
