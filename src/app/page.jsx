@@ -6,8 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import teamMembers from "@/obj/teamMembers";
 import "animate.css";
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
@@ -15,8 +13,8 @@ import "swiper/swiper-bundle.css";
 const LandingPageComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="bg-gray-100 h-auto scroll-smooth ">
-      <nav className="bg-gray-100 sticky top-0 z-10 shadow-sm border-b border-b-gray-200">
+    <div className="bg-slate-50 h-auto scroll-smooth ">
+      <nav className="bg-slate-100 sticky top-0 z-10 shadow-sm border-b border-b-gray-200">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-3">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
@@ -464,7 +462,7 @@ const LandingPageComponent = () => {
       {/* End Contact Section  */}
 
       {/*  Footer Section*/}
-      <footer className="bg-[#EDF2F7] shadow-sm border-t-gray-200  border-t pt-11">
+      <footer className="bg-slate-100 shadow-sm border-t-gray-200  border-t pt-11">
         <div className="max-w-[1320px] mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-start items-center   justify-between space-y-8 md:space-y-0">
             {/* Logo and Social Media */}
@@ -535,10 +533,10 @@ const LandingPageComponent = () => {
               <div className="flex flex-col text-gray-600 gap-2">
                 <p>Monday to Friday. 9AM to 6 PM</p>
                 <a
-                  href="tel:+85569872060"
+                  href="tel:+85516857577"
                   className="text-blue-600 hover:text-blue-800"
                 >
-                  Tel: +855 698 720 60
+                  Tel: +855 168 575 77
                 </a>
                 <a
                   href="tel:+85569872060"
