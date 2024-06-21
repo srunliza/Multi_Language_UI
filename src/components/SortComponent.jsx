@@ -1,11 +1,7 @@
 "use client";
 import { DatePicker } from "@nextui-org/react";
 
-const SortComponent = ({
-  selectedStatus,
-  handleStatusChange,
-  handleSortClick,
-}) => {
+const SortComponent = () => {
   return (
     <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
       <div className="flex w-full sm:w-auto">
@@ -17,7 +13,6 @@ const SortComponent = ({
           <DatePicker
             id="start-date"
             className="max-w-[284px]"
-            onChange={() => handleSortClick("startDate")}
           />
         </div>
       </div>
@@ -30,7 +25,6 @@ const SortComponent = ({
           <DatePicker
             id="end-date"
             className="max-w-[284px]"
-            onChange={() => handleSortClick("endDate")}
           />
         </div>
       </div>
@@ -41,17 +35,15 @@ const SortComponent = ({
         <select
           name="status"
           className="w-[10rem] border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block p-2.5 bg-white"
-          value={selectedStatus}
-          onChange={handleStatusChange}
         >
           <option value="All">All</option>
-          <option value="Pending" className="text-red-500 font-medium">
+          <option value="PENDING" className="text-red-500 font-medium">
             Pending
           </option>
-          <option value="Progress" className="text-yellow-500 font-medium">
+          <option value="PROGRESS" className="text-yellow-500 font-medium">
             Progress
           </option>
-          <option value="Completed" className="text-green-500 font-medium">
+          <option value="COMPLETED" className="text-green-500 font-medium">
             Completed
           </option>
         </select>

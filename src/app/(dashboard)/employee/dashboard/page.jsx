@@ -26,7 +26,6 @@ const EmployeeDashboardPage = async () => {
   const totalProject = await getAllProjectWithStatusService();
   const currentUser = await getCurrentUserProfileService();
 
-  // Process the project data to update the longest expireDate
   const processedProjectData = projectData?.payload?.map((project) => {
     if (project.attachment && project.attachment.length > 0) {
       const longestExpireDate = project.attachment.reduce((max, attachment) =>
@@ -180,7 +179,7 @@ const EmployeeDashboardPage = async () => {
                 Start Date
               </th>
               <th scope="col" className="px-6 py-4">
-                Longest Expire Date
+                End Date
               </th>
               <th scope="col" className="px-6 py-4 text-right pr-12">
                 Status

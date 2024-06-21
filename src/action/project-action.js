@@ -38,7 +38,6 @@ export const editUserRoleAction = async (formData) => {
   const roleId = formData.get("roleId");
   const result = await updateUserRoleService(projectId, userId, roleId);
   revalidateTag("project");
-  console.log(result)
   return result;
 };
 
