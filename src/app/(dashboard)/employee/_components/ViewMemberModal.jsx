@@ -1,5 +1,3 @@
-// components/ViewMemberModal.js
-
 import React, { useRef } from "react";
 import ViewMember from "@/components/ViewMember";
 

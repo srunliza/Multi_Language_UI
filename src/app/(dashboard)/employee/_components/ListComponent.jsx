@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import Link from "next/link";
 import MemberImage from "./MemberImage";
 import ActionButtons from "./ActionButton";
 import ViewMemberModal from "./ViewMemberModal";
+import DeleteProjectModal from "@/components/DeleteProjectModal";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -26,22 +26,11 @@ const getStatusBgColor = (status) => {
     case "PENDING":
       return "bg-red-500";
     default:
-      return "bg-gray-500";
+      return "bg-gray-200";
   }
 };
 
-const ProjectListComponent = ({
-  projects,
-  handleSeeAll,
-  handleEditClick,
-  handleDeleteClick,
-}) => {
-  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
-
-  const handleModalClose = () => {
-    setIsViewMemberOpen(false);
-  };
-
+const ListComponent = ({ projects }) => {
   return (
     <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] overflow-y-auto no-scrollbar">
       {projects.map((project, index) => (
@@ -59,10 +48,8 @@ const ProjectListComponent = ({
               <span className="text-xs text-green-500">{project.role}</span>
             </div>
           </div>
-
           <div className="sm:-ml-1 ml-4 flex flex-wrap gap-3 lg:w-auto text-md text-black mt-4 lg:mt-0">
             <Link
-              key={index}
               href={`/${project.role
                 .replace(" ", "-")
                 .toLowerCase()}/dashboard`}
@@ -85,9 +72,7 @@ const ProjectListComponent = ({
                 12
               </div>
             </Link>
-
             <Link
-              key={index}
               href={`/${project.role.replace(" ", "-").toLowerCase()}/calendar`}
               passHref
             >
@@ -105,14 +90,9 @@ const ProjectListComponent = ({
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                {/* {project.daysLeft > 6
-                  ? project.daysLeft + " days..."
-                  : project.daysLeft +
-                    (project.daysLeft > 1 ? " days left" : " day left")} */}
                 1 day left
               </div>
             </Link>
-
             <div className="flex lg:-ml-0 flex-wrap items-center sm:ml-5 sm:-mt-1 gap-7 lg:mt-0 md:mt-3">
               <div className="w-[10rem] md:-ml-4 text-black text-xs lg:-ml-0 sm:-ml-5">
                 Translation Progress
@@ -151,10 +131,14 @@ const ProjectListComponent = ({
               onDeleteClick={() => handleDeleteClick(project)}
             />
           </div>
-
           <ViewMemberModal
             isOpen={isViewMemberOpen}
             onClose={handleModalClose}
+          />
+          <DeleteProjectModal
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            onConfirm={handleDeleteConfirm}
           />
         </div>
       ))}
@@ -162,4 +146,4 @@ const ProjectListComponent = ({
   );
 };
 
-export default ProjectListComponent;
+export default ListComponent;

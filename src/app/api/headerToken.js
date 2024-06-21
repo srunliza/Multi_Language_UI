@@ -13,6 +13,5 @@ export const headerTokenFormData = async () => {
   const session = await getServerSession(authOption);
   return {
     authorization: `Bearer ${session?.user?.token}`,
-    "Content-Type": "multipart/form-data",
   };
 };
