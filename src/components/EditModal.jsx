@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Toast from "./ToastComponent";
 
 const EditModal = ({
   isOpen,
@@ -10,9 +11,11 @@ const EditModal = ({
   modalRef,
 }) => {
   const [roleId, setRoleId] = useState("");
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
+
   useEffect(() => {
     if (isOpen) {
-      setRoleId(""); // Reset role selection on open
+      setRoleId("");
     }
   }, [isOpen]);
 
@@ -29,13 +32,7 @@ const EditModal = ({
     formData.append("projectId", project.projectId);
     formData.append("userId", userId);
     formData.append("roleId", roleId);
-    console.log("Form Data:", {
-      projectId: project.projectId,
-      userId: userId,
-      roleId: roleId,
-    }); // Log to ensure correct values
     await onSubmit(formData);
-    onClose();
   };
 
   return (
@@ -62,11 +59,13 @@ const EditModal = ({
             value={roleId}
             className="block w-[319px] text-sm text-gray-500 transition duration-75 border py-1 mb-3 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
           >
-            <option disabled value="">Choose role for user</option>
-            <option value="da9b9088-cbe7-47ae-8a9d-e296551f1458">
+            <option disabled value="">
+              Choose role for user
+            </option>
+            <option value="63dbf948-62f0-4779-baeb-4bf88ca055ce">
               Developer
             </option>
-            <option value="fa06498a-0207-4638-8c37-eb60947c7b22">
+            <option value="82742e9c-7a2c-48b5-a532-395c3d2a5075">
               Translator
             </option>
           </select>
@@ -88,6 +87,12 @@ const EditModal = ({
           </div>
         </form>
       </div>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </div>
   );
 };

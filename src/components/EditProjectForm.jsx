@@ -1,38 +1,43 @@
 import React, { useState } from "react";
 import { editProjectAction } from "@/action/project-action";
+import Toast from "./ToastComponent";
 
 const EditProjectForm = ({ project, onClose }) => {
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastVisible, setToastVisible] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
       const result = await editProjectAction(formData);
-      if (result.success) {
-        setToastMessage("Project edited successfully!");
-        setIsError(false);
-        setToastVisible(true);
+      if (result.status === "OK") {
+        setToast({
+          message: "Project edited successfully!",
+          type: "success",
+          show: true,
+        });
         setTimeout(() => {
-          setToastVisible(false);
+          setToast({ ...toast, show: false });
           onClose();
         }, 2000);
       } else {
-        setToastMessage("Failed to edit project!");
-        setIsError(true);
-        setToastVisible(true);
+        setToast({
+          message: "Failed to edit project!",
+          type: "error",
+          show: true,
+        });
         setTimeout(() => {
-          setToastVisible(false);
+          setToast({ ...toast, show: false });
         }, 2000);
       }
     } catch (error) {
-      setToastMessage("Failed to edit project!");
-      setIsError(true);
-      setToastVisible(true);
+      setToast({
+        message: "Failed to edit project!",
+        type: "error",
+        show: true,
+      });
       setTimeout(() => {
-        setToastVisible(false);
+        setToast({ ...toast, show: false });
       }, 2000);
     }
   };
@@ -40,17 +45,12 @@ const EditProjectForm = ({ project, onClose }) => {
   return (
     <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
       <div className="w-full max-w-md p-6 border bg-white rounded-lg shadow-xl space-y-6 relative">
-        {toastVisible && (
-          <div className="fixed top-0 right-4 m-4 z-50">
-            <div
-              className={`alert text-white ${
-                isError ? "alert-error" : "alert-success"
-              }`}
-            >
-              <span>{toastMessage}</span>
-            </div>
-          </div>
-        )}
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          show={toast.show}
+          onClose={() => setToast({ ...toast, show: false })}
+        />
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-600">Edit Project</h2>
           <button

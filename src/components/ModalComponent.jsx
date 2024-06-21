@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { deleteProjectAction } from "@/action/project-action";
 import EditProjectForm from "./EditProjectForm";
+import Toast from "./ToastComponent";
 
 const Modal = ({
   isVisible,
@@ -13,31 +14,31 @@ const Modal = ({
   onDeleteClick,
   onSubmit,
 }) => {
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastVisible, setToastVisible] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   if (!isVisible) return null;
 
   const handleDelete = async () => {
     const result = await deleteProjectAction(project.projectId);
-    if (result.success) {
-      setToastMessage("Project deleted successfully!");
-      setIsEdit(false);
-      setIsSuccess(true);
-      setToastVisible(true);
+    if (result.status === "OK") {
+      setToast({
+        message: "Project deleted successfully!",
+        type: "success",
+        show: true,
+      });
       setTimeout(() => {
-        setToastVisible(false);
+        setToast({ ...toast, show: false });
         onClose();
         onDeleteClick();
       }, 2000);
     } else {
-      setToastMessage("Failed to delete project.");
-      setIsSuccess(false);
-      setToastVisible(true);
+      setToast({
+        message: "Failed to delete project.",
+        type: "error",
+        show: true,
+      });
       setTimeout(() => {
-        setToastVisible(false);
+        setToast({ ...toast, show: false });
       }, 2000);
     }
   };
@@ -90,17 +91,12 @@ const Modal = ({
           )}
         </div>
       </div>
-      {toastVisible && (
-        <div className="fixed top-0 right-4 m-4 z-50">
-          <div
-            className={`alert text-white ${
-              isSuccess ? "bg-green-500" : "bg-red-500"
-            }`}
-          >
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </>
   );
 };

@@ -5,7 +5,6 @@ import ProjectListComponent from "../../_components/ListComponent";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
 import ViewMember from "@/components/ViewMember";
 import SortComponent from "@/components/SortComponent";
-import { projectsData } from "@/obj/projectData";
 
 const ProjectListPage = () => {
   const [projects, setProjects] = useState(projectsData);
@@ -22,7 +21,6 @@ const ProjectListPage = () => {
   const modalRef = useRef();
 
   const handleSeeAll = () => {
-    // Implement logic if needed
   };
 
   const handleStatusChange = (e) => {
@@ -113,9 +111,6 @@ const ProjectListPage = () => {
       </h2>
       <div className="flex flex-wrap items-center mb-4">
         <SortComponent
-        // selectedStatus={selectedStatus}
-        // handleStatusChange={handleStatusChange}
-        // handleSortClick={handleSortClick}
         />
 
         <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">

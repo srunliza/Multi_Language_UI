@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ListMember from "./ListMember";
 import { addMemberAction } from "@/action/project-action";
+import Toast from "./ToastComponent";
 
 const AddMemberModal = ({ isOpen, onClose, project }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -13,12 +15,38 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
     formData.append("userIds", JSON.stringify(selectedUsers));
     formData.append("roleId", selectedRole);
 
-    console.log("Form data before action:", formData);
-
-    const result = await addMemberAction(formData);
-    console.log("Action result:", result);
-
-    onClose();
+    try {
+      const result = await addMemberAction(formData);
+      if (result.status === "OK") {
+        setToast({
+          message: "Member added successfully!",
+          type: "success",
+          show: true,
+        });
+        setTimeout(() => {
+          setToast({ ...toast, show: false });
+          onClose();
+        }, 2000);
+      } else {
+        setToast({
+          message: `User is already in the project!`,
+          type: "error",
+          show: true,
+        });
+        setTimeout(() => {
+          setToast({ ...toast, show: false });
+        }, 2000);
+      }
+    } catch (error) {
+      setToast({
+        message: `Failed to add member!`,
+        type: "error",
+        show: true,
+      });
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 2000);
+    }
   };
 
   return (
@@ -69,10 +97,10 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
                     <option value="" disabled>
                       Choose role for user
                     </option>
-                    <option value="c1fabd3c-639b-4bc1-b33c-7546a21c20ba">
+                    <option value="63dbf948-62f0-4779-baeb-4bf88ca055ce">
                       Developer
                     </option>
-                    <option value="907b64ed-384c-4392-be35-59f6b77c3e1f">
+                    <option value="82742e9c-7a2c-48b5-a532-395c3d2a5075">
                       Translator
                     </option>
                   </select>
@@ -91,6 +119,12 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
                   />
                 </div>
               </form>
+              <Toast
+                message={toast.message}
+                type={toast.type}
+                show={toast.show}
+                onClose={() => setToast({ ...toast, show: false })}
+              />
             </div>
           </div>
         </div>

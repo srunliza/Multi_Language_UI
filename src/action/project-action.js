@@ -38,6 +38,7 @@ export const editUserRoleAction = async (formData) => {
   const roleId = formData.get("roleId");
   const result = await updateUserRoleService(projectId, userId, roleId);
   revalidateTag("project");
+  console.log(result)
   return result;
 };
 
@@ -48,7 +49,6 @@ export const removeMemberAction = async (projectId, userId) => {
 };
 
 export const addMemberAction = async (formData) => {
-  console.log("In action ............", formData);
   const projectId = formData.get("projectId");
   const userIds = JSON.parse(formData.get("userIds"));
   const roleId = formData.get("roleId");
@@ -57,8 +57,7 @@ export const addMemberAction = async (formData) => {
     userId: userIds,
     roleId: roleId,
   };
-  console.log("Member object:", member);
   const result = await addMemberService(member);
-  revalidateTag("project");
+  revalidateTag("user");
   return result;
 };

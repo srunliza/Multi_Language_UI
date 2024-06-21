@@ -2,15 +2,31 @@ import Link from "next/link";
 import CardComponent from "../../_components/CardComponent";
 import SortComponent from "@/components/SortComponent";
 import { getAllProjectService } from "@/service/project.service";
+import { getCurrentUserProfileService } from "@/service/user.service";
+
+const calculateDaysLeft = (attachments) => {
+  if (!attachments || attachments.length === 0) return null;
+
+  const longestExpireDate = attachments.reduce((max, attachment) => 
+    new Date(attachment.expireDate) > new Date(max.expireDate) ? attachment : max
+  ).expireDate;
+
+  const expireDate = new Date(longestExpireDate);
+  const today = new Date();
+  const timeDiff = expireDate - today;
+  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+  return daysLeft >= 0 ? daysLeft : null; // Ensure no negative values
+};
 
 const ProjectCardPage = async ({ searchParams }) => {
   const sortOrder = searchParams.sortOrder || "asc";
   const projectData = await getAllProjectService();
   let projects = projectData.payload || [];
 
-  // Check if projects array is not empty before sorting
+  const currentUser = await getCurrentUserProfileService();
+
   if (projects.length > 0) {
-    // Sort the projects by projectName
     projects.sort((a, b) => {
       if (sortOrder === "asc") {
         return a.projectName.localeCompare(b.projectName);
@@ -19,6 +35,21 @@ const ProjectCardPage = async ({ searchParams }) => {
       }
     });
   }
+
+  const getUserRole = (project) => {
+    for (let member of project.members) {
+      if (member.userId === currentUser.payload.userId) {
+        return member.role.roleName;
+      }
+    }
+    return "Unknown";
+  };
+
+  const projectsWithDaysLeft = projects.map((project) => ({
+    ...project,
+    daysLeft: calculateDaysLeft(project.attachment),
+    userRole: getUserRole(project),
+  }));
 
   return (
     <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl shadow-md h-screen overflow-hidden">
@@ -100,11 +131,16 @@ const ProjectCardPage = async ({ searchParams }) => {
       <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
         <div className="overflow-auto h-full no-scrollbar">
           <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6 px-3 py-3">
-            {projects && projects.length > 0 ? (
-              projects
+            {projectsWithDaysLeft && projectsWithDaysLeft.length > 0 ? (
+              projectsWithDaysLeft
                 ?.filter((project) => project.active)
-                .map((project, index) => (
-                  <CardComponent key={index} project={project} index={index} />
+                .map((project) => (
+                  <CardComponent
+                    key={project.projectId}
+                    project={project}
+                    currentUserRole={project.userRole}
+                    daysLeft={project.daysLeft}
+                  />
                 ))
             ) : (
               <div className="text-center text-gray-500 font-semibold w-[40rem] p-10">

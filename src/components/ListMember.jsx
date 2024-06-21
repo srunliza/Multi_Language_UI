@@ -62,7 +62,7 @@ export const ListMember = ({ onSelectUsers }) => {
               <span className="w-4 h-4 inline-block border border-gray-300 rounded-full peer-checked:bg-blue-600 peer-checked:border-transparent peer-checked:before:content-['✓'] peer-checked:before:block peer-checked:before:text-white peer-checked:before:text-center peer-checked:before:leading-[13px]"></span>
             </label>
             <img
-              src={user.image || "https://via.placeholder.com/40"}
+              src={user.image || "../../Images/user-profile.png"}
               alt={user.fullName}
               className="w-10 h-10 rounded-full"
             />

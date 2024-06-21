@@ -1,5 +1,3 @@
-// components/ProjectListComponent.js
-
 import React, { useState } from "react";
 import Link from "next/link";
 import MemberImage from "./MemberImage";

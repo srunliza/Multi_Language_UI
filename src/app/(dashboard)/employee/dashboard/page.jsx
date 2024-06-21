@@ -5,28 +5,40 @@ import {
   getAllProjectService,
   getAllProjectWithStatusService,
 } from "@/service/project.service";
+import { getCurrentUserProfileService } from "@/service/user.service";
 
 const formatDate = (dateString) => {
   const options = { month: "numeric", day: "numeric", year: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
+const getUserRole = (project, currentUser) => {
+  for (let member of project.members) {
+    if (member.userId === currentUser.userId) {
+      return member.role.roleName;
+    }
+  }
+  return "Unknown";
+};
+
 const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
   const totalProject = await getAllProjectWithStatusService();
+  const currentUser = await getCurrentUserProfileService();
 
-  // Process the project data to update the updatedDate with the longest expireDate
-  const processedProjectData = projectData.payload.map((project) => {
+  // Process the project data to update the longest expireDate
+  const processedProjectData = projectData?.payload?.map((project) => {
     if (project.attachment && project.attachment.length > 0) {
       const longestExpireDate = project.attachment.reduce((max, attachment) =>
         new Date(attachment.expireDate) > new Date(max.expireDate)
           ? attachment
           : max
       ).expireDate;
-      project.updatedDate = formatDate(longestExpireDate);
+      project.longestExpireDate = formatDate(longestExpireDate);
     } else {
-      project.updatedDate = "N/A";
+      project.longestExpireDate = "N/A";
     }
+    project.userRole = getUserRole(project, currentUser.payload); // Add userRole to project
     return project;
   });
 
@@ -53,7 +65,8 @@ const EmployeeDashboardPage = async () => {
                 Greeting
               </h1>
               <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-50 dark:text-white">
-                Sok Heng!
+                {currentUser?.payload?.firstName}{" "}
+                {currentUser?.payload?.lastName}!
               </h2>
               <p className="xl:w-[27rem] lg:w-[25rem] mb-3 font-normal text-justify text-gray-100 text-sm dark:text-gray-100 md:w-[30rem]">
                 Welcome to LangNet! Manage multiple languages efficiently,
@@ -167,7 +180,7 @@ const EmployeeDashboardPage = async () => {
                 Start Date
               </th>
               <th scope="col" className="px-6 py-4">
-                End Date
+                Longest Expire Date
               </th>
               <th scope="col" className="px-6 py-4 text-right pr-12">
                 Status
@@ -188,50 +201,50 @@ const EmployeeDashboardPage = async () => {
                       className="px-6 py-4 font-medium whitespace-nowrap"
                     >
                       <Link
-                        href={`/${getRoleRoute(
-                          project.members[0].role.roleName
-                        )}/dashboard/${project.projectId}`}
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
                       >
                         {project.projectName}
                       </Link>
                     </th>
                     <td className="px-6 py-4">
                       <Link
-                        href={`/${getRoleRoute(
-                          project.members[0].role.roleName
-                        )}/dashboard/${project.projectId}`}
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
                       >
-                        {project.members[0].role.roleName}
+                        {project.userRole}
                       </Link>
                     </td>
                     <td className="px-6 py-4">
                       <Link
-                        href={`/${getRoleRoute(
-                          project.members[0].role.roleName
-                        )}/dashboard/${project.projectId}`}
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
                       >
                         {new Date(project.createDate).toLocaleDateString()}
                       </Link>
                     </td>
                     <td className="px-6 py-4">
                       <Link
-                        href={`/${getRoleRoute(
-                          project.members[0].role.roleName
-                        )}/dashboard/${project.projectId}`}
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
                         className={
-                          project.updatedDate !== "N/A"
+                          project.longestExpireDate !== "N/A"
                             ? "text-gray-800"
                             : "text-red-600"
                         }
                       >
-                        {project.updatedDate}
+                        {project.longestExpireDate}
                       </Link>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <Link
-                        href={`/${getRoleRoute(
-                          project.members[0].role.roleName
-                        )}/dashboard/${project.projectId}`}
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
                       >
                         <span
                           className={`status-label ${

@@ -6,6 +6,7 @@ import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import AddMemberModal from "./AddMember";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import Toast from "./ToastComponent";
 import {
   editUserRoleAction,
   removeMemberAction,
@@ -20,9 +21,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [roleToDelete, setRoleToDelete] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(null);
 
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const modalRef = useRef(null);
 
@@ -43,23 +42,21 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
     setMemberToDelete(id);
     setRoleToDelete(roleName);
     setDeleteModalVisible(true);
-    setDropdownOpen(null); // Close dropdown when delete is clicked
+    setDropdownOpen(null);
   };
 
   const confirmDelete = async () => {
-    console.log("Deleting member:", memberToDelete);
     const result = await removeMemberAction(project.projectId, memberToDelete);
-    console.log("Delete result:", result);
     if (result.status === "OK") {
       const index = project.members.findIndex(
         (member) => member.userId === memberToDelete
       );
       if (index > -1) {
-        project.members.splice(index, 1); // Remove member from project members
+        project.members.splice(index, 1);
       }
-      showToast(result.message, false);
+      showToast(result.message, "success");
     } else {
-      showToast("Failed to remove member.", true);
+      showToast("Failed to remove member.", "error");
     }
     setDeleteModalVisible(false);
     setMemberToDelete(null);
@@ -75,7 +72,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   const handleEditClick = (user) => {
     setEditProject(user);
     setIsEditing(true);
-    setDropdownOpen(null); // Close dropdown when edit is clicked
+    setDropdownOpen(null);
   };
 
   const handleModalClose = () => {
@@ -88,10 +85,8 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   };
 
   const handleEditSubmit = async (formData) => {
-    console.log("Editing role for user:", formData.get("userId"));
     const result = await editUserRoleAction(formData);
-    console.log("Edit result:", result);
-    if (result.success) {
+    if (result.status === "OK") {
       const index = project.members.findIndex(
         (member) => member.userId === formData.get("userId")
       );
@@ -102,23 +97,14 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
             ...project.members[index].role,
             roleId: formData.get("roleId"),
           },
-        }; // Update member role
+        };
       }
-      showToast("Role updated successfully!", false);
+      showToast("Role updated successfully!", "success");
     } else {
-      showToast("Failed to update role.", true);
+      showToast("Failed to update role.", "error");
     }
     setIsEditing(false);
     setEditProject(null);
-  };
-
-  const showToast = (message, error) => {
-    setToastMessage(message);
-    setIsError(error);
-    setToastVisible(true);
-    setTimeout(() => {
-      setToastVisible(false);
-    }, 3000); // Hide toast after 3 seconds
   };
 
   const toggleDropdown = (userId) => {
@@ -146,13 +132,11 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
               <div
-                className={`dropdown ${dropdownOpen === member.userId ? "dropdown-open" : ""
-                  } dropdown-end`}
+                className={`dropdown ${
+                  dropdownOpen === member.userId ? "dropdown-open" : ""
+                } dropdown-end`}
               >
-                <div
-                  tabIndex={0}
-                  onClick={() => toggleDropdown(member.userId)} // Toggle dropdown visibility
-                >
+                <div tabIndex={0} onClick={() => toggleDropdown(member.userId)}>
                   <svg
                     className="h-5 w-5 text-gray-500 cursor-pointer"
                     viewBox="0 0 24 24"
@@ -223,6 +207,13 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           )}
         </div>
       ));
+  };
+
+  const showToast = (message, type) => {
+    setToast({ message, type, show: true });
+    setTimeout(() => {
+      setToast({ ...toast, show: false });
+    }, 3000);
   };
 
   return (
@@ -306,16 +297,12 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
         />
       )}
 
-      {toastVisible && (
-        <div className="fixed top-0 right-4 m-4 z-50">
-          <div
-            className={`alert text-white ${isError ? "alert-error" : "alert-success"
-              }`}
-          >
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </div>
   );
 };

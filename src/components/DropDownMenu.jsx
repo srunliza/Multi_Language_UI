@@ -5,23 +5,6 @@ import Modal from "./ModalComponent";
 const DropdownMenu = ({ project, onDeleteClick }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [popupStyle, setPopupStyle] = useState({
-    message: "",
-    backgroundColor: "",
-  });
-
-  useEffect(() => {
-    if (popupStyle.message) {
-      const timer = setTimeout(() => {
-        setPopupStyle({
-          message: "",
-          backgroundColor: "",
-        });
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [popupStyle]);
 
   return (
     <div className="relative flex space-x-1">
@@ -102,8 +85,6 @@ const DropdownMenu = ({ project, onDeleteClick }) => {
         confirmText="Delete"
         project={project}
         onDeleteClick={onDeleteClick}
-        setPopupStyle={setPopupStyle}
-        popupStyle={popupStyle}
       >
         <div className=""></div>
       </Modal>
@@ -114,8 +95,6 @@ const DropdownMenu = ({ project, onDeleteClick }) => {
         title="Edit Project"
         confirmText="Save"
         project={project}
-        setPopupStyle={setPopupStyle}
-        popupStyle={popupStyle}
       >
         <form id="editForm">
           <input

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import DropdownMenu from "@/components/DropDownMenu";
 import MemberImages from "@/components/MemberComponent";
@@ -30,7 +30,7 @@ const getStatusBgColor = (status) => {
   }
 };
 
-const CardComponent = ({ project, index }) => {
+const CardComponent = ({ project, currentUserRole, daysLeft }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
@@ -57,14 +57,10 @@ const CardComponent = ({ project, index }) => {
   };
 
   return (
-    <div
-      key={index}
-      className="bg-white p-4 rounded-2xl shadow-md border border-gray-200"
-    >
+    <div className="bg-white p-4 rounded-2xl shadow-md border border-gray-200">
       <div className="flex justify-between items-center text-sm text-gray-700">
         <Link
-          key={index}
-          href={`/${project?.members[0].role.roleName
+          href={`/${currentUserRole
             .replace(" ", "-")
             .toLowerCase()}/dashboard/${project.projectId}`}
           passHref
@@ -74,36 +70,32 @@ const CardComponent = ({ project, index }) => {
             ? `${project?.projectName.substring(0, 15)}...`
             : project?.projectName}
         </Link>
-        <div className="cursor-pointer">
-          {project?.members[0]?.role.roleName !== "Translator" &&
-            project?.members[0]?.role.roleName !== "Developer" && (
-              <DropdownMenu
-                project={project}
-                onEditClick={handleEditClick}
-                onDeleteClick={handleDeleteClick}
-              />
-            )}
-        </div>
+        {currentUserRole === "Project Leader" && (
+          <div className="cursor-pointer">
+            <DropdownMenu
+              project={project}
+              onEditClick={handleEditClick}
+              onDeleteClick={handleDeleteClick}
+            />
+          </div>
+        )}
       </div>
 
       <div className="mb-5">
         <Link
-          key={index}
-          href={`/${project?.members[0].role.roleName
+          href={`/${currentUserRole
             .replace(" ", "-")
             .toLowerCase()}/dashboard/${project.projectId}`}
           passHref
           className="text-green-500 text-xs"
-          ធ
         >
-          {project.members[0].role.roleName}
+          {currentUserRole}
         </Link>
       </div>
 
       <div className="text-black text-md flex items-center mb-4 justify-between">
         <Link
-          key={index}
-          href={`/${project?.members[0].role.roleName
+          href={`/${currentUserRole
             .replace(" ", "-")
             .toLowerCase()}/dashboard/${project.projectId}`}
           passHref
@@ -128,10 +120,9 @@ const CardComponent = ({ project, index }) => {
         </Link>
 
         <Link
-          key={index}
-          href={`/${project?.members[0].role.roleName
-            .replace(" ", "-")
-            .toLowerCase()}/calendar/${project.projectId}`}
+          href={`/${currentUserRole.replace(" ", "-").toLowerCase()}/calendar/${
+            project.projectId
+          }`}
           passHref
         >
           <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-xs">
@@ -148,7 +139,9 @@ const CardComponent = ({ project, index }) => {
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            1 day left
+            {daysLeft !== null
+              ? `${daysLeft} day${daysLeft !== 1 ? "s" : ""} left`
+              : "N/A"}
           </div>
         </Link>
       </div>
@@ -169,15 +162,15 @@ const CardComponent = ({ project, index }) => {
               project.status === "COMPLETED"
                 ? "100%"
                 : project.status === "PROGRESS"
-                  ? "50%"
-                  : "20%",
+                ? "50%"
+                : "20%",
           }}
         ></div>
       </div>
 
       <MemberImages
         project={project}
-        handleSeeAll={() => handleSeeAll(project.members[0].role.roleName)}
+        handleSeeAll={() => handleSeeAll(currentUserRole)}
         isViewMemberOpen={isViewMemberOpen}
         viewMemberRole={viewMemberRole}
         modalRef={modalRef}
