@@ -1,16 +1,31 @@
 "use server";
 import { headerToken } from "@/app/api/headerToken";
 import { baseUrl } from "@/utils/constants";
-
-export const getAllProjectService = async (sortOrder = "asc") => {
+export const getAllProjectService = async (
+  sortOrder = "asc",
+  startDate = null,
+  endDate = null,
+  status = "All"
+) => {
   const header = await headerToken();
-  const res = await fetch(
-    `${baseUrl}/api/v1/project/get-all-project?size=100&page=1&sortOrder=${sortOrder}`,
-    {
-      headers: header,
-      next: { tags: ["project"] },
-    }
-  );
+  let url = `${baseUrl}/api/v1/project/get-all-project?size=100&page=1&sortOrder=${sortOrder}`;
+
+  if (startDate) {
+    url += `&startDate=${startDate}`;
+  }
+
+  if (endDate) {
+    url += `&endDate=${endDate}`;
+  }
+
+  if (status && status !== "All") {
+    url += `&status=${status}`;
+  }
+
+  const res = await fetch(url, {
+    headers: header,
+    next: { tags: ["project"] },
+  });
   const data = await res.json();
   return data;
 };

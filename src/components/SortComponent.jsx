@@ -1,7 +1,15 @@
 "use client";
 import { DatePicker } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 const SortComponent = () => {
+  const router = useRouter();
+
+  const handleSortChange = (e) => {
+    const { name, value } = e.target;
+    router.push(`/employee/project-card?${name}=${value}`);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
       <div className="flex w-full sm:w-auto">
@@ -13,6 +21,9 @@ const SortComponent = () => {
           <DatePicker
             id="start-date"
             className="max-w-[284px]"
+            onChange={(value) =>
+              handleSortChange({ target: { name: "startDate", value } })
+            }
           />
         </div>
       </div>
@@ -25,6 +36,9 @@ const SortComponent = () => {
           <DatePicker
             id="end-date"
             className="max-w-[284px]"
+            onChange={(value) =>
+              handleSortChange({ target: { name: "endDate", value } })
+            }
           />
         </div>
       </div>
@@ -35,6 +49,7 @@ const SortComponent = () => {
         <select
           name="status"
           className="w-[10rem] border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block p-2.5 bg-white"
+          onChange={handleSortChange}
         >
           <option value="All">All</option>
           <option value="PENDING" className="text-red-500 font-medium">

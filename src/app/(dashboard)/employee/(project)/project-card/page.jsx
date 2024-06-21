@@ -7,8 +7,10 @@ import { getCurrentUserProfileService } from "@/service/user.service";
 const calculateDaysLeft = (attachments) => {
   if (!attachments || attachments.length === 0) return null;
 
-  const longestExpireDate = attachments.reduce((max, attachment) => 
-    new Date(attachment.expireDate) > new Date(max.expireDate) ? attachment : max
+  const longestExpireDate = attachments.reduce((max, attachment) =>
+    new Date(attachment.expireDate) > new Date(max.expireDate)
+      ? attachment
+      : max
   ).expireDate;
 
   const expireDate = new Date(longestExpireDate);
@@ -21,20 +23,16 @@ const calculateDaysLeft = (attachments) => {
 
 const ProjectCardPage = async ({ searchParams }) => {
   const sortOrder = searchParams.sortOrder || "asc";
+  const startDate = searchParams.startDate
+    ? new Date(searchParams.startDate)
+    : null;
+  const endDate = searchParams.endDate ? new Date(searchParams.endDate) : null;
+  const status = searchParams.status || "All";
+
   const projectData = await getAllProjectService();
   let projects = projectData.payload || [];
 
   const currentUser = await getCurrentUserProfileService();
-
-  if (projects.length > 0) {
-    projects.sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.projectName.localeCompare(b.projectName);
-      } else {
-        return b.projectName.localeCompare(a.projectName);
-      }
-    });
-  }
 
   const getUserRole = (project) => {
     for (let member of project.members) {
@@ -50,6 +48,31 @@ const ProjectCardPage = async ({ searchParams }) => {
     daysLeft: calculateDaysLeft(project.attachment),
     userRole: getUserRole(project),
   }));
+
+  // Filter projects based on startDate, endDate, and status
+  const filteredProjects = projectsWithDaysLeft.filter((project) => {
+    const projectStartDate = new Date(project.createDate);
+    const projectEndDate =
+      project.attachment.length > 0
+        ? new Date(project.attachment[0].expireDate)
+        : null;
+
+    const matchesStartDate = startDate ? projectStartDate >= startDate : true;
+    const matchesEndDate = endDate ? projectEndDate <= endDate : true;
+    const matchesStatus = status !== "All" ? project.status === status : true;
+
+    return matchesStartDate && matchesEndDate && matchesStatus;
+  });
+
+  if (filteredProjects.length > 0) {
+    filteredProjects.sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.projectName.localeCompare(b.projectName);
+      } else {
+        return b.projectName.localeCompare(a.projectName);
+      }
+    });
+  }
 
   return (
     <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl shadow-md h-screen overflow-hidden">
@@ -131,8 +154,8 @@ const ProjectCardPage = async ({ searchParams }) => {
       <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
         <div className="overflow-auto h-full no-scrollbar">
           <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 gap-6 px-3 py-3">
-            {projectsWithDaysLeft && projectsWithDaysLeft.length > 0 ? (
-              projectsWithDaysLeft
+            {filteredProjects && filteredProjects.length > 0 ? (
+              filteredProjects
                 ?.filter((project) => project.active)
                 .map((project) => (
                   <CardComponent
