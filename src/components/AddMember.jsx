@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import ListMember from "./ListMember";
 import { addMemberAction } from "@/action/project-action";

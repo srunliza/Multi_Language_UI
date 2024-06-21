@@ -1,8 +1,10 @@
+"use client";
 import Link from "next/link";
 import MemberImage from "./MemberImage";
 import ActionButtons from "./ActionButton";
 import ViewMemberModal from "./ViewMemberModal";
 import DeleteProjectModal from "@/components/DeleteProjectModal";
+import { useState } from "react";
 
 const getStatusTextColor = (status) => {
   switch (status) {
@@ -30,10 +32,24 @@ const getStatusBgColor = (status) => {
   }
 };
 
+const mapProjectData = (projects) => {
+  return projects.map((project) => ({
+    name: project.projectName,
+    status: project.status,
+    role: project.members[0]?.role?.roleName || 'Unknown Role',
+    image: project.members[0]?.image,
+  }));
+};
+
 const ListComponent = ({ projects }) => {
+  const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const mappedProjects = mapProjectData(projects);
+
   return (
     <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] overflow-y-auto no-scrollbar">
-      {projects.map((project, index) => (
+      {mappedProjects.map((project, index) => (
         <div
           key={index}
           className="bg-white flex flex-wrap justify-between items-center gap-3 bg-slate-250 p-4 shadow rounded-lg border mb-4"
@@ -50,9 +66,7 @@ const ListComponent = ({ projects }) => {
           </div>
           <div className="sm:-ml-1 ml-4 flex flex-wrap gap-3 lg:w-auto text-md text-black mt-4 lg:mt-0">
             <Link
-              href={`/${project.role
-                .replace(" ", "-")
-                .toLowerCase()}/dashboard`}
+              href={`/${project.role.replace(" ", "-").toLowerCase()}/dashboard`}
               passHref
             >
               <div className="flex text-black items-center justify-center bg-gray-200 rounded-lg w-16 h-9 text-center text-xs">
@@ -133,12 +147,12 @@ const ListComponent = ({ projects }) => {
           </div>
           <ViewMemberModal
             isOpen={isViewMemberOpen}
-            onClose={handleModalClose}
+            onClose={() => setIsViewMemberOpen(false)}
           />
           <DeleteProjectModal
             isOpen={isDeleteModalOpen}
             onClose={() => setIsDeleteModalOpen(false)}
-            onConfirm={handleDeleteConfirm}
+            onConfirm={() => handleDeleteConfirm(project)}
           />
         </div>
       ))}
