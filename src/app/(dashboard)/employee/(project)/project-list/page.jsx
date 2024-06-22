@@ -1,16 +1,78 @@
 import Link from "next/link";
-import React from "react";
-import ProjectListComponent from "../../_components/ListComponent";
 import SortComponent from "@/components/SortComponent";
 import { getAllProjectService } from "@/service/project.service";
 import { getCurrentUserProfileService } from "@/service/user.service";
+import ListComponent from "../../_components/ListComponent";
 
-const ProjectListPage = async () => {
+const calculateDaysLeft = (attachments) => {
+  if (!attachments || attachments.length === 0) return null;
+
+  const longestExpireDate = attachments.reduce((max, attachment) =>
+    new Date(attachment.expireDate) > new Date(max.expireDate)
+      ? attachment
+      : max
+  ).expireDate;
+
+  const expireDate = new Date(longestExpireDate);
+  const today = new Date();
+  const timeDiff = expireDate - today;
+  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+  return daysLeft >= 0 ? daysLeft : null;
+};
+
+const ProjectListPage = async ({ searchParams }) => {
+  const sortOrder = searchParams.sortOrder || "asc";
+  const startDate = searchParams.startDate
+    ? new Date(searchParams.startDate)
+    : null;
+  const endDate = searchParams.endDate ? new Date(searchParams.endDate) : null;
+  const status = searchParams.status || "All";
+
   const projectData = await getAllProjectService();
   let projects = projectData.payload || [];
 
   const currentUser = await getCurrentUserProfileService();
 
+  const getUserRole = (project) => {
+    for (let member of project.members) {
+      if (member.userId === currentUser.payload.userId) {
+        return member.role.roleName;
+      }
+    }
+    return "Unknown";
+  };
+
+  const projectsWithDaysLeft = projects.map((project) => ({
+    ...project,
+    daysLeft: calculateDaysLeft(project.attachment),
+    userRole: getUserRole(project),
+  }));
+
+  // Filter projects based on startDate, endDate, and status
+  const filteredProjects = projectsWithDaysLeft.filter((project) => {
+    const projectStartDate = new Date(project.createDate);
+    const projectEndDate =
+      project.attachment.length > 0
+        ? new Date(project.attachment[0].expireDate)
+        : null;
+
+    const matchesStartDate = startDate ? projectStartDate >= startDate : true;
+    const matchesEndDate = endDate ? projectEndDate <= endDate : true;
+    const matchesStatus = status !== "All" ? project.status === status : true;
+
+    return matchesStartDate && matchesEndDate && matchesStatus;
+  });
+
+  if (filteredProjects.length > 0) {
+    filteredProjects.sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.projectName.localeCompare(b.projectName);
+      } else {
+        return b.projectName.localeCompare(a.projectName);
+      }
+    });
+  }
   return (
     <div className="p-4 lg:mr-0 xl:mr-0 sm:p-6 md:p-8 lg:p-10 flex-1 bg-white rounded-xl shadow-md h-screen overflow-hidden">
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-700">
@@ -21,7 +83,9 @@ const ProjectListPage = async () => {
         <div className="flex flex-row justify-center sm:justify-end z-30 mt-4 sm:mt-0 sm:ml-auto">
           <Link
             className="focus:outline-none mr-1 rounded-md hover:bg-gray-200"
-            href={`/employee/project-card`}
+            href={`/employee/project-list?sortOrder=${
+              sortOrder === "asc" ? "desc" : "asc"
+            }`}
           >
             <svg
               className="h-8 w-8 text-gray-500 p-1"
@@ -33,7 +97,11 @@ const ProjectListPage = async () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="1.5"
-                d={"M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"}
+                d={
+                  sortOrder === "asc"
+                    ? "M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
+                    : "M3 20h13M3 16h9m-9 4h9m5-16v12m0 0l-4-4m-4 4"
+                }
               />
             </svg>
           </Link>
@@ -77,9 +145,25 @@ const ProjectListPage = async () => {
           </Link>
         </div>
       </div>
-      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] xl:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
         <div className="overflow-auto h-full no-scrollbar px-2 py-2">
-          <ProjectListComponent projects={projects} />
+          {filteredProjects && filteredProjects.length > 0 ? (
+            filteredProjects
+              ?.filter((project) => project.active)
+              .map((project) => (
+                <ListComponent
+                  key={project.projectId}
+                  project={project}
+                  currentUserRole={project.userRole}
+                  daysLeft={project.daysLeft}
+                />
+              ))
+          ) : (
+            <div className="text-center text-gray-500 font-semibold w-[40rem] p-10">
+              No projects available. Please check back later or start a new
+              project.
+            </div>
+          )}
         </div>
       </div>
     </div>

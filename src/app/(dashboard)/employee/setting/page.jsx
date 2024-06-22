@@ -75,6 +75,9 @@ const SettingPage = () => {
     e.preventDefault();
 
     let imageFileName = null;
+    let uploadImageSuccess = false;
+    let updateUserDetailsSuccess = false;
+
     // Upload image if a file is selected
     if (profile) {
       const formData = new FormData();
@@ -83,6 +86,12 @@ const SettingPage = () => {
 
       if (res?.status === "CREATED") {
         imageFileName = res.payload;
+        setToast({
+          message: "Upload profile image successfully!",
+          type: "success",
+          show: true,
+        });
+        uploadImageSuccess = true;
       } else {
         setToast({
           message: "Failed to upload profile image.",
@@ -93,42 +102,64 @@ const SettingPage = () => {
       }
     }
 
-    const formData = new FormData(e.target);
-    const updatedUserDetail = {
-      username: formData.get("username"),
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      gender: selectedGender,
-      birthDate: formData.get("birthDate"),
-      facebook: formData.get("facebook"),
-      phoneNumber: formData.get("phoneNumber"),
-      telegram: formData.get("telegram"),
-    };
+    // Update user details if form data is provided
+    if (
+      firstName ||
+      lastName ||
+      selectedGender ||
+      socialContactUsername ||
+      birthDate ||
+      phoneNumber ||
+      facebook ||
+      telegram
+    ) {
+      const formData = new FormData(e.target);
+      const updatedUserDetail = {
+        username: formData.get("username"),
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        gender: selectedGender,
+        birthDate: formData.get("birthDate"),
+        facebook: formData.get("facebook"),
+        phoneNumber: formData.get("phoneNumber"),
+        telegram: formData.get("telegram"),
+      };
 
-    const result = await updateUserDetailAction(updatedUserDetail);
+      const result = await updateUserDetailAction(updatedUserDetail);
 
-    if (result.status === "OK") {
+      if (result.status === "OK") {
+        setToast({
+          message: "Profile updated successfully!",
+          type: "success",
+          show: true,
+        });
+        updateUserDetailsSuccess = true;
+      } else if (result.status === 403) {
+        setToast({
+          message: result.detail,
+          type: "error",
+          show: true,
+        });
+      } else if (result.status === 400) {
+        setToast({
+          message: "Bad request. Please check your input.",
+          type: "error",
+          show: true,
+        });
+      } else {
+        setToast({
+          message: "Failed to update profile.",
+          type: "error",
+          show: true,
+        });
+      }
+    }
+
+    // Show both success toasts if both actions succeed
+    if (uploadImageSuccess && updateUserDetailsSuccess) {
       setToast({
-        message: "Profile updated successfully!",
+        message: "Profile updated successfully along with profile image!",
         type: "success",
-        show: true,
-      });
-    } else if (result.status === 403) {
-      setToast({
-        message: result.detail,
-        type: "error",
-        show: true,
-      });
-    } else if (result.status === 400) {
-      setToast({
-        message: "Bad request. Please check your input.",
-        type: "error",
-        show: true,
-      });
-    } else {
-      setToast({
-        message: "Failed to update profile.",
-        type: "error",
         show: true,
       });
     }

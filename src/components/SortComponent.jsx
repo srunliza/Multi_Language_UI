@@ -1,13 +1,16 @@
 "use client";
 import { DatePicker } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const SortComponent = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSortChange = (e) => {
     const { name, value } = e.target;
-    router.push(`/employee/project-card?${name}=${value}`);
+    const params = new URLSearchParams(window.location.search);
+    params.set(name, value);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
