@@ -44,14 +44,14 @@ const CreateProject = ({ onClose }) => {
 
   return (
     <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
-      <div className="w-full max-w-md p-6 border bg-white rounded-lg shadow-xl space-y-6 relative">
+      <div className="w-full max-w-lg p-6 border bg-white rounded-lg shadow-xl space-y-6 relative h-[17rem]">
         <Toast
           message={toastMessage}
           type={isError ? "error" : "success"}
           show={toastVisible}
           onClose={() => setToastVisible(false)}
         />
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-9 mt-3">
           <h2 className="text-2xl font-bold text-gray-600">Create Project</h2>
           <button
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -80,20 +80,20 @@ const CreateProject = ({ onClose }) => {
             type="text"
             id="projectName"
             name="projectName"
-            className="block w-full px-4 py-2 mb-2 border border-blue-800 rounded-md focus:outline-none text-gray-700"
+            className="block w-full px-4 py-4 border border-blue-800 rounded-md focus:outline-none text-gray-700"
             placeholder="Enter project name"
             required
           />
-          <div className="flex justify-end space-x-4">
+          <div className="flex justify-end space-x-4 mt-7">
             <button
-              className="px-6 py-2 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md hover:bg-purple-50 focus:outline-none"
+              className="px-6 py-3 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md hover:bg-purple-50 focus:outline-none"
               type="button"
               onClick={onClose}
             >
               No
             </button>
             <button
-              className="px-6 py-2 font-semibold text-white bg-blue-800 rounded-md hover:bg-blue-700 focus:outline-none"
+              className="px-6 py-3 font-semibold text-white bg-blue-800 rounded-md hover:bg-blue-700 focus:outline-none"
               type="submit"
             >
               Create project

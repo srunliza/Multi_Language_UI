@@ -145,7 +145,7 @@ const ProjectListPage = async ({ searchParams }) => {
           </Link>
         </div>
       </div>
-      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[22rem] md:pb-[22rem] lg:pb-[13rem] xl:pb-[13rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
+      <div className="sm:h-screen lg:h-screen md:h-screen sm:pb-[17rem] md:pb-[17rem] lg:pb-[8rem] xl:pb-[8rem] shadow-lg rounded-xl overflow-y-auto no-scrollbar bg-slate-50">
         <div className="overflow-auto h-full no-scrollbar px-2 py-2">
           {filteredProjects && filteredProjects.length > 0 ? (
             filteredProjects
