@@ -13,7 +13,7 @@ const ViewAttachmentPage = async ({ params }) => {
   return (
     <div className="w-full px-6 py-4 flex flex-col">
       <div className="flex justify-between  items-center mb-3">
-        <h2 className="text-lg font-semibold">{projects.projectName}</h2>
+        <h2 className="text-2xl font-semibold">{projects.projectName}</h2>
         <OpenAddMemberModalButton project={projects} />
       </div>
       <div className="flex flex-col xl:flex-row gap-10 h-[41rem]">
@@ -25,7 +25,7 @@ const ViewAttachmentPage = async ({ params }) => {
             <AttachmentComponent project={projects} />
           </div>
         </div>
-        <div className="w-full xl:w-[24%]">
+        <div className="xl:w-[23%] lg:w-[23%] xl:block lg:hidden sm:hidden md:hidden">
           <MemberProjectLeader project={projects} />
         </div>
       </div>

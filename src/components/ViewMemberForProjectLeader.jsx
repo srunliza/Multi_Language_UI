@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+"use client";
+import React, { useState, useRef, useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import GroupIcon from "@mui/icons-material/Group";
 import CloseIcon from "@mui/icons-material/Close";
@@ -7,6 +8,7 @@ import AddMemberModal from "./AddMember";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import Toast from "./ToastComponent";
+import UserProfileComponent from "./UserProfileComponent"; // Ensure the path is correct
 import {
   editUserRoleAction,
   removeMemberAction,
@@ -20,10 +22,25 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [roleToDelete, setRoleToDelete] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownOpen && !event.target.closest(".dropdown")) {
+        setDropdownOpen(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   const handleAddMemberClick = () => {
     setAddMemberModalVisible(true);
@@ -107,8 +124,17 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
     setEditProject(null);
   };
 
-  const toggleDropdown = (userId) => {
+  const toggleDropdown = (e, userId) => {
+    e.stopPropagation();
     setDropdownOpen((prevState) => (prevState === userId ? null : userId));
+  };
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
+
+  const handleCloseUserProfile = () => {
+    setSelectedUser(null);
   };
 
   const renderUserList = (role) => {
@@ -117,7 +143,8 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
       .map((member) => (
         <div
           key={member.userId}
-          className="flex items-center p-2 hover:bg-blue-100"
+          className="flex items-center p-2 hover:bg-blue-100 cursor-pointer"
+          onClick={() => handleUserClick(member)}
         >
           <img
             src={member.image ? member.image : "../../Images/user-profile.png"}
@@ -136,7 +163,10 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
                   dropdownOpen === member.userId ? "dropdown-open" : ""
                 } dropdown-end`}
               >
-                <div tabIndex={0} onClick={() => toggleDropdown(member.userId)}>
+                <div
+                  tabIndex={0}
+                  onClick={(e) => toggleDropdown(e, member.userId)}
+                >
                   <svg
                     className="h-5 w-5 text-gray-500 cursor-pointer"
                     viewBox="0 0 24 24"
@@ -153,11 +183,17 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
                 </div>
 
                 {dropdownOpen === member.userId && (
-                  <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box absolute right-0 mt-2 w-40">
+                  <ul
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box absolute right-0 mt-2 w-40"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <li>
                       <button
                         className="text-black hover:text-blue-600 w-full text-left flex items-center"
-                        onClick={() => handleEditClick(member)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditClick(member);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -179,9 +215,10 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
                     <li>
                       <button
                         className="text-black hover:text-red-600 w-full text-left flex items-center"
-                        onClick={() =>
-                          handleDelete(member.userId, member.role.roleName)
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(member.userId, member.role.roleName);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -294,6 +331,13 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
           onChange={handleEditChange}
           onSubmit={handleEditSubmit}
           modalRef={modalRef}
+        />
+      )}
+
+      {selectedUser && (
+        <UserProfileComponent
+          user={selectedUser}
+          onClose={handleCloseUserProfile}
         />
       )}
 

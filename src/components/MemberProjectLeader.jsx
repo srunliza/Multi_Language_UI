@@ -1,46 +1,74 @@
 "use client";
-import React, { useState, useRef } from "react";
-import Image from "next/image";
+import React, { useState, useRef, useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import GroupIcon from "@mui/icons-material/Group";
 import SearchIcon from "@mui/icons-material/Search";
+import DeleteModal from "./DeleteModal";
+import EditModal from "./EditModal";
+import Toast from "./ToastComponent";
 import ModalForSearch from "./ModalForSearch";
+import UserProfileComponent from "./UserProfileComponent"; // Ensure the path is correct
+import {
+  editUserRoleAction,
+  removeMemberAction,
+} from "@/action/project-action";
 
 const MemberProjectLeader = ({ project }) => {
-  const [isAddMemberModalVisible, setAddMemberModalVisible] = useState(false);
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editUser, setEditUser] = useState(null);
+  const [editProject, setEditProject] = useState(null);
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [roleToDelete, setRoleToDelete] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(null); // State for dropdown visibility
-  const [selectedUser, setSelectedUser] = useState(null); // State for selected user profile modal
+  const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   const modalRef = useRef(null);
 
-  const handleAddMemberClick = () => {
-    setAddMemberModalVisible(true);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownOpen && !event.target.closest(".dropdown")) {
+        setDropdownOpen(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
+  const handleSearchMemberClick = () => {
+    setSearchModalVisible(true);
   };
 
-  const handleCloseAddMemberModal = () => {
-    setAddMemberModalVisible(false);
+  const handleCloseSearchModal = () => {
+    setSearchModalVisible(false);
   };
 
-  const handleAddMember = (newMember) => {
-    // Add the new member logic here
-    handleCloseAddMemberModal();
-  };
-
-  const handleDelete = (id, role) => {
+  const handleDelete = (id, roleName) => {
     setMemberToDelete(id);
-    setRoleToDelete(role);
+    setRoleToDelete(roleName);
     setDeleteModalVisible(true);
-    setDropdownOpen(null); // Close dropdown when delete is clicked
+    setDropdownOpen(null);
   };
 
-  const confirmDelete = () => {
-    // Confirm delete logic here
+  const confirmDelete = async () => {
+    const result = await removeMemberAction(project.projectId, memberToDelete);
+    if (result.status === "OK") {
+      const index = project.members.findIndex(
+        (member) => member.userId === memberToDelete
+      );
+      if (index > -1) {
+        project.members.splice(index, 1);
+      }
+      showToast(result.message, "success");
+    } else {
+      showToast("Failed to remove member.", "error");
+    }
     setDeleteModalVisible(false);
     setMemberToDelete(null);
     setRoleToDelete("");
@@ -53,33 +81,49 @@ const MemberProjectLeader = ({ project }) => {
   };
 
   const handleEditClick = (user) => {
-    setEditUser(user);
+    setEditProject(user);
     setIsEditing(true);
-    setDropdownOpen(null); // Close dropdown when edit is clicked
+    setDropdownOpen(null);
   };
 
   const handleModalClose = () => {
     setIsEditing(false);
-    setEditUser(null);
+    setEditProject(null);
   };
 
   const handleEditChange = (e) => {
-    setEditUser({ ...editUser, role: e.target.value });
+    setEditProject({ ...editProject, role: e.target.value });
   };
 
-  const handleEditSubmit = () => {
-    // Submit edit logic here
+  const handleEditSubmit = async (formData) => {
+    const result = await editUserRoleAction(formData);
+    if (result.status === "OK") {
+      const index = project.members.findIndex(
+        (member) => member.userId === formData.get("userId")
+      );
+      if (index > -1) {
+        project.members[index] = {
+          ...project.members[index],
+          role: {
+            ...project.members[index].role,
+            roleId: formData.get("roleId"),
+          },
+        };
+      }
+      showToast("Role updated successfully!", "success");
+    } else {
+      showToast("Failed to update role.", "error");
+    }
     setIsEditing(false);
-    setEditUser(null);
+    setEditProject(null);
   };
 
-  const toggleDropdown = (userId) => {
-    setSelectedUser(null); // Close the user profile popup
+  const toggleDropdown = (e, userId) => {
+    e.stopPropagation();
     setDropdownOpen((prevState) => (prevState === userId ? null : userId));
   };
 
   const handleUserClick = (user) => {
-    setDropdownOpen(null); // Close the dropdown when a user is clicked
     setSelectedUser(user);
   };
 
@@ -89,31 +133,34 @@ const MemberProjectLeader = ({ project }) => {
 
   const renderUserList = (role) => {
     return project.members
-      .filter((user) => user.role === role)
-      .map((user) => (
-        <div key={user.id} className="flex items-center p-2 hover:bg-blue-100 ">
-          <Image
-            src={user.image}
+      .filter((member) => member.role.roleName === role)
+      .map((member) => (
+        <div
+          key={member.userId}
+          className="flex items-center p-2 hover:bg-blue-100 cursor-pointer"
+          onClick={() => handleUserClick(member)}
+        >
+          <img
+            src={member.image ? member.image : "../../Images/user-profile.png"}
             alt="User"
-            width={35}
-            height={35}
-            className="rounded-full cursor-pointer"
-            onClick={() => handleUserClick(user)}
+            width={30}
+            height={28}
+            className="rounded-full h-8 w-8"
           />
-          <div
-            className="ml-2 cursor-pointer"
-            onClick={() => handleUserClick(user)}
-          >
-            <div className="text-gray-800">{user.name}</div>
+          <div className="ml-2">
+            <div className="text-gray-800">{member.fullName}</div>
           </div>
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
               <div
                 className={`dropdown ${
-                  dropdownOpen === user.id ? "dropdown-open" : ""
+                  dropdownOpen === member.userId ? "dropdown-open" : ""
                 } dropdown-end`}
               >
-                <div tabIndex={0} onClick={() => toggleDropdown(user.id)}>
+                <div
+                  tabIndex={0}
+                  onClick={(e) => toggleDropdown(e, member.userId)}
+                >
                   <svg
                     className="h-5 w-5 text-gray-500 cursor-pointer"
                     viewBox="0 0 24 24"
@@ -128,12 +175,19 @@ const MemberProjectLeader = ({ project }) => {
                     <circle cx="12" cy="19" r="1" />
                   </svg>
                 </div>
-                {dropdownOpen === user.id && (
-                  <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box absolute right-0 mt-2 w-40">
+
+                {dropdownOpen === member.userId && (
+                  <ul
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box absolute right-0 mt-2 w-40"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <li>
                       <button
                         className="text-black hover:text-blue-600 w-full text-left flex items-center"
-                        onClick={() => handleEditClick(user)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditClick(member);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +209,10 @@ const MemberProjectLeader = ({ project }) => {
                     <li>
                       <button
                         className="text-black hover:text-red-600 w-full text-left flex items-center"
-                        onClick={() => handleDelete(user.id, user.role)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(member.userId, member.role.roleName);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -183,29 +240,35 @@ const MemberProjectLeader = ({ project }) => {
       ));
   };
 
+  const showToast = (message, type) => {
+    setToast({ message, type, show: true });
+    setTimeout(() => {
+      setToast({ ...toast, show: false });
+    }, 3000);
+  };
+
   return (
     <div className="text-sm">
       <main className="flex flex-1 w-[20rem]">
-        <div className="bg-white overflow-hidden border rounded-xl shadow-lg sm:rounded-xl p-2 w-full">
-          <div className="flex items-center p-2 border-b ">
+        <div className="bg-white overflow-hidden rounded-xl shadow-md sm:rounded-xl ml-4 p-2 w-full">
+          <div className="flex items-center p-2 border-b">
             <GroupIcon className="text-gray-500" />
-            <span className="pl-2 text-gray-800 text-md font-semibold">
-              40 MEMBERS
+            <span className="pl-2 text-base text-gray-800 text-md font-semibold">
+              {project.memberCount}{" "}
+              {project.memberCount === 1 ? "Member" : "Members"}
             </span>
-            <div className="justify-between">
-              <button
-                className="text-gray-500 rounded ml-[8.3rem]"
-                onClick={() => setSearchModalVisible(true)}
-              >
-                <SearchIcon />
-              </button>
-            </div>
           </div>
           <div className="px-3 py-2 flex items-center justify-between">
             <div className="flex items-center">
               <PersonOutlineIcon className="text-gray-500 mr-2" />
-              <span className="text-gray-800">Project Leader</span>
+              <span className="text-gray-800 w-[10rem]">Project Leader</span>
             </div>
+            <button
+              className="text-gray-500 rounded"
+              onClick={() => handleSearchMemberClick(true)}
+            >
+              <SearchIcon />
+            </button>
           </div>
           <hr className="mt-1 border-t border-gray-300" />
           {renderUserList("Project Leader")}
@@ -232,92 +295,33 @@ const MemberProjectLeader = ({ project }) => {
         </div>
       </main>
 
-      {isAddMemberModalVisible && (
-        <AddMemberModal
-          isOpen={isAddMemberModalVisible}
-          onClose={handleCloseAddMemberModal}
-          onAddMember={handleAddMember}
+      {isSearchModalVisible && (
+        <ModalForSearch
+          isOpen={isSearchModalVisible}
+          onClose={handleCloseSearchModal}
           project={project}
         />
       )}
 
-      {isSearchModalVisible && (
-        <ModalForSearch
-          isVisible={isSearchModalVisible}
-          onClose={() => setSearchModalVisible(false)}
+      {isDeleteModalVisible && (
+        <DeleteModal
+          isOpen={isDeleteModalVisible}
+          onClose={cancelDelete}
+          onConfirm={confirmDelete}
+          roleToDelete={roleToDelete}
         />
       )}
 
-      {isDeleteModalVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
-            <p>
-              Are you sure you want to delete this {roleToDelete.toLowerCase()}?
-            </p>
-            <div className="mt-4 flex justify-end">
-              <button
-                className="bg-red-600 hover:bg-red-800 text-white px-4 py-2 rounded-lg mr-2"
-                onClick={confirmDelete}
-              >
-                Confirm
-              </button>
-              <button
-                className="bg-gray-300 hover:bg-gray-500 px-4 py-2 rounded-lg"
-                onClick={cancelDelete}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {isEditing && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div
-            ref={modalRef}
-            className="bg-white p-4 rounded-lg shadow-lg w-96"
-          >
-            <div className="flex justify-between">
-              <h3 className="text-lg font-medium mb-4">Change role</h3>
-              <svg
-                className="h-4 w-4 cursor-pointer"
-                onClick={handleModalClose}
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="100"
-                height="100"
-                viewBox="0 0 50 50"
-              >
-                <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-              </svg>
-            </div>
-            <select
-              value={editUser?.role}
-              onChange={handleEditChange}
-              className="block w-[319px] text-sm text-gray-500 transition duration-75 border py-1 mb-3 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
-            >
-              <option value="choose">Choose role for user</option>
-              <option value="Developer">Developer</option>
-              <option value="Translator">Translator</option>
-            </select>
-            <div className="flex justify-end">
-              <button
-                onClick={handleModalClose}
-                className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500"
-              >
-                No
-              </button>
-              <button
-                onClick={handleEditSubmit}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        </div>
+        <EditModal
+          isOpen={isEditing}
+          onClose={handleModalClose}
+          project={project}
+          userId={editProject.userId}
+          onChange={handleEditChange}
+          onSubmit={handleEditSubmit}
+          modalRef={modalRef}
+        />
       )}
 
       {selectedUser && (
@@ -326,6 +330,13 @@ const MemberProjectLeader = ({ project }) => {
           onClose={handleCloseUserProfile}
         />
       )}
+
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </div>
   );
 };

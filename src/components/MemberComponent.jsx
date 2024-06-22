@@ -14,27 +14,29 @@ const MemberImages = ({
   const remainingCount = project.members.length - 4;
 
   return (
-    <div className="flex -space-x-2 -mt-2">
-      {memberImages.map((member, idx) => (
-        <img
-          key={member.userId}
-          src={member.image ? member.image : "../../Images/user-profile.png"}
-          alt={member.fullName}
-          width={28}
-          height={26}
-          className="w-7 h-7 rounded-full border-2 border-white"
-        />
-      ))}
-      {remainingCount > 0 && (
-        <div className="w-7 h-7 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">
-          +{remainingCount}
-        </div>
-      )}
+    <div className="flex -space-x-2">
       <button
         onClick={() => handleSeeAll("Project Leader")}
-        className="text-gray-600 text-right ml-auto self-end grow"
+        className="flex -space-x-2 -mt-2 justify-between w-full"
       >
-        See All
+        {memberImages.map((member, idx) => (
+          <img
+            key={member.userId}
+            src={member.image ? member.image : "../../Images/user-profile.png"}
+            alt={member.fullName}
+            width={28}
+            height={26}
+            className="w-7 h-7 rounded-full border-2 border-white"
+          />
+        ))}
+        {remainingCount > 0 && (
+          <div className="w-7 h-7 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 text-sm border-2 border-white">
+            +{remainingCount}
+          </div>
+        )}
+        <div className="text-gray-600 text-right self-end grow">
+          See All
+        </div>
       </button>
 
       {isViewMemberOpen && viewMemberRole === "Project Leader" && (

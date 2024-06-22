@@ -4,7 +4,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import dayjs from "dayjs";
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ project }) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const today = dayjs();
 
@@ -77,8 +77,12 @@ const CalendarComponent = () => {
             return (
               <div
                 key={index}
-                className={`p-8 text-right pt-2 pb-12 pr-5 border 
-                  ${!isCurrentMonth ? "bg-custom-pattern bg-custom-size" : "bg-white"} 
+                className={`p-8 text-right pt-2 pb-10 pr-5 border 
+                  ${
+                    !isCurrentMonth
+                      ? "bg-custom-pattern bg-custom-size"
+                      : "bg-white"
+                  } 
                   ${isToday ? "font-semibold border-3 border-blue-800" : ""}`}
               >
                 {day.date()}
