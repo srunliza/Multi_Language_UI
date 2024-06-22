@@ -35,7 +35,7 @@ const CalendarPage = () => {
 
   return (
     <main className="flex items-center justify-center">
-      <div className="w-full container p-4 bg-white shadow-md rounded-lg pr-8 pl-8">
+      <div className="w-full h-[44rem] container p-4 bg-white shadow-md rounded-lg pr-8 pl-8">
         <div className="flex items-center justify-between mb-4 text-black">
           <h1 className="text-2xl font-semibold">
             {currentDate.format("MMMM YYYY")}
@@ -62,13 +62,13 @@ const CalendarPage = () => {
           </div>
         </div>
         <div className="grid grid-cols-7 text-gray-800 bg-[#f1f4f9] rounded-lg">
-          <div className="text-center text-sm py-2 font-semibold">MON</div>
-          <div className="text-center text-sm py-2 font-semibold">TUE</div>
-          <div className="text-center text-sm py-2 font-semibold">WED</div>
-          <div className="text-center text-sm py-2 font-semibold">THU</div>
-          <div className="text-center text-sm py-2 font-semibold">FRI</div>
-          <div className="text-center text-sm py-2 font-semibold">SAT</div>
-          <div className="text-center text-sm py-2 font-semibold">SUN</div>
+          <div className="text-center text-sm py-4 font-semibold">MON</div>
+          <div className="text-center text-sm py-4 font-semibold">TUE</div>
+          <div className="text-center text-sm py-4 font-semibold">WED</div>
+          <div className="text-center text-sm py-4 font-semibold">THU</div>
+          <div className="text-center text-sm py-4 font-semibold">FRI</div>
+          <div className="text-center text-sm py-4 font-semibold">SAT</div>
+          <div className="text-center text-sm py-4 font-semibold">SUN</div>
 
           {days.map((day, index) => {
             const isCurrentMonth = day.month() === currentDate.month();
@@ -77,7 +77,7 @@ const CalendarPage = () => {
             return (
               <div
                 key={index}
-                className={`p-8 text-right pt-2 pb-12 pr-5 border 
+                className={`p-8 text-right pt-3 pb-12 pr-4 border 
                   ${!isCurrentMonth ? "bg-custom-pattern bg-custom-size" : "bg-white"} 
                   ${isToday ? "font-semibold border-3 border-blue-800" : ""}`}
               >

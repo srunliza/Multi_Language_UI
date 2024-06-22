@@ -39,7 +39,7 @@ const EmployeeCalendarComponent = () => {
           <div className="gap-2 flex">
             <button
               onClick={handlePrevMonth}
-              className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
+              className="p-2  px-5 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
             >
               <svg
                 className="w-4 h-4 stroke-current"
@@ -55,7 +55,7 @@ const EmployeeCalendarComponent = () => {
             </button>
             <button
               onClick={handleNextMonth}
-              className="p-2 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
+              className="p-2 px-5 rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-600"
             >
               <svg
                 className="w-4 h-4 stroke-current"
@@ -101,7 +101,7 @@ const EmployeeCalendarComponent = () => {
                 className={`hover:bg-indigo-100 text-xs rounded-md p-2 ${
                   isCurrentMonth
                     ? "text-gray-900"
-                    : "text-gray-500 bg-custom-pattern"
+                    : "text-gray-500 bg-gray-200"
                 } ${
                   isToday ? "bg-indigo-500 text-white hover:bg-indigo-600" : ""
                 }`}

@@ -8,6 +8,7 @@ import InputKeywordComponent from "../../_components/InputKeywordComponent";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 import CloseIcon from "@mui/icons-material/Close";
 import LanguageSelect from "@/components/LanguageSelect";
+import OpenAddMemberModalButton from "../../_components/ProjectLeaderAddMember";
 
 const AddKeyValuePage = () => {
   const [tableData, setTableData] = useState([
@@ -44,7 +45,7 @@ const AddKeyValuePage = () => {
     <div className="w-full px-6 py-4 h-screen  flex flex-col">
       <div className="flex justify-between items-center mb-3">
         <h2 className="text-lg font-semibold">Project Name</h2>
-        <AddMemberModal />
+        <OpenAddMemberModalButton />
       </div>
       <div className="flex flex-wrap justify-between gap-4">
         <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">

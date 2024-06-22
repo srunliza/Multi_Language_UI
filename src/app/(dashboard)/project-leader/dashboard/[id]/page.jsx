@@ -1,27 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import { getProjectByIdService } from "@/service/project.service";
-import AddMemberModal from "@/components/AddMember";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
+import OpenAddMemberModalButton from "../../_components/ProjectLeaderAddMember";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 
 const CreateProjectPage = async ({ params }) => {
   const { id } = params;
   const project = await getProjectByIdService(id);
+  let projects = project.payload || [];
 
   return (
     <div className="w-full px-6 py-4 h-screen flex flex-col">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold">
-          {project.name || "Project Name"}
-        </h2>
-        <AddMemberModal />
+        <h2 className="text-2xl font-semibold">{projects.projectName}</h2>
+        <OpenAddMemberModalButton project={projects} />
       </div>
 
       <div className="flex flex-col xl:flex-row gap-10">
-        <div className="flex flex-col flex-1 bg-white shadow-lg border rounded-xl">
+        <div className="flex flex-col flex-1 px-3 bg-white shadow-lg border rounded-xl">
           {/* Header */}
-          <NavbarProjectLeaderComponent />
+          <NavbarProjectLeaderComponent project={projects} />
 
           {/* Container */}
           <div className="py-10">
@@ -36,7 +35,7 @@ const CreateProjectPage = async ({ params }) => {
             </div>
 
             {/* File upload */}
-            <div className="flex flex-col items-center md:flex-row justify-center">
+            <div className="flex flex-col items-center md:flex-row justify-center gap-3">
               <div className="pt-10 w-full lg:w-1/2 max-w-md">
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
@@ -87,6 +86,7 @@ const CreateProjectPage = async ({ params }) => {
                   </div>
                 </div>
               </div>
+
               {/* File upload add manually */}
               <div className="pt-10 w-full lg:w-1/2 max-w-md">
                 <div className="rounded-lg overflow-hidden">
@@ -141,8 +141,8 @@ const CreateProjectPage = async ({ params }) => {
             </div>
           </div>
         </div>
-        <div className="w-full xl:w-[24%]">
-          <MemberProjectLeader />
+        <div className="xl:w-[23%] lg:w-[23%] xl:block lg:hidden sm:hidden md:hidden">
+          <MemberProjectLeader project={projects} />
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
-import AddMemberModal from "@/components/AddMemberModal";
 import AttachmentComponent from "@/components/AttachmentComponent";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 import { useSearchParams } from "next/navigation";
+import OpenAddMemberModalButton from "../../_components/ProjectLeaderAddMember";
 
 const ViewAttachmentPage = () => {
   const searchParams = useSearchParams();
@@ -16,7 +16,7 @@ const ViewAttachmentPage = () => {
         <h2 className="text-lg font-semibold">
           {projectName || "Project Name"}
         </h2>
-        <AddMemberModal />
+        <OpenAddMemberModalButton/>
       </div>
       <div className="flex flex-col  xl:flex-row    gap-10">
         <div className="flex flex-col flex-1 bg-white shadow-md border rounded-xl">

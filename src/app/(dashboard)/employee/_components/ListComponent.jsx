@@ -2,8 +2,6 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import MemberImage from "./MemberImage";
-import ViewMemberModal from "./ViewMemberModal";
-import DeleteProjectModal from "@/components/DeleteProjectModal";
 import DropdownMenu from "@/components/DropDownMenu";
 
 const getStatusTextColor = (status) => {
@@ -29,6 +27,18 @@ const getStatusBgColor = (status) => {
       return "bg-red-500";
     default:
       return "bg-gray-200";
+  }
+};
+
+const getDaysLeftBgColor = (daysLeft) => {
+  if (daysLeft === null) {
+    return "bg-gray-300";
+  } else if (daysLeft > 10) {
+    return "bg-green-300";
+  } else if (daysLeft > 5) {
+    return "bg-yellow-300";
+  } else {
+    return "bg-red-300";
   }
 };
 
@@ -86,7 +96,7 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
         </div>
       </div>
 
-      <div className="text-black text-md flex flex-wrap items-center mb-4 justify-between gap-3">
+      <div className="text-black text-md flex flex-wrap items-center mb-4 justify-between gap-4">
         <Link
           href={`/${currentUserRole
             .replace(" ", "-")
@@ -94,7 +104,7 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
           passHref
           className="text-base font-semibold"
         >
-          <div className="bg-gray-200 text-black rounded-lg px-7 py-2 text-xs">
+          <div className="bg-gray-100 text-black rounded-lg px-7 py-2 text-xs">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -118,7 +128,11 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
           }`}
           passHref
         >
-          <div className="bg-red-300 text-black w-[9em] rounded-lg px-3.5 py-2 text-xs">
+          <div
+            className={`${getDaysLeftBgColor(
+              daysLeft
+            )} text-black w-[9em] rounded-lg px-3.5 py-2 text-xs`}
+          >
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -164,7 +178,7 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
           ></div>
         </div>
         <div className="">
-          <div className="mr-6">
+          <div className="w-[13rem]">
             <MemberImage
               project={project}
               currentUserRole={currentUserRole}
@@ -179,7 +193,7 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
           </div>
         </div>
         {currentUserRole === "Project Leader" && (
-          <div className="cursor-pointer xl:ml-[13rem] lg:ml-[13rem] md:ml-3 sm:ml-3">
+          <div className="cursor-pointer ml-4">
             <DropdownMenu
               project={project}
               onEditClick={handleEditClick}

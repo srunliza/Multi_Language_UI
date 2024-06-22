@@ -30,6 +30,18 @@ const getStatusBgColor = (status) => {
   }
 };
 
+const getDaysLeftBgColor = (daysLeft) => {
+  if (daysLeft === null) {
+    return "bg-gray-300";
+  } else if (daysLeft > 10) {
+    return "bg-green-300";
+  } else if (daysLeft > 5) {
+    return "bg-yellow-300";
+  } else {
+    return "bg-red-300";
+  }
+};
+
 const CardComponent = ({ project, currentUserRole, daysLeft }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -101,7 +113,7 @@ const CardComponent = ({ project, currentUserRole, daysLeft }) => {
           passHref
           className="text-base font-semibold"
         >
-          <div className="bg-gray-200 text-black rounded-lg px-7 py-2 mr-5 text-xs">
+          <div className="bg-gray-100 text-black rounded-lg px-7 py-2 mr-5 text-xs">
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"
@@ -125,7 +137,11 @@ const CardComponent = ({ project, currentUserRole, daysLeft }) => {
           }`}
           passHref
         >
-          <div className="bg-red-300 text-black rounded-lg px-3.5 py-2 text-xs">
+          <div
+            className={`${getDaysLeftBgColor(
+              daysLeft
+            )} text-black rounded-lg px-3.5 py-2 text-xs`}
+          >
             <svg
               className="h-4 w-4 inline-block mr-1"
               fill="none"

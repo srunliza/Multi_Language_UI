@@ -90,7 +90,7 @@ const EmployeeDashboardPage = async () => {
 
       <div className="mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="bg-white p-4 rounded-xl border-2 border-blue-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
                 Total Project
@@ -108,7 +108,7 @@ const EmployeeDashboardPage = async () => {
               </h3>
             </div>
           </div>
-          <div className="bg-white p-4 rounded-xl border-2 border-green-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
                 Completed Project
@@ -126,7 +126,7 @@ const EmployeeDashboardPage = async () => {
               </h3>
             </div>
           </div>
-          <div className="bg-white p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
                 Progress Project
@@ -144,7 +144,7 @@ const EmployeeDashboardPage = async () => {
               </h3>
             </div>
           </div>
-          <div className="bg-white p-4 rounded-xl border-2 border-red-300 shadow-lg">
+          <div className="bg-white p-4 rounded-xl border-2 shadow-lg">
             <div>
               <h1 className="font-semibold text-lg text-gray-600">
                 Pending Project
@@ -180,6 +180,9 @@ const EmployeeDashboardPage = async () => {
               </th>
               <th scope="col" className="px-6 py-4">
                 End Date
+              </th>
+              <th scope="col" className="px-6 py-4 text-right pr-12">
+                Attachment
               </th>
               <th scope="col" className="px-6 py-4 text-right pr-12">
                 Status
@@ -237,6 +240,30 @@ const EmployeeDashboardPage = async () => {
                         }
                       >
                         {project.longestExpireDate}
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link
+                        href={`/${getRoleRoute(project.userRole)}/dashboard/${
+                          project.projectId
+                        }`}
+                      >
+                        <div className="flex justify-center items-center text-black rounded-lg text-xs">
+                          <svg
+                            className="h-4 w-4 inline-block mr-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                            />
+                          </svg>
+                          {project?.attachmentCount}
+                        </div>
                       </Link>
                     </td>
                     <td className="px-6 py-4 text-right">

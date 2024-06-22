@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
-import AddMemberModal from "@/components/AddMemberModal";
 import SelectComponent from "@/components/SelectComponent";
 import Link from "next/link";
 import CloseIcon from "@mui/icons-material/Close";
 import MemberProjectLeader from "@/components/MemberProjectLeader";
 import LanguageSelect from "@/components/LanguageSelect";
+import OpenAddMemberModalButton from "../../_components/ProjectLeaderAddMember";
 
 const UploadFilePage = () => {
   const [tableData, setTableData] = useState([
@@ -43,7 +43,7 @@ const UploadFilePage = () => {
     <div className="w-full h-screen px-6 py-4  ">
       <div className="flex justify-between mb-3 items-center ">
         <h2 className="text-lg font-semibold">Project Name</h2>
-        <AddMemberModal />
+        <OpenAddMemberModalButton />
       </div>
       <div className="flex flex-wrap justify-between gap-4">
         <div className="flex flex-col bg-white shadow-md w-[70%] rounded-xl">
