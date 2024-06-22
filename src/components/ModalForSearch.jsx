@@ -24,7 +24,9 @@ const ModalForSearch = ({ isOpen, onClose, project }) => {
         <div className="flex items-center justify-center min-h-screen ">
           <div className="bg-white w-[367px] p-6 rounded-lg shadow-lg h-[500px] ">
             <div className="flex justify-between mb-5">
-              <h2 className="text-base  ">Members</h2>
+              <h2 className="text-base font-semibold">
+                {project.memberCount === 1 ? "Member" : "Members"}
+              </h2>
               <button
                 id="closeContactForm"
                 className="text-gray-700 hover:text-red-500"

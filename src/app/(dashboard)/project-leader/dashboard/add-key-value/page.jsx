@@ -1,5 +1,4 @@
 "use client";
-import AddMemberModal from "@/components/AddMemberModal";
 import React, { useState } from "react";
 import NavbarProjectLeaderComponent from "../../_components/NavbarProjectLeaderComponent";
 import SelectComponent from "@/components/SelectComponent";
