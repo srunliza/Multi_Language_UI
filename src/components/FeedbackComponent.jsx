@@ -4,8 +4,11 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import DropdownMenu from "./DropdownFeedback";
 import ModalComponent from "./ModalFeedback";
-import { removeFeedbackAction } from "@/action/feedback-action";
 import Toast from "./ToastComponent";
+import {
+  removeFeedbackAction,
+  editFeedbackAction,
+} from "@/action/feedback-action";
 
 const FeedbackComponent = ({ feedback }) => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -76,18 +79,40 @@ const FeedbackComponent = ({ feedback }) => {
 
   const handleDeleteConfirm = async () => {
     const result = await removeFeedbackAction(editFeedback.id);
-    if (result.success) {
+    if (result.status === "OK") {
       const updatedFeedbacks = feedbacks.filter(
         (feedback) => feedback.feedbackId !== editFeedback.id
       );
       setFeedbacks(updatedFeedbacks);
       setToast({
         show: true,
-        message: "Comment is successfully deleted",
+        message: result.message || "Comment is successfully deleted",
         type: "success",
       });
     }
     setShowConfirmPopup(false);
+  };
+
+  const handleEditConfirm = async () => {
+    const formData = new FormData();
+    formData.append("feedbackId", editFeedback.id);
+    formData.append("comment", editFeedback.comment);
+
+    const result = await editFeedbackAction(formData);
+    if (result.status === "OK") {
+      const updatedFeedbacks = feedbacks.map((feedback) =>
+        feedback.feedbackId === editFeedback.id
+          ? { ...feedback, comment: editFeedback.comment }
+          : feedback
+      );
+      setFeedbacks(updatedFeedbacks);
+      setToast({
+        show: true,
+        message: result.message || "Comment is successfully updated",
+        type: "success",
+      });
+    }
+    setIsEditing(false);
   };
 
   const togglePopup = (index) => {
@@ -261,15 +286,7 @@ const FeedbackComponent = ({ feedback }) => {
         onClose={() => setIsEditing(false)}
         title="Edit Comment"
         confirmText="Save"
-        onConfirm={() => {
-          const updatedFeedbacks = feedbacks.map((feedback) =>
-            feedback.feedbackId === editFeedback.id
-              ? { ...feedback, comment: editFeedback.comment }
-              : feedback
-          );
-          setFeedbacks(updatedFeedbacks);
-          setIsEditing(false);
-        }}
+        onConfirm={handleEditConfirm}
       >
         <form>
           <input

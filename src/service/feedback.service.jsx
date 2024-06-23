@@ -21,3 +21,17 @@ export const deleteFeedbackService = async (id) => {
   const result = await res.json();
   return result;
 };
+
+export const updateFeedbackService = async (feedbackId, updatedFeedback) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/feedback/edit-comment/${feedbackId}`,
+    {
+      method: "PUT",
+      headers: header,
+      body: JSON.stringify(updatedFeedback),
+    }
+  );
+  const result = await res.json();
+  return result;
+};
