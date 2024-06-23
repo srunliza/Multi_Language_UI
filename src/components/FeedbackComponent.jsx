@@ -1,18 +1,20 @@
 "use client";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import send from "../../public/assets/icons/send.svg";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
-import ConfirmPopup from "../components/ConfirmToDeleteComponent";
+import DropdownMenu from "./DropdownFeedback";
+import ModalComponent from "./ModalFeedback";
+import { removeFeedbackAction } from "@/action/feedback-action";
+import Toast from "./ToastComponent";
 
 const FeedbackComponent = ({ feedback }) => {
   const [feedbacks, setFeedbacks] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  const [currentPopupIndex, setCurrentPopupIndex] = useState(null);
+  const [showPopup, setShowPopup] = useState(null);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editFeedback, setEditFeedback] = useState({ id: null, comment: "" });
   const [newComment, setNewComment] = useState("");
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   const modalRef = useRef();
 
@@ -26,10 +28,11 @@ const FeedbackComponent = ({ feedback }) => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setIsEditing(false);
-        setCurrentPopupIndex(null);
+        setShowConfirmPopup(false);
+        setShowPopup(null);
       }
     };
-    if (isEditing) {
+    if (isEditing || showConfirmPopup) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -37,7 +40,7 @@ const FeedbackComponent = ({ feedback }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isEditing]);
+  }, [isEditing, showConfirmPopup]);
 
   const handleNewCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -59,6 +62,42 @@ const FeedbackComponent = ({ feedback }) => {
     }
   };
 
+  const handleEditClick = (id, comment) => {
+    setIsEditing(true);
+    setShowPopup(null);
+    setEditFeedback({ id: id, comment: comment });
+  };
+
+  const handleDeleteClick = (id) => {
+    setShowConfirmPopup(true);
+    setShowPopup(null);
+    setEditFeedback({ id: id });
+  };
+
+  const handleDeleteConfirm = async () => {
+    const result = await removeFeedbackAction(editFeedback.id);
+    if (result.success) {
+      const updatedFeedbacks = feedbacks.filter(
+        (feedback) => feedback.feedbackId !== editFeedback.id
+      );
+      setFeedbacks(updatedFeedbacks);
+      setToast({
+        show: true,
+        message: "Comment is successfully deleted",
+        type: "success",
+      });
+    }
+    setShowConfirmPopup(false);
+  };
+
+  const togglePopup = (index) => {
+    if (showPopup === index) {
+      setShowPopup(null);
+    } else {
+      setShowPopup(index);
+    }
+  };
+
   return (
     <main className="max-w-4xl mx-auto relative">
       <div className="bg-white w-full py-5 px-5 shadow-md rounded-lg h-[40rem] border relative">
@@ -66,7 +105,7 @@ const FeedbackComponent = ({ feedback }) => {
         <div className="overflow-auto max-h-[480px] mb-4 no-scrollbar">
           {feedbacks.map((feedback, index) => (
             <div
-              key={index}
+              key={feedback.feedbackId}
               className="bg-white shadow-sm px-4 py-2 border rounded-x mt-3 rounded-md"
             >
               <div className="flex flex-col sm:flex-row pb-2">
@@ -82,15 +121,35 @@ const FeedbackComponent = ({ feedback }) => {
                 </div>
                 <div className="ml-0 sm:ml-3 mt-3 sm:mt-0 flex-1 relative">
                   <div className="text-gray-800 flex justify-end pr-0 md:mr-[-10px]">
-                    <div className="dropdown dropdown-end">
-                      <div>
-                        <MoreVertIcon />
+                    <div className="dropdown dropdown-end relative">
+                      <div onClick={() => togglePopup(index)}>
+                        <DropdownMenu
+                          feedback={feedback}
+                          index={index}
+                          onDeleteClick={() =>
+                            handleDeleteClick(feedback.feedbackId)
+                          }
+                          onEditClick={() =>
+                            handleEditClick(
+                              feedback.feedbackId,
+                              feedback.comment
+                            )
+                          }
+                        />
                       </div>
 
-                      {showPopup && currentPopupIndex === index && (
-                        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                      {showPopup === index && (
+                        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box absolute right-0">
                           <li>
-                            <button className="text-black hover:text-blue-600">
+                            <button
+                              className="text-black hover:text-blue-600"
+                              onClick={() =>
+                                handleEditClick(
+                                  feedback.feedbackId,
+                                  feedback.comment
+                                )
+                              }
+                            >
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +172,12 @@ const FeedbackComponent = ({ feedback }) => {
                             </button>
                           </li>
                           <li>
-                            <button className="text-black hover:text-red-600">
+                            <button
+                              className="text-black hover:text-red-600"
+                              onClick={() =>
+                                handleDeleteClick(feedback.feedbackId)
+                              }
+                            >
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +210,7 @@ const FeedbackComponent = ({ feedback }) => {
                   <div className="text-green-600 text-xs md:text-[11px] lg:text-sm">
                     {feedback.commentBy.role.roleName}
                   </div>
-                  <div className="mt-3.5 text-gray-700 text-md md:mt-[10px] ml-[-66px] mr-0 line-clamp-2 lg:mt-5 lg:text-md">
+                  <div className="relative mt-3.5 text-gray-700 text-md md:mt-[10px] ml-[-66px] mr-0 lg:text-md line-clamp-6 xl:w-[22rem] lg:w-[10rem] sm:w-[30rem] sm:pt-3 lg:mt-0 xl:mt-0 break-words">
                     {feedback.comment}
                   </div>
                   <div className="text-gray-500 sm:text-xs md:text-sm lg:text-sm mt-2 ml-[-66px]">
@@ -159,11 +223,11 @@ const FeedbackComponent = ({ feedback }) => {
         </div>
 
         <form
-          className=" bottom-0 w-full"
+          className="absolute bottom-4 w-full pr-10"
           onSubmit={handleNewCommentSubmit}
         >
           <div className="">
-            <div className="relative text-gray-800">
+            <div className="text-gray-800">
               <input
                 type="text"
                 id="new-comment"
@@ -173,7 +237,7 @@ const FeedbackComponent = ({ feedback }) => {
                 placeholder="Enter your feedback here..."
               />
 
-              <span className="absolute inset-y-0 flex items-center right-3 text-gray-500">
+              <span className="absolute inset-y-0 flex items-center right-3 text-gray-500 pr-10">
                 <button type="submit">
                   <Image src={send} width={20} height={20} alt="send icon" />
                 </button>
@@ -183,53 +247,49 @@ const FeedbackComponent = ({ feedback }) => {
         </form>
       </div>
 
-      {isEditing && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-          <div
-            ref={modalRef}
-            className="bg-white p-4 rounded-lg shadow-lg w-96"
-          >
-            <div className="flex justify-between">
-              <h3 className="text-lg font-semibold mb-4">Edit Comment</h3>
-              <svg
-                className="h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="100"
-                height="100"
-                viewBox="0 0 50 50"
-              >
-                <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-              </svg>
-            </div>
-            <input
-              type="text"
-              value={editFeedback.comment}
-              onChange={(e) =>
-                setEditFeedback({ ...editFeedback, comment: e.target.value })
-              }
-              className="w-full p-2 border border-gray-300 rounded-md mb-4"
-            />
-            <div className="flex justify-end">
-              <button className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500">
-                No
-              </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                Edit
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ModalComponent
+        isVisible={showConfirmPopup}
+        onClose={() => setShowConfirmPopup(false)}
+        confirmText="Delete"
+        onConfirm={handleDeleteConfirm}
+      >
+        <div>Are you sure you want to delete this comment?</div>
+      </ModalComponent>
 
-      {showConfirmPopup && (
-        <ConfirmPopup
-          message="Are you sure you want to delete this item?"
-          onConfirm={() => {}}
-          onCancel={() => {}}
-        />
-      )}
+      <ModalComponent
+        isVisible={isEditing}
+        onClose={() => setIsEditing(false)}
+        title="Edit Comment"
+        confirmText="Save"
+        onConfirm={() => {
+          const updatedFeedbacks = feedbacks.map((feedback) =>
+            feedback.feedbackId === editFeedback.id
+              ? { ...feedback, comment: editFeedback.comment }
+              : feedback
+          );
+          setFeedbacks(updatedFeedbacks);
+          setIsEditing(false);
+        }}
+      >
+        <form>
+          <input
+            type="text"
+            value={editFeedback.comment}
+            onChange={(e) =>
+              setEditFeedback({ ...editFeedback, comment: e.target.value })
+            }
+            className="w-full p-2 border border-gray-300 rounded-md mb-4"
+            placeholder="Enter your comment"
+          />
+        </form>
+      </ModalComponent>
+
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </main>
   );
 };

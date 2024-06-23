@@ -56,3 +56,18 @@ export const updateAttachmentService = async (attachmentId, newAttachment) => {
   const result = await res.json();
   return result;
 };
+
+// export const uploadAttachmentManuallyService = async (req) => {
+//   const header = await headerToken();
+//   const res = await fetch(
+//     `${baseUrl}/api/v1/attachment/upload-attachment-manual`,
+//     {
+//       method: "POST",
+//       headers: header,
+//       body: JSON.stringify(req),
+//     }
+//   )
+//     .then((r) => r.json())
+//     .catch((e) => console.log(e));
+//   return res;
+// };

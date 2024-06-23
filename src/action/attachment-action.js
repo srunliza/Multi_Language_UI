@@ -2,6 +2,7 @@
 import {
   deleteAttachmentService,
   updateAttachmentService,
+  uploadAttachmentManuallyService,
 } from "@/service/attachment.service";
 import { revalidateTag } from "next/cache";
 
@@ -27,3 +28,9 @@ export const editAttachmentAction = async (formData) => {
   revalidateTag("attachment");
   return result;
 };
+
+// export const uploadAttachmentManuallyAction = async (req) => {
+//   const res = await uploadAttachmentManuallyService(req);
+//   revalidateTag("attachment");
+//   return res;
+// };
