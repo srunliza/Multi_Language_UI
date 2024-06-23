@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import Dropdown from "./DropDownDownload";
 import ArticleIcon from "@mui/icons-material/Article";
 import { FileDownloadOutlined } from "@mui/icons-material";
+import DropdownAttachment from "./DropDownAttachment";
 
 const AttachmentComponent = ({ attachment = [] }) => {
   const [data, setData] = useState([]);
@@ -79,11 +80,10 @@ const AttachmentComponent = ({ attachment = [] }) => {
     <div className="w-full">
       {data.length === 0 ? (
         <div className="px-6 py-[10rem] text-center text-gray-500 font-semibold">
-          No attachments available. Please check back later or upload a new
-          attachment.
+          No attachments available. Please check back later.
         </div>
       ) : (
-        <div className="shadow-md no-scrollbar">
+        <div className="no-scrollbar h-[36rem]">
           <table className="text-sm w-full text-left rtl:text-right text-gray-500">
             <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
               <tr>
@@ -173,6 +173,7 @@ const AttachmentComponent = ({ attachment = [] }) => {
                       attachmentId={item.attachmentId}
                       handleAction={handleDownload}
                     />
+                    <DropdownAttachment attachmentId={item.attachmentId} />
                   </td>
                 </tr>
               ))}
