@@ -15,6 +15,18 @@ export const getAttachmentByProjectIdService = async (id) => {
   return data;
 };
 
+export const previewXMLService = async (id) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/get-attachment/XML/${id}`,
+    {
+      headers: header,
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
 export const deleteAttachmentService = async (id) => {
   const header = await headerToken();
   const res = await fetch(

@@ -1,14 +1,12 @@
 "use client";
-
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import send from "../../public/assets/icons/send.svg";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import ConfirmPopup from "../components/ConfirmToDeleteComponent";
-import { feedbackData } from "@/obj/feedbackData";
 
-const FeedbackComponent = () => {
-  const [feedbacks, setFeedbacks] = useState(feedbackData);
+const FeedbackComponent = ({ feedback }) => {
+  const [feedbacks, setFeedbacks] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [currentPopupIndex, setCurrentPopupIndex] = useState(null);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
@@ -18,63 +16,17 @@ const FeedbackComponent = () => {
 
   const modalRef = useRef();
 
-  const handleIconClick = (index) => {
-    if (currentPopupIndex === index) {
-      setShowPopup(!showPopup);
-    } else {
-      setShowPopup(true);
-      setCurrentPopupIndex(index);
+  useEffect(() => {
+    if (feedback && feedback.payload) {
+      setFeedbacks(feedback.payload);
     }
-  };
-
-  const handleEditClick = (feedback) => {
-    setEditFeedback(feedback);
-    setIsEditing(true);
-    setShowPopup(false);
-  };
-
-  const handleEditChange = (e) => {
-    setEditFeedback({ ...editFeedback, comment: e.target.value });
-  };
-
-  const handleEditSubmit = () => {
-    setFeedbacks((prevFeedbacks) =>
-      prevFeedbacks.map((fb) =>
-        fb.id === editFeedback.id
-          ? { ...fb, comment: editFeedback.comment }
-          : fb
-      )
-    );
-    setIsEditing(false);
-    setCurrentPopupIndex(null);
-  };
-
-  const handleDeleteClick = () => {
-    setShowConfirmPopup(true);
-    setShowPopup(false);
-  };
-
-  const confirmDelete = () => {
-    setFeedbacks((prevFeedbacks) =>
-      prevFeedbacks.filter((feedback) => feedback.id !== currentPopupIndex + 1)
-    );
-    setShowConfirmPopup(false);
-    setCurrentPopupIndex(null);
-  };
-
-  const cancelDelete = () => {
-    setShowConfirmPopup(false);
-  };
-
-  const handleModalClose = () => {
-    setIsEditing(false);
-    setCurrentPopupIndex(null);
-  };
+  }, [feedback]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleModalClose();
+        setIsEditing(false);
+        setCurrentPopupIndex(null);
       }
     };
     if (isEditing) {
@@ -95,11 +47,11 @@ const FeedbackComponent = () => {
     e.preventDefault();
     if (newComment.trim()) {
       const newFeedback = {
-        id: feedbacks.length + 1,
-        name: "New User",
-        position: "Developer",
+        feedbackId: feedbacks.length + 1,
+        fullName: "New User",
+        roleName: "Developer",
         comment: newComment,
-        date: new Date().toLocaleDateString(),
+        createdDate: new Date().toISOString(),
         image: "../../assets/images/lisa.png",
       };
       setFeedbacks([...feedbacks, newFeedback]);
@@ -108,37 +60,37 @@ const FeedbackComponent = () => {
   };
 
   return (
-    <main className="max-w-4xl mx-auto">
-      <div className="bg-white w-full py-3 px-5 shadow-md rounded-xl min-h-[100px] border">
+    <main className="max-w-4xl mx-auto relative">
+      <div className="bg-white w-full py-5 px-5 shadow-md rounded-lg h-[40rem] border relative">
         <h1 className="text-gray-800 text-xl font-semibold mb-5">Feedback</h1>
-        <div className="overflow-auto max-h-[426px] mb-4 no-scrollbar">
+        <div className="overflow-auto max-h-[480px] mb-4 no-scrollbar">
           {feedbacks.map((feedback, index) => (
             <div
               key={index}
-              className="bg-white shadow-sm px-4 py-2 border rounded-xl mb-2.5"
+              className="bg-white shadow-sm px-4 py-2 border rounded-x mt-3 rounded-md"
             >
               <div className="flex flex-col sm:flex-row pb-2">
                 <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
                   <img
                     className="h-12 w-12 rounded-full object-cover"
-                    src={feedback.image}
+                    src={
+                      feedback.commentBy.image ||
+                      "../../Images/user-profile.png"
+                    }
                     alt="profile user image"
                   />
                 </div>
                 <div className="ml-0 sm:ml-3 mt-3 sm:mt-0 flex-1 relative">
                   <div className="text-gray-800 flex justify-end pr-0 md:mr-[-10px]">
                     <div className="dropdown dropdown-end">
-                      <div tabIndex={0} onClick={() => handleIconClick(index)}>
+                      <div>
                         <MoreVertIcon />
                       </div>
 
                       {showPopup && currentPopupIndex === index && (
                         <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                           <li>
-                            <button
-                              className="text-black hover:text-blue-600"
-                              onClick={() => handleEditClick(feedback)}
-                            >
+                            <button className="text-black hover:text-blue-600">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -161,10 +113,7 @@ const FeedbackComponent = () => {
                             </button>
                           </li>
                           <li>
-                            <button
-                              className="text-black hover:text-red-600"
-                              onClick={handleDeleteClick}
-                            >
+                            <button className="text-black hover:text-red-600">
                               <span>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -181,10 +130,7 @@ const FeedbackComponent = () => {
                                   />
                                 </svg>
                               </span>
-                              <span
-                                className="hidden md:inline-block"
-                                name="delete"
-                              >
+                              <span className="hidden md:inline-block">
                                 Delete
                               </span>
                             </button>
@@ -195,16 +141,16 @@ const FeedbackComponent = () => {
                   </div>
 
                   <div className="font-medium text-gray-800 mr-7 top-0 mt-[-20px] md:text-sm lg:text-lg">
-                    {feedback.name}
+                    {feedback.commentBy.fullName}
                   </div>
-                  <div className="text-gray-600 text-xs md:text-[11px] lg:text-sm">
-                    {feedback.position}
+                  <div className="text-green-600 text-xs md:text-[11px] lg:text-sm">
+                    {feedback.commentBy.role.roleName}
                   </div>
-                  <div className="mt-3.5 text-gray-700 text-[12.8px] md:mt-[10px] ml-[-66px] mr-0 line-clamp-2 lg:mt-5 lg:text-sm">
+                  <div className="mt-3.5 text-gray-700 text-md md:mt-[10px] ml-[-66px] mr-0 line-clamp-2 lg:mt-5 lg:text-md">
                     {feedback.comment}
                   </div>
-                  <div className="text-gray-500 sm:text-xs md:text-sm lg:text-[15px] mt-2 ml-[-66px]">
-                    {feedback.date}
+                  <div className="text-gray-500 sm:text-xs md:text-sm lg:text-sm mt-2 ml-[-66px]">
+                    {new Date(feedback.createdDate).toLocaleDateString()}
                   </div>
                 </div>
               </div>
@@ -213,10 +159,10 @@ const FeedbackComponent = () => {
         </div>
 
         <form
-          className="sticky bottom-0 bg-white w-full"
+          className=" bottom-0 w-full"
           onSubmit={handleNewCommentSubmit}
         >
-          <div className="py-1">
+          <div className="">
             <div className="relative text-gray-800">
               <input
                 type="text"
@@ -247,7 +193,6 @@ const FeedbackComponent = () => {
               <h3 className="text-lg font-semibold mb-4">Edit Comment</h3>
               <svg
                 className="h-4 w-4"
-                onClick={handleModalClose}
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
                 y="0px"
@@ -261,20 +206,16 @@ const FeedbackComponent = () => {
             <input
               type="text"
               value={editFeedback.comment}
-              onChange={handleEditChange}
+              onChange={(e) =>
+                setEditFeedback({ ...editFeedback, comment: e.target.value })
+              }
               className="w-full p-2 border border-gray-300 rounded-md mb-4"
             />
             <div className="flex justify-end">
-              <button
-                onClick={handleModalClose}
-                className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500"
-              >
+              <button className="bg-white text-blue-500 px-4 py-2 rounded-md mr-2 border border-blue-500">
                 No
               </button>
-              <button
-                onClick={handleEditSubmit}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              >
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
                 Edit
               </button>
             </div>
@@ -285,8 +226,8 @@ const FeedbackComponent = () => {
       {showConfirmPopup && (
         <ConfirmPopup
           message="Are you sure you want to delete this item?"
-          onConfirm={confirmDelete}
-          onCancel={cancelDelete}
+          onConfirm={() => {}}
+          onCancel={() => {}}
         />
       )}
     </main>
