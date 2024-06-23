@@ -7,7 +7,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import { FileDownloadOutlined } from "@mui/icons-material";
 import DropdownAttachment from "./DropDownAttachment";
 
-const AttachmentComponent = ({ attachment = [] }) => {
+const AttachmentComponent = ({ attachment = [], language = [] }) => {
   const [data, setData] = useState([]);
   const router = useRouter();
 
@@ -173,7 +173,10 @@ const AttachmentComponent = ({ attachment = [] }) => {
                       attachmentId={item.attachmentId}
                       handleAction={handleDownload}
                     />
-                    <DropdownAttachment attachmentId={item.attachmentId} />
+                    <DropdownAttachment
+                      attachmentId={item.attachmentId}
+                      language={language}
+                    />
                   </td>
                 </tr>
               ))}

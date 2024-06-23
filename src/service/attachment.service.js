@@ -28,17 +28,17 @@ export const deleteAttachmentService = async (id) => {
   return result;
 };
 
-export const updateAttachmentService = async (
-  projectId,
-  updatedProjectName
-) => {
+export const updateAttachmentService = async (attachmentId, newAttachment) => {
   const header = await headerToken();
   const res = await fetch(
-    `${baseUrl}/api/v1/project/update-project-name/${projectId}`,
+    `${baseUrl}/api/v1/attachment/update-attachment/${attachmentId}`,
     {
       method: "PUT",
-      headers: header,
-      body: JSON.stringify(updatedProjectName),
+      headers: {
+        ...header,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newAttachment),
     }
   );
   const result = await res.json();

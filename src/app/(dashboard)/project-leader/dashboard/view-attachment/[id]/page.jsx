@@ -5,6 +5,7 @@ import NavbarProjectLeaderComponent from "../../../_components/NavbarProjectLead
 import AttachmentComponent from "@/components/AttachmentComponent";
 import { getProjectByIdService } from "@/service/project.service";
 import { getAttachmentByProjectIdService } from "@/service/attachment.service";
+import { getAllLanguageService } from "@/service/language.service";
 
 const ViewAttachmentPage = async ({ params }) => {
   const { id } = params;
@@ -12,6 +13,8 @@ const ViewAttachmentPage = async ({ params }) => {
   let projects = project.payload || [];
   const attachment = await getAttachmentByProjectIdService(id);
   let attachments = attachment.payload || [];
+  const language = await getAllLanguageService();
+  let languages = language.payload || [];
 
   return (
     <div className="w-full px-6 py-4 h-full flex flex-col">
@@ -25,7 +28,7 @@ const ViewAttachmentPage = async ({ params }) => {
           <NavbarProjectLeaderComponent project={projects} />
           {/* Container */}
           <div className="overflow-y-auto no-scrollbar">
-            <AttachmentComponent attachment={attachments} />
+            <AttachmentComponent attachment={attachments} language={languages}/>
           </div>
         </div>
         <div className="xl:w-[23%] lg:w-[23%] xl:block lg:hidden sm:hidden md:hidden">

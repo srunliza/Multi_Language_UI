@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { red } from "@mui/material/colors";
 import Toast from "./ToastComponent";
-import { deleteAttachmentAction } from "@/action/attachment-action";
+import { DatePicker } from "@nextui-org/react";
+import {
+  deleteAttachmentAction,
+  editAttachmentAction,
+} from "@/action/attachment-action";
 
-const DropdownAttachment = ({ attachmentId }) => {
+const DropdownAttachment = ({ attachmentId, language }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -90,6 +92,42 @@ const DropdownAttachment = ({ attachmentId }) => {
     handleDeleteAttachment(attachmentId);
   };
 
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    formData.append("attachmentId", attachmentId);
+    const result = await editAttachmentAction(formData);
+    if (result.status === "OK") {
+      setToast({
+        message: "Attachment updated successfully!",
+        type: "success",
+        show: true,
+      });
+      setIsEditing(false);
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 2000);
+    } else {
+      let errorMessage =
+        "Can only update attachments with status 'Pending' or 'Progress.";
+      if (
+        result.status === 400 &&
+        result.detail === "Cannot update language when status is 'Progress'."
+      ) {
+        errorMessage = result.detail;
+      }
+      setToast({
+        message: errorMessage,
+        type: "error",
+        show: true,
+      });
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 2000);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -161,7 +199,7 @@ const DropdownAttachment = ({ attachmentId }) => {
           className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
           onClick={closeModalOnBackgroundClick}
         >
-          <form>
+          <form onSubmit={handleEditSubmit}>
             <div
               ref={modalRef}
               className="bg-white p-4 rounded-lg shadow-lg w-[400px]"
@@ -183,38 +221,50 @@ const DropdownAttachment = ({ attachmentId }) => {
               </div>
               <div className="flex flex-col justify-between lg:flex-row items-center lg:space-x-4 text-xs py-2">
                 <div className="flex flex-col w-full">
-                  <label htmlFor="language" className="">
+                  <label htmlFor="languageId" className="">
                     Language
                   </label>
                   <select
-                    name="language"
-                    className="block text-xs text-gray-500 transition duration-75 border px-2 border-gray-300 rounded-lg shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
+                    name="languageId"
+                    className="block text-xs text-gray-500 transition duration-75 border px-2 border-gray-300 rounded-xl shadow-sm h-[41px] focus:border-blue-600 focus:ring-1 focus:ring-inset focus:ring-blue-600 mt-1 bg-none"
                   >
-                    <option value="English">English</option>
-                    <option value="Korean">Korean</option>
-                    <option value="Khmer">Khmer</option>
+                    {language.map((lang) => (
+                      <option key={lang.languageId} value={lang.languageId}>
+                        {lang.language}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-                  <label htmlFor="end" className="text-xs mb-1">
+                  <label htmlFor="expireDate" className="text-xs mb-1">
                     End Date
                   </label>
-                  <input
+                  {/* <input
                     type="date"
-                    id="end"
-                    name="end"
+                    id="expireDate"
+                    name="expireDate"
                     className="w-full lg:w-[175px] h-[37.6px] px-3 py-5 border text-gray-600 border-gray-300 text-xs rounded-lg"
+                  /> */}
+                  <DatePicker
+                    type="date"
+                    id="expireDate"
+                    name="expireDate"
+                    className="w-full border text-gray-600 text-xs rounded-xl"
                   />
                 </div>
               </div>
               <div className="flex justify-end py-3">
                 <button
+                  type="button"
                   onClick={handleModalClose}
                   className="px-4 py-2 border border-blue-800 text-blue-800 rounded-md text-sm hover:border-blue-500 transition duration-150 ease-in-out mr-2"
                 >
                   Cancel
                 </button>
-                <button className="px-4 py-2 bg-blue-800 text-white rounded-md text-sm hover:bg-blue-700 transition duration-150 ease-in-out">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-800 text-white rounded-md text-sm hover:bg-blue-700 transition duration-150 ease-in-out"
+                >
                   Save
                 </button>
               </div>
@@ -247,10 +297,10 @@ const DropdownAttachment = ({ attachmentId }) => {
                 <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
               </svg>
             </div>
-            <p className="text-lg font-semibold">
+            <p className="text-lg font-semibold mt-4">
               Do you want to delete this attachment?
             </p>
-            <div className="flex pt-2">
+            <div className="flex pt-3 ml-[12rem]">
               <button
                 className="px-4 py-2 border border-blue-800 text-blue-800 rounded-md text-sm hover:border-blue-500  transition duration-150 ease-in-out mr-2"
                 onClick={cancelDelete}
