@@ -7,7 +7,7 @@ import { FileDownloadOutlined } from "@mui/icons-material";
 import Dropdown from "@/components/DropDownDownload";
 import SortComponent from "./SortDeveloper";
 
-const AttachmentComponent = ({ attachment = [], language = [] }) => {
+const AttachmentComponent = ({ attachment = [] }) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const router = useRouter();
@@ -54,15 +54,15 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
 
   const handlePreview = (fileType, attachmentId) => {
     const routeMap = {
-      json: `../preview-json-file/${attachmentId}`,
-      xml: `../preview-xml-file/${attachmentId}`,
-      string: `../preview-string-file/${attachmentId}`,
+      json: `./preview-json-file/${attachmentId}`,
+      xml: `./preview-xml-file/${attachmentId}`,
+      string: `./preview-string-file/${attachmentId}`,
     };
     router.push(routeMap[fileType]);
   };
 
   const handleRowClick = (attachmentId) => {
-    router.push(`../preview-page/${attachmentId}`);
+    router.push(`./preview-page/${attachmentId}`);
   };
 
   const previewItems = [
