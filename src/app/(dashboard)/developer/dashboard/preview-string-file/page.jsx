@@ -41,7 +41,7 @@ const PreviewStringFilePage = () => {
                 <div className="bg-white p-5 rounded-lg shadow-lg flex-1">
                     <div className="bg-white rounded-lg min-h-[560px] border">
                         {/* title */}
-                        <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">Preview Page</h1>
+                        <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">STRINGS Preview Page</h1>
                         <hr />
 
                         <div className='overflow-auto max-h-[65vh] mb-4 no-scrollbar'>

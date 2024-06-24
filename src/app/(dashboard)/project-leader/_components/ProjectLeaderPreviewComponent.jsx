@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 
-const ProjectLeaderPreviewTranslateComponent = ({}) => {
+const ProjectLeaderPreviewTranslateComponent = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editableData, setEditableData] = useState(translateData);
   const [editingRowIndex, setEditingRowIndex] = useState(null);
