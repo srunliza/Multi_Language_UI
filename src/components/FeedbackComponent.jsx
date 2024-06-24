@@ -8,9 +8,10 @@ import Toast from "./ToastComponent";
 import {
   removeFeedbackAction,
   editFeedbackAction,
+  postFeedbackAction,
 } from "@/action/feedback-action";
 
-const FeedbackComponent = ({ feedback }) => {
+const FeedbackComponent = ({ feedback, attachmentId }) => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [showPopup, setShowPopup] = useState(null);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
@@ -49,19 +50,25 @@ const FeedbackComponent = ({ feedback }) => {
     setNewComment(e.target.value);
   };
 
-  const handleNewCommentSubmit = (e) => {
+  const handleNewCommentSubmit = async (e) => {
     e.preventDefault();
-    if (newComment.trim()) {
-      const newFeedback = {
-        feedbackId: feedbacks.length + 1,
-        fullName: "New User",
-        roleName: "Developer",
-        comment: newComment,
-        createdDate: new Date().toISOString(),
-        image: "../../assets/images/lisa.png",
-      };
-      setFeedbacks([...feedbacks, newFeedback]);
-      setNewComment("");
+    const formData = new FormData();
+    formData.append("attachmentId", attachmentId);
+    formData.append("comment", newComment);
+
+    const result = await postFeedbackAction(formData);
+    if (result.status === "CREATED") {
+      setToast({
+        show: true,
+        message: result.message || "Comment is successfully created",
+        type: "success",
+      });
+    } else if (result.status === 404) {
+      setToast({
+        show: true,
+        message: result.detail || "There is no translator in the project",
+        type: "error",
+      });
     }
   };
 
@@ -79,6 +86,7 @@ const FeedbackComponent = ({ feedback }) => {
 
   const handleDeleteConfirm = async () => {
     const result = await removeFeedbackAction(editFeedback.id);
+    console.log("Delete Feedback Result:", result); // Debug log
     if (result.status === "OK") {
       const updatedFeedbacks = feedbacks.filter(
         (feedback) => feedback.feedbackId !== editFeedback.id
@@ -88,6 +96,12 @@ const FeedbackComponent = ({ feedback }) => {
         show: true,
         message: result.message || "Comment is successfully deleted",
         type: "success",
+      });
+    } else if (result.status === 404) {
+      setToast({
+        show: true,
+        message: result.detail || "There is no translator in the project",
+        type: "error",
       });
     }
     setShowConfirmPopup(false);
@@ -99,6 +113,7 @@ const FeedbackComponent = ({ feedback }) => {
     formData.append("comment", editFeedback.comment);
 
     const result = await editFeedbackAction(formData);
+    console.log("Edit Feedback Result:", result); // Debug log
     if (result.status === "OK") {
       const updatedFeedbacks = feedbacks.map((feedback) =>
         feedback.feedbackId === editFeedback.id
@@ -110,6 +125,12 @@ const FeedbackComponent = ({ feedback }) => {
         show: true,
         message: result.message || "Comment is successfully updated",
         type: "success",
+      });
+    } else if (result.status === 404) {
+      setToast({
+        show: true,
+        message: result.detail || "There is no translator in the project",
+        type: "error",
       });
     }
     setIsEditing(false);
@@ -278,7 +299,7 @@ const FeedbackComponent = ({ feedback }) => {
         confirmText="Delete"
         onConfirm={handleDeleteConfirm}
       >
-        <div>Are you sure you want to delete this comment?</div>
+        <div className="text-md -mt-3 font-semibold">Are you sure you want to delete this comment?</div>
       </ModalComponent>
 
       <ModalComponent

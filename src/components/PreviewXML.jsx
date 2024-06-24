@@ -2,9 +2,9 @@
 import { useRouter } from "next/navigation";
 import { saveAs } from "file-saver";
 import { useEffect, useState } from "react";
-import FeedbackServer from "./FeedbackServer";
+import FeedbackComponent from "./FeedbackComponent";
 
-const PreviewXmlFileComponent = ({ xml, attachmentId }) => {
+const PreviewXmlFileComponent = ({ xml, attachmentId, feedback }) => {
   const router = useRouter();
   const [previewXmlData, setPreviewXmlData] = useState([]);
   console.log("xml:    ", xml);
@@ -97,7 +97,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId }) => {
 
         {/* feedback component */}
         <div className="w-full lg:w-1/3">
-          <FeedbackServer attachmentId={attachmentId} />
+          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} />
         </div>
       </div>
     </main>

@@ -35,3 +35,14 @@ export const updateFeedbackService = async (feedbackId, updatedFeedback) => {
   const result = await res.json();
   return result;
 };
+
+export const createFeedbackService = async (attachmentId, comment) => {
+  const header = await headerToken();
+  const res = await fetch(`${baseUrl}/api/v1/feedback/comment-feedback/${attachmentId}`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(comment),
+  });
+  const data = await res.json();
+  return data;
+};
