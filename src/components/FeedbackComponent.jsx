@@ -58,6 +58,7 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
 
     const result = await postFeedbackAction(formData);
     if (result.status === "CREATED") {
+      setNewComment("");
       setToast({
         show: true,
         message: result.message || "Comment is successfully created",
@@ -248,16 +249,16 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
                     </div>
                   </div>
 
-                  <div className="font-medium text-gray-800 mr-7 top-0 mt-[-20px] md:text-sm lg:text-lg">
+                  <div className="text-gray-800 mr-7 top-0 mt-[-20px] md:text-sm lg:text-md font-semibold">
                     {feedback.commentBy.fullName}
                   </div>
                   <div className="text-green-600 text-xs md:text-[11px] lg:text-sm">
                     {feedback.commentBy.role.roleName}
                   </div>
-                  <div className="relative mt-3.5 text-gray-700 text-md md:mt-[10px] ml-[-66px] mr-0 lg:text-md line-clamp-6 xl:w-[22rem] lg:w-[10rem] sm:w-[30rem] sm:pt-3 lg:mt-0 xl:mt-0 break-words">
+                  <div className="relative mt-3.5 text-gray-700 text-sm md:mt-[10px] ml-[-66px] mr-0 lg:text-md line-clamp-6 xl:w-[22rem] lg:w-[10rem] sm:w-[30rem] sm:pt-3 lg:mt-1 xl:mt-1 break-words">
                     {feedback.comment}
                   </div>
-                  <div className="text-gray-500 sm:text-xs md:text-sm lg:text-sm mt-2 ml-[-66px]">
+                  <div className="text-gray-500 sm:text-xs md:text-xs lg:text-xs mt-2 ml-[-66px]">
                     {new Date(feedback.createdDate).toLocaleDateString()}
                   </div>
                 </div>
@@ -297,7 +298,9 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
         confirmText="Delete"
         onConfirm={handleDeleteConfirm}
       >
-        <div className="text-md -mt-3 font-semibold">Are you sure you want to delete this comment?</div>
+        <div className="text-md -mt-3 font-semibold">
+          Are you sure you want to delete this comment?
+        </div>
       </ModalComponent>
 
       <ModalComponent
