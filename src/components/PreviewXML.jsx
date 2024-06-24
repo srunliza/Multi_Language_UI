@@ -59,7 +59,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback }) => {
             </h1>
             <hr />
 
-            <div className="overflow-auto max-h-[55vh] my-4 no-scrollbar">
+            <div className="overflow-auto max-h-[49vh] my-4 no-scrollbar">
               {/* map data as xml data */}
               {previewXmlData.map((xmlData) => (
                 <div key={xmlData.id} className="text-black pl-8 mt-4">

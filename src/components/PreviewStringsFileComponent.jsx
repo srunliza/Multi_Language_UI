@@ -2,43 +2,31 @@
 import { useRouter } from "next/navigation";
 import FeedbackComponent from "@/components/FeedbackComponent";
 
-const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
-  console.log("json: ", json);
+const PreviewStringsFileComponent = ({ string, attachmentId, feedback }) => {
+  console.log("string: ", string);
   const router = useRouter();
 
-  // Convert JSON object to an array of key-value pairs
-  const previewJsonData = Object.entries(json).map(([key, value]) => ({
-    key,
-    value,
+  // Convert the string content to an array of key-value pairs
+  const previewStringData = string.split("\n").map((line, index) => ({
+    key: index + 1,
+    value: line,
   }));
 
-  // Function to handle the download of the JSON data
+  // Function to handle the download of the string data
   const handleDownload = () => {
-    // Convert the JSON object to a string
-    const jsonString = JSON.stringify(json);
-
-    // Convert the string into an array of characters
-    const jsonCharArray = Array.from(jsonString);
-
-    // Create a new JSON object where each character is a key-value pair
-    const formattedJson = jsonCharArray.reduce((acc, char, index) => {
-      acc[index] = char;
-      return acc;
-    }, {});
-
-    // Convert the formatted JSON object to a string with new lines
-    const formattedJsonString =
+    const formattedStringContent =
       "{\n" +
-      Object.entries(formattedJson)
-        .map(([key, value]) => `"${key}" : "${value}"`)
+      previewStringData
+        .map(({ key, value }) => `"${key}" : "${value}"`)
         .join(",\n") +
       "\n}";
 
     const dataStr =
-      "data:text/json;charset=utf-8," + encodeURIComponent(formattedJsonString);
+      "data:text/plain;charset=utf-8," +
+      encodeURIComponent(formattedStringContent);
     const downloadAnchorNode = document.createElement("a");
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "data.json");
+    downloadAnchorNode.setAttribute("download", "preview.txt");
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
@@ -51,15 +39,15 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
           <div className="bg-white rounded-lg min-h-[550px] border">
             {/* title */}
             <h1 className="text-gray-800 py-4 pl-5 text-lg font-semibold">
-              JSON Preview Page
+              STRINGS Preview Page
             </h1>
             <hr />
-            <div className="overflow-auto max-h-[49vh] my-4 no-scrollbar">
-              {/* data map as json data */}
-              {previewJsonData.map((jsonData, index) => (
-                <div key={index} className="text-black pl-8 mt-4">
-                  <p className="ml-4 font-consolas text-gray-800">
-                    "{jsonData.key}" : "{jsonData.value}",
+            <div className="overflow-auto max-h-[55vh] my-4 no-scrollbar">
+              {/* data map as string data */}
+              {previewStringData.map(({ key, value }, index) => (
+                <div key={index} className="text-black pl-8 mt-3">
+                  <p className="font-consolas text-gray-800">
+                    "{key}" : "{value}",
                   </p>
                 </div>
               ))}
@@ -67,7 +55,7 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
           </div>
 
           {/* button go back and download */}
-          <div className="flex justify-end gap-2 mt-4">
+          <div className="flex gap-2 mt-4 justify-end">
             <button
               onClick={() =>
                 router.push(
@@ -96,4 +84,4 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
   );
 };
 
-export default PreviewJsonFileComponent;
+export default PreviewStringsFileComponent;
