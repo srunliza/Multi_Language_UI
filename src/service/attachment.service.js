@@ -27,6 +27,18 @@ export const previewXMLService = async (id) => {
   return data;
 };
 
+export const previewJsonService = async (id) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/get-attachment/JSON/${id}`,
+    {
+      headers: header,
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
 export const deleteAttachmentService = async (id) => {
   const header = await headerToken();
   const res = await fetch(

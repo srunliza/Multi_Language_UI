@@ -22,6 +22,27 @@ const PreviewXmlFilePage = () => {
             'value': `<string name="app_name"> Welcome to cambodia </string>`,
             'end_tag': "</resource>"
         },
+        {
+            'id': 3,
+            'tag': "<resource>",
+            'key': `<string name="app_name"> Language </string>`,
+            'value': `<string name="app_name"> Welcome to cambodia </string>`,
+            'end_tag': "</resource>"
+        },
+        {
+            'id': 2,
+            'tag': "<resource>",
+            'key': `<string name="app_name"> Language </string>`,
+            'value': `<string name="app_name"> Welcome to cambodia </string>`,
+            'end_tag': "</resource>"
+        },
+        {
+            'id': 2,
+            'tag': "<resource>",
+            'key': `<string name="app_name"> Language </string>`,
+            'value': `<string name="app_name"> Welcome to cambodia </string>`,
+            'end_tag': "</resource>"
+        },
     ];
 
     const handleDownload = () => {

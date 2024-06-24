@@ -86,7 +86,6 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
 
   const handleDeleteConfirm = async () => {
     const result = await removeFeedbackAction(editFeedback.id);
-    console.log("Delete Feedback Result:", result); // Debug log
     if (result.status === "OK") {
       const updatedFeedbacks = feedbacks.filter(
         (feedback) => feedback.feedbackId !== editFeedback.id
@@ -113,7 +112,6 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
     formData.append("comment", editFeedback.comment);
 
     const result = await editFeedbackAction(formData);
-    console.log("Edit Feedback Result:", result); // Debug log
     if (result.status === "OK") {
       const updatedFeedbacks = feedbacks.map((feedback) =>
         feedback.feedbackId === editFeedback.id
