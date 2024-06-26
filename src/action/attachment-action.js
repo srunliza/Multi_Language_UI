@@ -1,6 +1,8 @@
 "use server";
 import {
+  AddValueService,
   deleteAttachmentService,
+  submitService,
   updateAttachmentService,
   uploadAttachmentManuallyService,
 } from "@/service/attachment.service";
@@ -26,6 +28,18 @@ export const editAttachmentAction = async (formData) => {
 
   const result = await updateAttachmentService(attachmentId, newAttachment);
   revalidateTag("attachment");
+  return result;
+};
+
+export const saveValueAction = async (attachmentId, formDataArray) => {
+  const res = await AddValueService(attachmentId, formDataArray);
+  revalidateTag("data");
+  return res;
+};
+
+export const submitAction = async (id) => {
+  const result = await submitService(id);
+  revalidateTag("data");
   return result;
 };
 

@@ -93,7 +93,8 @@ export const updateAttachmentService = async (attachmentId, newAttachment) => {
   return result;
 };
 
-export const AddValueKeywordService = async (attachmentId, payload) => {
+export const AddValueService = async (attachmentId, payload) => {
+  console.log(payload);
   const header = await headerToken();
   const res = await fetch(
     `${baseUrl}/api/v1/attachment/update-data/${attachmentId}`,
@@ -102,12 +103,28 @@ export const AddValueKeywordService = async (attachmentId, payload) => {
       headers: {
         ...header,
       },
-      body: JSON.stringify([payload]),
+      body: JSON.stringify(payload),
     }
   );
 
   const data = await res.json();
-  console.log("In service:", data);
+  console.log(data);
+  return data;
+};
+
+export const submitService = async (attachmentId) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/update-attachment-status-submit/${attachmentId}`,
+    {
+      method: "PUT",
+      headers: {
+        ...header,
+      },
+    }
+  );
+
+  const data = await res.json();
   return data;
 };
 
