@@ -20,7 +20,7 @@ const LandingPageComponent = () => {
             <div className="flex-shrink-0">
               <Link href="/">
                 <img
-                  src="../Images/logo.png"
+                  src="../Images/logov1.png"
                   alt="LangNet"
                   className="h-12"
                 />
@@ -468,7 +468,7 @@ const LandingPageComponent = () => {
             {/* Logo and Social Media */}
             <div className="flex flex-col items-center">
               <img
-                src="./Images/logo-v4-blue.png"
+                src="../Images/logov1.png"
                 alt="LangNet Logo"
                 className="h-12  mb-4"
               />

@@ -58,8 +58,8 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div className="sm:hidden md:block lg:block mx-auto px-4 py-4">
             <Image
               src="/Images/l2.png"
-              width={100}
-              height={100}
+              width={70}
+              height={70}
               
               alt="Langnet Logo"
             />{" "}

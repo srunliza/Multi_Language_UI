@@ -77,7 +77,7 @@ const PopUpProfileComponent = () => {
             className={`inline-block h-[38px] w-[38px] rounded-full cursor-pointer ${
               animateProfile ? "animate-scale-up" : ""
             }`}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s"
+            src="/Images/Neath.png"
             alt="Profile Image"
             onClick={handleProfileClick}
           />
