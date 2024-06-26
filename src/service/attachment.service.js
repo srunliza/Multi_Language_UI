@@ -140,7 +140,7 @@ export const uploadAttachmentManuallyService = async (req) => {
   )
     .then((r) => r.json())
     .catch((e) => console.log(e));
-    console.log(res)
+  console.log(res);
   return res;
 };
 

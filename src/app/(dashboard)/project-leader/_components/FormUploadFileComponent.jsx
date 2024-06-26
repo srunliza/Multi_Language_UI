@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import SelectComponent from "@/components/SelectComponent";
+import SelectLanguageMultiComponent from "./SelectLanguageMultiComponent";
 import { handlerFileUploadAction } from "@/action/attachment-action";
 import CloseIcon from "@mui/icons-material/Close";
 import Toast from "@/components/ToastComponent";
@@ -16,6 +16,7 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
   const [tableData, setTableData] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [hint, setHint] = useState("");
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
 
   // Toast state management
   const [showToast, setShowToast] = useState(false);
@@ -64,6 +65,11 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
     setTableData([]);
     setKeyword("");
     setHint("");
+  };
+
+  // For get language from child component
+  const handleLanguageChange = (selectedOptions) => {
+    setSelectedLanguages(selectedOptions);
   };
 
   const showSuccessToast = (message) => {
@@ -240,9 +246,10 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
         {/* ./ End Section Select Base Language */}
 
         {/* Section Select Target Language */}
-        <section>
-          <SelectComponent languageData={languageData} />
-        </section>
+        <SelectLanguageMultiComponent
+          languageData={languageData}
+          onLanguageChange={handleLanguageChange}
+        />
         {/* ./ End Section Select Target Language */}
 
         {/* Section Select Start Date and End Date */}

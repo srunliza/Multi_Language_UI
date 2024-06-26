@@ -70,6 +70,5 @@ export async function handlerFileUploadAction(fileUploadData) {
   formData.append("expireDate", `${fileUploadData.get("expireDate")} 00:00:00`);
 
   const response = await insertFileAttachmentService(formData);
-  console.log(response)
   return response;
 }

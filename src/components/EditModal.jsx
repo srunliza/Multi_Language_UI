@@ -62,10 +62,10 @@ const EditModal = ({
             <option disabled value="">
               Choose role for user
             </option>
-            <option value="63dbf948-62f0-4779-baeb-4bf88ca055ce">
+            <option value="da9b9088-cbe7-47ae-8a9d-e296551f1458">
               Developer
             </option>
-            <option value="82742e9c-7a2c-48b5-a532-395c3d2a5075">
+            <option value="fa06498a-0207-4638-8c37-eb60947c7b22">
               Translator
             </option>
           </select>

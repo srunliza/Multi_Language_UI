@@ -1,11 +1,11 @@
 import React from "react";
-import MemberProjectLeader from "@/components/MemberProjectLeader";
 import OpenAddMemberModalButton from "../../../_components/ProjectLeaderAddMember";
 import NavbarProjectLeaderComponent from "../../../_components/NavbarProjectLeaderComponent";
 import AttachmentComponent from "@/components/AttachmentComponent";
 import { getProjectByIdService } from "@/service/project.service";
 import { getAttachmentByProjectIdService } from "@/service/attachment.service";
 import { getAllLanguageService } from "@/service/language.service";
+import MemberProjectLeader from "@/components/MemberLeader";
 
 const ViewAttachmentPage = async ({ params }) => {
   const { id } = params;
