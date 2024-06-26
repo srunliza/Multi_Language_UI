@@ -2,6 +2,7 @@
 import {
   AddValueService,
   deleteAttachmentService,
+  insertFileAttachmentService,
   submitService,
   updateAttachmentService,
   uploadAttachmentManuallyService,
@@ -45,7 +46,30 @@ export const submitAction = async (id) => {
 
 export const uploadAttachmentManuallyAction = async (req) => {
   const res = await uploadAttachmentManuallyService(req);
-  console.log("data req: ", req);
-  console.log("response in action: ", res);
+  revalidateTag("attachment");
   return res;
 };
+
+export async function handlerFileUploadAction(fileUploadData) {
+  // Parse the keyAndHint JSON string
+  const keyAndHint = JSON.parse(fileUploadData.get("keyAndHint") || "[]");
+
+  // Extract keys and hints into separate arrays
+  const keys = keyAndHint.map((el) => el.key);
+  const hints = keyAndHint.map((el) => el.hint);
+
+  // Define object structure
+  const formData = new FormData();
+  formData.append("baseLanguage", fileUploadData.get("baseLanguage"));
+  formData.append("language", fileUploadData.getAll("language"));
+  formData.append("project", fileUploadData.get("proId"));
+  formData.append("file", fileUploadData.get("file"));
+  formData.append("key", JSON.stringify(keys));
+  formData.append("hint", JSON.stringify(hints));
+  formData.append("startDate", `${fileUploadData.get("startDate")} 00:00:00`);
+  formData.append("expireDate", `${fileUploadData.get("expireDate")} 00:00:00`);
+
+  const response = await insertFileAttachmentService(formData);
+  console.log(response)
+  return response;
+}

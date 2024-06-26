@@ -6,6 +6,7 @@ import {
   getAllProjectWithStatusService,
 } from "@/service/project.service";
 import { getCurrentUserProfileService } from "@/service/user.service";
+import { OneSignalComponent } from "../_components/OneSignal";
 
 const formatDate = (dateString) => {
   const options = { month: "numeric", day: "numeric", year: "numeric" };
@@ -25,6 +26,7 @@ const EmployeeDashboardPage = async () => {
   const projectData = await getAllProjectService();
   const totalProject = await getAllProjectWithStatusService();
   const currentUser = await getCurrentUserProfileService();
+  const userId = currentUser.payload.userId;
 
   const processedProjectData = projectData?.payload?.map((project) => {
     if (project.attachment && project.attachment.length > 0) {
@@ -56,6 +58,7 @@ const EmployeeDashboardPage = async () => {
 
   return (
     <main>
+      <OneSignalComponent userId={userId} />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
         <div className="col-span-1 xl:col-span-8 lg:col-span-8 md:col-span-1">
           <div className="h-full flex flex-col items-center bg-[#1A42BC] rounded-xl shadow md:flex-row md:max-w-4xl">

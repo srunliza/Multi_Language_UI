@@ -1,5 +1,5 @@
 "use server";
-import { headerToken } from "@/app/api/headerToken";
+import { headerToken, headerTokenFormData } from "@/app/api/headerToken";
 import { baseUrl } from "@/utils/constants";
 
 export const getAttachmentByProjectIdService = async (id) => {
@@ -130,8 +130,6 @@ export const submitService = async (attachmentId) => {
 
 export const uploadAttachmentManuallyService = async (req) => {
   const header = await headerToken();
-  console.log("header: ", header);
-  console.log("req data from action: ", req);
   const res = await fetch(
     `${baseUrl}/api/v1/attachment/upload-attachment-manual`,
     {
@@ -142,5 +140,21 @@ export const uploadAttachmentManuallyService = async (req) => {
   )
     .then((r) => r.json())
     .catch((e) => console.log(e));
+    console.log(res)
   return res;
+};
+
+export const insertFileAttachmentService = async (attachmentData) => {
+  const header = await headerTokenFormData();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/upload-attachment-with-excel`,
+    {
+      method: "POST",
+      body: attachmentData,
+      headers: header,
+    }
+  );
+
+  const data = await res.json();
+  return data;
 };
