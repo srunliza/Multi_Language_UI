@@ -7,6 +7,11 @@ import { FileDownloadOutlined } from "@mui/icons-material";
 import Dropdown from "@/components/DropDownDownload";
 import SortComponent from "./SortDeveloper";
 import Toast from "@/components/ToastComponent";
+import {
+  downloadXMLService,
+  downloadJsonService,
+  downloadStringsService,
+} from "@/service/attachment.service";
 
 const AttachmentComponent = ({ attachment = [] }) => {
   const [data, setData] = useState([]);
@@ -53,21 +58,49 @@ const AttachmentComponent = ({ attachment = [] }) => {
     setFilteredData(filtered);
   };
 
-  const handleDownload = (fileType, attachmentIdOrUrl) => {
+  const handleDownload = async (fileType, attachmentIdOrUrl) => {
     const attachment = data.find((a) => a.attachmentId === attachmentIdOrUrl);
     if (attachment.status !== "COMPLETED") {
       showToast("File must be completed to download.", "warning");
       return;
     }
+
     let fileUrl, fileName;
-    if (fileType === "string") {
-      fileUrl = attachmentIdOrUrl;
-      fileName = `your-file.${fileType}`;
+    if (fileType === "xml") {
+      const result = await downloadXMLService(attachmentIdOrUrl);
+      if (result.status === "OK") {
+        fileUrl = result.payload;
+        fileName = `your-file.${fileType}`;
+        saveAs(fileUrl, fileName);
+        showToast("File downloaded successfully.", "success");
+      } else {
+        showToast("Failed to download file.", "error");
+      }
+    } else if (fileType === "json") {
+      const result = await downloadJsonService(attachmentIdOrUrl);
+      if (result.status === "OK") {
+        fileUrl = result.payload;
+        fileName = `your-file.${fileType}`;
+        saveAs(fileUrl, fileName);
+        showToast("File downloaded successfully.", "success");
+      } else {
+        showToast("Failed to download file.", "error");
+      }
+    } else if (fileType === "string") {
+      const result = await downloadStringsService(attachmentIdOrUrl);
+      if (result.status === "OK") {
+        fileUrl = result.payload;
+        fileName = `your-file.${fileType}`;
+        saveAs(fileUrl, fileName);
+        showToast("File downloaded successfully.", "success");
+      } else {
+        showToast("Failed to download file.", "error");
+      }
     } else {
       fileUrl = `/path/to/your/${fileType}-file.${fileType}`;
       fileName = `your-file.${fileType}`;
+      saveAs(fileUrl, fileName);
     }
-    saveAs(fileUrl, fileName);
   };
 
   const handlePreview = (fileType, attachmentId) => {

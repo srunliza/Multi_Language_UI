@@ -159,7 +159,7 @@ const FeedbackComponent = ({ feedback, attachmentId }) => {
                     className="h-12 w-12 rounded-full object-cover"
                     src={
                       feedback.commentBy.image ||
-                      "../../Images/user-profile.png"
+                      "../../../Images/user-profile.png"
                     }
                     alt="profile user image"
                   />

@@ -12,7 +12,7 @@ const DeveloperPreviewTranslateComponent = ({previewData}) => {
 
   return (
     <section className="bg-white p-5 rounded-lg shadow-lg flex-1">
-      <h1 className="text-lg font-semibold mb-4">Web Designing</h1>
+      <h1 className="text-lg font-semibold mb-4">{previewData.attachmentName}</h1>
       <div className="flex rounded-t-md border-x border-t sticky py-2 px-4 font-semibold bg-[#daeaff] justify-evenly items-center">
         <h1>{previewData.baseLanguage}</h1>
         <KeyboardDoubleArrowRightOutlinedIcon fontSize="small" />

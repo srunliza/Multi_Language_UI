@@ -27,6 +27,33 @@ export const previewXMLService = async (id) => {
   return data;
 };
 
+export const downloadXMLService = async (id) => {
+  const header = await headerTokenFormData();
+  const res = await fetch(`${baseUrl}/api/v1/attachment/download/xml/${id}`, {
+    headers: header,
+  });
+  const data = await res.json();
+  return data;
+};
+
+export const downloadJsonService = async (id) => {
+  const header = await headerTokenFormData();
+  const res = await fetch(`${baseUrl}/api/v1/attachment/download/JSON/${id}`, {
+    headers: header,
+  });
+  const data = await res.json();
+  return data;
+};
+
+export const downloadStringsService = async (id) => {
+  const header = await headerTokenFormData();
+  const res = await fetch(`${baseUrl}/api/v1/attachment/download/strings/${id}`, {
+    headers: header,
+  });
+  const data = await res.json();
+  return data;
+};
+
 export const getDataByAttachmentIdService = async (id) => {
   const header = await headerToken();
   const res = await fetch(
