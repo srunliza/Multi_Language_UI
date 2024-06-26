@@ -40,7 +40,7 @@ const CreateProjectPage = async ({ params }) => {
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
                     <Link
-                      href={`/project-leader/dashboard/upload-file?id=${id}`}
+                      href={`/project-leader/dashboard/upload-file/${id}`}
                     >
                       <div className="relative h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
@@ -92,7 +92,7 @@ const CreateProjectPage = async ({ params }) => {
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
                     <Link
-                      href={`/project-leader/dashboard/add-key-value?id=${id}`}
+                      href={`/project-leader/dashboard/add-key-value/${id}`}
                     >
                       <div className="relative h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">

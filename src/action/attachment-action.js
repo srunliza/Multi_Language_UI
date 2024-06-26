@@ -43,8 +43,9 @@ export const submitAction = async (id) => {
   return result;
 };
 
-// export const uploadAttachmentManuallyAction = async (req) => {
-//   const res = await uploadAttachmentManuallyService(req);
-//   revalidateTag("attachment");
-//   return res;
-// };
+export const uploadAttachmentManuallyAction = async (req) => {
+  const res = await uploadAttachmentManuallyService(req);
+  console.log("data req: ", req);
+  console.log("response in action: ", res);
+  return res;
+};

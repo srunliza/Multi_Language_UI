@@ -128,17 +128,19 @@ export const submitService = async (attachmentId) => {
   return data;
 };
 
-// export const uploadAttachmentManuallyService = async (req) => {
-//   const header = await headerToken();
-//   const res = await fetch(
-//     `${baseUrl}/api/v1/attachment/upload-attachment-manual`,
-//     {
-//       method: "POST",
-//       headers: header,
-//       body: JSON.stringify(req),
-//     }
-//   )
-//     .then((r) => r.json())
-//     .catch((e) => console.log(e));
-//   return res;
-// };
+export const uploadAttachmentManuallyService = async (req) => {
+  const header = await headerToken();
+  console.log("header: ", header);
+  console.log("req data from action: ", req);
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/upload-attachment-manual`,
+    {
+      method: "POST",
+      headers: header,
+      body: JSON.stringify(req),
+    }
+  )
+    .then((r) => r.json())
+    .catch((e) => console.log(e));
+  return res;
+};
