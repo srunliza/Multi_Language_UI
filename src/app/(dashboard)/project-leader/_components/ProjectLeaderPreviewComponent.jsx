@@ -1,78 +1,31 @@
 "use client";
-import { translateData } from "@/obj/translateData";
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 
-const ProjectLeaderPreviewTranslateComponent = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editableData, setEditableData] = useState(translateData);
-  const [editingRowIndex, setEditingRowIndex] = useState(null);
-  const inputRefs = useRef({});
-
-  const handleEditClick = () => {
-    if (!isEditing && editingRowIndex === null && editableData.length > 0) {
-      setEditingRowIndex(0);
-    }
-    setIsEditing(!isEditing);
-  };
-
-  const handleInputChange = (id, value) => {
-    const updatedData = editableData.map((item) =>
-      item.id === id ? { ...item, baseLang: value } : item
-    );
-    setEditableData(updatedData);
-  };
-
+const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
   const router = useRouter();
 
   const handleGoBack = () => {
-    router.push(`../view-attachment/${projectId}`);
+    router.push(`../view-attachment/${previewData.projectId}`);
   };
 
-  useEffect(() => {
-    if (isEditing && editingRowIndex !== null) {
-      inputRefs.current[editingRowIndex]?.focus();
-    }
-  }, [isEditing, editingRowIndex]);
-
   return (
-    <section class="bg-white p-5 rounded-lg shadow-lg flex-1">
-      <h1 class="text-lg font-semibold mb-4">Web Designing</h1>
-      <div className="flex rounded-t-md border-x border-t sticky py-2 px-4 font-semibold  bg-[#daeaff] justify-evenly items-center">
-        <h1>English</h1>
+    <section className="bg-white p-5 rounded-lg shadow-lg flex-1">
+      <h1 className="text-lg font-semibold mb-4">Web Designing</h1>
+      <div className="flex rounded-t-md border-x border-t sticky py-2 px-4 font-semibold bg-[#daeaff] justify-evenly items-center">
+        <h1>{previewData.baseLanguage}</h1>
         <KeyboardDoubleArrowRightOutlinedIcon fontSize="small" />
-        <h1>Korean</h1>
+        <h1>{previewData.language.language}</h1>
       </div>
       {/* Table Section */}
-      <div className="max-h-[65vh] border-b rounded-b-md overflow-y-scroll no-scrollbar">
-        <table className="w-full  border-collapse">
+      <div className="max-h-[55vh] border-b rounded-b-md overflow-y-scroll no-scrollbar">
+        <table className="w-full border-collapse">
           <tbody>
-            {editableData.map((e, index) => (
+            {previewData.data.map((e) => (
               <tr key={e.id} className="border">
-                <td
-                  className={`w-1/2   py-2 px-4 ${
-                    isEditing && editingRowIndex === index
-                      ? "border border-blue-500 transition-all"
-                      : ""
-                  }`}
-                  onClick={() => setEditingRowIndex(index)}
-                >
-                  {isEditing && editingRowIndex === index ? (
-                    <input
-                      type="text"
-                      value={e.baseLang}
-                      onChange={(event) =>
-                        handleInputChange(e.id, event.target.value)
-                      }
-                      ref={(el) => (inputRefs.current[index] = el)}
-                      className="border-0 p-0  outline-none focus:ring-0 h-full w-full"
-                    />
-                  ) : (
-                    e.baseLang
-                  )}
-                </td>
-                <td className="py-2 border-l px-4">{e.tagetLang}</td>
+                <td className="w-1/2 py-2 px-4">{e.key}</td>
+                <td className="py-2 border-l px-4">{e.value || ""}</td>
               </tr>
             ))}
           </tbody>
@@ -84,17 +37,10 @@ const ProjectLeaderPreviewTranslateComponent = () => {
       <div className="flex justify-end gap-2 mt-4">
         {/* Button Go Back */}
         <button
-          className="px-4 py-2 border border-blue-800 text-blue-800 hover:border-blue-400 rounded-md text-sm transition duration-150 ease-in-out "
+          className="px-4 py-2 border border-blue-800 text-blue-800 hover:border-blue-400 rounded-md text-sm transition duration-150 ease-in-out"
           onClick={handleGoBack}
         >
           Back
-        </button>
-        {/* Button Handle Edit Key */}
-        <button
-          onClick={handleEditClick}
-          className="px-4 py-2 bg-blue-800 text-sm text-white rounded-md hover:bg-blue-700 transition duration-150 ease-in-out"
-        >
-          {isEditing ? "Save" : "Edit"}
         </button>
       </div>
     </section>

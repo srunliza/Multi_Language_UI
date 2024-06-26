@@ -67,7 +67,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setTimeout(() => {
         setToast({ ...toast, show: false });
         setIsDeleteModalVisible(false);
-      }, 2000);
+      }, 1000);
     } else {
       let errorMessage = "Failed to delete attachment.";
       if (
@@ -84,7 +84,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setTimeout(() => {
         setToast({ ...toast, show: false });
         setIsDeleteModalVisible(false);
-      }, 2000);
+      }, 1000);
     }
   };
 
@@ -97,6 +97,17 @@ const DropdownAttachment = ({ attachmentId, language }) => {
     const form = event.target;
     const formData = new FormData(form);
     formData.append("attachmentId", attachmentId);
+
+    const expireDate = formData.get("expireDate");
+    if (!expireDate) {
+      setToast({
+        message: "Please choose an end date.",
+        type: "error",
+        show: true,
+      });
+      return;
+    }
+
     const result = await editAttachmentAction(formData);
     if (result.status === "OK") {
       setToast({
@@ -107,7 +118,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setIsEditing(false);
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 2000);
+      }, 1000);
     } else {
       let errorMessage =
         "Can only update attachments with status 'Pending' or 'Progress.";
@@ -124,7 +135,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 2000);
+      }, 1000);
     }
   };
 
@@ -239,12 +250,6 @@ const DropdownAttachment = ({ attachmentId, language }) => {
                   <label htmlFor="expireDate" className="text-xs mb-1">
                     End Date
                   </label>
-                  {/* <input
-                    type="date"
-                    id="expireDate"
-                    name="expireDate"
-                    className="w-full lg:w-[175px] h-[37.6px] px-3 py-5 border text-gray-600 border-gray-300 text-xs rounded-lg"
-                  /> */}
                   <DatePicker
                     type="date"
                     id="expireDate"

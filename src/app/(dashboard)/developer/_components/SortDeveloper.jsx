@@ -15,6 +15,16 @@ const SortComponent = ({ onFilterChange }) => {
     onFilterChange(newFilters);
   };
 
+  const handleReset = () => {
+    const resetFilters = {
+      status: "All",
+      startDate: null,
+      endDate: null,
+    };
+    setFilters(resetFilters);
+    onFilterChange(resetFilters);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row sm:gap-5 flex-wrap items-center mb-4 w-full sm:w-auto">
       <div className="flex w-full sm:w-auto">
@@ -61,6 +71,14 @@ const SortComponent = ({ onFilterChange }) => {
             Completed
           </option>
         </select>
+      </div>
+      <div className="flex w-full sm:w-auto mt-2 sm:mt-0">
+        <button
+          onClick={handleReset}
+          className="px-4 py-2 text-sm text-white bg-blue-800 rounded-md hover:bg-blue-700"
+        >
+          Reset All
+        </button>
       </div>
     </div>
   );

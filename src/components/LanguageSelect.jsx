@@ -12,7 +12,6 @@ const languages = [
   "Korean",
   "Russian",
   "Italian",
-  // Add more languages as needed
 ];
 
 const LanguageSelect = () => {

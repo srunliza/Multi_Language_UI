@@ -39,7 +39,7 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
         setTimeout(() => {
           setToast({ ...toast, show: false });
           onClose();
-        }, 2000);
+        }, 1000);
       } else {
         setToast({
           message: `User is already in the project!`,
@@ -48,7 +48,7 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
         });
         setTimeout(() => {
           setToast({ ...toast, show: false });
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       setToast({
@@ -58,7 +58,7 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 2000);
+      }, 1000);
     }
   };
 

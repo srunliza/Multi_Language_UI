@@ -2,7 +2,6 @@
 import React from "react";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CakeOutlinedIcon from "@mui/icons-material/CakeOutlined";
 import FemaleOutlinedIcon from "@mui/icons-material/FemaleOutlined";
 import MaleOutlinedIcon from "@mui/icons-material/MaleOutlined";

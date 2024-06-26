@@ -6,7 +6,7 @@ const Toast = ({ message, type, show, onClose }) => {
     if (show) {
       const timer = setTimeout(() => {
         onClose();
-      }, 3000);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [show, onClose]);

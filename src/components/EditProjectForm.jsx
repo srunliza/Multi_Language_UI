@@ -19,7 +19,7 @@ const EditProjectForm = ({ project, onClose }) => {
         setTimeout(() => {
           setToast({ ...toast, show: false });
           onClose();
-        }, 2000);
+        }, 1000);
       } else {
         setToast({
           message: "Failed to edit project!",
@@ -28,7 +28,7 @@ const EditProjectForm = ({ project, onClose }) => {
         });
         setTimeout(() => {
           setToast({ ...toast, show: false });
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       setToast({
@@ -38,7 +38,7 @@ const EditProjectForm = ({ project, onClose }) => {
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 2000);
+      }, 1000);
     }
   };
 

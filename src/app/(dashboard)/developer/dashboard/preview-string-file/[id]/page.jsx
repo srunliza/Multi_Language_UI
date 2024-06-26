@@ -1,4 +1,4 @@
-import PreviewJsonFileComponent from "@/components/PreviewJsonFileDeveloperComponent";
+import PreviewStringsFileComponent from "@/components/PreviewStringsFileComponent";
 import { previewStringsService } from "@/service/attachment.service";
 import { getFeedbackByAttachmentIdService } from "@/service/feedback.service";
 
@@ -9,7 +9,7 @@ const PreviewStringsFilePage = async ({ params }) => {
   const data = await getFeedbackByAttachmentIdService(id);
 
   return (
-    <PreviewJsonFileComponent
+    <PreviewStringsFileComponent
       string={strings}
       attachmentId={id}
       feedback={data}

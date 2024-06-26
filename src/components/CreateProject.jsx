@@ -23,14 +23,14 @@ const CreateProject = ({ onClose }) => {
           setToastVisible(false);
           onClose();
           router.push(`/project-leader/dashboard/${result.payload.projectId}`);
-        }, 3000);
+        }, 1000);
       } else {
         setToastMessage(result.detail || "Failed to create project!");
         setIsError(true);
         setToastVisible(true);
         setTimeout(() => {
           setToastVisible(false);
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       setToastMessage("Failed to create project!");
@@ -38,7 +38,7 @@ const CreateProject = ({ onClose }) => {
       setToastVisible(true);
       setTimeout(() => {
         setToastVisible(false);
-      }, 3000);
+      }, 1000);
     }
   };
 

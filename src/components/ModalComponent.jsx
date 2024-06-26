@@ -30,7 +30,7 @@ const Modal = ({
         setToast({ ...toast, show: false });
         onClose();
         onDeleteClick();
-      }, 2000);
+      }, 1000);
     } else {
       setToast({
         message: "Failed to delete project.",
@@ -39,7 +39,7 @@ const Modal = ({
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 2000);
+      }, 1000);
     }
   };
 

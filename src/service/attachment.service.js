@@ -27,6 +27,19 @@ export const previewXMLService = async (id) => {
   return data;
 };
 
+export const getDataByAttachmentIdService = async (id) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/get-attachment-by-id/${id}`,
+    {
+      headers: header,
+      next: { tags: ["data"] },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+
 export const previewJsonService = async (id) => {
   const header = await headerToken();
   const res = await fetch(
@@ -72,13 +85,30 @@ export const updateAttachmentService = async (attachmentId, newAttachment) => {
       method: "PUT",
       headers: {
         ...header,
-        "Content-Type": "application/json",
       },
       body: JSON.stringify(newAttachment),
     }
   );
   const result = await res.json();
   return result;
+};
+
+export const AddValueKeywordService = async (attachmentId, payload) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/update-data/${attachmentId}`,
+    {
+      method: "PUT",
+      headers: {
+        ...header,
+      },
+      body: JSON.stringify([payload]),
+    }
+  );
+
+  const data = await res.json();
+  console.log("In service:", data);
+  return data;
 };
 
 // export const uploadAttachmentManuallyService = async (req) => {

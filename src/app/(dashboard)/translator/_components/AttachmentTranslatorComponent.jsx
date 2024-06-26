@@ -48,7 +48,7 @@ const AttachmentComponent = ({ attachment = [] }) => {
           No attachments available. Please check back later.
         </div>
       ) : (
-        <div className="no-scrollbar overflow-y-auto pt-4 px-3 h-[39rem] bg-white shadow-md rounded-lg">
+        <div className="no-scrollbar overflow-y-auto h-[39rem] bg-white shadow-md rounded-lg">
           <table className="text-sm w-full text-left rtl:text-right text-gray-500">
             <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
               <tr>
@@ -74,7 +74,7 @@ const AttachmentComponent = ({ attachment = [] }) => {
               {filteredData.map((item) => (
                 <tr
                   key={item.attachmentId}
-                  className="bg-white border-b hover:bg-gray-100 text-gray-900 dark:border-gray-300 cursor-pointer"
+                  className="bg-white border-b hover:bg-gray-100 text-gray-900 cursor-pointer"
                   onClick={() => handleRowClick(item.attachmentId)}
                 >
                   <th

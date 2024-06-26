@@ -244,7 +244,7 @@ const MemberProjectLeader = ({ project }) => {
     setToast({ message, type, show: true });
     setTimeout(() => {
       setToast({ ...toast, show: false });
-    }, 3000);
+    }, 1000);
   };
 
   return (

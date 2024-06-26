@@ -9,7 +9,11 @@ const PreviewStringsFilePage = async ({ params }) => {
   const data = await getFeedbackByAttachmentIdService(id);
 
   return (
-    <PreviewStringsFileComponent string={strings} attachmentId={id} feedback={data} />
+    <PreviewStringsFileComponent
+      string={strings}
+      attachmentId={id}
+      feedback={data}
+    />
   );
 };
 

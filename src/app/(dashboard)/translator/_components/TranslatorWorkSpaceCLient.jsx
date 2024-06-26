@@ -1,36 +1,23 @@
 "use client";
-
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
-import HintPopupComponent from "../../_components/HintPopupComponent";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FeedbackTranslatorComponent from "../../_components/FeedbackTranslatorCompoent";
 import ChatbotPopover from "@/components/ChatbotPopover";
+import HintPopupComponent from "./HintPopupComponent";
+import FeedbackComponent from "./FeedbackComponent";
+import IconButton from "@mui/material/IconButton";
+import FeedbackIcon from "@mui/icons-material/Feedback";
 
-const TranslatorWorkSpace = () => {
- 
+const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
+  console.log(previewData);
 
-  const translations = [
-    { id: 1, english: "Home" },
-    { id: 2, english: "About" },
-    { id: 3, english: "Contact" },
-    { id: 4, english: "Services" },
-    { id: 5, english: "Products" },
-    { id: 6, english: "Blog" },
-    { id: 7, english: "Careers" },
-    { id: 8, english: "Support" },
-    { id: 9, english: "Privacy" },
-    { id: 10, english: "Terms" },
-    { id: 11, english: "Login" },
-    { id: 12, english: "Register" },
-  ];
+  const [showFeedback, setShowFeedback] = useState(false);
 
-  const router = useRouter();
-
+  const [translations, setTranslations] = useState(previewData.data);
   const [koreanTranslations, setKoreanTranslations] = useState(
-    translations.reduce((acc, item) => {
-      acc[item.id] = "";
+    previewData.data.reduce((acc, item) => {
+      acc[item.id] = item.value || "";
       return acc;
     }, {})
   );
@@ -48,6 +35,12 @@ const TranslatorWorkSpace = () => {
       ...koreanTranslations,
       [id]: value,
     });
+
+    setTranslations(
+      translations.map((translation) =>
+        translation.id === id ? { ...translation, value: value } : translation
+      )
+    );
   };
 
   const handleKeyDown = (e, index) => {
@@ -72,47 +65,13 @@ const TranslatorWorkSpace = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted translations:", koreanTranslations);
-    router.push("/translator/dashboard");
-  };
-
-  const handleSave = () => {
-    console.log("Saved translations:", koreanTranslations);
-    router.push("/translator/dashboard");
-  };
-
-  const handleCloseAndExit = () => {
-    router.push("/translator/dashboard");
-  };
-
-  const handleNoAction = (modalId) => {
-    document.getElementById(modalId).close();
-  };
-
-  const handleUserMessageSend = () => {
-    if (userMessage.trim() !== "") {
-      setMessages([
-        ...messages,
-        { sender: "user", text: userMessage },
-        { sender: "ai", text: "hello" },
-      ]);
-      setMessages([
-        ...messages,
-        { sender: "user", text: userMessage },
-        { sender: "ai", text: "hello" },
-      ]);
-      setUserMessage("");
-    }
-  };
-
   return (
     <div className="container mx-auto px-10">
       <div className="grid grid-cols-12">
         <div className="col-span-8">
           <div className="flex h-full px-3 justify-between items-center">
             <h1 className="gap-5 text-gray-800 text-xl font-semibold">
-              Web Design
+              {previewData.attachmentName}
             </h1>
             <button
               onClick={() => document.getElementById("modal_close").showModal()}
@@ -121,21 +80,15 @@ const TranslatorWorkSpace = () => {
             </button>
             <dialog id="modal_close" className="modal">
               <div className="modal-box w-96">
-                <p className="py-4 text-xl text-center">
+                <p className="py-4 text-xl text-center font-semibold">
                   Do you want to Save or Not?
                 </p>
                 <div className="modal-action">
                   <form method="dialog" className="flex m-auto gap-5">
-                    <button
-                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
-                      onClick={() => handleNoAction("modal_close")}
-                    >
+                    <button className="text-blue-800 bg-white border border-blue-800 hover:border-blue-400 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4">
                       No
                     </button>
-                    <button
-                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
-                      onClick={handleSave}
-                    >
+                    <button className="bg-blue-800 hover:bg-blue-700 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white">
                       Yes
                     </button>
                   </form>
@@ -146,7 +99,7 @@ const TranslatorWorkSpace = () => {
         </div>
 
         <div className="col-span-4">
-          <HintPopupComponent />
+          <HintPopupComponent previewData={previewData}/>
         </div>
       </div>
 
@@ -154,9 +107,9 @@ const TranslatorWorkSpace = () => {
         <div className="col-span-8">
           <div className="rounded-xl bg-white border pb-3 overflow-hidden shadow-md">
             <div className="flex bg-[#dbebfe] font-semibold text-gray-800 p-3 justify-evenly items-center">
-              <h3>English</h3>
+              <h3>{previewData.baseLanguage}</h3>
               <SwapHorizOutlinedIcon />
-              <h3>Korean</h3>
+              <h3>{previewData.language.language}</h3>
             </div>
             <div className="max-h-[460px] no-scrollbar overflow-auto">
               <table className="min-w-full bg-white border-6">
@@ -164,7 +117,7 @@ const TranslatorWorkSpace = () => {
                   {translations.map((item, index) => (
                     <tr key={item.id}>
                       <td className="py-2 px-6 border-b border-r w-[50%]">
-                        {item.english}
+                        {item.key}
                       </td>
                       <td className="border-b w-[50%]">
                         <input
@@ -192,28 +145,22 @@ const TranslatorWorkSpace = () => {
 
           <div className="flex gap-4 mt-4 justify-end">
             <button
-              className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
+              className="border border-blue-800 hover:border-blue-400 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-black"
               onClick={() => document.getElementById("modal_save").showModal()}
             >
               Save
             </button>
             <dialog id="modal_save" className="modal">
               <div className="modal-box w-96">
-                <p className="py-4 text-xl text-center">
+                <p className="py-4 text-xl text-center font-semibold">
                   Do you want to save this translation?
                 </p>
                 <div className="modal-action">
                   <form method="dialog" className="flex m-auto gap-5">
-                    <button
-                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
-                      onClick={() => handleNoAction("modal_save")}
-                    >
+                  <button className="text-blue-800 bg-white border border-blue-800 hover:border-blue-400 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4">
                       No
                     </button>
-                    <button
-                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
-                      onClick={handleSave}
-                    >
+                    <button className="bg-blue-800 hover:bg-blue-700 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white">
                       Yes
                     </button>
                   </form>
@@ -221,7 +168,7 @@ const TranslatorWorkSpace = () => {
               </div>
             </dialog>
             <button
-              className="bg-green-600 hover:bg-green-800 shadow-sm focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-5 text-white"
+              className="bg-blue-800 hover:bg-blue-700 shadow-sm focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-5 text-white"
               onClick={() =>
                 document.getElementById("modal_submit").showModal()
               }
@@ -230,21 +177,15 @@ const TranslatorWorkSpace = () => {
             </button>
             <dialog id="modal_submit" className="modal">
               <div className="modal-box w-96">
-                <p className="py-4 text-xl text-center">
+                <p className="py-4 text-xl text-center font-semibold">
                   Do you want to submit this translation?
                 </p>
                 <div className="modal-action">
                   <form method="dialog" className="flex m-auto gap-5">
-                    <button
-                      className="text-blue-700 bg-white border hover:text-white border-blue-600 hover:bg-blue-600 shadow-sm focus:ring-blue-300 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4"
-                      onClick={() => handleNoAction("modal_submit")}
-                    >
+                  <button className="text-blue-800 bg-white border border-blue-800 hover:border-blue-400 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4">
                       No
                     </button>
-                    <button
-                      className="bg-blue-600 hover:bg-blue-800 shadow-sm focus:ring-2 focus:ring-blue-400 font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white"
-                      onClick={handleSubmit}
-                    >
+                    <button className="bg-blue-800 hover:bg-blue-700 shadow-sm font-medium rounded-lg text-sm py-[10px] w-[90px] px-4 text-white">
                       Yes
                     </button>
                   </form>
@@ -254,16 +195,26 @@ const TranslatorWorkSpace = () => {
           </div>
         </div>
 
-        {/* feedback component and popover ai chat*/}
         <div className="col-span-4 flex flex-col items-end">
-          <FeedbackTranslatorComponent />
-
-          {/* popover ai chat bot */}
-          <ChatbotPopover/>
+          <div className="hidden md:flex lg:hidden">
+            <IconButton onClick={() => setShowFeedback(true)}>
+              <FeedbackIcon className="text-4xl" />
+            </IconButton>
+            {showFeedback && (
+              <FeedbackComponent
+                feedback={feedback}
+                closeFeedback={() => setShowFeedback(false)}
+              />
+            )}
+          </div>
+          <div className="hidden lg:flex">
+            <FeedbackComponent feedback={feedback} />
+          </div>
+          <ChatbotPopover />
         </div>
       </div>
     </div>
   );
 };
 
-export default TranslatorWorkSpace;
+export default TranslatorWorkSpaceClient;

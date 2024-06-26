@@ -18,7 +18,7 @@ const calculateDaysLeft = (attachments) => {
   const timeDiff = expireDate - today;
   const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-  return daysLeft >= 0 ? daysLeft : null; // Ensure no negative values
+  return daysLeft >= 0 ? daysLeft : null;
 };
 
 const ProjectCardPage = async ({ searchParams }) => {
@@ -29,7 +29,12 @@ const ProjectCardPage = async ({ searchParams }) => {
   const endDate = searchParams.endDate ? new Date(searchParams.endDate) : null;
   const status = searchParams.status || "All";
 
-  const projectData = await getAllProjectService();
+  const projectData = await getAllProjectService(
+    sortOrder,
+    startDate,
+    endDate,
+    status
+  );
   let projects = projectData.payload || [];
 
   const currentUser = await getCurrentUserProfileService();
@@ -54,7 +59,9 @@ const ProjectCardPage = async ({ searchParams }) => {
     const projectStartDate = new Date(project.createDate);
     const projectEndDate =
       project.attachment.length > 0
-        ? new Date(project.attachment[0].expireDate)
+        ? new Date(
+            Math.max(...project.attachment.map((a) => new Date(a.expireDate)))
+          )
         : null;
 
     const matchesStartDate = startDate ? projectStartDate >= startDate : true;

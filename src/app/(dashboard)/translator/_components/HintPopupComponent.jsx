@@ -6,7 +6,7 @@ const hintData = [
   {
     id: 1,
     name: "Tep Thean",
-    image: '/assets/images/Thean.png',
+    image: "/assets/images/Thean.png",
     position: "Project Leader",
     tablehint: [
       { key: "Home", hint: "relating to the place where one lives" },
@@ -18,13 +18,14 @@ const hintData = [
       { key: "More", hint: "a way of getting in touch with someone" },
       { key: "About", hint: "information about something or someone" },
       { key: "Contact", hint: "a way of getting in touch with someone" },
-      { key: "More", hint: "a way of getting in touch with someone" }
+      { key: "More", hint: "a way of getting in touch with someone" },
     ],
     date: "24 May 2024",
   },
 ];
 
-const HintPopupComponent = () => {
+const HintPopupComponent = ({ previewData }) => {
+  console.log("popup hint: ", previewData);
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {

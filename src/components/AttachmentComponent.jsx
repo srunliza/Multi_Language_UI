@@ -6,16 +6,34 @@ import Dropdown from "./DropDownDownload";
 import ArticleIcon from "@mui/icons-material/Article";
 import { FileDownloadOutlined } from "@mui/icons-material";
 import DropdownAttachment from "./DropDownAttachment";
+import Toast from "./ToastComponent";
 
 const AttachmentComponent = ({ attachment = [], language = [] }) => {
   const [data, setData] = useState([]);
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const router = useRouter();
+
+  const showToast = (message, type) => {
+    setToast({ show: true, message, type });
+    setTimeout(() => {
+      setToast({ show: false, message: "", type: "" });
+    }, 1000);
+  };
+
+  const onCloseToast = () => {
+    setToast({ show: false, message: "", type: "" });
+  };
 
   useEffect(() => {
     setData(attachment);
   }, [attachment]);
 
   const handleDownload = (fileType, attachmentIdOrUrl) => {
+    const attachment = data.find((a) => a.attachmentId === attachmentIdOrUrl);
+    if (attachment.status !== "COMPLETED") {
+      showToast("File must be completed to download.", "warning");
+      return;
+    }
     let fileUrl, fileName;
     if (fileType === "string") {
       fileUrl = attachmentIdOrUrl;
@@ -28,6 +46,11 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
   };
 
   const handlePreview = (fileType, attachmentId) => {
+    const attachment = data.find((a) => a.attachmentId === attachmentId);
+    if (attachment.status !== "COMPLETED") {
+      showToast("File must be completed to preview.", "warning");
+      return;
+    }
     const routeMap = {
       json: `../preview-json-file/${attachmentId}`,
       xml: `../preview-xml-file/${attachmentId}`,
@@ -78,6 +101,12 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
 
   return (
     <div className="w-full">
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={onCloseToast}
+      />
       {data.length === 0 ? (
         <div className="px-6 py-[10rem] text-center text-gray-500 font-semibold">
           No attachments available. Please check back later.
@@ -173,10 +202,13 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
                       attachmentId={item.attachmentId}
                       handleAction={handleDownload}
                     />
-                    <DropdownAttachment
-                      attachmentId={item.attachmentId}
-                      language={language}
-                    />
+                    {item.status !== "COMPLETED" &&
+                      item.status !== "PROGRESS" && (
+                        <DropdownAttachment
+                          attachmentId={item.attachmentId}
+                          language={language}
+                        />
+                      )}
                   </td>
                 </tr>
               ))}
