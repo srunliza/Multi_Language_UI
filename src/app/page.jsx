@@ -20,7 +20,7 @@ const LandingPageComponent = () => {
             <div className="flex-shrink-0">
               <Link href="/">
                 <img
-                  src="./Images/logo-v4-blue.png"
+                  src="../Images/logo.png"
                   alt="LangNet"
                   className="h-12"
                 />
