@@ -33,8 +33,13 @@ export const editAttachmentAction = async (formData) => {
 };
 
 export const saveValueAction = async (attachmentId, formDataArray) => {
-  const res = await AddValueService(attachmentId, formDataArray);
+  const values = {
+    keyValueRequests: formDataArray,
+  };
+  console.log(values);
+  const res = await AddValueService(attachmentId, values);
   revalidateTag("data");
+  console.log(res);
   return res;
 };
 

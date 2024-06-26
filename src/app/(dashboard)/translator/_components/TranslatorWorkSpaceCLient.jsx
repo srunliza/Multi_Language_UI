@@ -8,10 +8,13 @@ import IconButton from "@mui/material/IconButton";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import CloseModal from "./CloseModal";
 import SaveSubmitModal from "./SaveSubmitComponent";
+import Toast from "@/components/ToastComponent";
 
 const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [translationData, setTranslationData] = useState(previewData.data);
+  const [showToast, setShowToast] = useState(false); // State for showing toast
+
   const attachmentId = previewData.attachmentId;
   const projectId = previewData.projectId;
   const data = previewData.data;
@@ -53,6 +56,23 @@ const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
     }
   };
 
+  const filteredTranslationData = translationData.filter(
+    (item) => item.value !== null && item.value !== ""
+  );
+
+  const handleSave = () => {
+    if (filteredTranslationData.length === 0) {
+      setShowToast(true);
+    } else {
+      // Proceed with saving
+      // Your saving logic here
+    }
+  };
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
+
   return (
     <div className="container mx-auto px-10">
       <div className="grid grid-cols-12">
@@ -64,7 +84,7 @@ const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
             <CloseModal
               attachmentId={attachmentId}
               projectId={projectId}
-              translationData={translationData}
+              translationData={filteredTranslationData}
             />
           </div>
         </div>
@@ -118,7 +138,7 @@ const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
             <SaveSubmitModal
               attachmentId={attachmentId}
               projectId={projectId}
-              translationData={translationData}
+              translationData={filteredTranslationData}
             />
           </div>
         </div>
@@ -141,6 +161,15 @@ const TranslatorWorkSpaceClient = ({ feedback, previewData }) => {
           <ChatbotPopover />
         </div>
       </div>
+
+      {showToast && (
+        <Toast
+          message="At least one translated word is required to save."
+          type="error"
+          show={showToast}
+          onClose={handleCloseToast}
+        />
+      )}
     </div>
   );
 };

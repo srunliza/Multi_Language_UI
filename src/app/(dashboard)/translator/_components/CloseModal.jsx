@@ -5,7 +5,6 @@ import Toast from "@/components/ToastComponent";
 import { useRouter } from "next/navigation";
 
 const CloseModal = ({ attachmentId, translationData, projectId }) => {
-  console.log(translationData);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const router = useRouter();
 

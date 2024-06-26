@@ -21,15 +21,17 @@ const SaveSubmitModal = ({ attachmentId, translationData, projectId }) => {
         message: "Attachment data updated successfully",
         type: "success",
       });
-      router.push(`../${projectId}`);
     } else {
       setToast({
         show: true,
         message:
-          "Cannot update attachment data after the expiration date please inform your project leader to update the date",
+          "Cannot update attachment data after the expiration date. Please inform your project leader to update the date",
         type: "error",
       });
     }
+    setTimeout(() => {
+      document.getElementById("modal_save").close(); // Close the modal automatically after 1000 ms
+    }, 1000);
   };
 
   const handleSubmit = async () => {
@@ -40,7 +42,9 @@ const SaveSubmitModal = ({ attachmentId, translationData, projectId }) => {
         message: "Attachment data submitted successfully",
         type: "success",
       });
-      router.push(`../${projectId}`);
+      setTimeout(() => {
+        router.push(`../${projectId}`);
+      }, 1000);
     } else {
       setToast({
         show: true,
@@ -49,6 +53,9 @@ const SaveSubmitModal = ({ attachmentId, translationData, projectId }) => {
         type: "error",
       });
     }
+    setTimeout(() => {
+      document.getElementById("modal_submit").close(); // Close the modal automatically after 1000 ms
+    }, 1000);
   };
 
   return (

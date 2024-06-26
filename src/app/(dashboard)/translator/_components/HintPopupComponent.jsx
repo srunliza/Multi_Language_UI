@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import WbIncandescentOutlinedIcon from "@mui/icons-material/WbIncandescentOutlined";
 
 const HintPopupComponent = ({ previewData }) => {
-  console.log("popup hint: ", previewData);
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {

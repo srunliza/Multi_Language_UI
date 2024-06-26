@@ -94,7 +94,7 @@ export const updateAttachmentService = async (attachmentId, newAttachment) => {
 };
 
 export const AddValueService = async (attachmentId, payload) => {
-  console.log(payload);
+  console.log("payload:", payload);
   const header = await headerToken();
   const res = await fetch(
     `${baseUrl}/api/v1/attachment/update-data/${attachmentId}`,
@@ -108,7 +108,6 @@ export const AddValueService = async (attachmentId, payload) => {
   );
 
   const data = await res.json();
-  console.log(data);
   return data;
 };
 
