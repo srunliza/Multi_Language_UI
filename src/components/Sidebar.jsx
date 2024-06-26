@@ -10,7 +10,6 @@ import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import CreateProject from "@/components/CreateProject";
-import langnet from "../../public/Images/logo-v4-white.png";
 import Image from "next/image";
 import LogoutComponent from "./LogoutComponent";
 
@@ -57,7 +56,13 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       >
         <div className="flex sm:w-full md:w-full h-full lg:w-full flex-col bg-blue-800">
           <div className="sm:hidden md:block lg:block mx-auto px-4 py-4">
-            <Image src={langnet} className="h-[3.5rem]" alt="Langnet Logo" />
+            <Image
+              src="/Images/l2.png"
+              width={70}
+              height={70}
+              
+              alt="Langnet Logo"
+            />{" "}
           </div>
 
           <div className="flex flex-col items-center justify-between h-screen pb-5">
