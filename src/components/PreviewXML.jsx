@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 import { useEffect, useState } from "react";
 import FeedbackComponent from "./FeedbackComponent";
 
-const PreviewXmlFileComponent = ({ xml, attachmentId, feedback }) => {
+const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
   const router = useRouter();
   const [previewXmlData, setPreviewXmlData] = useState([]);
   console.log("xml:    ", xml);
@@ -97,7 +97,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback }) => {
 
         {/* feedback component */}
         <div className="w-full lg:w-1/3">
-          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} />
+          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} userId={userId}/>
         </div>
       </div>
     </main>

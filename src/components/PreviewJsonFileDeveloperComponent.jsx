@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import FeedbackComponent from "@/components/FeedbackComponent";
 
-const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
+const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
   console.log("json: ", json);
   const router = useRouter();
 
@@ -89,7 +89,7 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback }) => {
 
         {/* feedback  */}
         <div className="w-full lg:w-1/3">
-          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} />
+          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} userId={userId}/>
         </div>
       </div>
     </main>

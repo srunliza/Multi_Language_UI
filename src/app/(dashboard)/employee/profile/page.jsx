@@ -12,12 +12,14 @@ const ProfilePage = async () => {
           Personal Details
         </h1>
         <div className="flex gap-x-8 items-center mt-8">
-          <div className="h-24 w-24 rounded-full overflow-hidden">
-            <img
-              src={userData?.payload?.image || defaultImage}
-              alt="User Profile"
-            />
-          </div>
+          <div
+            className="h-24 w-24 rounded-full overflow-hidden bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${
+                userData?.payload?.image || defaultImage
+              })`,
+            }}
+          ></div>
           <div>
             <h2 className="uppercase text-sm font-semibold text-gray-600">
               Username
