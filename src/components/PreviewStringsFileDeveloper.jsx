@@ -1,35 +1,31 @@
 "use client";
 import { useRouter } from "next/navigation";
 import FeedbackComponent from "@/components/FeedbackComponent";
+import { v4 as uuidv4 } from "uuid";
 
-const PreviewStringsFileComponent = ({ string, attachmentId, feedback, userId }) => {
-  console.log("string: ", string);
+const PreviewStringsFileComponent = ({
+  string,
+  attachmentId,
+  feedback,
+  userId,
+}) => {
   const router = useRouter();
+  console.log(feedback);
 
-  // Convert the string content to an array of key-value pairs
-  const previewStringData = string.split("\n").map((line, index) => ({
-    key: index + 1,
-    value: line,
-  }));
+  const { data: previewStringData } = string; // Extracting the data array from the string object
 
-  // Function to handle the download of the string data
+  const mappedData = previewStringData
+    .map(({ key, value }) => `"${key}" = "${value}";`)
+    .join("\n");
+
   const handleDownload = () => {
-    const formattedStringContent =
-      "{\n" +
-      previewStringData
-        .map(({ key, value }) => `"${key}" : "${value}"`)
-        .join(",\n") +
-      "\n}";
-
-    const dataStr =
-      "data:text/plain;charset=utf-8," +
-      encodeURIComponent(formattedStringContent);
-    const downloadAnchorNode = document.createElement("a");
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "preview.txt");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    const element = document.createElement("a");
+    const file = new Blob([mappedData], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "data.strings";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+    document.body.removeChild(element);
   };
 
   return (
@@ -44,10 +40,10 @@ const PreviewStringsFileComponent = ({ string, attachmentId, feedback, userId })
             <hr />
             <div className="overflow-auto max-h-[55vh] my-4 no-scrollbar">
               {/* data map as string data */}
-              {previewStringData.map(({ key, value }, index) => (
-                <div key={index} className="text-black pl-8 mt-3">
+              {previewStringData.map(({ id, key, value }, index) => (
+                <div key={id} className="text-black pl-8 mt-3">
                   <p className="font-consolas text-gray-800">
-                    "{key}" : "{value}",
+                    "{key}" = "{value}";
                   </p>
                 </div>
               ))}
@@ -58,9 +54,7 @@ const PreviewStringsFileComponent = ({ string, attachmentId, feedback, userId })
           <div className="flex gap-2 mt-4 justify-end">
             <button
               onClick={() =>
-                router.push(
-                  `/project-leader/dashboard/view-attachment/${attachmentId}`
-                )
+                router.push(`/developer/dashboard/${string.projectId}`)
               }
               className="text-white hover:bg-blue-700 bg-blue-800 shadow-sm rounded-md text-sm py-2 px-4"
             >
@@ -77,7 +71,11 @@ const PreviewStringsFileComponent = ({ string, attachmentId, feedback, userId })
 
         {/* feedback  */}
         <div className="w-full lg:w-1/3">
-          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} userId={userId}/>
+          <FeedbackComponent
+            attachmentId={attachmentId}
+            feedback={feedback}
+            userId={userId}
+          />
         </div>
       </div>
     </main>

@@ -86,7 +86,7 @@ const EmployeeDashboardPage = async () => {
           </div>
         </div>
 
-        <div className="col-span-1 lg:col-span-4 md:col-span-3">
+        <div className="xl:block lg:block col-span-1 lg:col-span-4 md:col-span-3 md:hidden sm:hidden">
           <EmployeeCalendarComponent />
         </div>
       </div>

@@ -6,36 +6,19 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
   console.log("json: ", json);
   const router = useRouter();
 
-  // Convert JSON object to an array of key-value pairs
-  const previewJsonData = Object.entries(json).map(([key, value]) => ({
-    key,
-    value,
-  }));
+  // Extract data into a plain object with key-value pairs
+  const previewJsonData = json.data.reduce((acc, item) => {
+    acc[item.key] = item.value;
+    return acc;
+  }, {});
 
   // Function to handle the download of the JSON data
   const handleDownload = () => {
     // Convert the JSON object to a string
-    const jsonString = JSON.stringify(json);
-
-    // Convert the string into an array of characters
-    const jsonCharArray = Array.from(jsonString);
-
-    // Create a new JSON object where each character is a key-value pair
-    const formattedJson = jsonCharArray.reduce((acc, char, index) => {
-      acc[index] = char;
-      return acc;
-    }, {});
-
-    // Convert the formatted JSON object to a string with new lines
-    const formattedJsonString =
-      "{\n" +
-      Object.entries(formattedJson)
-        .map(([key, value]) => `"${key}" : "${value}"`)
-        .join(",\n") +
-      "\n}";
+    const jsonString = JSON.stringify(previewJsonData, null, 2);
 
     const dataStr =
-      "data:text/json;charset=utf-8," + encodeURIComponent(formattedJsonString);
+      "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
     const downloadAnchorNode = document.createElement("a");
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "data.json");
@@ -56,10 +39,10 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
             <hr />
             <div className="overflow-auto max-h-[49vh] my-4 no-scrollbar">
               {/* data map as json data */}
-              {previewJsonData.map((jsonData, index) => (
+              {Object.entries(previewJsonData).map(([key, value], index) => (
                 <div key={index} className="text-black pl-8 mt-4">
                   <p className="ml-4 font-consolas text-gray-800">
-                    "{jsonData.key}" : "{jsonData.value}",
+                    "{key}" : "{value}",
                   </p>
                 </div>
               ))}
@@ -71,7 +54,7 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
             <button
               onClick={() =>
                 router.push(
-                  `/project-leader/dashboard/view-attachment/${attachmentId}`
+                  `/developer/dashboard/${json.projectId}`
                 )
               }
               className="text-white hover:bg-blue-700 bg-blue-800 shadow-sm rounded-md text-sm py-2 px-4"
@@ -89,7 +72,11 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
 
         {/* feedback  */}
         <div className="w-full lg:w-1/3">
-          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} userId={userId}/>
+          <FeedbackComponent
+            attachmentId={attachmentId}
+            feedback={feedback}
+            userId={userId}
+          />
         </div>
       </div>
     </main>
