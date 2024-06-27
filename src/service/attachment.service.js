@@ -47,9 +47,12 @@ export const downloadJsonService = async (id) => {
 
 export const downloadStringsService = async (id) => {
   const header = await headerTokenFormData();
-  const res = await fetch(`${baseUrl}/api/v1/attachment/download/strings/${id}`, {
-    headers: header,
-  });
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/download/strings/${id}`,
+    {
+      headers: header,
+    }
+  );
   const data = await res.json();
   return data;
 };
@@ -181,6 +184,18 @@ export const insertFileAttachmentService = async (attachmentData) => {
     }
   );
 
+  const data = await res.json();
+  return data;
+};
+
+export const getPreviewDataService = async (id) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/get-data-preview/${id}`,
+    {
+      headers: header,
+    }
+  );
   const data = await res.json();
   return data;
 };

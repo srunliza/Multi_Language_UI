@@ -10,42 +10,28 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
   console.log("xml:    ", xml);
 
   useEffect(() => {
-    const parseXml = (xmlString) => {
-      try {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-        const strings = xmlDoc.getElementsByTagName("string");
-
-        const formattedData = Array.from(strings).map((str, index) => ({
-          id: index + 1,
-          tag: "<resource>",
-          key: `<string name="${str.getAttribute("name")}">${
-            str.textContent
-          }</string>`,
-          value: str.textContent,
-          end_tag: "</resource>",
-        }));
-
-        setPreviewXmlData(formattedData);
-      } catch (err) {
-        console.error("Failed to parse XML:", err);
-      }
+    const formatXmlData = (xmlObject) => {
+      const formattedData = xmlObject.data.map((item, index) => ({
+        id: index + 1,
+        key: `<string name="${item.key}">${item.value}</string>`,
+        value: item.value,
+      }));
+      setPreviewXmlData(formattedData);
     };
 
-    parseXml(xml);
+    formatXmlData(xml);
   }, [xml]);
 
   const handleDownload = () => {
     const xmlContent = `
-      <resources>
-        ${previewXmlData
-          .map((data) => `  <string name="${data.key}">${data.value}</string>`)
-          .join("\n")}
-      </resources>
-    `;
+<resources>
+  ${previewXmlData
+    .map((data) => `  <string name="${data.key}">${data.value}</string>`)
+    .join("\n  ")}
+</resources>`;
 
     const xmlBlob = new Blob([xmlContent], { type: "application/xml" });
-    saveAs(xmlBlob, "preview.xml");
+    saveAs(xmlBlob, "data.xml");
   };
 
   return (
@@ -61,18 +47,18 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
 
             <div className="overflow-auto max-h-[49vh] my-4 no-scrollbar">
               {/* map data as xml data */}
-              {previewXmlData.map((xmlData) => (
-                <div key={xmlData.id} className="text-black pl-8 mt-4">
-                  <p className="font-consolas">{xmlData.tag}</p>
-                  <p className="pl-10 font-consolas text-gray-800">
+              <div className="text-black pl-8 mt-4">
+                <p className="font-consolas">&lt;resources&gt;</p>
+                {previewXmlData.map((xmlData) => (
+                  <p
+                    key={xmlData.id}
+                    className="pl-10 font-consolas text-gray-800"
+                  >
                     {xmlData.key}
                   </p>
-                  <p className="pl-10 font-consolas text-gray-800">
-                    {xmlData.value}
-                  </p>
-                  <p className="font-consolas">{xmlData.end_tag}</p>
-                </div>
-              ))}
+                ))}
+                <p className="font-consolas">&lt;/resources&gt;</p>
+              </div>
             </div>
           </div>
 
@@ -80,7 +66,9 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
           <div className="flex justify-end gap-2 mt-4">
             <button
               onClick={() =>
-                router.push`/project-leader/dashboard/view-attachment/${projectId}`()
+                router.push(
+                  `/project-leader/dashboard/view-attachment/${xml.projectId}`
+                )
               }
               className="text-white hover:bg-blue-700 bg-blue-800 shadow-sm rounded-md text-sm py-2 px-4"
             >
@@ -97,7 +85,11 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
 
         {/* feedback component */}
         <div className="w-full lg:w-1/3">
-          <FeedbackComponent attachmentId={attachmentId} feedback={feedback} userId={userId}/>
+          <FeedbackComponent
+            attachmentId={attachmentId}
+            feedback={feedback}
+            userId={userId}
+          />
         </div>
       </div>
     </main>
