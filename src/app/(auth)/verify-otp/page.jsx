@@ -1,21 +1,30 @@
 "use client";
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { otpVerifyService } from "@/service/auth.service";
+import {
+  otpVerifyService,
+  forgotPasswordService,
+} from "@/service/auth.service";
+import { z } from "zod";
+
+const otpSchema = z.string().length(6, "Please enter a valid 6-digit OTP.");
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 2 minutes in seconds
   const [otpError, setOtpError] = useState("");
   const [isOtpExpired, setIsOtpExpired] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
 
   useEffect(() => {
     if (timeRemaining <= 0) {
@@ -48,33 +57,52 @@ const VerifyOtpPage = () => {
     }
   };
 
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     setTimeRemaining(2 * 60);
     setIsOtpExpired(false);
     setOtp(new Array(6).fill(""));
     setOtpError("");
-    // TODO: Add logic to re-send OTP to user's email
+
+    try {
+      const res = await forgotPasswordService(email);
+      console.log("res", res);
+      if (res.code !== 200) {
+        setOtpError("Failed to resend OTP. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setOtpError("An unexpected error occurred while resending OTP.");
+    }
   };
 
   const handleVerifyOtpClick = async () => {
     const enteredOtp = otp.join("");
-    console.log(enteredOtp);
-    if (enteredOtp.length < 6) {
-      setOtpError("Please enter a valid 6-digit OTP.");
+    const validation = otpSchema.safeParse(enteredOtp);
+    if (!validation.success) {
+      setOtpError(validation.error.errors[0].message);
       return;
     }
 
-    const res = await otpVerifyService(enteredOtp);
-    if (res && res.code === 200 && res.status === "OK") {
-      router.push("/login");
-    } else {
-      console.log("login failed!");
+    setLoading(true);
+    try {
+      const res = await otpVerifyService(enteredOtp);
+      if (res.code === 200) {
+        router.push("/login");
+      } else {
+        setOtpError("Failed to verify OTP. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setOtpError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
-    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
+    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
-        <div className="bg-white pt-10 pb-8 px-8 mt-8 rounded-3xl shadow-xl max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%]">
+        <div className="bg-white pt-10 pb-8 px-8 mt-8 rounded-3xl shadow-xl">
           <h2 className="text-3xl font-bold text-[#1A42BC] mb-4 text-center">
             Verification
           </h2>
@@ -135,8 +163,9 @@ const VerifyOtpPage = () => {
               onClick={handleVerifyOtpClick}
               type="button"
               className="bg-[#1A42BC] hover:bg-[#2d1abc] text-white text-md py-3 px-24 rounded-xl transition duration-300"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
           </div>
           {otpError && (

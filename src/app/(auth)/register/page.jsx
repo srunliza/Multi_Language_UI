@@ -5,27 +5,86 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { useRouter } from "next/navigation";
 import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 import Link from "next/link";
+import { useState } from "react";
 import { registerService } from "@/service/auth.service";
+import { z } from "zod";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+const registerSchema = z
+  .object({
+    firstName: z.string().min(1, "First Name is required"),
+    lastName: z.string().min(1, "Last Name is required"),
+    email: z.string().email("Invalid email address"),
+    gender: z.enum(["Male", "Female"], "Gender is required"),
+    birthDate: z.string().nonempty("Date of Birth is required"),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
+    confirmPassword: z
+      .string()
+      .min(8, "Confirm Password must be at least 8 characters long"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 const RegisterPage = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  async function handleRegister(userDetail) {
-    const newUserDetail = {
-      firstName: userDetail.get("firstName"),
-      lastName: userDetail.get("lastName"),
-      email: userDetail.get("email"),
-      gender: userDetail.get("gender"),
-      birthDate: userDetail.get("birthDate"),
-      password: userDetail.get("password"),
-    };
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
-    const register = await registerService(newUserDetail);
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
 
-    if (register.code === 201) {
-      router.push("/verify-otp");
-    } else {
-      console.log("failed");
+  async function handleRegister(event) {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const formData = new FormData(event.currentTarget);
+      const data = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        gender: formData.get("gender"),
+        birthDate: formData.get("birthDate"),
+        password: formData.get("password"),
+        confirmPassword: formData.get("confirmPassword"),
+      };
+
+      const validation = registerSchema.safeParse(data);
+      if (!validation.success) {
+        setError(validation.error.errors[0].message);
+        setLoading(false);
+        return;
+      }
+
+      const newUserDetail = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        gender: data.gender,
+        birthDate: data.birthDate,
+        password: data.password,
+      };
+
+      const res = await registerService(newUserDetail);
+
+      if (res.code === 201) {
+        router.push("/verify-otp");
+      } else {
+        setError("Registration failed");
+        setLoading(false);
+      }
+    } catch (e) {
+      console.error(e);
+      setError("Registration failed");
+      setLoading(false);
     }
   }
 
@@ -40,7 +99,7 @@ const RegisterPage = () => {
             Enter your details to create an account
           </p>
 
-          <form action={handleRegister}>
+          <form onSubmit={handleRegister}>
             <div className="mb-3">
               <label
                 htmlFor="first-name"
@@ -88,7 +147,7 @@ const RegisterPage = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-3">
               <div className="flex flex-col">
                 <label
-                  htmlFor="Gender"
+                  htmlFor="gender"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Gender
@@ -114,7 +173,7 @@ const RegisterPage = () => {
 
               <div className="flex flex-col">
                 <label
-                  htmlFor="Birth-Date"
+                  htmlFor="birthDate"
                   className="text-gray-700 font-medium mb-1 sm:text-sm md:text-sm lg:text-[15px]"
                 >
                   Date of birth
@@ -135,7 +194,7 @@ const RegisterPage = () => {
 
             <div className="mb-3">
               <label
-                htmlFor="Email"
+                htmlFor="email"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Email
@@ -157,14 +216,14 @@ const RegisterPage = () => {
 
             <div className="mb-4">
               <label
-                htmlFor="Password"
+                htmlFor="password"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
               >
                 Password
               </label>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   aria-label="Password"
@@ -174,14 +233,59 @@ const RegisterPage = () => {
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
                 </span>
+                <span
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <Visibility fontSize="small" />
+                  ) : (
+                    <VisibilityOff fontSize="small" />
+                  )}
+                </span>
               </div>
             </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="confirm-password"
+                className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-sm lg:text-[15px]"
+              >
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirm-password"
+                  name="confirmPassword"
+                  aria-label="Confirm Password"
+                  className="w-full bg-gray-50 px-10 py-2.5 text-sm text-gray-800 border rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
+                  placeholder="Confirm Your Password"
+                />
+                <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
+                  <HttpsOutlinedIcon fontSize="small" />
+                </span>
+                <span
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? (
+                    <Visibility fontSize="small" />
+                  ) : (
+                    <VisibilityOff fontSize="small" />
+                  )}
+                </span>
+              </div>
+            </div>
+
+            {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
 
             <button
               type="submit"
               className="w-full mt-2 bg-[#1A42BC] text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              disabled={loading}
             >
-              SignUp
+              {loading ? "Loading..." : "SignUp"}
             </button>
           </form>
 
@@ -189,7 +293,7 @@ const RegisterPage = () => {
             <span className="text-gray-700 text-xs">
               Do you have an account?
             </span>
-            <Link href="login" className="text-blue-800 text-xs pl-1">
+            <Link href="/login" className="text-blue-800 text-xs pl-1">
               Sign In
             </Link>
           </div>

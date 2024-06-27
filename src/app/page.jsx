@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import Link from "next/link";
@@ -11,7 +13,16 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
 const LandingPageComponent = () => {
+  const { data: session, status } = useSession();
+  const router = new useRouter();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log("session: ", session);
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/employee/dashboard");
+    }
+  }, [status, router]);
   return (
     <div className="bg-slate-50 h-auto scroll-smooth ">
       <nav className="bg-slate-100 sticky top-0 z-10 shadow-sm border-b border-b-gray-200">

@@ -6,22 +6,46 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { forgotPasswordService } from "@/service/auth.service";
 import { useState } from "react";
+import { z } from "zod";
+
+const forgetPasswordSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});
 
 const ForgetPasswordPage = () => {
-  // Initialize the router
   const router = useRouter();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Function to handle button click
-  async function handleForgot(data) {
-    const email = data.get("email");
+  async function handleForgot(event) {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const res = await forgotPasswordService(email);
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      email: formData.get("email"),
+    };
 
-    if (res.code === 200) {
-      router.push(`/forget-verify?email=${email}`);
-    } else {
-      setError("Failed to send forgot password email");
+    const validation = forgetPasswordSchema.safeParse(data);
+    if (!validation.success) {
+      setError(validation.error.errors[0].message);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await forgotPasswordService(data.email);
+      if (res.code === 200) {
+        router.push(`/forget-verify?email=${data.email}`);
+      } else {
+        setError("Failed to send forgot password email");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -48,8 +72,7 @@ const ForgetPasswordPage = () => {
           </div>
 
           {/* form */}
-          <form action={handleForgot}>
-            {/* input new password */}
+          <form onSubmit={handleForgot}>
             <div className="mb-3 text-gray-700">
               <label
                 htmlFor="email"
@@ -65,22 +88,22 @@ const ForgetPasswordPage = () => {
                   className="w-full px-10 py-2.5 text-sm border bg-gray-50 rounded-lg focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Email"
                 />
-
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <EmailOutlined fontSize="small" />
                 </span>
               </div>
             </div>
 
-            {/* button submit */}
+            {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
+
             <button
               type="submit"
               className="w-full mt-2 bg-[#1A42BC] text-white text-base py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
 
-            {/* remember password or not */}
             <div className="text-gray-500 text-sm mt-5 flex justify-center items-center">
               <span>Remember your password?</span>
               <Link href="login" className="text-blue-800 text-sm px-2">

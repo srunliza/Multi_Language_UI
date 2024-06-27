@@ -1,5 +1,10 @@
 import { NextUIProvider } from "@nextui-org/system";
+import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }) {
-  return <NextUIProvider>{children}</NextUIProvider>;
+  return (
+    <SessionProvider>
+      <NextUIProvider>{children}</NextUIProvider>
+    </SessionProvider>
+  );
 }

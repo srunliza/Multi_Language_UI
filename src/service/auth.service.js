@@ -13,6 +13,18 @@ export const loginService = async (userInfo) => {
   return data;
 };
 
+export const loginSclService = async (userInfo) => {
+  const res = await fetch(`${baseUrl}/api/v1/auth/login-with-third-party`, {
+    method: "POST",
+    body: JSON.stringify(userInfo),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  return data;
+};
+
 export const registerService = async (userDetail) => {
   const res = await fetch(`${baseUrl}/api/v1/auth/register`, {
     method: "POST",
@@ -21,6 +33,7 @@ export const registerService = async (userDetail) => {
       "Content-Type": "application/json",
     },
   });
+
   const data = await res.json();
   return data;
 };

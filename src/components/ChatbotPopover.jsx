@@ -1,37 +1,17 @@
 "use client";
-import user from "../../public/assets/icons/Vandy.png";
+
 import {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
 } from "@google/generative-ai";
 import { useState, useEffect } from "react";
-import { keyframes } from "@emotion/react";
 import Image from "next/image";
 import Popover from "@mui/material/Popover";
 import IconButton from "@mui/material/IconButton";
-import TranslateIcon from "@mui/icons-material/Translate";
+import user from "../../public/assets/icons/Vandy.png";
 import Avatar from "@mui/material/Avatar";
 import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
-
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-const iconStyle = {
-  fontSize: 70,
-  color: "white",
-  marginTop: "20px",
-  background: "linear-gradient(90deg, blue, purple)",
-  borderRadius: "50%",
-  padding: "10px",
-  animation: `${rotate} 2s linear infinite`,
-};
 
 const ChatbotPopover = () => {
   const [messages, setMessages] = useState([]);
@@ -42,38 +22,45 @@ const ChatbotPopover = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const handleNewMessage = async (message) => {
+    setLoading(true);
+    // Simulate sending message and waiting for AI response
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setLoading(false);
+  };
+
   const API_KEY = "AIzaSyDjr_GaiM86TzUEty7Ey-HkghaHZjbLNHU";
   const MODEL_NAME = "gemini-1.0-pro-001";
 
+  const genAI = new GoogleGenerativeAI(API_KEY);
+
+  const generationConfig = {
+    temperature: 0.9,
+    topK: 1,
+    topP: 1,
+    maxOutputTokens: 2048,
+  };
+
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
+
   useEffect(() => {
-    const genAI = new GoogleGenerativeAI(API_KEY);
-
-    const generationConfig = {
-      temperature: 0.7,
-      topK: 5,
-      topP: 0.9,
-      maxOutputTokens: 2048,
-    };
-
-    const safetySettings = [
-      {
-        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-      },
-      {
-        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-      },
-    ];
-
     const initChat = async () => {
       try {
         const newChat = await genAI
@@ -96,6 +83,7 @@ const ChatbotPopover = () => {
   }, [messages]);
 
   const handleSendMessage = async () => {
+    setLoading(true);
     try {
       const userMessage = {
         text: userInput,
@@ -109,7 +97,7 @@ const ChatbotPopover = () => {
       if (chat) {
         const result = await chat.sendMessage(userInput);
         const botMessage = {
-          text: await result.response.text(),
+          text: await result.response.text(), // Ensure the method exists and works correctly
           role: "bot",
           timestamp: new Date(),
         };
@@ -119,6 +107,8 @@ const ChatbotPopover = () => {
       }
     } catch (error) {
       setError("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -179,16 +169,16 @@ const ChatbotPopover = () => {
   const id = open ? "chatbot-popover" : undefined;
 
   return (
-    <div className="relative">
-      <Image
-        src="/assets/images/chatboot.svg"
-        width={40}
-        height={40}
-        alt="chat bot image"
-        className="w-[6rem] h-[6rem] rounded-full mr-2"
-        aria-describedby={id}
-        onClick={handleClick}
-      />
+    <div className="relative pr-10">
+      <div className="flex justify-end items-end">
+        <IconButton aria-describedby={id} onClick={handleClick}>
+          <img
+            alt="Support Bot"
+            src="/assets/images/chatboot.svg"
+            className="w-24"
+          />
+        </IconButton>
+      </div>
       <Popover
         id={id}
         open={open}
@@ -211,13 +201,13 @@ const ChatbotPopover = () => {
           },
         }}
       >
-        <div className="w-[420px] h-[540px] rounded-2xl">
+        <div className="w-[437px] h-[617px] rounded-2xl">
           <div className="flex justify-between bg-blue-700 items-center p-2">
             <div className="flex items-center">
               <Avatar
-                alt="Translation Assistant"
+                alt="Support Bot"
                 src="/assets/images/chatboot.svg"
-                className="mr-2"
+                className=""
               />
               <h2 className="text-lg font-semibold text-white">Support Bot</h2>
             </div>
@@ -229,7 +219,8 @@ const ChatbotPopover = () => {
             </IconButton>
           </div>
 
-          <div className="flex flex-col h-[425px] overflow-y-auto w-full p-2 no-scrollbar">
+          {/* mapping ai chat */}
+          <div className="flex flex-col h-[502px] overflow-y-auto w-full p-2 no-scrollbar">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -237,6 +228,7 @@ const ChatbotPopover = () => {
                   msg.role === "user" ? "justify-end" : "justify-start"
                 } items-start mt-3`}
               >
+                {/* AI role */}
                 {msg.role === "bot" && (
                   <Image
                     src="/assets/images/chatboot.svg"
@@ -267,6 +259,7 @@ const ChatbotPopover = () => {
                   </p>
                 </div>
 
+                {/* User role */}
                 {msg.role === "user" && (
                   <Image
                     src={user}
@@ -288,9 +281,17 @@ const ChatbotPopover = () => {
                   alt="chat bot image"
                   className="w-10 h-10 rounded-full mr-2"
                 />
-                <div className="flex flex-col items-start">
-                  <div className="inline-block p-2 rounded-lg border border-gray-300 bg-gray-200 animate-pulse w-48 h-10"></div>
-                  <p className="text-xs text-gray-400 mt-1">Bot is typing...</p>
+                <div class="flex animate-pulse">
+                  <div class="ms-4 mt-2 w-full">
+                    <p class="h-2 bg-gray-200 rounded-full dark:bg-neutral-700 w-60"></p>
+
+                    <ul class="mt-2 space-y-3">
+                      <li class="w-full h-2 bg-gray-200 rounded-full dark:bg-neutral-700"></li>
+                      <li class="w-full h-1.5 bg-gray-200 rounded-full dark:bg-neutral-700"></li>
+                      {/* <li class="w-full h-1 bg-gray-200 rounded-full dark:bg-neutral-700"></li> */}
+                      <p className="text-xs">Bot is typing...</p>
+                    </ul>
+                  </div>
                 </div>
               </div>
             )}

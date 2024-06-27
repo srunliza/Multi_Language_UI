@@ -1,17 +1,17 @@
-import { getServerSession } from "next-auth";
-import { authOption } from "./auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 export const headerToken = async () => {
-  const session = await getServerSession(authOption);
+  const session = await auth();
+
   return {
-    authorization: `Bearer ${session?.user?.token}`,
+    authorization: `Bearer ${session?.user?.newToken}`,
     "Content-Type": "application/json",
   };
 };
 
 export const headerTokenFormData = async () => {
-  const session = await getServerSession(authOption);
+  const session = await auth();
   return {
-    authorization: `Bearer ${session?.user?.token}`,
+    authorization: `Bearer ${session?.user?.newToken}`,
   };
 };

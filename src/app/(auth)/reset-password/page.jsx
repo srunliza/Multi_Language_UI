@@ -5,6 +5,22 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { resetPasswordService } from "@/service/auth.service";
 import { useState } from "react";
+import { z } from "zod";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+const passwordSchema = z
+  .object({
+    newPassword: z
+      .string()
+      .min(8, "Password must be at least 8 characters long"),
+    confirmPassword: z
+      .string()
+      .min(8, "Password must be at least 8 characters long"),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 const ResetPasswordPage = () => {
   const router = useRouter();
@@ -12,32 +28,59 @@ const ResetPasswordPage = () => {
   const email = searchParams.get("email");
 
   const [error, setError] = useState(null);
-  async function handleResetPassword(data) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
+
+  async function handleResetPassword(event) {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
     const passwords = {
-      password: data.get("newPassword"),
-      confirmPassword: data.get("confirmPassword"),
+      password: formData.get("newPassword"),
+      confirmPassword: formData.get("confirmPassword"),
     };
 
-    if (passwords.password !== passwords.confirmPassword) {
-      setError("Passwords do not match");
+    const validation = passwordSchema.safeParse({
+      newPassword: passwords.password,
+      confirmPassword: passwords.confirmPassword,
+    });
+    if (!validation.success) {
+      setError(validation.error.errors[0].message);
+      setLoading(false);
       return;
     }
 
-    const response = await resetPasswordService(email, passwords);
-    if (response.code === 200) {
-      router.push("/login");
-    } else {
-      setError("Failed to reset password"); // Set error message
+    try {
+      const response = await resetPasswordService(email, passwords);
+
+      if (response.code === 200) {
+        router.push("/login");
+      } else {
+        setError("Failed to reset password");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    // background
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
       <div className="flex justify-center items-center">
-        {/* card */}
         <div className="bg-white rounded-2xl mt-12 shadow-lg p-8 md:px-14 pb-10 max-w-md w-full sm:ml-px">
-          {/* title and subtitle */}
           <h2 className="sm:text-lg md:text-xl lg:text-2xl font-bold text-[#1A42BC] mb-2">
             Change New Password
           </h2>
@@ -45,7 +88,6 @@ const ResetPasswordPage = () => {
             Enter your new password below
           </p>
 
-          {/* image */}
           <div className="flex justify-center items-center mb-4">
             <Image
               src={changePasswordImage}
@@ -55,60 +97,83 @@ const ResetPasswordPage = () => {
             />
           </div>
 
-          {/* form */}
-          <form action={handleResetPassword}>
-            {/* input new password */}
+          <form onSubmit={handleResetPassword}>
             <div className="mb-3">
               <label
-                htmlFor="new-password"
+                htmlFor="newPassword"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
               >
                 New Password
               </label>
               <div className="relative text-gray-800">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="newPassword"
                   name="newPassword"
                   className="w-full px-10 py-2 border rounded-lg focus:outline-none bg-gray-50 focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Enter Your Password"
+                  required
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
                 </span>
-                <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"></span>
+                <span
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <VisibilityOff fontSize="small" />
+                  ) : (
+                    <Visibility fontSize="small" />
+                  )}
+                </span>
               </div>
             </div>
 
-            {/* input confirm password */}
             <div className="mb-4">
               <label
-                htmlFor="confirm-password"
+                htmlFor="confirmPassword"
                 className="block font-medium text-gray-700 mb-2 sm:text-sm md:text-base lg:text-base"
               >
                 Confirm Password
               </label>
               <div className="relative text-gray-800">
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   id="confirmPassword"
                   name="confirmPassword"
                   className="w-full px-10 py-2 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
                   placeholder="Confirm Your Password"
+                  required
                 />
                 <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
                   <HttpsOutlinedIcon fontSize="small" />
                 </span>
-                <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"></span>
+                <span
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? (
+                    <VisibilityOff fontSize="small" />
+                  ) : (
+                    <Visibility fontSize="small" />
+                  )}
+                </span>
               </div>
             </div>
 
-            {/* button submit */}
+            {error && (
+              <div className="text-center text-red-500 text-sm mb-4">
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
               className="w-full mt-2 bg-[#1A42BC] text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
           </form>
         </div>
