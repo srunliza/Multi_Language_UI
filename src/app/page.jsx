@@ -463,7 +463,7 @@ const LandingPageComponent = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="./Images/facebook.png"
+                    src="./Images/facebook.jpg"
                     alt="Facebook"
                     className="hover:scale-125 w-6 h-6 transition-all"
                   />
