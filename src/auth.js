@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { loginService, loginSclService } from "./service/auth.service";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 
 export const {
   handlers: { GET, POST },
@@ -41,28 +41,8 @@ export const {
         }
       },
     }),
-    GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
-    }),
-    GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
-    }),
+    Google,
+    GitHub,
   ],
   callbacks: {
     async jwt({ token, user, account, profile }) {

@@ -26,6 +26,7 @@ export const loginSclService = async (userInfo) => {
 };
 
 export const registerService = async (userDetail) => {
+  console.log(userDetail)
   const res = await fetch(`${baseUrl}/api/v1/auth/register`, {
     method: "POST",
     body: JSON.stringify(userDetail),
@@ -33,8 +34,8 @@ export const registerService = async (userDetail) => {
       "Content-Type": "application/json",
     },
   });
-
   const data = await res.json();
+  console.log(data)
   return data;
 };
 

@@ -60,12 +60,12 @@ body,
   border-bottom-right-radius: 10px;
 }
 
-#start-date{
+#start-date {
   background-color: white;
   box-shadow: none;
 }
 
-#end-date{
+#end-date {
   background-color: white;
   box-shadow: none;
 }
@@ -119,7 +119,6 @@ body,
     background-position: 0% 50%;
   }
 }
-
 
 .underline-animation {
   position: relative;
@@ -200,4 +199,36 @@ body,
 
 .input-container button:hover {
   background-color: #005bb5;
+}
+
+.fc .fc-col-header-cell-cushion {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.fc .fc-button {
+  @apply bg-blue-700 hover:bg-blue-600 border-none;
+}
+
+.fc-toolbar h2 {
+  font-weight: 600;
+  color: #111122;
+}
+
+:root {
+  --fc-border-color: rgb(210, 209, 209);
+  --fc-daygrid-event-dot-width: 5px;
+}
+
+.fc-button-group .fc-button {
+  margin: 6px;
+}
+
+.fc-event-time {
+  display: none;
+}
+
+.fc-event-title {
+  font-weight: 500;
+  font-size: 15px;
 }

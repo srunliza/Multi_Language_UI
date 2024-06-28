@@ -15,18 +15,6 @@ export const getAttachmentByProjectIdService = async (id) => {
   return data;
 };
 
-export const previewXMLService = async (id) => {
-  const header = await headerToken();
-  const res = await fetch(
-    `${baseUrl}/api/v1/attachment/get-attachment/XML/${id}`,
-    {
-      headers: header,
-    }
-  );
-  const data = await res.json();
-  return data;
-};
-
 export const downloadXMLService = async (id) => {
   const header = await headerTokenFormData();
   const res = await fetch(`${baseUrl}/api/v1/attachment/download/xml/${id}`, {
@@ -64,30 +52,6 @@ export const getDataByAttachmentIdService = async (id) => {
     {
       headers: header,
       next: { tags: ["data"] },
-    }
-  );
-  const data = await res.json();
-  return data;
-};
-
-export const previewJsonService = async (id) => {
-  const header = await headerToken();
-  const res = await fetch(
-    `${baseUrl}/api/v1/attachment/get-attachment/JSON/${id}`,
-    {
-      headers: header,
-    }
-  );
-  const data = await res.json();
-  return data;
-};
-
-export const previewStringsService = async (id) => {
-  const header = await headerToken();
-  const res = await fetch(
-    `${baseUrl}/api/v1/attachment/get-attachment/strings/${id}`,
-    {
-      headers: header,
     }
   );
   const data = await res.json();
