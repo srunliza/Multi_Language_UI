@@ -122,9 +122,9 @@ const ResetPasswordPage = () => {
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
-                    <VisibilityOff fontSize="small" />
-                  ) : (
                     <Visibility fontSize="small" />
+                  ) : (
+                    <VisibilityOff fontSize="small" />
                   )}
                 </span>
               </div>
@@ -154,9 +154,9 @@ const ResetPasswordPage = () => {
                   onClick={toggleConfirmPasswordVisibility}
                 >
                   {showConfirmPassword ? (
-                    <VisibilityOff fontSize="small" />
-                  ) : (
                     <Visibility fontSize="small" />
+                  ) : (
+                    <VisibilityOff fontSize="small" />
                   )}
                 </span>
               </div>

@@ -11,6 +11,7 @@ import "animate.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+import ContactForm from "@/app/api/ContactUs";
 
 const LandingPageComponent = () => {
   const { data: session, status } = useSession();
@@ -418,47 +419,7 @@ const LandingPageComponent = () => {
               <p className="mb-8 text-gray-600 text-left">
                 Please use the form below to contact us. Thank you!
               </p>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="sr-only">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="username"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="sr-only">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="example@gmail.com"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="sr-only">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    placeholder="message"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-                    rows="4"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="px-6 py-2 text-white bg-blue-800 rounded-md hover:bg-blue-700"
-                >
-                  Submit
-                </button>
-              </form>
+              <ContactForm />
             </div>
             <div className="flex justify-center w-full max-w-sm">
               <img
