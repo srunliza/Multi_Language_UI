@@ -3,23 +3,23 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import notifications from "@/obj/notifications";
 import styles from "./style/styles.css";
 import PopUpProfileComponent from "./PopUpProfileComponent";
 import Link from "next/link";
 import { getAllProjectService } from "@/service/project.service";
+import { getAllNotificationService } from "@/service/notification.service";
 
 const NotificationItem = ({ notification, onClick }) => (
   <div
     className={`flex gap-1 h-auto py-2 px-3 items-center cursor-pointer ${
-      notification.unread ? "bg-blue-100" : "hover:bg-gray-100"
+      !notification.isRead ? "bg-blue-100" : "hover:bg-gray-100"
     }`}
     onClick={() => onClick(notification)}
   >
     <div>
       <img
         className="inline-block h-[60px] w-[60px] rounded-full mr-1"
-        src={notification.imgSrc}
+        src={notification.sender.image}
         alt="Profile Image"
       />
     </div>
@@ -30,9 +30,9 @@ const NotificationItem = ({ notification, onClick }) => (
       </div>
     </div>
     <div className="">
-      <div className="text-sm">{notification.date}</div>
+      <div className="text-sm">{notification.createDate}</div>
       <div className="w-4 h-4">
-        {notification.unread ? null : (
+        {!notification.isRead ? null : (
           <img
             width="50"
             height="50"
@@ -51,25 +51,38 @@ const NavbarClient = ({ toggleSidebar }) => {
   const [popupContent, setPopupContent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [projects, setProjects] = useState([]); // New state to store fetched projects
+  const [projects, setProjects] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [animateNotification, setAnimateNotification] = useState(false);
   const [animateSearch, setAnimateSearch] = useState(false);
   const notificationRef = useRef();
 
-  
   useEffect(() => {
-    // Function to fetch projects from the API
     const fetchProjects = async () => {
       try {
         const response = await getAllProjectService();
-        console.log(response)
-        setProjects(response.payload); // Adjusted to set the projects from the payload
+        console.log(response);
+        setProjects(response.payload);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
 
     fetchProjects();
+  }, []);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await getAllNotificationService();
+        console.log("Notifications", response);
+        setNotifications(response.payload);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    fetchNotifications();
   }, []);
 
   useEffect(() => {
@@ -159,11 +172,11 @@ const NavbarClient = ({ toggleSidebar }) => {
             {searchResults.length > 0 && (
               <div className="absolute mt-1 bg-white border border-gray-300 rounded-lg shadow-lg w-full z-10 max-h-80 overflow-hidden overflow-x-auto ">
                 {searchResults.map((project) => (
-                  <Link href={`/project-leader/dashboard/${project.projectId}`}>
-                    <div
-                      key={project.projectId}
-                      className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer"
-                    >
+                  <Link
+                    href={`/project-leader/dashboard/${project.projectId}`}
+                    key={project.projectId}
+                  >
+                    <div className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer">
                       <span>{project.projectName}</span>
                     </div>
                   </Link>
@@ -199,7 +212,7 @@ const NavbarClient = ({ toggleSidebar }) => {
                 </div>
                 <div className="no-scrollbar overflow-y-auto">
                   {notifications
-                    .filter((notification) => showAll || notification.unread)
+                    .filter((notification) => showAll || !notification.isRead)
                     .map((notification, index) => (
                       <NotificationItem
                         key={index}
