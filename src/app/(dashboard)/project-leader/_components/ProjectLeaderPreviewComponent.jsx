@@ -24,17 +24,21 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
     if (isEditing) {
       // Collect only the changed data
       const updateJsonKey = editedData
-        .filter((item, index) => item.key !== previewData.data[index].key)
+        .filter(
+          (item, index) =>
+            item.key !== previewData.data[index].key ||
+            item.hint !== previewData.data[index].hint
+        )
         .map((item) => ({
           id: item.id,
           newKey: item.key,
-          hint: item.hint || null,
+          hint: item.hint !== undefined ? item.hint : "null",
         }));
 
       if (updateJsonKey.length > 0) {
         try {
           const response = await updateKeyAction(attachmentId, updateJsonKey);
-          if (response.status === "OK") {
+          if (response.status === "OK" || response.status === 202) {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
@@ -55,10 +59,10 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
     setIsEditing(!isEditing);
   };
 
-  const handleInputChange = (id, newKey) => {
+  const handleInputChange = (id, newKey, newHint) => {
     const updatedData = editedData.map((item) => {
       if (item.id === id) {
-        return { ...item, key: newKey };
+        return { ...item, key: newKey, hint: newHint };
       }
       return item;
     });

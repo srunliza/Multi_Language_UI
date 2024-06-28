@@ -29,10 +29,12 @@ export const {
         };
 
         try {
-          const user = await loginService(detail);
-          if (user) {
-            return user;
+          const response = await loginService(detail);
+          console.log("response", response);
+          if (response.status === "OK") {
+            return response;
           } else {
+            throw new Error(response?.detail || "Login failed");
             return null;
           }
         } catch (error) {
@@ -45,7 +47,7 @@ export const {
     GitHub,
   ],
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account }) {
       if (
         user &&
         account &&
@@ -61,9 +63,13 @@ export const {
 
         try {
           const authenticatedUser = await loginSclService(userInfo);
-          if (authenticatedUser) {
+
+          console.log("auththentication user: ", authenticatedUser);
+          if (authenticatedUser.code === 200) {
             token = { ...token, ...authenticatedUser };
-            console.log("token: ", token);
+            // console.log("token: ", token);
+          } else if (authenticatedUser.title === "CONFLICT") {
+            token = null;
           }
         } catch (error) {
           console.error("Error during social login:", error);
@@ -81,5 +87,7 @@ export const {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
+    verifyRequest: "/verify-otp",
+    newUser: null,
   },
 });

@@ -2,6 +2,30 @@
 import { useRouter } from "next/navigation";
 import FeedbackComponent from "@/components/FeedbackComponent";
 
+const JsonViewer = ({ data, level = 0 }) => {
+  return (
+    <div style={{ paddingLeft: level * 20 }}>
+      {Object.entries(data).map(([key, value], index) => (
+        <div key={index} className="text-black pl-8 mt-4">
+          {typeof value === "object" && value !== null ? (
+            <>
+              <p className="ml-4 font-consolas text-gray-800">
+                "{key}": {"{"}
+              </p>
+              <JsonViewer data={value} level={level + 1} />
+              <p className="ml-4 font-consolas text-gray-800">{"},"}</p>
+            </>
+          ) : (
+            <p className="ml-4 font-consolas text-gray-800">
+              "{key}": "{value}",
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
   console.log("json: ", json);
   const router = useRouter();
@@ -21,7 +45,7 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
       "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
     const downloadAnchorNode = document.createElement("a");
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "data.json");
+    downloadAnchorNode.setAttribute("download", `${json.attachmentName}.json`);
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
@@ -39,13 +63,11 @@ const PreviewJsonFileComponent = ({ json, attachmentId, feedback, userId }) => {
             <hr />
             <div className="overflow-auto max-h-[49vh] my-4 no-scrollbar">
               {/* data map as json data */}
-              {Object.entries(previewJsonData).map(([key, value], index) => (
-                <div key={index} className="text-black pl-8 mt-4">
-                  <p className="ml-4 font-consolas text-gray-800">
-                    "{key}" : "{value}",
-                  </p>
-                </div>
-              ))}
+              <div className="text-black pl-8 mt-4">
+                <p className="ml-4 font-consolas text-gray-800">{"{"}</p>
+                <JsonViewer data={previewJsonData} />
+                <p className="ml-4 font-consolas text-gray-800">{"}"}</p>
+              </div>
             </div>
           </div>
 

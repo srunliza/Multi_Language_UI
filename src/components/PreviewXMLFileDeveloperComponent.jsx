@@ -13,7 +13,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
     const formatXmlData = (xmlObject) => {
       const formattedData = xmlObject.data.map((item, index) => ({
         id: index + 1,
-        key: `<string name="${item.key}">${item.value}</string>`,
+        key: item.key.replace(/\s+/g, "_"),
         value: item.value,
       }));
       setPreviewXmlData(formattedData);
@@ -31,7 +31,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
 </resources>`;
 
     const xmlBlob = new Blob([xmlContent], { type: "application/xml" });
-    saveAs(xmlBlob, "data.xml");
+    saveAs(xmlBlob, `${xml.attachmentName}.xml`);
   };
 
   return (
@@ -54,7 +54,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
                     key={xmlData.id}
                     className="pl-10 font-consolas text-gray-800"
                   >
-                    {xmlData.key}
+                    {`<string name="${xmlData.key}">${xmlData.value}</string>`}
                   </p>
                 ))}
                 <p className="font-consolas">&lt;/resources&gt;</p>
@@ -66,9 +66,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
           <div className="flex justify-end gap-2 mt-4">
             <button
               onClick={() =>
-                router.push(
-                  `/developer/dashboard/${xml.projectId}`
-                )
+                router.push(`/developer/dashboard/${xml.projectId}`)
               }
               className="text-white hover:bg-blue-700 bg-blue-800 shadow-sm rounded-md text-sm py-2 px-4"
             >

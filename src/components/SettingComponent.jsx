@@ -357,7 +357,7 @@ const SettingComponent = ({ currentUser }) => {
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <img
-                        src="../Images/facebook.png"
+                        src="../Images/facebook.jpg"
                         alt="facebook"
                         className="w-5 h-5 text-gray-400"
                       />

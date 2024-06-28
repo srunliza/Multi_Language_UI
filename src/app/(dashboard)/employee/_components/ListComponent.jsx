@@ -131,7 +131,7 @@ const ListComponent = ({ project, currentUserRole, daysLeft }) => {
           <div
             className={`${getDaysLeftBgColor(
               daysLeft
-            )} text-black w-[9em] rounded-lg px-3.5 py-2 text-xs`}
+            )} text-black w-[10em] rounded-lg px-3.5 py-2 text-xs`}
           >
             <svg
               className="h-4 w-4 inline-block mr-1"

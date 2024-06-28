@@ -369,7 +369,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="./images/telegram.png"
+                        src="./Images/telegram.png"
                       />
                     </a>
                     <a
@@ -384,7 +384,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="./images/facebook.png"
+                        src="./Images/facebook.jpg"
                       />
                     </a>
                     <a
@@ -399,7 +399,7 @@ const LandingPageComponent = () => {
                         width="30"
                         height="30"
                         decoding="async"
-                        src="./images/google.png"
+                        src="./Images/google.png"
                       />
                     </a>
                   </div>

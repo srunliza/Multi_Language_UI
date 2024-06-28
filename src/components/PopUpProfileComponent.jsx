@@ -32,7 +32,6 @@ const PopUpProfileComponent = () => {
     const fetchCurrentUser = async () => {
       try {
         const response = await getCurrentUserProfileService();
-
         setUser(response);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -84,13 +83,13 @@ const PopUpProfileComponent = () => {
       <Dropdown
         radius="sm"
         classNames={{
-          base: "before:bg-default-200",
-          content: "p-0 border-small border-divider bg-background",
+          base: "before:bg-gray-100",
+          content: "p-0 border-small border-gray-300 bg-white",
         }}
       >
         <DropdownTrigger>
           <img
-            className={`inline-block h-[38px] w-[38px] rounded-full cursor-pointer ${
+            className={`inline-block h-[38px] w-[38px] rounded-full border-2 border-gray-300 cursor-pointer ${
               animateProfile ? "animate-scale-up" : ""
             }`}
             src={user?.payload?.image || "/Images/user-profile.png"}
@@ -101,35 +100,41 @@ const PopUpProfileComponent = () => {
         <DropdownMenu
           aria-label="Custom item styles"
           disabledKeys={["profile"]}
-          className="p-3 w-[400px] h-auto"
+          className="p-3 w-[400px] h-auto bg-white"
           itemClasses={{
             base: [
               "rounded-md",
-              "text-default-500",
+              "text-gray-700",
               "transition-opacity",
-              "data-[hover=true]:text-foreground",
-              "data-[hover=true]:bg-default-100",
-              "dark:data-[hover=true]:bg-default-50",
-              "data-[selectable=true]:focus:bg-default-50",
+              "data-[hover=true]:text-black",
+              "data-[hover=true]:bg-gray-200",
+              "dark:data-[hover=true]:bg-gray-100",
+              "data-[selectable=true]:focus:bg-gray-100",
               "data-[pressed=true]:opacity-70",
-              "data-[focus-visible=true]:ring-default-500",
+              "data-[focus-visible=true]:ring-gray-300",
             ],
           }}
           onAction={handleMenuItemClick}
         >
           <DropdownSection aria-label="Profile & Actions" showDivider>
-            <DropdownItem isReadOnly key="profile" className="h-14 gap-2">
+            <DropdownItem
+              isReadOnly
+              key="profile"
+              className="h-14 gap-2 bg-gray-100 hover:bg-gray-200"
+            >
               <div className="flex items-center">
                 <img
-                  className="h-12 w-12 rounded-full"
-                  src={user?.payload?.image || "/Images/Neath.png"}
+                  className="h-12 w-12 rounded-full border-2 border-gray-300"
+                  src={user?.payload?.image || "/Images/user-profile.png"}
                   alt="User img"
                 />
                 <div className="ml-2">
                   <p className="text-black text-lg">
                     {user?.payload?.fullName}
                   </p>
-                  <p className="text-black text-base">{user?.payload?.email}</p>
+                  <p className="text-gray-700 text-base">
+                    {user?.payload?.email}
+                  </p>
                 </div>
               </div>
             </DropdownItem>
