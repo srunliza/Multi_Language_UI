@@ -1,6 +1,6 @@
 import React from "react";
-import MemberProjectLeader from "@/components/MemberLeader";
-import OpenAddMemberModalButton from "../../../_components/ProjectLeaderAddMember";
+import MemberProjectLeader from "@/components/Member";
+import OpenAddMemberModalButton from "../../../_components/AddPopup";
 import NavbarProjectLeaderComponent from "../../../_components/NavbarProjectLeaderComponent";
 import { getProjectByIdService } from "@/service/project.service";
 import { getAllLanguageService } from "@/service/language.service";
