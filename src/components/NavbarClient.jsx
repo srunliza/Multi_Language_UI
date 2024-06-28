@@ -6,6 +6,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import notifications from "@/obj/notifications";
 import styles from "./style/styles.css";
 import PopUpProfileComponent from "./PopUpProfileComponent";
+import Link from "next/link";
+import { getAllProjectService } from "@/service/project.service";
 
 const NotificationItem = ({ notification, onClick }) => (
   <div
@@ -49,50 +51,26 @@ const NavbarClient = ({ toggleSidebar }) => {
   const [popupContent, setPopupContent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [projects, setProjects] = useState([]); // New state to store fetched projects
   const [animateNotification, setAnimateNotification] = useState(false);
   const [animateSearch, setAnimateSearch] = useState(false);
   const notificationRef = useRef();
 
-  const handleShowAll = () => {
-    setShowAll(true);
-  };
+  
+  useEffect(() => {
+    // Function to fetch projects from the API
+    const fetchProjects = async () => {
+      try {
+        const response = await getAllProjectService();
+        console.log(response)
+        setProjects(response.payload); // Adjusted to set the projects from the payload
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
 
-  const handleShowUnread = () => {
-    setShowAll(false);
-  };
-
-  const handleNotificationClick = (content) => {
-    setPopupContent(content);
-  };
-
-  const closePopup = () => {
-    setPopupContent(null);
-  };
-
-  const handleSearchChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-
-    if (query) {
-      const results = projects.filter((project) =>
-        project.name.toLowerCase().includes(query.toLowerCase())
-      );
-      setSearchResults(results);
-    } else {
-      setSearchResults([]);
-    }
-  };
-
-  const handleNotificationIconClick = () => {
-    setAnimateNotification(true);
-    setTimeout(() => setAnimateNotification(false), 300);
-    setPopupVisible(!popupVisible);
-  };
-
-  const handleSearchBarClick = () => {
-    setAnimateSearch(true);
-    setTimeout(() => setAnimateSearch(false), 500);
-  };
+    fetchProjects();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -117,6 +95,47 @@ const NavbarClient = ({ toggleSidebar }) => {
     };
   }, []);
 
+  const handleShowAll = () => {
+    setShowAll(true);
+  };
+
+  const handleShowUnread = () => {
+    setShowAll(false);
+  };
+
+  const handleNotificationClick = (content) => {
+    setPopupContent(content);
+  };
+
+  const closePopup = () => {
+    setPopupContent(null);
+  };
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      const results = projects.filter((project) =>
+        project.projectName.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleNotificationIconClick = () => {
+    setAnimateNotification(true);
+    setTimeout(() => setAnimateNotification(false), 300);
+    setPopupVisible(!popupVisible);
+  };
+
+  const handleSearchBarClick = () => {
+    setAnimateSearch(true);
+    setTimeout(() => setAnimateSearch(false), 500);
+  };
+
   return (
     <>
       <nav className="bg-white sticky top-0 shadow-sm h-16 flex px-10 justify-between items-center z-50">
@@ -138,26 +157,23 @@ const NavbarClient = ({ toggleSidebar }) => {
             />
             <SearchIcon className="absolute left-3 top-2.5 text-gray-500" />
             {searchResults.length > 0 && (
-              <div className="absolute mt-1 bg-white border border-gray-300 rounded-lg shadow-lg w-full z-10">
-                {searchResults.map((project, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer"
-                  >
-                    <img
-                      src={project.icon}
-                      alt={project.name}
-                      className="w-5 h-5 mr-2"
-                    />
-                    <span>{project.name}</span>
-                  </div>
+              <div className="absolute mt-1 bg-white border border-gray-300 rounded-lg shadow-lg w-full z-10 max-h-80 overflow-hidden overflow-x-auto ">
+                {searchResults.map((project) => (
+                  <Link href={`/project-leader/dashboard/${project.projectId}`}>
+                    <div
+                      key={project.projectId}
+                      className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer"
+                    >
+                      <span>{project.projectName}</span>
+                    </div>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
         </div>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex space-x-4 items-center">
           <div className="relative" ref={notificationRef}>
             <Popover placement="bottom" offset={20} showArrow>
               <PopoverTrigger>

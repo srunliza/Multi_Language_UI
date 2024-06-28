@@ -19,6 +19,7 @@ const LandingPageComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   console.log("session: ", session);
+  console.log(status)
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/employee/dashboard");

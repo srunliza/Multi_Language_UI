@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
@@ -14,17 +14,33 @@ import {
 import { useRouter } from "next/navigation";
 import CreateProject from "@/components/CreateProject";
 import PopUpLogoutComponent from "@/components/PopUpLogoutComponent";
+import { getCurrentUserProfileService } from "@/service/user.service";
 
 const PopUpProfileComponent = () => {
   const router = useRouter();
   const [animateProfile, setAnimateProfile] = useState(false);
   const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false);
   const [isLogoutPopupVisible, setIsLogoutPopupVisible] = useState(false);
+  const [user, setUser] = useState({});
 
   const handleProfileClick = () => {
     setAnimateProfile(true);
     setTimeout(() => setAnimateProfile(false), 300);
   };
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await getCurrentUserProfileService();
+
+        setUser(response);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
 
   const handleMenuItemClick = (key) => {
     switch (key) {
@@ -77,7 +93,7 @@ const PopUpProfileComponent = () => {
             className={`inline-block h-[38px] w-[38px] rounded-full cursor-pointer ${
               animateProfile ? "animate-scale-up" : ""
             }`}
-            src="/Images/Neath.png"
+            src={user?.payload?.image || "/Images/user-profile.png"}
             alt="Profile Image"
             onClick={handleProfileClick}
           />
@@ -106,15 +122,18 @@ const PopUpProfileComponent = () => {
               <div className="flex items-center">
                 <img
                   className="h-12 w-12 rounded-full"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlz-0gZGjxoAp2wa6pbtGIR_9nsVwQZMHbOQ&s"
+                  src={user?.payload?.image || "/Images/Neath.png"}
                   alt="User img"
                 />
                 <div className="ml-2">
-                  <p className="text-black text-lg">Srun Lisa</p>
-                  <p className="text-black text-base">lisa@gmail.com</p>
+                  <p className="text-black text-lg">
+                    {user?.payload?.fullName}
+                  </p>
+                  <p className="text-black text-base">{user?.payload?.email}</p>
                 </div>
               </div>
             </DropdownItem>
+
             <DropdownItem key="view_profile">
               <div className="flex items-center">
                 <AccountBoxOutlinedIcon className="mx-2" />
