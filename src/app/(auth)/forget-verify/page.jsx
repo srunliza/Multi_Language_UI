@@ -8,12 +8,16 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { otpVerifyService } from "@/service/auth.service";
+import {
+  forgotPasswordService,
+  otpVerifyService,
+} from "@/service/auth.service";
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 2 minutes in seconds
   const [otpError, setOtpError] = useState("");
+  const [otpSuccess, setOtpSuccess] = useState(""); // State for success message
   const [isOtpExpired, setIsOtpExpired] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,14 +54,6 @@ const VerifyOtpPage = () => {
     }
   };
 
-  const handleResendOtp = () => {
-    setTimeRemaining(2 * 60);
-    setIsOtpExpired(false);
-    setOtp(new Array(6).fill(""));
-    setOtpError("");
-    // TODO: Add logic to re-send OTP to user's email
-  };
-
   const handleVerifyOtpClick = async () => {
     const enteredOtp = otp.join("");
     console.log(enteredOtp);
@@ -71,6 +67,26 @@ const VerifyOtpPage = () => {
     } else {
       console.log("Login failed!");
       setOtpError(res.message || "OTP verification failed. Please try again.");
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setTimeRemaining(2 * 60);
+    setIsOtpExpired(false);
+    setOtp(new Array(6).fill(""));
+    setOtpError("");
+    setOtpSuccess(""); // Clear any previous success message
+
+    try {
+      const res = await forgotPasswordService(email);
+      if (res.code === 200) {
+        setOtpSuccess("OTP has been resent successfully.");
+      } else {
+        setOtpError("Failed to resend OTP. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setOtpError("An unexpected error occurred while resending OTP.");
     }
   };
 
@@ -133,6 +149,11 @@ const VerifyOtpPage = () => {
               Re-send
             </a>
           </div>
+          {otpSuccess && (
+            <div className="text-center text-green-500 text-sm mb-4">
+              {otpSuccess}
+            </div>
+          )}
           <div className="text-center">
             <button
               onClick={handleVerifyOtpClick}

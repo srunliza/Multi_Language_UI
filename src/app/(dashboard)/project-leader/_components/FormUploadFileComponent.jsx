@@ -5,9 +5,12 @@ import { handlerFileUploadAction } from "@/action/attachment-action";
 import CloseIcon from "@mui/icons-material/Close";
 import Toast from "@/components/ToastComponent";
 import { useRouter } from "next/navigation";
+import { DatePicker } from "@nextui-org/react";
 
 const FormUploadFileComponent = ({ languageData, proId }) => {
   const router = useRouter();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const [file, setFile] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -23,10 +26,17 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
 
+  // Validation error states
+  const [startDateError, setStartDateError] = useState("");
+  const [endDateError, setEndDateError] = useState("");
+  const [fileError, setFileError] = useState("");
+  const [dateComparisonError, setDateComparisonError] = useState("");
+
   const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
+      setFileError(""); // Clear file error on file select
     }
     console.log("file upload: ", event);
   };
@@ -65,9 +75,19 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
     setTableData([]);
     setKeyword("");
     setHint("");
+    setFile(null);
+    setSelectedLanguage("");
+    setSelectedLanguages([]);
+    setSearchTerm("");
+    setStartDate(null);
+    setEndDate(null);
+    setStartDateError("");
+    setEndDateError("");
+    setFileError("");
+    setDateComparisonError("");
   };
 
-  // For get language from child component
+  // For getting language from child component
   const handleLanguageChange = (selectedOptions) => {
     setSelectedLanguages(selectedOptions);
   };
@@ -84,13 +104,58 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
     setShowToast(true);
   };
 
+  const validateForm = () => {
+    let valid = true;
+    const todayDate = new Date();
+
+    if (!startDate) {
+      setStartDateError("Start date is required");
+      valid = false;
+    } else {
+      setStartDateError("");
+    }
+
+    if (!endDate) {
+      setEndDateError("End date is required");
+      valid = false;
+    } else if (new Date(endDate) < todayDate) {
+      setEndDateError("End date cannot be in the past");
+      valid = false;
+    } else {
+      setEndDateError("");
+    }
+
+    if (startDate && endDate && new Date(endDate) <= new Date(startDate)) {
+      setDateComparisonError("End date must be later than start date");
+      valid = false;
+    } else {
+      setDateComparisonError("");
+    }
+
+    if (!file) {
+      setFileError("File upload is required");
+      valid = false;
+    } else {
+      setFileError("");
+    }
+
+    return valid;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
+    const formData = new FormData(event.target);
+    formData.append("startDate", startDate);
+    formData.append("expireDate", endDate);
+
     try {
-      const formData = new FormData(event.target);
       const response = await handlerFileUploadAction(formData);
-      if (response.status === "ACCEPTED") {
-        showSuccessToast(response.message);
+      if (response.status === "ACCEPTED" || response?.status === 202) {
+        showSuccessToast("Created attachment success");
         router.push(`/project-leader/dashboard/view-attachment/${proId}`);
       } else {
         showErrorToast("Failed to create attachment");
@@ -160,6 +225,9 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
             </div>
           )}
         </div>
+        {fileError && (
+          <div className="text-red-500 text-xs py-2">{fileError}</div>
+        )}
         <div className="w-full border-b border-gray-300 mb-4"></div>
         {/* End Section File Upload */}
 
@@ -253,32 +321,49 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
         {/* ./ End Section Select Target Language */}
 
         {/* Section Select Start Date and End Date */}
-        <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-gray-500 text-xs py-2">
-          <div className="flex flex-col w-full lg:w-auto">
-            <label htmlFor="start" className="text-xs text-gray-600 mb-2">
+        <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
+          <div className="flex relative flex-col w-full lg:w-auto">
+            <label htmlFor="start" className="text-xs mb-1">
               Start Date
             </label>
-            <input
-              type="date"
-              id="start"
-              name="startDate"
-              className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-xs border-gray-300 rounded-lg"
-              required
-            />
+            <div className="border border-gray-300 text-gray-900 h-[37.6px] overflow-hidden rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
+              <DatePicker
+                id="start-date"
+                className="max-w-[284px]"
+                isRequired
+                value={startDate}
+                onChange={setStartDate}
+              />
+            </div>
+            {startDateError && (
+              <div className="text-red-500  absolute left-2 -bottom-9 text-xs py-2">
+                {startDateError}
+              </div>
+            )}
           </div>
-          <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
-            <label htmlFor="end" className="text-xs text-gray-600 mb-2">
+          <div className="flex relative flex-col w-full lg:w-auto mt-2 lg:mt-0">
+            <label htmlFor="end" className="text-xs mb-1">
               End Date
             </label>
-            <input
-              type="date"
-              id="end"
-              name="expireDate"
-              className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border border-gray-300 text-xs rounded-lg"
-              required
-            />
+            <div className="border  border-gray-300 text-gray-900 h-[37.6px] overflow-hidden rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
+              <DatePicker
+                id="end-date"
+                className="max-w-[284px]"
+                isRequired
+                value={endDate}
+                onChange={setEndDate}
+              />
+            </div>
+            {endDateError && (
+              <div className="absolute  left-2 -bottom-9 text-red-500 text-xs py-2">
+                {endDateError}
+              </div>
+            )}
           </div>
         </div>
+        {dateComparisonError && (
+          <div className="text-red-500   text-xs">{dateComparisonError}</div>
+        )}
         {/* ./ End Section Select Start Date and End Date */}
 
         {/* Section Add Keys and Hints */}
@@ -328,12 +413,12 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
         </div>
         {/* ./ End Section Add Keys and Hints */}
 
-        {/* Section Show  Table Keys and Hints */}
+        {/* Section Show Table Keys and Hints */}
         <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
           <div className="rounded-md w-full lg:w-[570px] overflow-hidden overflow-y-auto max-h-56 h-52 no-scrollbar">
             <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
               <thead>
-                <tr className="text-center text-sm  bg-[#daeaff]  sticky top-0">
+                <tr className="text-center text-sm bg-[#daeaff] sticky top-0">
                   <th className="w-1/2 p-2 text-left text-gray-900 font-medium">
                     Keyword
                   </th>
@@ -346,13 +431,13 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
                 {tableData.map((row) => (
                   <tr
                     key={row.key}
-                    className=" border-b  border-gray-200 text-gray-700 truncate"
+                    className="border-b border-gray-200 text-gray-700 truncate"
                   >
-                    <td className=" pl-2 py-1.5">{row.key}</td>
+                    <td className="pl-2 py-1.5">{row.key}</td>
                     <td className="flex py-1.5 h-full justify-between items-center">
                       {row.hint}
                       <CloseIcon
-                        className="float-end w-4 text-gray-700    cursor-pointer"
+                        className="float-end w-4 text-gray-700 cursor-pointer"
                         onClick={() => handleDelete(row.key)}
                       />
                     </td>
@@ -362,7 +447,7 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
             </table>
           </div>
         </div>
-        {/* ./ End Section Show  Table Keys and Hints */}
+        {/* ./ End Section Show Table Keys and Hints */}
 
         {/* Section Handle Button Reset and Submit */}
         <div className="flex pt-6">

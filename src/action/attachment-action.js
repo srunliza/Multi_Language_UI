@@ -5,8 +5,10 @@ import {
   insertFileAttachmentService,
   submitService,
   updateAttachmentService,
+  updateKeyService,
   uploadAttachmentManuallyService,
 } from "@/service/attachment.service";
+import { identity } from "@fullcalendar/core/internal";
 import { revalidateTag } from "next/cache";
 
 export const deleteAttachmentAction = async (id) => {
@@ -69,11 +71,22 @@ export async function handlerFileUploadAction(fileUploadData) {
   formData.append("language", fileUploadData.getAll("language"));
   formData.append("project", fileUploadData.get("proId"));
   formData.append("file", fileUploadData.get("file"));
-  formData.append("key", JSON.stringify(keys));
-  formData.append("hint", JSON.stringify(hints));
+  formData.append("key", keys);
+  formData.append("hint", hints);
   formData.append("startDate", `${fileUploadData.get("startDate")} 00:00:00`);
   formData.append("expireDate", `${fileUploadData.get("expireDate")} 00:00:00`);
 
   const response = await insertFileAttachmentService(formData);
+  console.log("response from service: ", response)
   return response;
 }
+
+export const updateKeyAction = async (id, updateJsonKey) => {
+  console.log("In action: ", updateJsonKey);
+  const values = {
+    updateJsonKey: updateJsonKey,
+  };
+  const res = await updateKeyService(id, values);
+  revalidateTag("data");
+  return res;
+};

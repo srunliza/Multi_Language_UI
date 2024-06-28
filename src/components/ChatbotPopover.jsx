@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import user from "../../public/assets/icons/Vandy.png";
 import Avatar from "@mui/material/Avatar";
 import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
+import { getCurrentUserProfileService } from "@/service/user.service";
 
 const ChatbotPopover = () => {
   const [messages, setMessages] = useState([]);
@@ -21,6 +22,7 @@ const ChatbotPopover = () => {
   const [error, setError] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const handleNewMessage = async (message) => {
     setLoading(true);
@@ -61,6 +63,15 @@ const ChatbotPopover = () => {
   ];
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCurrentUserProfileService();
+        setUserData(data.payload); // Assuming the response has a payload property with user data
+      } catch (err) {
+        setError("Failed to fetch user data. Please try again.");
+      }
+    };
+
     const initChat = async () => {
       try {
         const newChat = await genAI
@@ -79,6 +90,7 @@ const ChatbotPopover = () => {
       }
     };
 
+    fetchData();
     initChat();
   }, [messages]);
 
@@ -169,7 +181,7 @@ const ChatbotPopover = () => {
   const id = open ? "chatbot-popover" : undefined;
 
   return (
-    <div className="relative pr-10">
+    <div className="relative pr-10 pt-3">
       <div className="flex justify-end items-end">
         <IconButton aria-describedby={id} onClick={handleClick}>
           <img
@@ -260,9 +272,13 @@ const ChatbotPopover = () => {
                 </div>
 
                 {/* User role */}
-                {msg.role === "user" && (
-                  <Image
-                    src={user}
+                {msg.role === "user" && userData && (
+                  <img
+                    src={
+                      userData.image
+                        ? userData.image
+                        : "/Images/user-profile.png"
+                    }
                     width={45}
                     height={45}
                     alt="user image"

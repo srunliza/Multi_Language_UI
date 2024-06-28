@@ -1,25 +1,51 @@
-// components/KeywordSelect.js
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const keywords = [
-  "Dashboard",
-  "Home",
-  "Authenticate",
-  "Page",
-  // Add more keywords as needed
-];
+const KeywordSelect = ({ onSelect, staticKeyData }) => {
+  console.log("static keys data: ", staticKeyData);
 
-const KeywordSelect = ({ onSelect }) => {
+  // State to store mapped data
+  const [mappedData, setMappedData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const filteredKeywords = keywords.filter((keyword) =>
-    keyword.toLowerCase().includes(searchTerm.toLowerCase())
+  // Function to map the static key data based on sections
+  const mapDataToSections = (data) => {
+    // Reduce the data array to a single object
+    return data.reduce((acc, item) => {
+      // Check if the section exists in the accumulator object
+      if (!acc[item.section]) {
+        // If not, create a new array for this section
+
+        acc[item.section] = [];
+      }
+      // Push the key of the current item into the section array
+
+      acc[item.section].push(item.key);
+      // Return the updated accumulator object for the next iteration
+
+      return acc;
+    }, {});
+  };
+
+  // Use useEffect to map data when staticKeyData prop changes
+  useEffect(() => {
+    if (staticKeyData && staticKeyData.length > 0) {
+      const mapped = mapDataToSections(staticKeyData);
+      setMappedData(mapped);
+      console.log("Mapped Data:", mapped);
+    }
+  }, [staticKeyData]);
+
+  console.log("data section prop: ", mappedData);
+
+  // Filter sections based on search term
+  const filteredSections = Object.keys(mappedData).filter((section) =>
+    section.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSelect = (keyword) => {
-    onSelect(keyword);
+  const handleSelectSection = (section) => {
+    onSelect(mappedData[section]);
     setDropdownOpen(false);
   };
 
@@ -33,7 +59,7 @@ const KeywordSelect = ({ onSelect }) => {
         className="relative flex w-full h-[37.6px] items-center justify-between border border-gray-300 rounded-lg px-3 py-2 cursor-pointer"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
-        <span className="text-xs">Choose type of keyword</span>
+        <span className="text-xs">Choose section</span>
         <svg
           className="w-4 h-4 text-gray-500"
           fill="none"
@@ -51,11 +77,11 @@ const KeywordSelect = ({ onSelect }) => {
       </div>
       {dropdownOpen && (
         <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
-          <div className="flex justify-between items-center px-1 border-b border-gray-200">
+          <div className="flex justify-between items-center px-3 border-b border-gray-200">
             <input
               type="text"
               className="text-xs focus:outline-none focus:border-none h-8 focus:ring-0 border-none w-full px-2"
-              placeholder="Type here to search..."
+              placeholder="Search section..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -78,13 +104,13 @@ const KeywordSelect = ({ onSelect }) => {
             </button>
           </div>
           <ul className="max-h-60 overflow-auto no-scrollbar">
-            {filteredKeywords.map((keyword) => (
+            {filteredSections.map((section) => (
               <li
-                key={keyword}
+                key={section}
                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-xs"
-                onClick={() => handleSelect(keyword)}
+                onClick={() => handleSelectSection(section)}
               >
-                {keyword}
+                {section}
               </li>
             ))}
           </ul>

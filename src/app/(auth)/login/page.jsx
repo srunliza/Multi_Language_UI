@@ -5,7 +5,6 @@ import Link from "next/link";
 
 
 const LoginPage = () => {
-  
   return (
     <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex justify-center">
       <div className="flex justify-center items-center">

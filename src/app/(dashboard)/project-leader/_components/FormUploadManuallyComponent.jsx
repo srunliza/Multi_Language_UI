@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import InputKeywordComponent from "./InputKeywordComponent";
 import { useForm } from "react-hook-form";
@@ -7,9 +6,34 @@ import SelectLanguageMultiComponent from "./SelectLanguageMultiComponent";
 import { uploadAttachmentManuallyAction } from "@/action/attachment-action";
 import { useRouter } from "next/navigation";
 import Toast from "@/components/ToastComponent";
+import { DatePicker } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
 
-const FormUploadManuallyComponent = ({ languageData, proId }) => {
+const FormUploadManuallyComponent = ({
+  languageData,
+  proId,
+  staticKeyData,
+}) => {
   const router = useRouter();
+
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+
+  const [keyword, setKeyword] = useState("");
+  const [hint, setHint] = useState("");
+  const [tableData, setTableData] = useState([]);
+
+  const filteredLanguages = languageData.filter((language) =>
+    language.language.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const {
     register,
@@ -18,19 +42,21 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
     setValue,
   } = useForm();
 
-  // Handle language
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  useEffect(() => {
+    setValue("start", startDate);
+  }, [startDate, setValue]);
 
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastType, setToastType] = useState("");
-  const [showToast, setShowToast] = useState(false);
+  useEffect(() => {
+    setValue("end", endDate);
+  }, [endDate, setValue]);
 
-  const filteredLanguages = languageData.filter((language) =>
-    language.language.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    setValue("baseLanguage", selectedLanguage);
+  }, [selectedLanguage, setValue]);
+
+  useEffect(() => {
+    setValue("targetLanguageId", selectedLanguages);
+  }, [selectedLanguages, setValue]);
 
   const handleSelect = (event) => {
     const language = event.target.value;
@@ -44,23 +70,9 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
     setSearchTerm("");
   };
 
-  // For get language from child component
   const handleLanguageChange = (selectedOptions) => {
     setSelectedLanguages(selectedOptions);
   };
-
-  useEffect(() => {
-    setValue("baseLanguage", selectedLanguage);
-  }, [selectedLanguage, setValue]);
-
-  useEffect(() => {
-    setValue("targetLanguageId", selectedLanguages);
-  }, [selectedLanguages, setValue]);
-
-  // Handle hints and keywords
-  const [tableData, setTableData] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [hint, setHint] = useState("");
 
   const handleDelete = (keyToDelete) => {
     const updatedData = tableData.filter((row) => row.key !== keyToDelete);
@@ -73,30 +85,44 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
     setKeyword("");
   };
 
-  // Handle reset form
   const handleReset = () => {
     setTableData([]);
     setHint("");
     setKeyword("");
+    setStartDate(null);
+    setEndDate(null);
   };
 
-  // Handle submit form
   const handleSubmitUploadFile = async (data) => {
     const languages = data.targetLanguageId;
     console.log("Language IDs: ", languages);
     console.log("Submission Data: ", data);
     console.log("Key and Hint Data: ", tableData);
 
+    if (new Date(data.start) >= new Date(data.end)) {
+      setToastMessage("Start date must be before end date");
+      setToastType("error");
+      setShowToast(true);
+      return;
+    }
+
+    if (tableData.length === 0) {
+      setToastMessage("Table data must have at least one keyword and hint");
+      setToastType("error");
+      setShowToast(true);
+      return;
+    }
+
     const res = await uploadAttachmentManuallyAction({
       baseLanguage: data.baseLanguage,
       targetLanguageId: data.targetLanguageId,
       projectId: proId,
       keyAndHint: tableData,
-      startDate: `${data?.start}T09:28:36.228Z`,
-      expireDate: `${data?.end}T09:28:36.228Z`,
+      startDate: `${data.start}T00:00:00Z`,
+      expireDate: `${data.end}T00:00:00Z`,
     });
 
-    if (res?.status === "ACCEPTED") {
+    if (res?.status === "ACCEPTED" || res?.status === 202) {
       setToastMessage("Created attachment success");
       setToastType("success");
       setShowToast(true);
@@ -106,6 +132,13 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
       setToastType("error");
       setShowToast(true);
     }
+  };
+
+  const handleSelectKeywords = (keywords) => {
+    setTableData((prevData) => [
+      ...prevData,
+      ...keywords.map((key) => ({ key, hint: "" })),
+    ]);
   };
 
   return (
@@ -127,6 +160,9 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
           {...register("targetLanguageId")}
           value={selectedLanguages}
         />
+        <input type="hidden" {...register("start")} value={startDate} />
+        <input type="hidden" {...register("end")} value={endDate} />
+
         {/* Section Select Base Language */}
         <div className="w-full lg:w-[321px] py-4 text-xs">
           <label htmlFor="select" className="text-xs">
@@ -221,32 +257,42 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
             <label htmlFor="start" className="text-xs mb-1">
               Start Date
             </label>
-            <input
-              {...register("start")}
-              type="date"
-              id="start"
-              required
-              className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-gray-600 text-xs border-gray-300 rounded-lg"
-            />
+            <div className="border border-gray-300 text-gray-900 h-[37.6px] overflow-hidden rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
+              <DatePicker
+                id="start-date"
+                className="max-w-[284px]"
+                isRequired
+                value={startDate}
+                onChange={setStartDate}
+              />
+            </div>
+            {errors.start && (
+              <span className="text-red-600 text-xs">
+                {errors.start.message}
+              </span>
+            )}
           </div>
           <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
             <label htmlFor="end" className="text-xs mb-1">
               End Date
             </label>
-            <input
-              {...register("end")}
-              type="date"
-              id="end"
-              name="end"
-              required
-              className="w-full lg:w-[220px] h-[37.6px] px-3 py-2 border text-gray-600 border-gray-300 text-xs rounded-lg"
-            />
+            <div className="border border-gray-300 text-gray-900 h-[37.6px] overflow-hidden rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
+              <DatePicker
+                id="end-date"
+                className="max-w-[284px]"
+                isRequired
+                value={endDate}
+                onChange={setEndDate}
+              />
+            </div>
+            {errors.end && (
+              <span className="text-red-600 text-xs">{errors.end.message}</span>
+            )}
           </div>
         </div>
         {/* ./ End Section Select Start Date and End Date */}
 
         {/* Section Add Keys and Hints */}
-
         <div className="flex flex-col lg:flex-row items-center lg:space-x-4 text-xs py-3">
           <div className="flex flex-col w-full lg:w-auto mt-2 lg:mt-0">
             <label htmlFor="key" className="text-xs mb-1">
@@ -279,33 +325,35 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
           </div>
           <div className="flex lg:mt-5 mt-4 h-[35px] w-full lg:w-auto">
             <input
-              className={`px-3 py-2 text-center  border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${
+              className={`px-3 py-2 text-center border border-blue-600 rounded-lg focus:outline-none focus:ring cursor-pointer ${
                 keyword.trim() === ""
                   ? "bg-gray-100 text-gray-500 border-gray-300"
                   : "bg-blue-800 text-white hover:bg-blue-700"
               }`}
-              type="submit"
+              type="button"
               value={"Add key"}
               disabled={keyword.trim() === ""}
               onClick={handleAddKey}
             />
           </div>
         </div>
-
         {/* ./ End Section Add Keys and Hints */}
 
         {/* Section Static Keys and Hints */}
         <section>
-          <InputKeywordComponent />
+          <InputKeywordComponent
+            staticKeyData={staticKeyData}
+            onInsert={handleSelectKeywords}
+          />
         </section>
         {/* ./ End Section Static Keys and Hints */}
 
-        {/* Section Show  Table Keys and Hints */}
+        {/* Section Show Table Keys and Hints */}
         <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">
           <div className="rounded-md w-full lg:w-[570px] overflow-hidden overflow-y-auto max-h-56 h-52 no-scrollbar">
             <table className="w-full table-fixed text-md border-gray-200 rounded-r-lg">
               <thead>
-                <tr className="text-center text-sm   bg-[#daeaff]  sticky top-0">
+                <tr className="text-center text-sm bg-[#daeaff] sticky top-0">
                   <th className="w-1/2 p-2 text-left text-gray-900 font-medium">
                     Keyword
                   </th>
@@ -318,13 +366,13 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
                 {tableData.map((row) => (
                   <tr
                     key={row.key}
-                    className=" border-b  border-gray-200 text-gray-700 truncate"
+                    className="border-b border-gray-200 text-gray-700 truncate"
                   >
-                    <td className=" pl-2 py-1.5">{row.key}</td>
+                    <td className="pl-2 py-1.5">{row.key}</td>
                     <td className="flex py-1.5 h-full justify-between items-center">
                       {row.hint}
                       <CloseIcon
-                        className="float-end w-4 text-gray-700    cursor-pointer"
+                        className="float-end w-4 text-gray-700 cursor-pointer"
                         onClick={() => handleDelete(row.key)}
                       />
                     </td>
@@ -334,22 +382,20 @@ const FormUploadManuallyComponent = ({ languageData, proId }) => {
             </table>
           </div>
         </div>
-
-        {/* ./ End Section Show  Table Keys and Hints */}
+        {/* ./ End Section Show Table Keys and Hints */}
 
         {/* Section Handle Button Reset and Submit */}
         <div className="flex pt-6">
           <input
-            className="px-4 py-2 border border-blue-800 text-gray-800 rounded-lg  hover:border-blue-400 transition duration-150 ease-in-out mr-2 cursor-pointer"
+            className="px-4 py-2 border border-blue-800 text-gray-800 rounded-lg hover:border-blue-400 transition duration-150 ease-in-out mr-2 cursor-pointer"
             type="reset"
             value={"Reset"}
             onClick={handleReset}
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-800 text-white rounded-lg  hover:bg-blue-700 transition duration-150 ease-in-out cursor-pointer"
+            className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition duration-150 ease-in-out cursor-pointer"
           >
-            {" "}
             Submit
           </button>
         </div>

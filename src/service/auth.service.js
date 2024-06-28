@@ -10,6 +10,7 @@ export const loginService = async (userInfo) => {
     },
   });
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
@@ -22,6 +23,7 @@ export const loginSclService = async (userInfo) => {
     },
   });
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
@@ -53,6 +55,7 @@ export const otpVerifyService = async (otp) => {
 };
 
 export const forgotPasswordService = async (email) => {
+  console.log("email : ", email);
   const res = await fetch(`${baseUrl}/api/v1/auth/send-otp?email=${email}`, {
     method: "POST",
   });

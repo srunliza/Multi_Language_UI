@@ -26,7 +26,7 @@ const UserProfileComponent = ({ user, onClose }) => {
           />
           <div className="p-4">
             <h3 className="font-semibold text-xl mb-3">
-              {user.lastName} {user.firstName}{" "}
+              {user.lastName || "Fullname not provided"} {user.firstName}{" "}
             </h3>
             <div className="text-gray-700 mt-3 text-sm">
               <div className="flex items-center gap-5 mb-6">
@@ -36,13 +36,13 @@ const UserProfileComponent = ({ user, onClose }) => {
                 </span>
               </div>
               <div className="flex items-center gap-5 mb-6">
-                {user.gender === "female" ? (
+                {user.gender === "Female" ? (
                   <FemaleOutlinedIcon className="text-gray-500" />
                 ) : (
                   <MaleOutlinedIcon className="text-gray-500" />
                 )}
                 <span className="flex-grow border-b border-gray-300">
-                  {user.gender}
+                  {user.gender || "No gender provided"}
                 </span>
               </div>
 
@@ -62,7 +62,7 @@ const UserProfileComponent = ({ user, onClose }) => {
                 {/* <CalendarMonthIcon className="text-gray-500" /> */}
                 <CakeOutlinedIcon className="text-gray-500" />
                 <span className="flex-grow border-b border-gray-300">
-                  {user.birthDate}
+                  {user.birthDate || "No birth date provided"}
                 </span>
               </div>
             </div>

@@ -110,10 +110,10 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
                     <option value="" disabled>
                       Choose role for user
                     </option>
-                    <option value="63dbf948-62f0-4779-baeb-4bf88ca055ce">
+                    <option value="e55c69fc-d901-4497-962a-d3ca5061a000">
                       Developer
                     </option>
-                    <option value="82742e9c-7a2c-48b5-a532-395c3d2a5075">
+                    <option value="969a85eb-35fa-458e-8371-914f8aaee047">
                       Translator
                     </option>
                   </select>

@@ -163,3 +163,21 @@ export const getPreviewDataService = async (id) => {
   const data = await res.json();
   return data;
 };
+
+export const updateKeyService = async (id, values) => {
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/update-jsonb-key/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        ...header,
+      },
+      body: JSON.stringify(values),
+    }
+  );
+  
+  const data = await res.json();
+  console.log(data);
+  return data;
+};

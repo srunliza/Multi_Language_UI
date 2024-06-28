@@ -38,7 +38,7 @@ const HintPopupComponent = ({ previewData }) => {
                     <tr className="my-2" key={index}>
                       <td className="pl-4 border">{hint.key}</td>
                       <td className="pl-4 border">
-                        {hint.hint ?? "No hint available"}
+                        {hint.hint ?? "null"}
                       </td>
                     </tr>
                   ))}

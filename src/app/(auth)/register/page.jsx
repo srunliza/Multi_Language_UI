@@ -76,7 +76,7 @@ const RegisterPage = () => {
       const res = await registerService(newUserDetail);
 
       if (res.code === 201) {
-        router.push("/verify-otp");
+        router.push(`/verify-otp?email=${data.email}`);
       } else {
         setError("Registration failed");
         setLoading(false);

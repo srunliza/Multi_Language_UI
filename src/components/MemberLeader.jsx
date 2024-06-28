@@ -141,7 +141,7 @@ const MemberProjectLeader = ({ project }) => {
           onClick={() => handleUserClick(member)}
         >
           <img
-            src={member.image ? member.image : "../../../Images/user-profile.png"}
+            src={member.image ? member.image : "../../Images/user-profile.png"}
             alt="User"
             width={30}
             height={28}

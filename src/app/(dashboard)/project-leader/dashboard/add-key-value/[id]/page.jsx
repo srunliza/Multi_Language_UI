@@ -5,11 +5,13 @@ import NavbarProjectLeaderComponent from "../../../_components/NavbarProjectLead
 import { getProjectByIdService } from "@/service/project.service";
 import { getAllLanguageService } from "@/service/language.service";
 import FormUploadManuallyComponent from "../../../_components/FormUploadManuallyComponent";
+import { getAllStaticKeyService } from "@/service/staticKey.service";
 
 const ViewAttachmentPage = async ({ params }) => {
   const { id } = params;
   const languageData = await getAllLanguageService();
   const project = await getProjectByIdService(id);
+  const staticKeyData = await getAllStaticKeyService();
   let projects = project.payload || [];
 
   return (
@@ -28,6 +30,7 @@ const ViewAttachmentPage = async ({ params }) => {
             <FormUploadManuallyComponent
               languageData={languageData.payload}
               proId={projects.projectId}
+              staticKeyData={staticKeyData.payload}
             />
             {/* End Section form upload manually */}
           </div>

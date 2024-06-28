@@ -18,7 +18,7 @@ const LoginForm = () => {
 
   const schema = z.object({
     email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
   });
 
   const togglePasswordVisibility = () => {
@@ -43,7 +43,7 @@ const LoginForm = () => {
       }
 
       const response = await doCredentialLogin(formData);
-
+      
       if (!!response.error) {
         console.error(response.error);
         setError(response.error.message);
@@ -73,7 +73,7 @@ const LoginForm = () => {
             id="email"
             name="email"
             className="w-full px-10 py-2.5 bg-gray-50 border rounded-lg text-sm focus:outline-none focus:ring-2 border-[#1A42BC] focus:ring-blue-400 placeholder:text-sm"
-            placeholder="panha@gmail.com"
+            placeholder="example@gmail.com"
           />
           <span className="absolute inset-y-0 left-3 pr-3 flex items-center text-gray-500">
             <EmailOutlined fontSize="small" />

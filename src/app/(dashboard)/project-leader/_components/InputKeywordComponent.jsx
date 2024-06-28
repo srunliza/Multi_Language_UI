@@ -1,58 +1,51 @@
-// pages/index.js
 "use client";
 import { useState } from "react";
 import { Button, Modal, Checkbox } from "flowbite-react";
 import KeywordSelect from "./KeywordSelect";
 
-export default function InputKeywordComponent() {
+export default function InputKeywordComponent({ staticKeyData, onInsert }) {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedKeyword, setSelectedKeyword] = useState("");
+  const [selectedKeywords, setSelectedKeywords] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [selectedKeywords, setSelectedKeywords] = useState(
-    Array(12).fill(false)
-  ); // Adjust the length based on your keywords array
+  const [selectedKeywordStates, setSelectedKeywordStates] = useState([]);
 
-  const keywords = [
-    "Home",
-    "About Us",
-    "Contact Us",
-    "Services",
-    "Blog",
-    "Careers",
-    "Privacy Policy",
-    "Terms of Service",
-    "FAQ",
-    "Support",
-    "Testimonials",
-    "Portfolio",
-  ];
-
-  const handleSelectChange = (keyword) => {
-    setSelectedKeyword(keyword);
+  const handleSelectChange = (keywords) => {
+    setSelectedKeywords(keywords);
+    setSelectedKeywordStates(Array(keywords.length).fill(false));
     setOpenModal(true);
   };
 
   const toggleSelectAll = () => {
     const newSelectAll = !selectAll;
     setSelectAll(newSelectAll);
-    setSelectedKeywords(Array(keywords.length).fill(newSelectAll));
+    setSelectedKeywordStates(Array(selectedKeywords.length).fill(newSelectAll));
   };
 
   const toggleKeywordSelection = (index) => {
-    const newSelectedKeywords = [...selectedKeywords];
-    newSelectedKeywords[index] = !newSelectedKeywords[index];
-    setSelectedKeywords(newSelectedKeywords);
-    setSelectAll(newSelectedKeywords.every(Boolean));
+    const newSelectedKeywordStates = [...selectedKeywordStates];
+    newSelectedKeywordStates[index] = !newSelectedKeywordStates[index];
+    setSelectedKeywordStates(newSelectedKeywordStates);
+    setSelectAll(newSelectedKeywordStates.every(Boolean));
+  };
+
+  const handleInsert = () => {
+    const selected = selectedKeywords.filter(
+      (_, index) => selectedKeywordStates[index]
+    );
+    onInsert(selected);
+    setOpenModal(false);
   };
 
   return (
-    <>
+    <div>
       <div className="w-full lg:w-[321px] rounded-lg pb-2 mb-2 mt-0">
         <label htmlFor="select" className="text-xs">
-          Or choose keyword as a page
+          Or Add keywords as a section
         </label>
-        <KeywordSelect onSelect={handleSelectChange} />
-        
+        <KeywordSelect
+          staticKeyData={staticKeyData}
+          onSelect={handleSelectChange}
+        />
       </div>
       <Modal
         show={openModal}
@@ -62,7 +55,7 @@ export default function InputKeywordComponent() {
         popup
         className="flex items-center justify-center bg-gray-500 bg-opacity-70"
       >
-        <div className="flex flex-col bg-white rounded-lg shadow-lg w-full max-w-md mx-auto ">
+        <div className="flex flex-col bg-white rounded-lg shadow-lg w-full max-w-md mx-auto">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
             <span className="text-lg font-medium">List of Keywords</span>
             <div className="flex items-center">
@@ -81,14 +74,14 @@ export default function InputKeywordComponent() {
             </div>
           </div>
           <div className="max-h-96 overflow-y-auto no-scrollbar p-4">
-            {keywords.map((keyword, index) => (
+            {selectedKeywords.map((keyword, index) => (
               <div
                 key={index}
                 className="flex items-center p-2 border-b border-gray-200"
               >
                 <Checkbox
                   id={`keyword-${index}`}
-                  checked={selectedKeywords[index]}
+                  checked={selectedKeywordStates[index]}
                   onChange={() => toggleKeywordSelection(index)}
                   className="mr-2"
                 />
@@ -109,12 +102,12 @@ export default function InputKeywordComponent() {
             >
               Close
             </Button>
-            <Button onClick={() => setOpenModal(false)} className="bg-blue-500">
+            <Button onClick={handleInsert} className="bg-blue-500">
               Insert
             </Button>
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }

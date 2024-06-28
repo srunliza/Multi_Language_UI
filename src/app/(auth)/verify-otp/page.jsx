@@ -20,6 +20,7 @@ const VerifyOtpPage = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 2 minutes in seconds
   const [otpError, setOtpError] = useState("");
+  const [otpSuccess, setOtpSuccess] = useState(""); // State for success message
   const [isOtpExpired, setIsOtpExpired] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -62,11 +63,13 @@ const VerifyOtpPage = () => {
     setIsOtpExpired(false);
     setOtp(new Array(6).fill(""));
     setOtpError("");
+    setOtpSuccess(""); // Clear any previous success message
 
     try {
       const res = await forgotPasswordService(email);
-      console.log("res", res);
-      if (res.code !== 200) {
+      if (res.code === 200) {
+        setOtpSuccess("OTP has been resent successfully.");
+      } else {
         setOtpError("Failed to resend OTP. Please try again.");
       }
     } catch (err) {
@@ -158,6 +161,11 @@ const VerifyOtpPage = () => {
               Re-send
             </a>
           </div>
+          {otpSuccess && (
+            <div className="text-center text-green-500 text-sm mb-4">
+              {otpSuccess}
+            </div>
+          )}
           <div className="text-center">
             <button
               onClick={handleVerifyOtpClick}
