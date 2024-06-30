@@ -2,7 +2,7 @@
 import optImage from "../../../../public/assets/icons/verify-otp.svg";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -16,7 +16,7 @@ import { z } from "zod";
 
 const otpSchema = z.string().length(6, "Please enter a valid 6-digit OTP.");
 
-const VerifyOtpPage = () => {
+const VerifyOtpPageContent = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timeRemaining, setTimeRemaining] = useState(2 * 60); // 2 minutes in seconds
   const [otpError, setOtpError] = useState("");
@@ -186,5 +186,11 @@ const VerifyOtpPage = () => {
     </main>
   );
 };
+
+const VerifyOtpPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <VerifyOtpPageContent />
+  </Suspense>
+);
 
 export default VerifyOtpPage;

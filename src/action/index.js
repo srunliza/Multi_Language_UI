@@ -1,7 +1,7 @@
 "use server";
 import { auth, signIn, signOut } from "@/auth";
 
-const session = await auth();
+// const session = await auth();
 
 export async function doSocialLogin(formData) {
   const action = formData.get("action");

@@ -4,7 +4,7 @@ import changePasswordImage from "../../../../public/assets/icons/reset-password.
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { resetPasswordService } from "@/service/auth.service";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { z } from "zod";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -22,7 +22,7 @@ const passwordSchema = z
     path: ["confirmPassword"],
   });
 
-const ResetPasswordPage = () => {
+const ResetPasswordPageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
@@ -181,5 +181,11 @@ const ResetPasswordPage = () => {
     </main>
   );
 };
+
+const ResetPasswordPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ResetPasswordPageContent />
+  </Suspense>
+);
 
 export default ResetPasswordPage;

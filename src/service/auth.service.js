@@ -1,30 +1,39 @@
 "use server";
 import { baseUrl } from "@/utils/constants";
 
+
 export const loginService = async (userInfo) => {
-  const res = await fetch(`${baseUrl}/api/v1/auth/login`, {
-    method: "POST",
-    body: JSON.stringify(userInfo),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  console.log(data);
-  return data;
+  try {
+    const res = await fetch(`${baseUrl}/api/v1/auth/login`, {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.text(); // Get response as text
+    return JSON.parse(data); // Attempt to parse JSON
+  } catch (error) {
+    console.error("Error parsing JSON response:", error);
+    return null;
+  }
 };
 
 export const loginSclService = async (userInfo) => {
-  const res = await fetch(`${baseUrl}/api/v1/auth/login-with-third-party`, {
-    method: "POST",
-    body: JSON.stringify(userInfo),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  console.log(data);
-  return data;
+  try {
+    const res = await fetch(`${baseUrl}/api/v1/auth/login-with-third-party`, {
+      method: "POST",
+      body: JSON.stringify(userInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.text(); // Get response as text
+    return JSON.parse(data); // Attempt to parse JSON
+  } catch (error) {
+    console.error("Error parsing JSON response:", error);
+    return null;
+  }
 };
 
 export const registerService = async (userDetail) => {
