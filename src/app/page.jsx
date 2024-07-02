@@ -556,12 +556,6 @@ const LandingPageComponent = () => {
                   Langnet_help@gmail.com
                 </a>
                 <a
-                  href="mailto:panhach3495@gmail.com"
-                  className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
-                >
-                  panhach3495@gmail.com
-                </a>
-                <a
                   href="mailto:sokheng.tey03@gmail.com"
                   className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
                 >
