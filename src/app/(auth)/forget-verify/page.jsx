@@ -9,9 +9,12 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import {
-  forgotPasswordService,
   otpVerifyService,
+  forgotPasswordService,
 } from "@/service/auth.service";
+import { z } from "zod";
+
+const otpSchema = z.string().length(6, "Please enter a valid 6-digit OTP.");
 
 const VerifyOtpPageContent = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -19,6 +22,7 @@ const VerifyOtpPageContent = () => {
   const [otpError, setOtpError] = useState("");
   const [otpSuccess, setOtpSuccess] = useState(""); // State for success message
   const [isOtpExpired, setIsOtpExpired] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
@@ -43,31 +47,22 @@ const VerifyOtpPageContent = () => {
   };
 
   const handleOtpChange = (element, index) => {
-    if (/[^0-9]/.test(element.value)) {
-      return;
-    }
     const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-    if (element.nextSibling && element.value) {
-      element.nextSibling.focus();
-    }
-  };
-
-  const handleVerifyOtpClick = async () => {
-    const enteredOtp = otp.join("");
-    console.log(enteredOtp);
-    if (enteredOtp.length < 6) {
-      setOtpError("Please enter a valid 6-digit OTP.");
-      return;
-    }
-    const res = await otpVerifyService(enteredOtp);
-    if (res && res.code === 200 && res.status === "OK") {
-      router.push(`/reset-password?email=${email}`);
+    if (element.value === "") {
+      newOtp[index] = "";
+      if (element.previousSibling) {
+        element.previousSibling.focus();
+      }
     } else {
-      console.log("Login failed!");
-      setOtpError(res.message || "OTP verification failed. Please try again.");
+      if (/[^0-9]/.test(element.value)) {
+        return;
+      }
+      newOtp[index] = element.value;
+      if (element.nextSibling) {
+        element.nextSibling.focus();
+      }
     }
+    setOtp(newOtp);
   };
 
   const handleResendOtp = async () => {
@@ -90,10 +85,36 @@ const VerifyOtpPageContent = () => {
     }
   };
 
+  const handleVerifyOtpClick = async () => {
+    const enteredOtp = otp.join("");
+    const validation = otpSchema.safeParse(enteredOtp);
+    if (!validation.success) {
+      setOtpError(validation.error.errors[0].message);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await otpVerifyService(enteredOtp);
+      if (res.code === 200) {
+        router.push(`/reset-password?email=${email}`);
+      } else if (res.status === 403 && res.detail === "OTP has expired.") {
+        setOtpError("The OTP has expired. Please request a new one.");
+      } else {
+        setOtpError("Failed to verify OTP. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setOtpError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen">
+    <main className="bg-[url('/assets/images/background.png')] bg-cover bg-center w-full min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center min-h-screen space-y-8">
-        <div className="bg-white pt-10 pb-8 px-8 mt-8 rounded-3xl shadow-xl max-w-lg w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%]">
+        <div className="bg-white pt-10 pb-8 px-8 mt-8 rounded-3xl shadow-xl">
           <h2 className="text-3xl font-bold text-[#1A42BC] mb-4 text-center">
             Verification
           </h2>
@@ -159,8 +180,9 @@ const VerifyOtpPageContent = () => {
               onClick={handleVerifyOtpClick}
               type="button"
               className="bg-[#1A42BC] hover:bg-[#2d1abc] text-white text-md py-3 px-24 rounded-xl transition duration-300"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
           </div>
           {otpError && (

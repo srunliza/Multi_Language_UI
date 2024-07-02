@@ -16,11 +16,11 @@ const CreateProject = ({ onClose }) => {
   const projectSchema = z.object({
     projectName: z
       .string()
-      .nonempty("Project name is required")
-      .max(35, "Project name must be at most 50 characters long")
+      .min(1, "Project name is required")
+      .max(25, "Project name must be at most 25 characters long")
       .regex(
-        /^[A-Za-z0-9]+$/,
-        "Project name can only contain letters and numbers with no spaces"
+        /[A-Za-z0-9]+$/,
+        "Project name can only contain letters and numbers"
       ),
   });
 

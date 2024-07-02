@@ -80,6 +80,7 @@ const EditProjectForm = ({ project, onClose }) => {
             <input
               type="text"
               name="projectName"
+              required
               defaultValue={project.projectName}
               className="mt-1 p-3 block w-full border border-gray-300 rounded-md shadow-sm"
             />

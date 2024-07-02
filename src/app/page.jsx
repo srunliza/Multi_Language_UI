@@ -12,21 +12,30 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import ContactForm from "@/app/api/ContactUs";
+import Toast from "@/components/ToastComponent";
 
 const LandingPageComponent = () => {
   const { data: session, status } = useSession();
   const router = new useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "", show: false });
 
   console.log("session: ", session);
-  console.log(status)
+  console.log(status);
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/employee/dashboard");
     }
   }, [status, router]);
+
   return (
     <div className="bg-slate-50 h-auto scroll-smooth ">
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
       <nav className="bg-slate-100 sticky top-0 z-10 shadow-sm border-b border-b-gray-200">
         <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-3">
           <div className="flex justify-between items-center h-16">

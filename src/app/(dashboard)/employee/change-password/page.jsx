@@ -23,6 +23,12 @@ const ChangePassword = () => {
     setNewPasswordVisible(!newPasswordVisible);
   };
 
+  const validatePassword = (password) => {
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -31,6 +37,29 @@ const ChangePassword = () => {
       newPassword: formData.get("newPassword"),
       confirmPassword: formData.get("confirmPassword"),
     };
+
+    if (
+      !validatePassword(updatedPassword.oldPassword) ||
+      !validatePassword(updatedPassword.newPassword) ||
+      !validatePassword(updatedPassword.confirmPassword)
+    ) {
+      setToast({
+        message:
+          "Password must be at least 8 characters long, contain at least one letter, one number, and one special character",
+        type: "error",
+        show: true,
+      });
+      return;
+    }
+
+    if (updatedPassword.newPassword !== updatedPassword.confirmPassword) {
+      setToast({
+        message: "New password and confirm password do not match",
+        type: "error",
+        show: true,
+      });
+      return;
+    }
 
     try {
       const result = await resetPasswordAction(updatedPassword);
@@ -41,9 +70,9 @@ const ChangePassword = () => {
           type: "success",
           show: true,
         });
-      } else if (result.status === 401) {
+      } else if (result.status === 401 || result.status === 400) {
         setToast({
-          message: result.detail || "Your old password is incorrect",
+          message: result.detail || "Wrong current password",
           type: "error",
           show: true,
         });

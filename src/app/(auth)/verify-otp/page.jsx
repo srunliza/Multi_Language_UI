@@ -47,15 +47,22 @@ const VerifyOtpPageContent = () => {
   };
 
   const handleOtpChange = (element, index) => {
-    if (/[^0-9]/.test(element.value)) {
-      return;
-    }
     const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-    if (element.nextSibling && element.value) {
-      element.nextSibling.focus();
+    if (element.value === "") {
+      newOtp[index] = "";
+      if (element.previousSibling) {
+        element.previousSibling.focus();
+      }
+    } else {
+      if (/[^0-9]/.test(element.value)) {
+        return;
+      }
+      newOtp[index] = element.value;
+      if (element.nextSibling) {
+        element.nextSibling.focus();
+      }
     }
+    setOtp(newOtp);
   };
 
   const handleResendOtp = async () => {
@@ -91,6 +98,8 @@ const VerifyOtpPageContent = () => {
       const res = await otpVerifyService(enteredOtp);
       if (res.code === 200) {
         router.push("/login");
+      } else if (res.status === 403 && res.detail === "OTP has expired.") {
+        setOtpError("The OTP has expired. Please request a new one.");
       } else {
         setOtpError("Failed to verify OTP. Please try again.");
       }

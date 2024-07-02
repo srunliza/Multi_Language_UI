@@ -11,19 +11,20 @@ import Toast from "./ToastComponent";
 const UserSchema = z.object({
   firstName: z
     .string()
-    .nonempty("First name is required")
+    .min(1, "First name is required")
     .regex(/^[A-Za-z\s]+$/, "First name can only contain letters and spaces")
-    .max(50, "First name can only contain a maximum of 50 characters"),
+    .max(25, "First name can only contain a maximum of 25 characters"),
   lastName: z
     .string()
-    .nonempty("Last name is required")
-    .regex(/^[A-Za-z]+$/, "Last name can only contain letters")
-    .max(50, "Last name can only contain a maximum of 50 characters"),
+    .min(1, "Last name is required")
+    .regex(/^[A-Za-z]+$/, "Last name can only contain letters with no spacing")
+    .max(25, "Last name can only contain a maximum of 25 characters"),
   socialContactUsername: z
     .string()
-    .nonempty("Username is required")
-    .regex(/^[A-Za-z@]+$/, "Username can only contain letters and '@'"),
-  selectedGender: z.string().nonempty("Gender is required"),
+    .min(1, "Username is required")
+    .regex(/^[A-Za-z@]+$/, "Username can only contain letters and '@'")
+    .max(25, "Username can only contain a maximum of 25 characters"),
+  selectedGender: z.string().min(1, "Gender is required"),
   phoneNumber: z
     .string()
     .regex(
@@ -284,17 +285,19 @@ const SettingComponent = ({ currentUser }) => {
             >
               User Info
             </a>
-            <a
-              href="#"
-              className={
-                activeLink === "/employee/change-password"
-                  ? "text-blue-600"
-                  : "text-gray-500"
-              }
-              onClick={() => handleLinkClick("/employee/change-password")}
-            >
-              Change Password
-            </a>
+            {currentUser?.payload?.credential && (
+              <a
+                href="#"
+                className={
+                  activeLink === "/employee/change-password"
+                    ? "text-blue-600"
+                    : "text-gray-500"
+                }
+                onClick={() => handleLinkClick("/employee/change-password")}
+              >
+                Change Password
+              </a>
+            )}
           </div>
 
           <hr className="border-gray-300 mb-6" />

@@ -18,7 +18,13 @@ const LoginForm = () => {
 
   const schema = z.object({
     email: z.string().email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .regex(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Password must contain at least one letter, one number, and one special character"
+      ),
   });
 
   const togglePasswordVisibility = () => {
@@ -48,6 +54,12 @@ const LoginForm = () => {
       if (!!response.error) {
         console.error(response.error);
         setError(response.error.message);
+        setLoading(false);
+      } else if (response.status === 401) {
+        setError("Your password is incorrect, please try again");
+        setLoading(false);
+      } else if (response.status === 404) {
+        setError("User with this email or username is not found");
         setLoading(false);
       } else {
         router.push("/employee/dashboard");

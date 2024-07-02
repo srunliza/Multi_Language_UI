@@ -11,6 +11,17 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (selectedUsers.length === 0) {
+      setToast({
+        message: "Please select at least one user!",
+        type: "error",
+        show: true,
+      });
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 2000);
+      return;
+    }
     if (!selectedRole) {
       setToast({
         message: "Please select a role!",
@@ -22,7 +33,7 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
       }, 2000);
       return;
     }
-    
+
     const formData = new FormData(e.target);
     formData.append("projectId", project.projectId);
     formData.append("userIds", JSON.stringify(selectedUsers));

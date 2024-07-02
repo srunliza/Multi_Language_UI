@@ -12,12 +12,41 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const registerSchema = z
   .object({
-    firstName: z.string().min(1, "First Name is required"),
-    lastName: z.string().min(1, "Last Name is required"),
-    email: z.string().email("Invalid email address"),
+    firstName: z
+      .string()
+      .min(1, "First name is required")
+      .regex(/^[A-Za-z\s]+$/, "First name can only contain letters and spaces")
+      .max(25, "First name can only contain a maximum of 25 characters"),
+    lastName: z
+      .string()
+      .min(1, "Last name is required")
+      .regex(
+        /^[A-Za-z]+$/,
+        "Last name can only contain letters with no spacing"
+      )
+      .max(25, "Last name can only contain a maximum of 25 characters"),
+    email: z
+      .string()
+      .email("Invalid email address")
+      .regex(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Email should be valid and follow the format: example@gmail.com"
+      ),
     gender: z.enum(["Male", "Female"], "Gender is required"),
-    birthDate: z.string().nonempty("Date of Birth is required"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
+    birthDate: z
+      .string()
+      .min(1, "Date of Birth is required")
+      .regex(
+        /^\d{4}-\d{2}-\d{2}$/,
+        "BirthDate cannot be null and must follow the format yyyy-MM-dd"
+      ),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .regex(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Password must be at least 8 characters long, contain at least one letter, one number, and one special character"
+      ),
     confirmPassword: z
       .string()
       .min(8, "Confirm Password must be at least 8 characters long"),
@@ -77,8 +106,26 @@ const RegisterPage = () => {
 
       if (res.code === 201) {
         router.push(`/verify-otp?email=${data.email}`);
+      } else if (
+        res.status === 403 &&
+        res.detail === "Birth date cannot be in the future"
+      ) {
+        setError("Birth date cannot be in the future");
+        setLoading(false);
+      } else if (
+        res.status === 403 &&
+        res.detail === "You must be at least 16 years old to register but younger than 65."
+      ) {
+        setError("You must be at least 16 years old to register but younger than 65.");
+        setLoading(false);
+      } else if (
+        res.status === 403 &&
+        res.detail === "This email account is already exist"
+      ) {
+        setError("This email account is already exist");
+        setLoading(false);
       } else {
-        setError("Registration failed");
+        setError("Registration failed! Please Check Your Info");
         setLoading(false);
       }
     } catch (e) {

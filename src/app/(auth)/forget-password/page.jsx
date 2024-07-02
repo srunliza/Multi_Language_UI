@@ -36,10 +36,13 @@ const ForgetPasswordPage = () => {
 
     try {
       const res = await forgotPasswordService(data.email);
+      console.log(res);
       if (res.code === 200) {
         router.push(`/forget-verify?email=${data.email}`);
       } else {
-        setError("Failed to send forgot password email");
+        setError(
+          "Cannot find your email account or you logged in with third party"
+        );
       }
     } catch (err) {
       console.error(err);
