@@ -1,17 +1,21 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Toast = ({ message, type, show, onClose }) => {
+  const [visible, setVisible] = useState(show);
+
   useEffect(() => {
     if (show) {
+      setVisible(true);
       const timer = setTimeout(() => {
-        onClose();
-      }, 1000);
+        setVisible(false);
+        setTimeout(onClose, 300); // Additional delay for fade-out effect
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [show, onClose]);
 
-  if (!show) return null;
+  if (!visible) return null;
 
   const getBackgroundColor = (type) => {
     switch (type) {
@@ -29,9 +33,13 @@ const Toast = ({ message, type, show, onClose }) => {
   };
 
   return (
-    <div className={`toast fixed top-10 right-4 m-4 z-50`}>
+    <div
+      className={`toast fixed top-10 right-4 m-4 z-50 transition-opacity duration-300 ${
+        show ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div
-        className={`alert ${getBackgroundColor(type)} p-4 rounded-lgshadow-lg`}
+        className={`alert ${getBackgroundColor(type)} p-4 rounded-lg shadow-lg`}
       >
         <div className="flex justify-between items-center">
           <span>{message}</span>

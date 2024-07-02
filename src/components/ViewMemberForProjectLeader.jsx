@@ -154,7 +154,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
             className="rounded-full h-8 w-8"
           />
           <div className="ml-2">
-            <div className="text-gray-800">{member.fullName}</div>
+            <div className="text-gray-800">{member.username}</div>
           </div>
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
@@ -255,7 +255,7 @@ const ViewMemberProjectLeader = ({ onClose, project }) => {
 
   return (
     <div className="text-sm">
-      <main className="flex flex-1 w-[20rem]">
+      <main className="flex flex-1 w-[21rem]">
         <div className="bg-white overflow-hidden rounded-xl shadow-md sm:rounded-xl ml-4 p-2 w-full">
           <div className="flex items-center p-2 border-b">
             <GroupIcon className="text-gray-500" />

@@ -3,16 +3,43 @@ import React, { useState } from "react";
 import { createProjectAction } from "@/action/project-action";
 import { useRouter } from "next/navigation";
 import Toast from "./ToastComponent";
+import { z } from "zod";
 
 const CreateProject = ({ onClose }) => {
   const [toastMessage, setToastMessage] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [formError, setFormError] = useState("");
   const router = useRouter();
+
+  // Define the schema using zod
+  const projectSchema = z.object({
+    projectName: z
+      .string()
+      .nonempty("Project name is required")
+      .max(35, "Project name must be at most 50 characters long")
+      .regex(
+        /^[A-Za-z0-9]+$/,
+        "Project name can only contain letters and numbers with no spaces"
+      ),
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    const projectName = formData.get("projectName");
+
+    // Validate the form data
+    const validationResult = projectSchema.safeParse({ projectName });
+
+    if (!validationResult.success) {
+      // If validation fails, set the form error state
+      setFormError(validationResult.error.errors[0].message);
+      return;
+    }
+
+    setFormError(""); // Clear form error if validation succeeds
+
     try {
       const result = await createProjectAction(formData);
       if (result.status === "CREATED") {
@@ -76,17 +103,19 @@ const CreateProject = ({ onClose }) => {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
+          {formError && (
+            <p className="-mt-4 text-sm text-red-600">{formError}</p>
+          )}
           <input
             type="text"
             id="projectName"
             name="projectName"
             className="block w-full px-4 py-4 border border-blue-800 rounded-md focus:outline-none text-gray-700"
             placeholder="Enter project name"
-            required
           />
           <div className="flex justify-end space-x-4 mt-7">
             <button
-              className="px-6 py-3 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md hover:bg-purple-50 focus:outline-none"
+              className="px-6 py-3 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md focus:outline-none"
               type="button"
               onClick={onClose}
             >

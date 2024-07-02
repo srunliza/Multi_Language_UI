@@ -2,24 +2,68 @@
 import React, { useState } from "react";
 import { DatePicker } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 import { updateUserDetailAction } from "@/action/user-action";
 import { postImageAction } from "@/action/image-action";
 import Toast from "./ToastComponent";
 
+// Zod validation schema
+const UserSchema = z.object({
+  firstName: z
+    .string()
+    .nonempty("First name is required")
+    .regex(/^[A-Za-z\s]+$/, "First name can only contain letters and spaces")
+    .max(50, "First name can only contain a maximum of 50 characters"),
+  lastName: z
+    .string()
+    .nonempty("Last name is required")
+    .regex(/^[A-Za-z]+$/, "Last name can only contain letters")
+    .max(50, "Last name can only contain a maximum of 50 characters"),
+  socialContactUsername: z
+    .string()
+    .nonempty("Username is required")
+    .regex(/^[A-Za-z@]+$/, "Username can only contain letters and '@'"),
+  selectedGender: z.string().nonempty("Gender is required"),
+  phoneNumber: z
+    .string()
+    .regex(
+      /^\+?[0-9]{1,20}$/,
+      "Phone number can only contain numbers and optionally start with +"
+    ),
+  facebook: z.string().optional(),
+  telegram: z.string().optional(),
+});
+
 const SettingComponent = ({ currentUser }) => {
+  console.log(currentUser);
   const userProfileImage =
     currentUser?.payload?.image || "/Images/user-profile.png";
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [selectedGender, setSelectedGender] = useState("");
-  const [socialContactUsername, setSocialContactUsername] = useState("");
+  const [firstName, setFirstName] = useState(
+    currentUser?.payload?.firstName || ""
+  );
+  const [lastName, setLastName] = useState(
+    currentUser?.payload?.lastName || ""
+  );
+  const [selectedGender, setSelectedGender] = useState(
+    currentUser?.payload?.gender || ""
+  );
+  const [socialContactUsername, setSocialContactUsername] = useState(
+    currentUser?.payload?.username || ""
+  );
   const [birthDate, setBirthDate] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [facebook, setFacebook] = useState("");
-  const [telegram, setTelegram] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(
+    currentUser?.payload?.contact?.phoneNumber || ""
+  );
+  const [facebook, setFacebook] = useState(
+    currentUser?.payload?.contact?.facebook || ""
+  );
+  const [telegram, setTelegram] = useState(
+    currentUser?.payload?.contact?.telegram || ""
+  );
   const [profileImage, setProfileImage] = useState(userProfileImage);
   const [profile, setProfile] = useState(null);
   const [toast, setToast] = useState({ message: "", type: "", show: false });
+  const [errors, setErrors] = useState({});
 
   const router = useRouter();
   const [activeLink, setActiveLink] = useState(router.pathname);
@@ -31,26 +75,32 @@ const SettingComponent = ({ currentUser }) => {
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
+    setErrors((prevErrors) => ({ ...prevErrors, selectedGender: "" }));
   };
 
   const handleSocialContactUsernameChange = (event) => {
     setSocialContactUsername(event.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, socialContactUsername: "" }));
   };
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, firstName: "" }));
   };
 
   const handleLastNameChange = (e) => {
     setLastName(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, lastName: "" }));
   };
 
   const handleFacebookChange = (e) => {
     setFacebook(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, facebook: "" }));
   };
 
   const handleTelegramChange = (e) => {
     setTelegram(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, telegram: "" }));
   };
 
   const handleBirthDateChange = (date) => {
@@ -59,6 +109,7 @@ const SettingComponent = ({ currentUser }) => {
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: "" }));
   };
 
   const handleProfileChange = async (event) => {
@@ -73,25 +124,48 @@ const SettingComponent = ({ currentUser }) => {
     }
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    let month = "" + (d.getMonth() + 1);
+    let day = "" + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !firstName &&
-      !lastName &&
-      !selectedGender &&
-      !socialContactUsername &&
-      !birthDate &&
-      !phoneNumber &&
-      !facebook &&
-      !telegram &&
-      !profile
-    ) {
-      setToast({
-        message: "Please upload an image or fill in at least one input field.",
-        type: "error",
-        show: true,
+
+    // Validate form data
+    try {
+      UserSchema.parse({
+        firstName,
+        lastName,
+        selectedGender,
+        socialContactUsername,
+        birthDate,
+        phoneNumber,
+        facebook,
+        telegram,
       });
-      return;
+      setErrors({}); // Clear errors if validation passes
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const validationErrors = {};
+        error.errors.forEach((err) => {
+          validationErrors[err.path[0]] = err.message;
+        });
+        setErrors(validationErrors);
+        setToast({
+          message: "Validation errors occurred. Please check your inputs.",
+          type: "error",
+          show: true,
+        });
+        return;
+      }
     }
 
     let imageFileName = null;
@@ -139,7 +213,7 @@ const SettingComponent = ({ currentUser }) => {
         firstName: formData.get("firstName"),
         lastName: formData.get("lastName"),
         gender: selectedGender,
-        birthDate: formData.get("birthDate"),
+        birthDate: birthDate ? formatDate(birthDate) : null,
         facebook: formData.get("facebook"),
         phoneNumber: formData.get("phoneNumber"),
         telegram: formData.get("telegram"),
@@ -243,6 +317,9 @@ const SettingComponent = ({ currentUser }) => {
                     onChange={handleFirstNameChange}
                     className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 md:pr-[10px] sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-20 pl-3 focus:outline-none input-bordered w-full max-w-xs"
                   />
+                  {errors.firstName && (
+                    <p className="text-red-600 text-xs">{errors.firstName}</p>
+                  )}
                 </div>
                 <div>
                   <label
@@ -260,6 +337,9 @@ const SettingComponent = ({ currentUser }) => {
                     onChange={handleLastNameChange}
                     className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full"
                   />
+                  {errors.lastName && (
+                    <p className="text-red-600 text-xs">{errors.lastName}</p>
+                  )}
                 </div>
               </div>
               {/* gender */}
@@ -280,6 +360,11 @@ const SettingComponent = ({ currentUser }) => {
                     onChange={handleSocialContactUsernameChange}
                     className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border py-1.5 pr-4 pl-3 focus:outline-none input-bordered w-full"
                   />
+                  {errors.socialContactUsername && (
+                    <p className="text-red-600 text-xs">
+                      {errors.socialContactUsername}
+                    </p>
+                  )}
                 </div>
                 <div className="">
                   <label
@@ -312,6 +397,11 @@ const SettingComponent = ({ currentUser }) => {
                       />
                     </div>
                   </div>
+                  {errors.selectedGender && (
+                    <p className="text-red-600 text-xs">
+                      {errors.selectedGender}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
@@ -328,7 +418,6 @@ const SettingComponent = ({ currentUser }) => {
                     aria-label="Date of Birth"
                     name="birthDate"
                     className="text-gray-700 focus:ring-gray-500 focus:border-gray-500 sm:text-sm sm:leading-6 rounded-md border pl-4 focus:outline-none input-bordered w-full"
-                    isRequired
                     value={birthDate}
                     onChange={handleBirthDateChange}
                   />
@@ -362,6 +451,9 @@ const SettingComponent = ({ currentUser }) => {
                         className="w-5 h-5 text-gray-400"
                       />
                     </div>
+                    {errors.facebook && (
+                      <p className="text-red-600 text-xs">{errors.facebook}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -400,6 +492,9 @@ const SettingComponent = ({ currentUser }) => {
                       onChange={handlePhoneNumberChange}
                     />
                   </div>
+                  {errors.phoneNumber && (
+                    <p className="text-red-600 text-xs">{errors.phoneNumber}</p>
+                  )}
                 </div>
 
                 {/* Telegram */}
@@ -430,6 +525,9 @@ const SettingComponent = ({ currentUser }) => {
                         className="w-5 h-5 text-gray-400"
                       />
                     </div>
+                    {errors.telegram && (
+                      <p className="text-red-600 text-xs">{errors.telegram}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -482,6 +580,7 @@ const SettingComponent = ({ currentUser }) => {
                 <button
                   type="button"
                   className="btn text-black bg-white px-4 py-2  w-[100px]"
+                  onClick={() => router.push("/employee/profile")}
                 >
                   Cancel
                 </button>

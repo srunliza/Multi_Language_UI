@@ -40,10 +40,18 @@ const ProfilePage = async () => {
           <h2 className="uppercase text-sm font-semibold text-gray-600">
             Last Name
           </h2>
-          <p className="text-gray-600">
+          <p
+            className={`${
+              userData?.payload?.firstName ? "text-gray-600" : "text-red-600"
+            }`}
+          >
             {userData?.payload?.firstName || "N/A"}
           </p>
-          <p className="text-gray-600">
+          <p
+            className={`${
+              userData?.payload?.lastName ? "text-gray-600" : "text-red-600"
+            }`}
+          >
             {userData?.payload?.lastName || "N/A"}
           </p>
         </div>
@@ -54,10 +62,20 @@ const ProfilePage = async () => {
           <h2 className="uppercase text-sm font-semibold text-gray-600">
             Gender
           </h2>
-          <p className="text-gray-600">
+          <p
+            className={`${
+              userData?.payload?.birthDate ? "text-gray-600" : "text-red-600"
+            }`}
+          >
             {userData?.payload?.birthDate || "N/A"}
           </p>
-          <p className="text-gray-600">{userData?.payload?.gender || "N/A"}</p>
+          <p
+            className={`${
+              userData?.payload?.gender ? "text-gray-600" : "text-red-600"
+            }`}
+          >
+            {userData?.payload?.gender || "N/A"}
+          </p>
         </div>
       </div>
       <div className="bg-white w-full pl-8 md:pl-10 lg:pl-32 mt-4 rounded-xl shadow-md py-10">

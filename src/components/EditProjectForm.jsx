@@ -17,18 +17,22 @@ const EditProjectForm = ({ project, onClose }) => {
           show: true,
         });
         setTimeout(() => {
-          setToast({ ...toast, show: false });
           onClose();
-        }, 1000);
+        }, 3000);
+      } else if (result.status === 400) {
+        setToast({
+          message: result.detail || "Failed to edit project!",
+          type: "error",
+          show: true,
+        });
+        setTimeout(() => {}, 3000);
       } else {
         setToast({
           message: "Failed to edit project!",
           type: "error",
           show: true,
         });
-        setTimeout(() => {
-          setToast({ ...toast, show: false });
-        }, 1000);
+        setTimeout(() => {}, 3000);
       }
     } catch (error) {
       setToast({
@@ -36,21 +40,13 @@ const EditProjectForm = ({ project, onClose }) => {
         type: "error",
         show: true,
       });
-      setTimeout(() => {
-        setToast({ ...toast, show: false });
-      }, 1000);
+      setTimeout(() => {}, 3000);
     }
   };
 
   return (
     <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
       <div className="w-full max-w-md p-6 border bg-white rounded-lg shadow-xl space-y-6 relative">
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          show={toast.show}
-          onClose={() => setToast({ ...toast, show: false })}
-        />
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-600">Edit Project</h2>
           <button
@@ -92,19 +88,25 @@ const EditProjectForm = ({ project, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-outline btn-blue-800 mr-2"
+              className="px-6 py-3 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md focus:outline-none mr-2"
             >
               No
             </button>
             <button
               type="submit"
-              className="btn bg-blue-800 hover:bg-blue-700 text-white"
+              className="btn px-6 bg-blue-800 hover:bg-blue-700 text-white"
             >
               Save
             </button>
           </div>
         </form>
       </div>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        show={toast.show}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
     </div>
   );
 };

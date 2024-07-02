@@ -30,7 +30,16 @@ const Modal = ({
         setToast({ ...toast, show: false });
         onClose();
         onDeleteClick();
-      }, 1000);
+      }, 3000);
+    } else if (result.status === 400) {
+      setToast({
+        message: result.detail || "Failed to delete project.",
+        type: "error",
+        show: true,
+      });
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 3000);
     } else {
       setToast({
         message: "Failed to delete project.",
@@ -39,7 +48,7 @@ const Modal = ({
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 1000);
+      }, 3000);
     }
   };
 
@@ -72,7 +81,7 @@ const Modal = ({
               <div className="flex justify-end">
                 <button
                   onClick={onClose}
-                  className="btn btn-outline btn-blue-800 mr-2"
+                  className="px-6 py-3 font-semibold text-blue-800 border border-blue-800 hover:border-blue-300 rounded-md focus:outline-none mr-2"
                 >
                   No
                 </button>
@@ -80,7 +89,7 @@ const Modal = ({
                   onClick={onConfirm}
                   className={`btn ${
                     confirmText === "Delete"
-                      ? "bg-red-500 hover:bg-red-700"
+                      ? "bg-red-700 hover:bg-red-500"
                       : "bg-blue-800 hover:bg-blue-700"
                   } text-white`}
                 >

@@ -28,6 +28,15 @@ const EditModal = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!roleId) {
+      setToast({
+        message: "Please select a role for the user.",
+        type: "error",
+        show: true,
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append("projectId", project.projectId);
     formData.append("userId", userId);

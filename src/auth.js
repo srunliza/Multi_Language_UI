@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { loginService, loginSclService } from "./service/auth.service";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook";
 
 export const {
   handlers: { GET, POST },
@@ -45,20 +46,23 @@ export const {
     }),
     Google,
     GitHub,
+    Facebook,
   ],
   callbacks: {
     async jwt({ token, user, account }) {
       if (
         user &&
         account &&
-        (account.provider === "google" || account.provider === "github")
+        (account.provider === "google" ||
+          account.provider === "github" ||
+          account.provider === "facebook")
       ) {
         console.log("user: ", user);
         const userInfo = {
           email: user.email,
           username: user.name,
           password: user.email,
-          image: user.image,
+          image: user.image || user.picture,
         };
 
         try {
@@ -84,7 +88,7 @@ export const {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/login",
     verifyRequest: "/verify-otp",
