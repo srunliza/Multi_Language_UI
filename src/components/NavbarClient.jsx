@@ -66,6 +66,7 @@ const NavbarClient = ({ toggleSidebar }) => {
       try {
         const response = await getAllProjectService();
         setProjects(response.payload);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -185,7 +186,9 @@ const NavbarClient = ({ toggleSidebar }) => {
               <div className="absolute mt-1 bg-white border border-gray-300 rounded-lg shadow-lg w-full z-10 max-h-80 overflow-hidden overflow-x-auto ">
                 {searchResults?.map((project) => (
                   <Link
-                    href={`/project-leader/dashboard/${project.projectId}`}
+                    href={`/${project.currentUserRole.roleName
+                      .toLowerCase()
+                      .replace(" ", "-")}/dashboard/${project.projectId}`}
                     key={project.projectId}
                   >
                     <div className="flex items-center p-2 hover:bg-gray-200 rounded-lg cursor-pointer">
@@ -216,10 +219,16 @@ const NavbarClient = ({ toggleSidebar }) => {
                 <div className="flex justify-between items-center px-3 py-2 border-b">
                   <div className="text-xl font-bold">Notifications</div>
                   <div className="flex gap-4">
-                    <button className="ml-10 text-tiny" onClick={handleShowAll}>
+                    <button
+                      className="ml-10 text-blue-800 text-sm"
+                      onClick={handleShowAll}
+                    >
                       All
                     </button>
-                    <button className="text-tiny" onClick={handleShowUnread}>
+                    <button
+                      className="text-sm text-blue-800"
+                      onClick={handleShowUnread}
+                    >
                       Unread
                     </button>
                   </div>
