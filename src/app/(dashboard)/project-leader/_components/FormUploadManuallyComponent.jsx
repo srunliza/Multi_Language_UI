@@ -91,16 +91,22 @@ const FormUploadManuallyComponent = ({
     setKeyword("");
     setStartDate(null);
     setEndDate(null);
+    setSelectedLanguage("");
+    setSelectedLanguages([]);
   };
 
   const handleSubmitUploadFile = async (data) => {
-    const languages = data.targetLanguageId;
-    console.log("Language IDs: ", languages);
-    console.log("Submission Data: ", data);
-    console.log("Key and Hint Data: ", tableData);
-
     if (new Date(data.start) >= new Date(data.end)) {
       setToastMessage("Start date must be before end date");
+      setToastType("error");
+      setShowToast(true);
+      return;
+    }
+
+    if (!data.baseLanguage || !data.targetLanguageId.length) {
+      setToastMessage(
+        "Please select a base language and at least one target language"
+      );
       setToastType("error");
       setShowToast(true);
       return;

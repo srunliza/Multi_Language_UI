@@ -48,6 +48,8 @@ const CardComponent = ({ project, currentUserRole, daysLeft }) => {
   const [isViewMemberOpen, setIsViewMemberOpen] = useState(false);
   const [viewMemberRole, setViewMemberRole] = useState(null);
   const modalRef = useRef(null);
+  console.log(project);
+  console.log(daysLeft);
 
   const handleEditClick = () => {
     setIsEditing(true);

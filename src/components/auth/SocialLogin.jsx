@@ -27,18 +27,6 @@ const SocialLogin = () => {
           alt="github"
         />
       </button>
-      <button
-        type="submit"
-        name="action"
-        value="facebook"
-        className="flex items-center justify-center bg-white border border-gray-300 rounded-full py-2 px-2 hover:bg-gray-100"
-      >
-        <img
-          src="./Images/facebook.jpg"
-          alt="Facebook"
-          className="hover:scale-125 w-6 h-6 transition-all"
-        />
-      </button>
     </form>
   );
 };
