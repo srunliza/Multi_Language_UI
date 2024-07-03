@@ -1,6 +1,7 @@
 "use server";
 import {
   AddValueService,
+  addKeyService,
   deleteAttachmentService,
   insertFileAttachmentService,
   submitService,
@@ -102,6 +103,16 @@ export const updateKeyAction = async (id, updateJsonKey) => {
     updateJsonKey: updateJsonKey,
   };
   const res = await updateKeyService(id, values);
+  revalidateTag("data");
+  return res;
+};
+
+export const addKeyAction = async (id, updateJsonKey) => {
+  console.log("In action: ", updateJsonKey);
+  const values = {
+    updateKeyAndHint: updateJsonKey,
+  };
+  const res = await addKeyService(id, values);
   revalidateTag("data");
   return res;
 };

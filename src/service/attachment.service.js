@@ -205,3 +205,23 @@ export const updateKeyService = async (id, values) => {
   console.log(data);
   return data;
 };
+
+export const addKeyService = async (id, values) => {
+  console.log(values);
+  const header = await headerToken();
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/insert-key-into-data/${id}`,
+    {
+      method: "POST",
+      headers: {
+        ...header,
+      },
+      body: JSON.stringify(values),
+    }
+  );
+
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+

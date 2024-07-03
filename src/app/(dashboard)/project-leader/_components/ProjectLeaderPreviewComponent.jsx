@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 import { updateKeyAction } from "@/action/attachment-action";
 import Toast from "@/components/ToastComponent";
+import AddKeyComponent from "./AddKeyComponent";
 
 const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("");
+  const [showAddKeyForm, setShowAddKeyForm] = useState(false);
   const status = previewData.status;
   const attachmentId = previewData.attachmentId;
   console.log(attachmentId);
@@ -22,7 +24,6 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
 
   const handleEditClick = async () => {
     if (isEditing) {
-      // Collect only the changed data
       const updateJsonKey = editedData
         .filter(
           (item, index) =>
@@ -42,7 +43,6 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
-            router.refresh(); // Refresh the page
           } else if (
             response.status === 400 &&
             response.detail ===
@@ -51,7 +51,6 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
-            router.refresh(); // Refresh the page
           } else if (response.status === 400) {
             setToastMessage(
               "Can only update keys for attachments with status 'Pending' or 'Progress'."
@@ -85,6 +84,11 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
     setEditedData(updatedData);
   };
 
+  const handleAddKeySuccess = (newKeys) => {
+    setEditedData([...editedData, ...newKeys]);
+    setShowAddKeyForm(false);
+  };
+
   return (
     <section className="bg-white p-5 rounded-lg shadow-lg flex-1">
       <Toast
@@ -101,7 +105,6 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
         <KeyboardDoubleArrowRightOutlinedIcon fontSize="small" />
         <h1>{previewData.language.language}</h1>
       </div>
-      {/* Table Section */}
       <div className="max-h-[55vh] border-b rounded-b-md overflow-y-scroll no-scrollbar">
         <table className="w-full border-collapse">
           <tbody>
@@ -129,25 +132,32 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
           </tbody>
         </table>
       </div>
-      {/* End Table Section */}
-
-      {/* Handle Button */}
       <div className="flex justify-end gap-2 mt-4">
-        {/* Button Go Back */}
         <button
           className="px-4 py-2 border border-blue-800 text-blue-800 hover:border-blue-400 rounded-md text-sm transition duration-150 ease-in-out"
           onClick={handleGoBack}
         >
           Back
         </button>
-        {/* Edit/Save Button */}
         <button
           className="px-4 py-2 border bg-blue-800 border-blue-800 text-white hover:bg-blue-700 rounded-md text-sm transition duration-150 ease-in-out"
           onClick={handleEditClick}
         >
           {isEditing ? "Save" : "Edit"}
         </button>
+        <button
+          className="px-4 py-2 border bg-green-800 border-green-800 text-white hover:bg-green-700 rounded-md text-sm transition duration-150 ease-in-out"
+          onClick={() => setShowAddKeyForm(!showAddKeyForm)}
+        >
+          {showAddKeyForm ? "Cancel" : "Add Key"}
+        </button>
       </div>
+      {showAddKeyForm && (
+        <AddKeyComponent
+          attachmentId={attachmentId}
+          onAddKeySuccess={handleAddKeySuccess}
+        />
+      )}
     </section>
   );
 };
