@@ -195,7 +195,7 @@ const EmployeeDashboardPage = async () => {
           <tbody>
             {processedProjectData && processedProjectData.length > 0 ? (
               processedProjectData
-                .filter((project) => project.active)
+                ?.filter((project) => project.active)
                 .map((project, index) => (
                   <tr
                     key={index}

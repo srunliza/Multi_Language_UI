@@ -53,7 +53,7 @@ export default function InputKeywordComponent({ staticKeyData, onInsert }) {
         size="md"
         position="center"
         popup
-        className="flex items-center justify-center bg-gray-500 bg-opacity-70"
+        className="flex items-center pt-[6rem] justify-center bg-gray-700 bg-opacity-25"
       >
         <div className="flex flex-col bg-white rounded-lg shadow-lg w-full max-w-md mx-auto">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
@@ -98,11 +98,11 @@ export default function InputKeywordComponent({ staticKeyData, onInsert }) {
             <Button
               color="gray"
               onClick={() => setOpenModal(false)}
-              className="mr-2 border-blue-400"
+              className="mr-2 border-blue-800 text-blue-800 hover:border-blue-400"
             >
               Close
             </Button>
-            <Button onClick={handleInsert} className="bg-blue-500">
+            <Button onClick={handleInsert} className="bg-blue-800 hover:bg-blue-700">
               Insert
             </Button>
           </div>

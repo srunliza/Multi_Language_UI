@@ -31,6 +31,7 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
   const [endDateError, setEndDateError] = useState("");
   const [fileError, setFileError] = useState("");
   const [dateComparisonError, setDateComparisonError] = useState("");
+  const [formError, setFormError] = useState(""); // New state for form error message
 
   const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
@@ -85,6 +86,7 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
     setEndDateError("");
     setFileError("");
     setDateComparisonError("");
+    setFormError(""); // Clear form error message on reset
   };
 
   // For getting language from child component
@@ -137,6 +139,15 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
       valid = false;
     } else {
       setFileError("");
+    }
+
+    if (!selectedLanguage || !selectedLanguages.length) {
+      setFormError(
+        "Please select at least one base language and one target language"
+      );
+      valid = false;
+    } else {
+      setFormError("");
     }
 
     return valid;
@@ -243,6 +254,7 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
               role="button"
               aria-expanded={dropdownOpen}
               aria-haspopup="listbox"
+              isRequired
             >
               <span>{selectedLanguage || "Select a language"}</span>
               <svg
@@ -295,7 +307,6 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
                   size={filteredLanguages.length}
                   onChange={handleSelect}
                   onBlur={handleClose}
-                  required
                 >
                   {filteredLanguages.map((el) => (
                     <option
@@ -412,6 +423,10 @@ const FormUploadFileComponent = ({ languageData, proId }) => {
           </div>
         </div>
         {/* ./ End Section Add Keys and Hints */}
+
+        {formError && (
+          <div className="text-red-500 text-xs py-2">{formError}</div>
+        )}
 
         {/* Section Show Table Keys and Hints */}
         <div className="border w-full lg:w-[600px] px-3 py-3 rounded-lg border-gray-300">

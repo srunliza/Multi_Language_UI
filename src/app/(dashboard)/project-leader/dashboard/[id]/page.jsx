@@ -39,13 +39,11 @@ const CreateProjectPage = async ({ params }) => {
               <div className="pt-10 w-full lg:w-1/2 max-w-md">
                 <div className="rounded-lg overflow-hidden">
                   <div className="flex justify-center">
-                    <Link
-                      href={`/project-leader/dashboard/upload-file/${id}`}
-                    >
+                    <Link href={`/project-leader/dashboard/upload-file/${id}`}>
                       <div className="relative h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
-                            File Upload
+                            Excel File Upload
                           </h1>
                           <hr className="w-full mb-3" />
                           <div className="flex flex-col items-center">
@@ -70,11 +68,8 @@ const CreateProjectPage = async ({ params }) => {
                               />
                             </svg>
                             <p className="text-base py-2 text-blue-700">
-                              Select a File Upload
+                              Upload File
                             </p>
-                            <span className="block text-xs text-gray-400 font-normal">
-                              Or Drag and Drop It here
-                            </span>
                           </div>
                         </div>
                         <input
@@ -97,7 +92,7 @@ const CreateProjectPage = async ({ params }) => {
                       <div className="relative h-[250px] rounded-2xl border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center cursor-pointer">
                         <div className="absolute w-full px-5">
                           <h1 className="text-md leading-loose mb-2 text-center">
-                            Add keys manually
+                            Add Keyword Manually
                           </h1>
                           <hr className="w-full mb-3" />
                           <div className="flex flex-col items-center">
@@ -122,11 +117,8 @@ const CreateProjectPage = async ({ params }) => {
                               />
                             </svg>
                             <p className="text-base py-2 text-blue-700">
-                              Add keys and Value
+                              Add Keyword and Value
                             </p>
-                            <span className="block text-xs text-gray-400 font-normal">
-                              Or Drag and Drop It here
-                            </span>
                           </div>
                         </div>
                         <input

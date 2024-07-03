@@ -8,7 +8,6 @@ import {
   updateKeyService,
   uploadAttachmentManuallyService,
 } from "@/service/attachment.service";
-import { identity } from "@fullcalendar/core/internal";
 import { revalidateTag } from "next/cache";
 
 export const deleteAttachmentAction = async (id) => {
