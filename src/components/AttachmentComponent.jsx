@@ -6,13 +6,13 @@ import Dropdown from "./DropDownDownload";
 import ArticleIcon from "@mui/icons-material/Article";
 import { FileDownloadOutlined } from "@mui/icons-material";
 import DropdownAttachment from "./DropDownAttachment";
-import DropdownProgressAttachment from "./DropdownProgressAttachment";
 import Toast from "./ToastComponent";
 import {
   downloadXMLService,
   downloadJsonService,
   downloadStringsService,
 } from "@/service/attachment.service";
+import DropdownProgressAttachment from "./DropDownProgressAttachment";
 
 const AttachmentComponent = ({ attachment = [], language = [] }) => {
   const [data, setData] = useState([]);
