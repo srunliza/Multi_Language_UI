@@ -120,7 +120,7 @@ const PopUpProfileComponent = () => {
             <DropdownItem
               isReadOnly
               key="profile"
-              className="h-14 gap-2 bg-gray-100 hover:bg-gray-200"
+              className="h-14 gap-2 opacity-100 hover:bg-gray-200 mb-6"
             >
               <div className="flex items-center">
                 <img
@@ -129,8 +129,8 @@ const PopUpProfileComponent = () => {
                   alt="User img"
                 />
                 <div className="ml-2">
-                  <p className="text-black text-lg">
-                    {user?.payload?.fullName}
+                  <p className="text-gray-800 text-lg">
+                    {user?.payload?.username}
                   </p>
                   <p className="text-gray-700 text-base">
                     {user?.payload?.email}

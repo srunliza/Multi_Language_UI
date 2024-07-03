@@ -71,6 +71,26 @@ export const deleteAttachmentService = async (id) => {
   return result;
 };
 
+export const updateAttachmentProgressService = async (
+  attachmentId,
+  expireDate
+) => {
+  const header = await headerToken();
+  console.log(expireDate,attachmentId)
+  const res = await fetch(
+    `${baseUrl}/api/v1/attachment/update-attachment-progress/${attachmentId}?expireDate=${expireDate}`,
+    {
+      method: "PUT",
+      headers: {
+        ...header,
+      },
+    }
+  );
+  const result = await res.json();
+  console.log(result);
+  return result;
+};
+
 export const updateAttachmentService = async (attachmentId, newAttachment) => {
   const header = await headerToken();
   const res = await fetch(
@@ -84,6 +104,7 @@ export const updateAttachmentService = async (attachmentId, newAttachment) => {
     }
   );
   const result = await res.json();
+  console.log(result);
   return result;
 };
 
@@ -165,7 +186,7 @@ export const getPreviewDataService = async (id) => {
 };
 
 export const updateKeyService = async (id, values) => {
-  console.log(values)
+  console.log(values);
   const header = await headerToken();
   const res = await fetch(
     `${baseUrl}/api/v1/attachment/update-jsonb-key/${id}`,
@@ -177,7 +198,7 @@ export const updateKeyService = async (id, values) => {
       body: JSON.stringify(values),
     }
   );
-  
+
   const data = await res.json();
   console.log(data);
   return data;

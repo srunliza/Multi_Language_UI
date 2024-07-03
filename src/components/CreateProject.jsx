@@ -70,7 +70,7 @@ const CreateProject = ({ onClose }) => {
   };
 
   return (
-    <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50 w-full">
+    <div className="flex items-center bg-gray-600 bg-opacity-25 justify-center fixed inset-0 z-50">
       <div className="w-full max-w-lg p-6 border bg-white rounded-lg shadow-xl relative h-[17rem]">
         <Toast
           message={toastMessage}

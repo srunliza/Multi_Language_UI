@@ -23,6 +23,18 @@ const AddMemberModal = ({ isOpen, onClose, project }) => {
       return;
     }
 
+    if (selectedUsers.length === 0) {
+      setToast({
+        message: "Please select at least one user!",
+        type: "error",
+        show: true,
+      });
+      setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 2000);
+      return;
+    }
+
     const formData = new FormData(e.target);
     formData.append("projectId", project.projectId);
     formData.append("userIds", JSON.stringify(selectedUsers));

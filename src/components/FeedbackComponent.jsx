@@ -1,7 +1,8 @@
-"use client";
+// FeedbackComponent.js
+"use client"
+import React, { useState, useRef, useEffect } from "react";
 import send from "../../public/assets/icons/send.svg";
 import Image from "next/image";
-import React, { useState, useRef, useEffect } from "react";
 import DropdownMenu from "./DropdownFeedback";
 import ModalComponent from "./ModalFeedback";
 import Toast from "./ToastComponent";
@@ -18,6 +19,7 @@ const FeedbackComponent = ({ feedback, attachmentId, userId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editFeedback, setEditFeedback] = useState({ id: null, comment: "" });
   const [newComment, setNewComment] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   const modalRef = useRef();
@@ -98,12 +100,18 @@ const FeedbackComponent = ({ feedback, attachmentId, userId }) => {
         message: result.message || "Comment is successfully deleted",
         type: "success",
       });
+      setTimeout(() => {
+        setToastVisible(false);
+      }, 1000);
     } else if (result.status === 404) {
       setToast({
         show: true,
         message: result.detail || "There is no translator in the project",
         type: "error",
       });
+      setTimeout(() => {
+        setToastVisible(false);
+      }, 1000);
     }
     setShowConfirmPopup(false);
   };
@@ -126,12 +134,18 @@ const FeedbackComponent = ({ feedback, attachmentId, userId }) => {
         message: result.message || "Comment is successfully updated",
         type: "success",
       });
+      setTimeout(() => {
+        setToastVisible(false);
+      }, 1000);
     } else if (result.status === 404) {
       setToast({
         show: true,
         message: result.detail || "There is no translator in the project",
         type: "error",
       });
+      setTimeout(() => {
+        setToastVisible(false);
+      }, 1000);
     }
     setIsEditing(false);
   };

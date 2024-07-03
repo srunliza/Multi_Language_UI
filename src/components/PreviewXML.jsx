@@ -13,7 +13,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
     const formatXmlData = (xmlObject) => {
       const formattedData = xmlObject.data.map((item, index) => ({
         id: index + 1,
-        key: item.key.replace(/\s+/g, "_"),
+        key: item.key.replace(/\s+/g, "_").toLowerCase(),
         value: item.value,
       }));
       setPreviewXmlData(formattedData);
@@ -31,7 +31,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
 </resources>`;
 
     const xmlBlob = new Blob([xmlContent], { type: "application/xml" });
-    saveAs(xmlBlob, `${xml.attachmentName}data.xml`);
+    saveAs(xmlBlob, `${xml.attachmentName}.xml`);
   };
 
   return (

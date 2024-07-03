@@ -207,7 +207,7 @@ const NavbarClient = ({ toggleSidebar }) => {
           </div>
         </div>
 
-        <div className="flex space-x-4 items-center">
+        <div className="flex gap-4 items-center">
           <div className="relative" ref={notificationRef}>
             <Popover placement="bottom" offset={20} showArrow>
               <PopoverTrigger>

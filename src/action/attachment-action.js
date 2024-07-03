@@ -4,6 +4,7 @@ import {
   deleteAttachmentService,
   insertFileAttachmentService,
   submitService,
+  updateAttachmentProgressService,
   updateAttachmentService,
   updateKeyService,
   uploadAttachmentManuallyService,
@@ -29,6 +30,17 @@ export const editAttachmentAction = async (formData) => {
   };
 
   const result = await updateAttachmentService(attachmentId, newAttachment);
+  revalidateTag("attachment");
+  return result;
+};
+
+export const editProgessAttachmentAction = async (formData) => {
+  const attachmentId = formData.get("attachmentId");
+  let expireDate = formData.get("expireDate");
+
+  expireDate = `${expireDate}%2000%3A00%3A00`;
+
+  const result = await updateAttachmentProgressService(attachmentId, expireDate);
   revalidateTag("attachment");
   return result;
 };
@@ -76,7 +88,7 @@ export async function handlerFileUploadAction(fileUploadData) {
   formData.append("expireDate", `${fileUploadData.get("expireDate")} 00:00:00`);
 
   const response = await insertFileAttachmentService(formData);
-  console.log("response from service: ", response)
+  console.log("response from service: ", response);
   return response;
 }
 
