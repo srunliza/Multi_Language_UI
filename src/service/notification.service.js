@@ -9,6 +9,7 @@ export const getAllNotificationService = async () => {
     {
       headers: header,
       next: { tags: ["notification"] },
+      cache: "no-store",
     }
   );
   const data = await res.json();

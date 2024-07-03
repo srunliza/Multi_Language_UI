@@ -17,6 +17,7 @@ export const getAllUserService = async () => {
   const res = await fetch(`${baseUrl}/api/v1/user/get-all-users`, {
     headers: header,
     next: { tags: ["user"] },
+    cache: "no-store"
   });
   const data = await res.json();
   return data;
@@ -35,6 +36,8 @@ export const resetPasswordService = async (updatedPassword) => {
 
 export const updateUserDetailService = async (updatedUserDetail) => {
   const header = await headerToken();
+  console.log(baseUrl);
+  console.log(updatedUserDetail);
   const res = await fetch(`${baseUrl}/api/v1/user/update-user-profile`, {
     method: "PUT",
     headers: header,

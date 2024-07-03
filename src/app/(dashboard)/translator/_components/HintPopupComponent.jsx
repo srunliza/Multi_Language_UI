@@ -37,7 +37,11 @@ const HintPopupComponent = ({ previewData }) => {
                   {previewData.map((hint, index) => (
                     <tr className="my-2" key={index}>
                       <td className="pl-4 border">{hint.key}</td>
-                      <td className="pl-4 border">
+                      <td
+                        className={`pl-4 border ${
+                          hint.hint === null ? "text-red-500 text-sm" : ""
+                        }`}
+                      >
                         {hint.hint ?? "null"}
                       </td>
                     </tr>

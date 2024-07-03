@@ -7,6 +7,7 @@ export const getFeedbackByAttachmentIdService = async (id) => {
   const res = await fetch(`${baseUrl}/api/v1/feedback/get-all-feedback/${id}`, {
     headers: header,
     next: { tags: ["feedback"] },
+    cache: "no-store"
   });
   const data = await res.json();
   return data;

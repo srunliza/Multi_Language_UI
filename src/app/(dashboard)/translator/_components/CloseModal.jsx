@@ -22,6 +22,18 @@ const CloseModal = ({ attachmentId, translationData, projectId }) => {
         type: "success",
       });
       router.push(`../${projectId}`);
+    } else if (
+      response.status === 400 &&
+      response.detail === "Please input id and value of the words"
+    ) {
+      setToast({
+        show: true,
+        message: "Before save please have at least 1 keyword translated",
+        type: "error",
+      });
+      setTimeout(() => {
+        document.getElementById("modal_save").close(); // Close the modal automatically after 1000 ms
+      }, 3000);
     } else {
       setToast({
         show: true,
@@ -47,6 +59,12 @@ const CloseModal = ({ attachmentId, translationData, projectId }) => {
           onClose={() => setToast({ show: false, message: "", type: "" })}
         />
         <div className="modal-box w-96">
+          <button
+            onClick={() => document.getElementById("modal_close").close()}
+            className="absolute top-0 right-0 m-2 p-1"
+          >
+            <CloseOutlinedIcon />
+          </button>
           <p className="py-4 text-xl text-center font-semibold">
             Do you want to save or Not?
           </p>

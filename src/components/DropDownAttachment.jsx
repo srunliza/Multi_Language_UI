@@ -120,8 +120,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
         setToast({ ...toast, show: false });
       }, 3000);
     } else {
-      let errorMessage =
-        "Can only update attachments with status 'Pending' or 'Progress.";
+      let errorMessage = result.detail;
       if (
         result.status === 400 &&
         result.detail === "Cannot update language when status is 'Progress'."

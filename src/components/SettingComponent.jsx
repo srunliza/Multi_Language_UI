@@ -27,6 +27,7 @@ const UserSchema = z.object({
   selectedGender: z.string().min(1, "Gender is required"),
   phoneNumber: z
     .string()
+    .min(3, "Phone number is required")
     .regex(
       /^\+?[0-9]{1,20}$/,
       "Phone number can only contain numbers and optionally start with +"

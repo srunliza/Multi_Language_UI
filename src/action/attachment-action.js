@@ -40,7 +40,10 @@ export const editProgessAttachmentAction = async (formData) => {
 
   expireDate = `${expireDate}%2000%3A00%3A00`;
 
-  const result = await updateAttachmentProgressService(attachmentId, expireDate);
+  const result = await updateAttachmentProgressService(
+    attachmentId,
+    expireDate
+  );
   revalidateTag("attachment");
   return result;
 };
@@ -59,6 +62,7 @@ export const saveValueAction = async (attachmentId, formDataArray) => {
 export const submitAction = async (id) => {
   const result = await submitService(id);
   revalidateTag("data");
+  console.log(result);
   return result;
 };
 

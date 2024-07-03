@@ -175,22 +175,25 @@ const AttachmentComponent = ({ attachment = [] }) => {
           <table className="text-sm w-full text-left rtl:text-right text-gray-500">
             <thead className="text-sm text-gray-700 z-10 font-semibold sticky top-0 bg-[#daeaff]">
               <tr>
-                <th scope="col" className="px-7 py-4">
+                <th scope="col" className="px-6 py-4">
                   File Name
                 </th>
-                <th scope="col" className="px-7 py-4">
-                  Language
+                <th scope="col" className="px-6 py-4">
+                  T Language
                 </th>
-                <th scope="col" className="px-7 py-4">
+                <th scope="col" className="px-6 py-4">
+                  B Language
+                </th>
+                <th scope="col" className="px-6 py-4">
                   Status
                 </th>
-                <th scope="col" className="px-7 py-4">
+                <th scope="col" className="px-6 py-4">
                   Start Date
                 </th>
-                <th scope="col" className="px-7 py-4">
+                <th scope="col" className="px-6 py-4">
                   End Date
                 </th>
-                <th scope="col" className="px-7 py-4">
+                <th scope="col" className="px-6 py-4">
                   Action
                 </th>
               </tr>
@@ -211,6 +214,9 @@ const AttachmentComponent = ({ attachment = [] }) => {
                   </th>
                   <td className="px-6 py-4 overflow-hidden text-ellipsis">
                     {item.language ? item.language.language : "N/A"}
+                  </td>{" "}
+                  <td className="px-6 py-4 overflow-hidden text-ellipsis">
+                    {item.baseLanguage ? item.baseLanguage : "N/A"}
                   </td>
                   <td
                     className={`px-6 py-4 overflow-hidden text-ellipsis ${

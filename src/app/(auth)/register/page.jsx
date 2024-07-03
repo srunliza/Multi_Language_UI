@@ -325,7 +325,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
+            {error && <div className="mb-4 text-red-500 text-xs w-80">{error}</div>}
 
             <button
               type="submit"

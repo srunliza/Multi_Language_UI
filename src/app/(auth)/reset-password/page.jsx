@@ -175,7 +175,7 @@ const ResetPasswordPageContent = () => {
             </div>
 
             {error && (
-              <div className="text-center text-red-500 text-sm mb-4">
+              <div className="text-center text-red-500 text-xs mb-4">
                 {error}
               </div>
             )}

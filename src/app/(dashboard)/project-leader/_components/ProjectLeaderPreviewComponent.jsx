@@ -26,8 +26,8 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
       const updateJsonKey = editedData
         .filter(
           (item, index) =>
-            item.key !== previewData.data[index].key ||
-            item.hint !== previewData.data[index].hint
+            item.key !== previewData?.data[index]?.key ||
+            item.hint !== previewData?.data[index]?.hint
         )
         .map((item) => ({
           id: item.id,
@@ -42,6 +42,7 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
+            router.refresh(); // Refresh the page
           } else if (
             response.status === 400 &&
             response.detail ===
@@ -50,6 +51,7 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
+            router.refresh(); // Refresh the page
           } else if (response.status === 400) {
             setToastMessage(
               "Can only update keys for attachments with status 'Pending' or 'Progress'."
@@ -104,7 +106,7 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
         <table className="w-full border-collapse">
           <tbody>
             {editedData
-              .filter((e) => e.key !== null)
+              .filter((e) => e.key !== "")
               .map((e) => (
                 <tr key={e.id} className="border">
                   <td className="w-1/2 py-2 px-4">

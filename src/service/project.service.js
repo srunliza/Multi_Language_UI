@@ -26,6 +26,7 @@ export const getAllProjectService = async (
   const res = await fetch(url, {
     headers: header,
     next: { tags: ["project"] },
+    cache: "no-store"
   });
   const data = await res.json();
   return data;

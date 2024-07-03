@@ -9,6 +9,7 @@ export const getAttachmentByProjectIdService = async (id) => {
     {
       headers: header,
       next: { tags: ["attachment"] },
+      cache: "no-store"
     }
   );
   const data = await res.json();
@@ -52,6 +53,7 @@ export const getDataByAttachmentIdService = async (id) => {
     {
       headers: header,
       next: { tags: ["data"] },
+      cache: "no-store"
     }
   );
   const data = await res.json();

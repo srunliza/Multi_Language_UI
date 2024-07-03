@@ -6,9 +6,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import styles from "./style/styles.css";
 import PopUpProfileComponent from "./PopUpProfileComponent";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  getAllNotificationService,
+  isReadService,
+} from "@/service/notification.service";
 import { getAllProjectService } from "@/service/project.service";
-import { getAllNotificationService } from "@/service/notification.service";
-import { isReadAction } from "@/action/notification-action";
 
 const NotificationItem = ({ notification, onClick }) => (
   <div
@@ -46,40 +49,17 @@ const NotificationItem = ({ notification, onClick }) => (
   </div>
 );
 
-const NotificationDetailPopup = ({ notification, onClose }) => (
-  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-    <div className="bg-white p-5 rounded-lg shadow-lg w-1/3">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">{notification.title}</h2>
-        <button onClick={onClose} className="text-gray-500">
-          &times;
-        </button>
-      </div>
-      <div>
-        <img
-          src={notification.sender.image}
-          alt="Sender"
-          className="rounded-full w-16 h-16 mb-4"
-        />
-        <p>{notification.description}</p>
-        <p className="text-gray-500 text-sm mt-4">{notification.createDate}</p>
-      </div>
-    </div>
-  </div>
-);
-
 const NavbarClient = ({ toggleSidebar }) => {
   const [showAll, setShowAll] = useState(true);
   const [popupVisible, setPopupVisible] = useState(false);
-  const [popupContent, setPopupContent] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [projects, setProjects] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const [selectedNotification, setSelectedNotification] = useState(null);
   const [animateNotification, setAnimateNotification] = useState(false);
   const [animateSearch, setAnimateSearch] = useState(false);
   const notificationRef = useRef();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -94,16 +74,16 @@ const NavbarClient = ({ toggleSidebar }) => {
     fetchProjects();
   }, []);
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await getAllNotificationService();
-        setNotifications(response.payload);
-      } catch (error) {
-        console.error("Error fetching notifications:", error);
-      }
-    };
+  const fetchNotifications = async () => {
+    try {
+      const response = await getAllNotificationService();
+      setNotifications(response.payload);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchNotifications();
   }, []);
 
@@ -115,15 +95,26 @@ const NavbarClient = ({ toggleSidebar }) => {
     setShowAll(false);
   };
 
-  const handleNotificationClick = (notification) => {
-    setSelectedNotification(notification);
-    setPopupVisible(true);
-    markNotificationAsRead(notification.notificationId);
-  };
+  const handleNotificationClick = async (notification) => {
+    const { projectId } = notification;
+    const role = notification.receiver[0].role.roleName.toLowerCase();
 
-  const closePopup = () => {
-    setPopupContent(null);
-    setPopupVisible(false);
+    await markNotificationAsRead(notification.notificationId);
+    fetchNotifications();
+
+    switch (role) {
+      case "developer":
+        router.push(`/developer/dashboard/${projectId}`);
+        break;
+      case "project leader":
+        router.push(`/project-leader/dashboard/view-attachment/${projectId}`);
+        break;
+      case "translator":
+        router.push(`/translator/dashboard/${projectId}`);
+        break;
+      default:
+        console.error("Unknown role:", role);
+    }
   };
 
   const handleSearchChange = (e) => {
@@ -153,7 +144,7 @@ const NavbarClient = ({ toggleSidebar }) => {
 
   const markNotificationAsRead = async (notificationId) => {
     try {
-      await isReadAction(notificationId);
+      await isReadService(notificationId);
       setNotifications((prevNotifications) =>
         prevNotifications.map((notification) =>
           notification.notificationId === notificationId
@@ -250,18 +241,15 @@ const NavbarClient = ({ toggleSidebar }) => {
                 </div>
               </PopoverContent>
             </Popover>
-            <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+            {filteredNotifications?.some(
+              (notification) => !notification.isRead
+            ) && (
+              <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+            )}
           </div>
           <PopUpProfileComponent />
         </div>
       </nav>
-
-      {/* {popupVisible && selectedNotification && (
-        <NotificationDetailPopup
-          notification={selectedNotification}
-          onClose={closePopup}
-        />
-      )} */}
     </>
   );
 };

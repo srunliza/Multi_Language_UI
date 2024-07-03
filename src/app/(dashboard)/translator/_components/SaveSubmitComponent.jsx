@@ -21,6 +21,18 @@ const SaveSubmitModal = ({ attachmentId, translationData, projectId }) => {
         message: "Attachment data updated successfully",
         type: "success",
       });
+    } else if (
+      response.status === 400 &&
+      response.detail === "Please input id and value of the words"
+    ) {
+      setToast({
+        show: true,
+        message: "Before save please have at least 1 keyword translated",
+        type: "error",
+      });
+      setTimeout(() => {
+        document.getElementById("modal_save").close(); // Close the modal automatically after 1000 ms
+      }, 3000);
     } else {
       setToast({
         show: true,
@@ -31,7 +43,7 @@ const SaveSubmitModal = ({ attachmentId, translationData, projectId }) => {
     }
     setTimeout(() => {
       document.getElementById("modal_save").close(); // Close the modal automatically after 1000 ms
-    }, 1000);
+    }, 3000);
   };
 
   const handleSubmit = async () => {

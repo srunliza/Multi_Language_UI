@@ -13,7 +13,7 @@ const PreviewXmlFileComponent = ({ xml, attachmentId, feedback, userId }) => {
     const formatXmlData = (xmlObject) => {
       const formattedData = xmlObject.data.map((item, index) => ({
         id: index + 1,
-        key: item.key.replace(/\s+/g, "_"),
+        key: item.key.replace(/\s+/g, "_").toLowerCase(),
         value: item.value,
       }));
       setPreviewXmlData(formattedData);
