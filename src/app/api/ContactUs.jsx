@@ -8,6 +8,7 @@ export default function ContactForm() {
     email: "",
     message: "",
   });
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -19,20 +20,30 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("/api/sendEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    // Simulate an API response
+    const mockResponse = {
+      ok: true, // Change to `false` to simulate an error response
+      json: async () => ({ message: "Email sent successfully!" }),
+    };
+
+    const response = await new Promise((resolve) =>
+      setTimeout(() => resolve(mockResponse), 1000)
+    );
 
     if (response.ok) {
       // Handle successful response
-      console.log("Email sent successfully!");
+      const data = await response.json();
+      console.log(data.message);
+      setResponseMessage(data.message);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
     } else {
       // Handle error response
       console.log("Error sending email");
+      setResponseMessage("Error sending email");
     }
   };
 
@@ -83,6 +94,9 @@ export default function ContactForm() {
       >
         Submit
       </button>
+      {responseMessage && (
+        <p className="mt-4 text-green-600">{responseMessage}</p>
+      )}
     </form>
   );
 }

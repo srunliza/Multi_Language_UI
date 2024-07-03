@@ -42,6 +42,20 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
             setToastMessage("Changes saved successfully!");
             setToastType("success");
             setShowToast(true);
+          } else if (
+            response.status === 400 &&
+            response.detail ===
+              "There no more key in the attachment while your status is progress please add more key"
+          ) {
+            setToastMessage("Changes saved successfully!");
+            setToastType("success");
+            setShowToast(true);
+          } else if (response.status === 400) {
+            setToastMessage(
+              "Can only update keys for attachments with status 'Pending' or 'Progress'."
+            );
+            setToastType("error");
+            setShowToast(true);
           } else {
             setToastMessage("Failed to save changes.");
             setToastType("error");
@@ -89,25 +103,27 @@ const ProjectLeaderPreviewTranslateComponent = ({ previewData }) => {
       <div className="max-h-[55vh] border-b rounded-b-md overflow-y-scroll no-scrollbar">
         <table className="w-full border-collapse">
           <tbody>
-            {editedData.map((e) => (
-              <tr key={e.id} className="border">
-                <td className="w-1/2 py-2 px-4">
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={e.key}
-                      onChange={(event) =>
-                        handleInputChange(e.id, event.target.value)
-                      }
-                      className="border border-gray-300 p-1 rounded-md w-full"
-                    />
-                  ) : (
-                    e.key
-                  )}
-                </td>
-                <td className="py-2 border-l px-4">{e.value || ""}</td>
-              </tr>
-            ))}
+            {editedData
+              .filter((e) => e.key !== null)
+              .map((e) => (
+                <tr key={e.id} className="border">
+                  <td className="w-1/2 py-2 px-4">
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={e.key}
+                        onChange={(event) =>
+                          handleInputChange(e.id, event.target.value)
+                        }
+                        className="border border-gray-300 p-1 rounded-md w-full"
+                      />
+                    ) : (
+                      e.key
+                    )}
+                  </td>
+                  <td className="py-2 border-l px-4">{e.value || ""}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

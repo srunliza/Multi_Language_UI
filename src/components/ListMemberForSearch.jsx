@@ -32,7 +32,7 @@ const ListMemberForSearch = ({ project, searchQuery }) => {
               className="rounded-full h-8 w-8"
             />
             <div>
-              <p className="text-sm font-medium">{member.fullName}</p>
+              <p className="text-sm font-medium">{member.username}</p>
             </div>
           </div>
         ))}

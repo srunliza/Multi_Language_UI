@@ -28,11 +28,11 @@ const ListMemberForSearch = ({ project, searchQuery }) => {
           >
             <img
               src={member.image || "../../../../Images/user-profile.png"}
-              alt={member.fullName}
+              alt={member.username}
               className="rounded-full h-8 w-8"
             />
             <div>
-              <p className="text-sm font-medium">{member.fullName}</p>
+              <p className="text-sm font-medium">{member.username}</p>
             </div>
           </div>
         ))}

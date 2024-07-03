@@ -3,9 +3,10 @@ import { useRouter } from "next/navigation";
 import FeedbackComponent from "@/components/FeedbackComponent";
 
 const JsonViewer = ({ data, level = 0 }) => {
+  const entries = Object.entries(data);
   return (
     <div style={{ paddingLeft: level * 20 }}>
-      {Object.entries(data).map(([key, value], index) => (
+      {entries.map(([key, value], index) => (
         <div key={index} className="text-black pl-8 mt-4">
           {typeof value === "object" && value !== null ? (
             <>
@@ -13,11 +14,14 @@ const JsonViewer = ({ data, level = 0 }) => {
                 "{key}": {"{"}
               </p>
               <JsonViewer data={value} level={level + 1} />
-              <p className="ml-4 font-consolas text-gray-800">{"},"}</p>
+              <p className="ml-4 font-consolas text-gray-800">
+                {"}"}
+                {index < entries.length - 1 ? "," : ""}
+              </p>
             </>
           ) : (
             <p className="ml-4 font-consolas text-gray-800">
-              "{key}": "{value}",
+              "{key}": "{value}"{index < entries.length - 1 ? "," : ""}
             </p>
           )}
         </div>

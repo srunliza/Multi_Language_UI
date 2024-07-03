@@ -67,7 +67,7 @@ export const ListMember = ({ onSelectUsers }) => {
               className="w-10 h-10 rounded-full"
             />
             <div>
-              <p className="text-sm font-medium">{user.fullName}</p>
+              <p className="text-sm font-medium">{user.username}</p>
               <p className="text-xs text-gray-500">{user.email}</p>
             </div>
           </div>

@@ -67,7 +67,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setTimeout(() => {
         setToast({ ...toast, show: false });
         setIsDeleteModalVisible(false);
-      }, 1000);
+      }, 3000);
     } else {
       let errorMessage = "Failed to delete attachment.";
       if (
@@ -84,7 +84,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setTimeout(() => {
         setToast({ ...toast, show: false });
         setIsDeleteModalVisible(false);
-      }, 1000);
+      }, 3000);
     }
   };
 
@@ -118,7 +118,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       setIsEditing(false);
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 1000);
+      }, 3000);
     } else {
       let errorMessage =
         "Can only update attachments with status 'Pending' or 'Progress.";
@@ -135,7 +135,7 @@ const DropdownAttachment = ({ attachmentId, language }) => {
       });
       setTimeout(() => {
         setToast({ ...toast, show: false });
-      }, 1000);
+      }, 3000);
     }
   };
 

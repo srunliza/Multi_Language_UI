@@ -10,6 +10,15 @@ const poppins = Poppins({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <title>LangNet</title>
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="/Images/image.svg"
+          sizes="32x32"
+        />
+      </head>
       <body className={poppins.className}>
         <Providers>
           <NextTopLoader

@@ -1,11 +1,12 @@
-"use client";
+"use client"
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { saveAs } from "file-saver";
 import Dropdown from "./DropDownDownload";
 import ArticleIcon from "@mui/icons-material/Article";
 import { FileDownloadOutlined } from "@mui/icons-material";
 import DropdownAttachment from "./DropDownAttachment";
+import DropdownProgressAttachment from "./DropdownProgressAttachment";
 import Toast from "./ToastComponent";
 import {
   downloadXMLService,
@@ -156,6 +157,9 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
                   Language
                 </th>
                 <th scope="col" className="px-7 py-4">
+                  Base Language
+                </th>
+                <th scope="col" className="px-7 py-4">
                   Status
                 </th>
                 <th scope="col" className="px-7 py-4">
@@ -185,6 +189,9 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
                   </th>
                   <td className="px-6 py-4 overflow-hidden text-ellipsis">
                     {item.language ? item.language.language : "N/A"}
+                  </td>
+                  <td className="px-6 py-4 overflow-hidden text-ellipsis">
+                    {item.baseLanguage ? item.baseLanguage : "N/A"}
                   </td>
                   <td
                     className={`px-6 py-4 overflow-hidden text-ellipsis ${
@@ -235,13 +242,18 @@ const AttachmentComponent = ({ attachment = [], language = [] }) => {
                       attachmentId={item.attachmentId}
                       handleAction={handleDownload}
                     />
-                    {item.status !== "COMPLETED" &&
-                      item.status !== "PROGRESS" && (
+                    {item.status === "PROGRESS" ? (
+                      <DropdownProgressAttachment
+                        attachmentId={item.attachmentId}
+                      />
+                    ) : (
+                      item.status !== "COMPLETED" && (
                         <DropdownAttachment
                           attachmentId={item.attachmentId}
                           language={language}
                         />
-                      )}
+                      )
+                    )}
                   </td>
                 </tr>
               ))}

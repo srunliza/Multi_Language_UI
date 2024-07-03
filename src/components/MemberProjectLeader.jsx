@@ -148,7 +148,7 @@ const MemberProjectLeader = ({ project }) => {
             className="rounded-full h-8 w-8"
           />
           <div className="ml-2">
-            <div className="text-gray-800">{member.fullName}</div>
+            <div className="text-gray-800">{member.username}</div>
           </div>
           {role !== "Project Leader" && (
             <div className="flex space-x-1 ml-auto relative">
