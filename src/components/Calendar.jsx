@@ -3,9 +3,20 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
 export default function Calendar({ deadline, projects }) {
-
-  const { postedDate, expireDate } = deadline.length > 0 ? deadline[0] : {};
+  console.log("Projects: ", projects);
+  const { postedDate } = deadline.length > 0 ? deadline[0] : {};
   const projectName = projects?.projectName || "No Project Name";
+  const createDate = projects?.createDate;
+  console.log(createDate);
+
+  // Find the maximum expireDate from attachments
+  let maxExpireDate = null;
+  if (projects.attachment && projects.attachment.length > 0) {
+    maxExpireDate = projects.attachment.reduce((maxDate, attachment) => {
+      const expireDate = new Date(attachment.expireDate);
+      return !maxDate || expireDate > maxDate ? expireDate : maxDate;
+    }, null);
+  }
 
   return (
     <FullCalendar
@@ -19,8 +30,8 @@ export default function Calendar({ deadline, projects }) {
       events={[
         {
           title: `${projectName}`,
-          start: `${postedDate}`,
-          end: `${expireDate}`,
+          start: `${createDate}`,
+          end: maxExpireDate ? maxExpireDate.toISOString() : null,
         },
       ]}
       height={575} // Fixed height for the calendar

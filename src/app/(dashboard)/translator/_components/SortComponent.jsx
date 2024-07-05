@@ -34,6 +34,7 @@ const SortComponent = ({ onFilterChange }) => {
         <div className="border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block w-[13.5rem] bg-white">
           <DatePicker
             id="start-date"
+            name="start-date"
             className="max-w-[284px]"
             onChange={(value) => handleSortChange("startDate", value)}
           />
@@ -46,6 +47,7 @@ const SortComponent = ({ onFilterChange }) => {
         <div className="w-[13.5rem] border border-gray-300 text-gray-900 text-sm rounded-r-md focus:ring-blue-500 focus:border-blue-500 block bg-white">
           <DatePicker
             id="end-date"
+            name="end-date"
             className="max-w-[284px]"
             onChange={(value) => handleSortChange("endDate", value)}
           />
