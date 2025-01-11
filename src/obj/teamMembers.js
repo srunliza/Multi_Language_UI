@@ -1,14 +1,5 @@
 const teamMembers = [
-  {
-    name: "Chhel Chhempanha",
-    role: "Front-end Developer",
-    image: "../Images/Panha.png",
-    links: {
-      telegram: "https://t.me/chhel_chhempanha",
-      facebook: "https://www.facebook.com/panha.konkhmer.1481",
-      google: "https://mail.google.com/panhach349@gmail.com",
-    },
-  },
+
   {
     name: "Mao Piseth",
     role: "Front-end Developer",
@@ -18,6 +9,16 @@ const teamMembers = [
       facebook:
         "https://www.facebook.com/profile.php?id=100068953839160&mibextid=LQQJ4d",
       google: "@pisethmao2002",
+    },
+  },
+  {
+    name: "Srun Lisa",
+    role: "Front-end Developer",
+    image: "../Images/Lisa.png",
+    links: {
+      telegram: "https://t.me/srunlisa",
+      facebook: "https://web.facebook.com/srun.liza/",
+      google: "srunliza@gmail.com",
     },
   },
   {
@@ -71,13 +72,13 @@ const teamMembers = [
     },
   },
   {
-    name: "Srun Lisa",
+    name: "Chhel Chhempanha",
     role: "Front-end Developer",
-    image: "../Images/Lisa.png",
+    image: "../Images/Panha.png",
     links: {
-      telegram: "https://t.me/srunlisa",
-      facebook: "https://web.facebook.com/srun.liza/",
-      google: "srunliza@gmail.com",
+      telegram: "https://t.me/chhel_chhempanha",
+      facebook: "https://www.facebook.com/panha.konkhmer.1481",
+      google: "https://mail.google.com/panhach349@gmail.com",
     },
   },
   {
