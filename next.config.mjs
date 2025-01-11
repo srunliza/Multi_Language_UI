@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    NEXT_APIURL: "https://api.langnet.info",
+    NEXT_APIURL: "https://multilanguageapi-production.up.railway.app",
   },
   images: {
     remotePatterns: [
