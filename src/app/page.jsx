@@ -568,7 +568,7 @@ const LandingPageComponent = () => {
                   href="mailto:sokheng.tey03@gmail.com"
                   className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm"
                 >
-                  sokheng.tey03@gmail.com
+                  srunliza@gmail.com
                 </a>
               </div>
             </div>
